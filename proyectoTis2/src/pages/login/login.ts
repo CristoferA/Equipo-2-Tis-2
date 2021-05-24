@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RegistroPage } from '../registro/registro';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the LoginPage page.
@@ -24,5 +25,9 @@ export class LoginPage {
   }
   irRegistro(){
     this.navCtrl.push(RegistroPage);
+  }
+
+  irHome(){
+    this.navCtrl.push(HomePage);
   }
 }

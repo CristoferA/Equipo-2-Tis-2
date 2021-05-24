@@ -5,12 +5,27 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>filtro</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-<h1>ESTE ES LA PAGINA DEL FILTROOO
-</h1>
+
+
+<ion-content padding center >
+  <div class="ion-text">
+    <h4>Buscar lugar</h4>
+    <ion-searchbar></ion-searchbar>
+  </div>
+  
+
+
+  <div>
+    <ion-select placeholder="Region">
+      <ion-option value="mon">Monday</ion-option>
+      <ion-option value="tue">Tuesday</ion-option>
+    </ion-select>
+  </div>
+  
+
 </ion-content>
