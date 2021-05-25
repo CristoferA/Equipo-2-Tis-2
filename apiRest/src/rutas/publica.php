@@ -7,10 +7,10 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 $app = new \slim\App;
 //GET de todas las publicaciones
 
-$app->get('/apiRest/oferente', function (Request $request, Response $response){
+$app->get('/apiRest/publica', function (Request $request, Response $response){
     
     
-    $sql = "SELECT * FROM oferente";
+    $sql = "SELECT * FROM publica";
     try {
         $db = new db();
         $db = $db -> conectionDB();
@@ -32,9 +32,10 @@ $app->get('/apiRest/oferente', function (Request $request, Response $response){
 }); 
 
 // GET Lista de una publicacion especifica por ID 
-$app->get('/apiRest/oferente/{usuario}', function(Request $request, Response $response){
-    $id_usuario = $request->getAttribute('usuario');
-    $sql = "SELECT * FROM oferente WHERE usuario = $id_usuario";
+$app->get('/apiRest/publica/{usuario}', function(Request $request, Response $response){
+    $id_oferente = $request->getAttribute('id_oferente');
+    $id_publicacion = $request->getAttribute('id_publicacion');
+    $sql = "SELECT * FROM publica WHERE id_oferente = $id_oferente OR id_publicacion = $id_publicacion";
     try{
       $db = new db();
       $db = $db->conectionDB();
@@ -55,27 +56,29 @@ $app->get('/apiRest/oferente/{usuario}', function(Request $request, Response $re
 
 //POST Agregar nueva publicacion
 
-$app->post('/apiRest/oferente/new', function(Request $request, Response $response){
+$app->post('/apiRest/publica/new', function(Request $request, Response $response){
     
-    $usuario = $request->getParam('usuario');
+    $id_oferente = $request->getParam('id_oferente');
+    $id_publicacion = $request->getParam('id_publicacion');
     
      
 
-    $sql= "INSERT INTO oferente (usuario) 
-    VALUES (:usuario)";
+    $sql= "INSERT INTO publica (id_oferente, id_publicacion) 
+    VALUES (:id_oferente, :id_publicacion)";
 
     try{
         $db = new db();
         $db = $db -> conectionDB();
         $result = $db -> prepare ($sql);
 
-        $result->bindParam(':usuario',$usuario);
+        $result->bindParam(':id_oferente',$id_oferente);
+        $result->bindParam(':id_publicacion',$id_publicacion);
        
         
 
 
         $result->execute();
-        echo json_encode("Usuario Guardado");
+        echo json_encode("Moderador Guardado");
         $result=null;
         $db=null;
     }catch(PDOException $e){
@@ -123,9 +126,12 @@ $app->put('/apiRest/oferente/editar/{usuario}', function(Request $request, Respo
 
 //DELETE borrar publicacion
 
-$app->delete('/apiRest/oferente/delete/{usuario}', function(Request $request, Response $response){
-    $id_usuario = $request->getAttribute('id_usuario');
-    $sql = "DELETE FROM oferente WHERE usuario = $id_usuario";
+$app->delete('/apiRest/publica/delete/{id}', function(Request $request, Response $response){
+    
+    $id_oferente = $request->getParam('id_oferente');
+    $id_publicacion = $request->getParam('id_publicacion');
+    
+    $sql = "DELETE FROM publica WHERE id_oferente = $id_oferente OR id_publicacion = $id_publicacion";
 
     try{
         $db = new db();

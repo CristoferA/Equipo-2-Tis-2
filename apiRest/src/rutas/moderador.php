@@ -7,10 +7,10 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 $app = new \slim\App;
 //GET de todas las publicaciones
 
-$app->get('/apiRest/oferente', function (Request $request, Response $response){
+$app->get('/apiRest/moderador', function (Request $request, Response $response){
     
     
-    $sql = "SELECT * FROM oferente";
+    $sql = "SELECT * FROM moderador";
     try {
         $db = new db();
         $db = $db -> conectionDB();
@@ -32,9 +32,9 @@ $app->get('/apiRest/oferente', function (Request $request, Response $response){
 }); 
 
 // GET Lista de una publicacion especifica por ID 
-$app->get('/apiRest/oferente/{usuario}', function(Request $request, Response $response){
+$app->get('/apiRest/moderador/{usuario}', function(Request $request, Response $response){
     $id_usuario = $request->getAttribute('usuario');
-    $sql = "SELECT * FROM oferente WHERE usuario = $id_usuario";
+    $sql = "SELECT * FROM moderador WHERE usuario = $id_usuario";
     try{
       $db = new db();
       $db = $db->conectionDB();
@@ -53,16 +53,17 @@ $app->get('/apiRest/oferente/{usuario}', function(Request $request, Response $re
     }
   }); 
 
-//POST Agregar nueva publicacion
+//POST Agregar nueva moderador
 
-$app->post('/apiRest/oferente/new', function(Request $request, Response $response){
+$app->post('/apiRest/moderador/new', function(Request $request, Response $response){
     
     $usuario = $request->getParam('usuario');
+    $codigo = $request->getParam('codigo');
     
      
 
-    $sql= "INSERT INTO oferente (usuario) 
-    VALUES (:usuario)";
+    $sql= "INSERT INTO moderador (usuario, codigo) 
+    VALUES (:usuario, :codigo)";
 
     try{
         $db = new db();
@@ -70,12 +71,13 @@ $app->post('/apiRest/oferente/new', function(Request $request, Response $respons
         $result = $db -> prepare ($sql);
 
         $result->bindParam(':usuario',$usuario);
+        $result->bindParam(':codigo',$codigo);
        
         
 
 
         $result->execute();
-        echo json_encode("Usuario Guardado");
+        echo json_encode("Moderador Guardado");
         $result=null;
         $db=null;
     }catch(PDOException $e){
@@ -123,9 +125,9 @@ $app->put('/apiRest/oferente/editar/{usuario}', function(Request $request, Respo
 
 //DELETE borrar publicacion
 
-$app->delete('/apiRest/oferente/delete/{usuario}', function(Request $request, Response $response){
+$app->delete('/apiRest/moderador/delete/{usuario}', function(Request $request, Response $response){
     $id_usuario = $request->getAttribute('id_usuario');
-    $sql = "DELETE FROM oferente WHERE usuario = $id_usuario";
+    $sql = "DELETE FROM moderador WHERE usuario = $id_usuario";
 
     try{
         $db = new db();
