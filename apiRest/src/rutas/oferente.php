@@ -7,7 +7,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 $app = new \slim\App;
 //GET de todas las publicaciones
 
-$app->get('/apiRest/oferente', function (Request $request, Response $response){
+$app->get('/oferente', function (Request $request, Response $response){
     
     
     $sql = "SELECT * FROM oferente";
@@ -32,7 +32,7 @@ $app->get('/apiRest/oferente', function (Request $request, Response $response){
 }); 
 
 // GET Lista de una publicacion especifica por ID 
-$app->get('/apiRest/oferente/{usuario}', function(Request $request, Response $response){
+$app->get('/oferente/{usuario}', function(Request $request, Response $response){
     $id_usuario = $request->getAttribute('usuario');
     $sql = "SELECT * FROM oferente WHERE usuario = $id_usuario";
     try{
@@ -55,7 +55,7 @@ $app->get('/apiRest/oferente/{usuario}', function(Request $request, Response $re
 
 //POST Agregar nueva publicacion
 
-$app->post('/apiRest/oferente/new', function(Request $request, Response $response){
+$app->post('/oferente/new', function(Request $request, Response $response){
     
     $usuario = $request->getParam('usuario');
     
@@ -86,7 +86,7 @@ $app->post('/apiRest/oferente/new', function(Request $request, Response $respons
 
 //PUT Editar publicacion
 /*
-$app->put('/apiRest/oferente/editar/{usuario}', function(Request $request, Response $response){
+$app->put('/oferente/editar/{usuario}', function(Request $request, Response $response){
     
     $usuario = $request->getAttribute('usuario');
     
@@ -123,7 +123,7 @@ $app->put('/apiRest/oferente/editar/{usuario}', function(Request $request, Respo
 
 //DELETE borrar publicacion
 
-$app->delete('/apiRest/oferente/delete/{usuario}', function(Request $request, Response $response){
+$app->delete('/oferente/delete/{usuario}', function(Request $request, Response $response){
     $id_usuario = $request->getAttribute('id_usuario');
     $sql = "DELETE FROM oferente WHERE usuario = $id_usuario";
 

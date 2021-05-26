@@ -7,7 +7,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 $app = new \slim\App;
 //GET de todas las publicaciones
 
-$app->get('/apiRest/visualiza', function (Request $request, Response $response){
+$app->get('/visualiza', function (Request $request, Response $response){
     
     
     $sql = "SELECT * FROM visualiza";
@@ -32,7 +32,7 @@ $app->get('/apiRest/visualiza', function (Request $request, Response $response){
 }); 
 
 // GET Lista de una publicacion especifica por ID 
-$app->get('/apiRest/visualiza/{usuario}', function(Request $request, Response $response){
+$app->get('/visualiza/{usuario}', function(Request $request, Response $response){
     $usuario = $request->getAttribute('usuario');
     $id_publicacion = $request->getAttribute('id_publicacion');
     $sql = "SELECT * FROM visualiza WHERE usuario = $usuario OR id_publicacion = $id_publicacion";
@@ -56,7 +56,7 @@ $app->get('/apiRest/visualiza/{usuario}', function(Request $request, Response $r
 
 //POST Agregar nueva publicacion
 
-$app->post('/apiRest/visualiza/new', function(Request $request, Response $response){
+$app->post('/visualiza/new', function(Request $request, Response $response){
     
     $usuario = $request->getAttribute('usuario');
     $id_publicacion = $request->getParam('id_publicacion');
@@ -89,7 +89,7 @@ $app->post('/apiRest/visualiza/new', function(Request $request, Response $respon
 
 //PUT Editar publicacion
 /*
-$app->put('/apiRest/oferente/editar/{usuario}', function(Request $request, Response $response){
+$app->put('/oferente/editar/{usuario}', function(Request $request, Response $response){
     
     $usuario = $request->getAttribute('usuario');
     
@@ -126,7 +126,7 @@ $app->put('/apiRest/oferente/editar/{usuario}', function(Request $request, Respo
 
 //DELETE borrar publicacion
 
-$app->delete('/apiRest/visualiza/delete/{id}', function(Request $request, Response $response){
+$app->delete('/visualiza/delete/{id}', function(Request $request, Response $response){
     
     $visualiza = $request->getParam('visualiza');
     $id_publicacion = $request->getParam('id_publicacion');

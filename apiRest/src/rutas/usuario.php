@@ -7,7 +7,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 $app = new \slim\App;
 //GET de todas las publicaciones
 
-$app->get('/apiRest/usuario', function (Request $request, Response $response){
+$app->get('/usuario', function (Request $request, Response $response){
     
     
     $sql = "SELECT * FROM usuario";
@@ -32,7 +32,7 @@ $app->get('/apiRest/usuario', function (Request $request, Response $response){
 }); 
 
 // GET Lista de un usuario especifica por ID 
-$app->get('/apiRest/usuario/{usuario}', function(Request $request, Response $response){
+$app->get('/usuario/{usuario}', function(Request $request, Response $response){
     $id_usuario = $request->getAttribute('usuario');
     $sql = "SELECT * FROM usuario WHERE usuario = $id_usuario";
     try{
@@ -55,7 +55,7 @@ $app->get('/apiRest/usuario/{usuario}', function(Request $request, Response $res
 
 //POST Agregar nueva usuario
 
-$app->post('/apiRest/usuario/new', function(Request $request, Response $response){
+$app->post('/usuario/new', function(Request $request, Response $response){
     
     $usuario = $request->getParam('usuario');
     $nombre_usuario = $request->getParam('nombre_usuario');
@@ -90,7 +90,7 @@ $app->post('/apiRest/usuario/new', function(Request $request, Response $response
 
 //PUT Editar usuario
 
-$app->put('/apiRest/usuario/editar/{usuario}', function(Request $request, Response $response){
+$app->put('/usuario/editar/{usuario}', function(Request $request, Response $response){
     
     $usuario = $request->getAttribute('usuario');
     $nombre_usuario = $request->getAttribute('nombre_usuario');
@@ -129,7 +129,7 @@ $app->put('/apiRest/usuario/editar/{usuario}', function(Request $request, Respon
 
 //DELETE borrar publicacion
 
-$app->delete('/apiRest/usuario/delete/{usuario}', function(Request $request, Response $response){
+$app->delete('/usuario/delete/{usuario}', function(Request $request, Response $response){
     $id_usuario = $request->getAttribute('id_publicacion');
     $sql = "DELETE FROM usuario WHERE usuario = $id_usuario";
 

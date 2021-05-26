@@ -7,7 +7,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 $app = new \slim\App;
 //GET de todas las publicaciones
 
-$app->get('/apiRest/publicacion', function (Request $request, Response $response){
+$app->get('/publicacion', function (Request $request, Response $response){
     
     
     $sql = "SELECT * FROM publicacion";
@@ -32,7 +32,7 @@ $app->get('/apiRest/publicacion', function (Request $request, Response $response
 }); 
 
 // GET Lista de una publicacion especifica por ID 
-$app->get('/apiRest/publicacion/{id_publicacion}', function(Request $request, Response $response){
+$app->get('/publicacion/{id_publicacion}', function(Request $request, Response $response){
     $id_publicacion = $request->getAttribute('id_publicacion');
     $sql = "SELECT * FROM publicacion WHERE id_publicacion = $id_publicacion";
     try{
@@ -55,7 +55,7 @@ $app->get('/apiRest/publicacion/{id_publicacion}', function(Request $request, Re
 
 //POST Agregar nueva publicacion
 
-$app->post('/apiRest/publicacion/new', function(Request $request, Response $response){
+$app->post('/publicacion/new', function(Request $request, Response $response){
     $nombre_publicacion = $request->getParam('nombre_publicacion');
     $descripcion_publicacion = $request->getParam('descripcion_publicacion');
     $valor_publicacion = $request->getParam('valor_publicacion');
@@ -111,7 +111,7 @@ $app->post('/apiRest/publicacion/new', function(Request $request, Response $resp
 
 //PUT Editar publicacion
 
-$app->put('/apiRest/publicacion/editar/{id_publicacion}', function(Request $request, Response $response){
+$app->put('/publicacion/editar/{id_publicacion}', function(Request $request, Response $response){
     $id_publicacion = $request->getAttribute('id_publicacion');
 
     $nombre_publicacion = $request->getAttribute('nombre_publicacion');
@@ -176,7 +176,7 @@ $app->put('/apiRest/publicacion/editar/{id_publicacion}', function(Request $requ
 
 //DELETE borrar publicacion
 
-$app->delete('/apiRest/publicacion/delete/{id}', function(Request $request, Response $response){
+$app->delete('/publicacion/delete/{id}', function(Request $request, Response $response){
     $id_publicacion = $request->getAttribute('id_publicacion');
     $sql = "DELETE FROM publicacion WHERE id_publicacion = $id_publicacion";
 

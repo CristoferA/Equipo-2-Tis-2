@@ -7,7 +7,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 $app = new \slim\App;
 //GET de todas las publicaciones
 
-$app->get('/apiRest/visitante', function (Request $request, Response $response){
+$app->get('/visitante', function (Request $request, Response $response){
     
     
     $sql = "SELECT * FROM visitante";
@@ -32,7 +32,7 @@ $app->get('/apiRest/visitante', function (Request $request, Response $response){
 }); 
 
 // GET Lista de una publicacion especifica por ID 
-$app->get('/apiRest/visitante/{usuario}', function(Request $request, Response $response){
+$app->get('/visitante/{usuario}', function(Request $request, Response $response){
     $id_oferente = $request->getAttribute('id_visita');
     $id_publicacion = $request->getAttribute('id_publicacion');
     $sql = "SELECT * FROM visitante WHERE id_visita = $id_visita OR id_publicacion = $id_publicacion";
@@ -56,7 +56,7 @@ $app->get('/apiRest/visitante/{usuario}', function(Request $request, Response $r
 
 //POST Agregar nueva publicacion
 
-$app->post('/apiRest/visitante/new', function(Request $request, Response $response){
+$app->post('/visitante/new', function(Request $request, Response $response){
     
     $id_visita = $request->getParam('id_visita');
     $id_publicacion = $request->getParam('id_publicacion');
@@ -89,7 +89,7 @@ $app->post('/apiRest/visitante/new', function(Request $request, Response $respon
 
 //PUT Editar publicacion
 /*
-$app->put('/apiRest/oferente/editar/{usuario}', function(Request $request, Response $response){
+$app->put('/oferente/editar/{usuario}', function(Request $request, Response $response){
     
     $usuario = $request->getAttribute('usuario');
     
@@ -126,7 +126,7 @@ $app->put('/apiRest/oferente/editar/{usuario}', function(Request $request, Respo
 
 //DELETE borrar publicacion
 
-$app->delete('/apiRest/visitante/delete/{id}', function(Request $request, Response $response){
+$app->delete('/visitante/delete/{id}', function(Request $request, Response $response){
     
     $id_visita = $request->getParam('id_visita');
     $id_publicacion = $request->getParam('id_publicacion');

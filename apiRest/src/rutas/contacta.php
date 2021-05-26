@@ -7,7 +7,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 $app = new \slim\App;
 //GET de todas los contactos
 
-$app->get('/apiRest/contacta', function (Request $request, Response $response){
+$app->get('/contacta', function (Request $request, Response $response){
     
     
     $sql = "SELECT * FROM contacta";
@@ -32,7 +32,7 @@ $app->get('/apiRest/contacta', function (Request $request, Response $response){
 }); 
 
 // GET Lista de un contacto especifico por ID 
-$app->get('/apiRest/contacta/{usuario}', function(Request $request, Response $response){
+$app->get('/contacta/{usuario}', function(Request $request, Response $response){
     $id_usuario = $request->getAttribute('usuario');
     $sql = "SELECT * FROM contacta WHERE id_oferente = $id_usuario OR id_demandante = $id_usuario";
     try{
@@ -55,7 +55,7 @@ $app->get('/apiRest/contacta/{usuario}', function(Request $request, Response $re
 
 //POST Agregar nueva publicacion
 
-$app->post('/apiRest/oferente/new', function(Request $request, Response $response){
+$app->post('/oferente/new', function(Request $request, Response $response){
     
     $id_oferente = $request->getParam('id_oferente');
     $id_demandante = $request->getParam('id_demandante');
@@ -88,7 +88,7 @@ $app->post('/apiRest/oferente/new', function(Request $request, Response $respons
 
 //PUT Editar publicacion
 /*
-$app->put('/apiRest/contacta/editar/{usuario}', function(Request $request, Response $response){
+$app->put('/contacta/editar/{usuario}', function(Request $request, Response $response){
     
     $usuario = $request->getAttribute('usuario');
     
@@ -125,7 +125,7 @@ $app->put('/apiRest/contacta/editar/{usuario}', function(Request $request, Respo
 
 //DELETE borrar publicacion
 
-$app->delete('/apiRest/contacta/delete/{usuario}', function(Request $request, Response $response){
+$app->delete('/contacta/delete/{usuario}', function(Request $request, Response $response){
     $id_oferente = $request->getAttribute('id_oferente');
     $id_demandante = $request->getAttribute('id_publicacion');
     $sql = "DELETE FROM oferente WHERE id_oferente = $id_oferente OR id_demandante = $id_demandante";
