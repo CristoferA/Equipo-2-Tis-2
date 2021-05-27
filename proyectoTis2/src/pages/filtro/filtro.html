@@ -6,26 +6,95 @@
 -->
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>filtro</ion-title>
+    <ion-title>Filtros</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 
-<ion-content padding center >
-  <div class="ion-text">
+<ion-content padding center class="centrado">
+ 
+
+  <ion-content padding>
     <h4>Buscar lugar</h4>
-    <ion-searchbar></ion-searchbar>
-  </div>
+    
+    <div class="centrado">
+      <ion-searchbar></ion-searchbar>
+    </div>
   
-
-
-  <div>
-    <ion-select placeholder="Region">
-      <ion-option value="mon">Monday</ion-option>
-      <ion-option value="tue">Tuesday</ion-option>
-    </ion-select>
-  </div>
+  
+    <br><br>
+    <hr>
+    <br>
+  
+  <ion-list >
+    <h4>Filtros</h4>
+    <br>
+    <ion-item>
+      <ion-label>Region</ion-label>
+      <ion-select placeholder="Selecciona">
+        <ion-option>Región de Arica y Parinacota</ion-option>
+        <ion-option>Región de Tarapacá</ion-option>
+        <ion-option>Región de Antofagasta</ion-option>
+        <ion-option>Región de Atacama</ion-option>
+        <ion-option>Región de Coquimbo</ion-option>
+        <ion-option>Región de Valparaíso</ion-option>
+        <ion-option>Región Metropolitana de Santiago</ion-option>
+        <ion-option>Región del Libertador General Bernardo O'Higgins</ion-option>
+        <ion-option>Región del Maule</ion-option>
+        <ion-option>Región de Ñuble</ion-option>
+        <ion-option>Región del BioBio</ion-option>
+      </ion-select>
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-label>Comuna</ion-label>
+      <ion-select placeholder="Selecciona">
+        <ion-option>Arica</ion-option>
+        <ion-option>Camarones</ion-option>
+        <ion-option>Putre</ion-option>
+        <ion-option>General Lagos</ion-option>
+        <ion-option>Iquique</ion-option>
+        <ion-option>Alto Hospicio</ion-option>
+        <ion-option>Antofagasta</ion-option>
+        <ion-option>Mejillones</ion-option>
+        <ion-option>Calama</ion-option>
+        <ion-option>Tocopilla</ion-option>
+        <ion-option>La Serena</ion-option>
+      </ion-select>
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-label>Tipo publicacion</ion-label>
+      <ion-select placeholder="Selecciona">
+        <ion-option>Producto</ion-option>
+        <ion-option>Servicio</ion-option>
+        <ion-option>Infraestructura</ion-option>
+      </ion-select>
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-label>Tipo turismo</ion-label>
+      <ion-select placeholder="Selecciona">
+        <ion-option>Negocios</ion-option>
+        <ion-option>Urbano</ion-option>
+        <ion-option>Natural</ion-option>
+        <ion-option>Gastronomico</ion-option>
+        <ion-option>Aventura</ion-option>
+        <ion-option>Ecologico</ion-option>
+        <ion-option>Cultural</ion-option>
+        <ion-option>De lujo</ion-option>
+        <ion-option>De diversion</ion-option>
+        <ion-option>Religioso</ion-option>
+        <ion-option>Espacial</ion-option>
+      </ion-select>
+    </ion-item>
+  
+  </ion-list>
+  <br>
+  <button ion-button round (click) = "irHome()">
+    Aplicar
+  </button>
   
 
 </ion-content>

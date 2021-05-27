@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { HomePage } from '../home/home';
+
 
 /**
  * Generated class for the FiltroPage page.
@@ -18,6 +20,9 @@ export class FiltroPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
+  irHome(){
+    this.navCtrl.push(HomePage);
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad FiltroPage');
   }

@@ -1,5 +1,10 @@
 page-filtro {
-    ion-searchbar *{
+    
+    ion-content {
+        background-color: hsl(187, 71%, 77%) !important;
+    }
+    
+    ion-searchbar{
         margin-top: 2vh;
         
     }
@@ -7,4 +12,10 @@ page-filtro {
     ion-text{
         text-align: center;
     }
+
+    .centrado{
+        text-align: center;
+      }
+
+      
 }

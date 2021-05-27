@@ -15,6 +15,18 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 ion-content {
-    background-color: rgba(212, 212, 212, 0.801)!important;
+    background-color: rgb(231, 230, 230)!important;
 }
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('../assets/fonts/source_sans_pro.woff2') format('woff2');
+  }
+  *{
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+
+  .centrado{
+    text-align: center;
+  }
 
