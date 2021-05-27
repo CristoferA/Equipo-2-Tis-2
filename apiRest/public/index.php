@@ -26,7 +26,7 @@ require '../src/rutas/usuario.php';
 
 require '../src/rutas/visitante.php';
 
-require '../src/rutas/visita.php';
+require '../src/rutas/visualiza.php';
 
 
 
