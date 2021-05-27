@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 20-05-2021 a las 05:25:47
--- Versión del servidor: 10.4.19-MariaDB
--- Versión de PHP: 8.0.6
+-- Host: localhost:3306
+-- Generation Time: May 27, 2021 at 12:01 AM
+-- Server version: 5.7.24
+-- PHP Version: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `atractivos_turisticos_bd`
+-- Database: `atractivos_turisticos_bd`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `contacta`
+-- Table structure for table `contacta`
 --
 
 CREATE TABLE `contacta` (
@@ -35,7 +36,7 @@ CREATE TABLE `contacta` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `demandante`
+-- Table structure for table `demandante`
 --
 
 CREATE TABLE `demandante` (
@@ -45,7 +46,7 @@ CREATE TABLE `demandante` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `moderador`
+-- Table structure for table `moderador`
 --
 
 CREATE TABLE `moderador` (
@@ -53,10 +54,17 @@ CREATE TABLE `moderador` (
   `codigo_acceso` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `moderador`
+--
+
+INSERT INTO `moderador` (`usuario`, `codigo_acceso`) VALUES
+('1', '1');
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `oferente`
+-- Table structure for table `oferente`
 --
 
 CREATE TABLE `oferente` (
@@ -66,7 +74,7 @@ CREATE TABLE `oferente` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `publica`
+-- Table structure for table `publica`
 --
 
 CREATE TABLE `publica` (
@@ -77,7 +85,7 @@ CREATE TABLE `publica` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `publicacion`
+-- Table structure for table `publicacion`
 --
 
 CREATE TABLE `publicacion` (
@@ -98,10 +106,17 @@ CREATE TABLE `publicacion` (
   `id_moderador` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `publicacion`
+--
+
+INSERT INTO `publicacion` (`id_publicacion`, `nombre_publicacion`, `descripcion_publicacion`, `valor_publicacion`, `region_publicacion`, `tipo_publicacion`, `estado`, `tipo_turismo`, `email_contacto`, `telefono_contacto`, `direccion`, `redes_sociales`, `comuna_publicacion`, `calificacion_publicacion`, `id_moderador`) VALUES
+(2, 'a', '1', 1, '1', 'servicio', 'pendiente', 'negocios', '1', 1, '1', '1', '1', 1, '1');
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuario`
+-- Table structure for table `usuario`
 --
 
 CREATE TABLE `usuario` (
@@ -111,10 +126,17 @@ CREATE TABLE `usuario` (
   `contraseña` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `usuario`
+--
+
+INSERT INTO `usuario` (`usuario`, `nombre_usuario`, `email_usuario`, `contraseña`) VALUES
+('1', '1', '1', '1');
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `visitante`
+-- Table structure for table `visitante`
 --
 
 CREATE TABLE `visitante` (
@@ -125,7 +147,7 @@ CREATE TABLE `visitante` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `visualiza`
+-- Table structure for table `visualiza`
 --
 
 CREATE TABLE `visualiza` (
@@ -134,128 +156,134 @@ CREATE TABLE `visualiza` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `contacta`
+-- Indexes for table `contacta`
 --
 ALTER TABLE `contacta`
   ADD PRIMARY KEY (`id_oferente`,`id_demandante`),
   ADD KEY `contacta_demandante` (`id_demandante`);
 
 --
--- Indices de la tabla `demandante`
+-- Indexes for table `demandante`
 --
 ALTER TABLE `demandante`
   ADD PRIMARY KEY (`usuario`);
 
 --
--- Indices de la tabla `moderador`
+-- Indexes for table `moderador`
 --
 ALTER TABLE `moderador`
   ADD PRIMARY KEY (`usuario`);
 
 --
--- Indices de la tabla `oferente`
+-- Indexes for table `oferente`
 --
 ALTER TABLE `oferente`
   ADD PRIMARY KEY (`usuario`);
 
 --
--- Indices de la tabla `publica`
+-- Indexes for table `publica`
 --
 ALTER TABLE `publica`
   ADD PRIMARY KEY (`id_oferente`,`id_publicacion`),
   ADD KEY `publica_publicacion` (`id_publicacion`);
 
 --
--- Indices de la tabla `publicacion`
+-- Indexes for table `publicacion`
 --
 ALTER TABLE `publicacion`
   ADD PRIMARY KEY (`id_publicacion`),
   ADD KEY `publicacion_moderador` (`id_moderador`);
 
 --
--- Indices de la tabla `usuario`
+-- Indexes for table `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`usuario`);
 
 --
--- Indices de la tabla `visitante`
+-- Indexes for table `visitante`
 --
 ALTER TABLE `visitante`
   ADD PRIMARY KEY (`id_visita`,`id_publicacion`),
   ADD KEY `visitante_publicacion` (`id_publicacion`);
 
 --
--- Indices de la tabla `visualiza`
+-- Indexes for table `visualiza`
 --
 ALTER TABLE `visualiza`
   ADD PRIMARY KEY (`usuario`,`id_publicacion`),
   ADD KEY `visualiza_publicacion` (`id_publicacion`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `visitante`
+-- AUTO_INCREMENT for table `publicacion`
+--
+ALTER TABLE `publicacion`
+  MODIFY `id_publicacion` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `visitante`
 --
 ALTER TABLE `visitante`
   MODIFY `id_visita` int(7) NOT NULL AUTO_INCREMENT;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `contacta`
+-- Constraints for table `contacta`
 --
 ALTER TABLE `contacta`
   ADD CONSTRAINT `contacta_demandante` FOREIGN KEY (`id_demandante`) REFERENCES `demandante` (`usuario`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `contacta_oferente` FOREIGN KEY (`id_oferente`) REFERENCES `oferente` (`usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `demandante`
+-- Constraints for table `demandante`
 --
 ALTER TABLE `demandante`
   ADD CONSTRAINT `demandante_usuario` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `moderador`
+-- Constraints for table `moderador`
 --
 ALTER TABLE `moderador`
   ADD CONSTRAINT `moderador_usuario` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `oferente`
+-- Constraints for table `oferente`
 --
 ALTER TABLE `oferente`
   ADD CONSTRAINT `oferente_usuario` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `publica`
+-- Constraints for table `publica`
 --
 ALTER TABLE `publica`
   ADD CONSTRAINT `publica_oferente` FOREIGN KEY (`id_oferente`) REFERENCES `oferente` (`usuario`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `publica_publicacion` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id_publicacion`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `publicacion`
+-- Constraints for table `publicacion`
 --
 ALTER TABLE `publicacion`
   ADD CONSTRAINT `publicacion_moderador` FOREIGN KEY (`id_moderador`) REFERENCES `moderador` (`usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `visitante`
+-- Constraints for table `visitante`
 --
 ALTER TABLE `visitante`
   ADD CONSTRAINT `visitante_publicacion` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id_publicacion`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `visualiza`
+-- Constraints for table `visualiza`
 --
 ALTER TABLE `visualiza`
   ADD CONSTRAINT `visualiza_publicacion` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id_publicacion`) ON DELETE CASCADE ON UPDATE CASCADE,
