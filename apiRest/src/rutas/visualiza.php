@@ -4,7 +4,6 @@ ini_set('display_errors', 1);
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-$app = new \slim\App;
 //GET de todas las publicaciones
 
 $app->get('/visualiza', function (Request $request, Response $response){

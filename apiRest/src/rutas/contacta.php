@@ -4,7 +4,6 @@ ini_set('display_errors', 1);
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-$app = new \slim\App;
 //GET de todas los contactos
 
 $app->get('/contacta', function (Request $request, Response $response){
@@ -55,7 +54,7 @@ $app->get('/contacta/{usuario}', function(Request $request, Response $response){
 
 //POST Agregar nueva publicacion
 
-$app->post('/oferente/new', function(Request $request, Response $response){
+$app->post('/contacta/new', function(Request $request, Response $response){
     
     $id_oferente = $request->getParam('id_oferente');
     $id_demandante = $request->getParam('id_demandante');
