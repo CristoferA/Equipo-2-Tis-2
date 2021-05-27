@@ -10,23 +10,11 @@ require '../src/config/db.php';
 $app = new \Slim\App;
 
 //ruta de cosas
-require '../src/rutas/contacta.php';
-
-require '../src/rutas/demandante.php';
-
-require '../src/rutas/moderador.php';
-
-require '../src/rutas/oferente.php';
-
-require '../src/rutas/publica.php';
-
 require '../src/rutas/publicacion.php';
 
-require '../src/rutas/usuario.php';
 
-require '../src/rutas/visitante.php';
 
-require '../src/rutas/visualiza.php';
+
 
 
 
