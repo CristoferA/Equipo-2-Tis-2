@@ -32,9 +32,9 @@ $app->get('/usuario', function (Request $request, Response $response){
 }); 
 
 // GET Lista de un usuario especifica por ID 
-$app->get('/usuario/{usuario}', function(Request $request, Response $response){
-    $id_usuario = $request->getAttribute('usuario');
-    $sql = "SELECT * FROM usuario WHERE usuario = $id_usuario";
+$app->get('/usuario/{id_usuario}', function(Request $request, Response $response){
+    $id_usuario = $request->getAttribute('id_usuario');
+    $sql = "SELECT * FROM usuario WHERE id_usuario = $id_usuario";
     try{
       $db = new db();
       $db = $db->conectionDB();
@@ -57,24 +57,24 @@ $app->get('/usuario/{usuario}', function(Request $request, Response $response){
 
 $app->post('/usuario/new', function(Request $request, Response $response){
     
-    $usuario = $request->getParam('usuario');
+    $id_usuario = $request->getParam('id_usuario');
     $nombre_usuario = $request->getParam('nombre_usuario');
     $email_usuario = $request->getParam('email_usuario');
-    $contraseña = $request->getParam('contraseña');
+    $contrasena = $request->getParam('contrasena');
      
 
-    $sql= "INSERT INTO usuario (usuario, nombre_usuario, email_usuario, contraseña) 
-    VALUES (:usuario, :nombre_usuario, :email_usuario, :contraseña)";
+    $sql= "INSERT INTO usuario(id_usuario,nombre_usuario,email_usuario,contrasena) 
+    VALUES (:id_usuario,:nombre_usuario,:email_usuario,:contrasena)";
 
     try{
         $db = new db();
         $db = $db -> conectionDB();
         $result = $db -> prepare ($sql);
 
-        $result->bindParam(':usuario',$usuario);
+        $result->bindParam(':id_usuario',$id_usuario);
         $result->bindParam(':nombre_usuario',$nombre_usuario);
         $result->bindParam(':email_usuario',$email_usuario);
-        $result->bindParam(':contraseña',$contraseña);
+        $result->bindParam(':contrasena',$contrasena);
         
 
 
