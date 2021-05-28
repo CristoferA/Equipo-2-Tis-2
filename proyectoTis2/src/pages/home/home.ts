@@ -12,9 +12,11 @@ export class HomePage {
   constructor(public navCtrl: NavController) {
 
   }
+  
   irPublicacion(){
     this.navCtrl.push(PublicacionPage);
   }
+
   irFiltro(){
     this.navCtrl.push(FiltroPage);
   }

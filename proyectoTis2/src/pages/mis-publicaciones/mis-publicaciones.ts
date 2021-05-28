@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { PublicacionPage } from '../publicacion/publicacion';
 
 /**
  * Generated class for the MisPublicacionesPage page.
@@ -21,5 +22,8 @@ export class MisPublicacionesPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad MisPublicacionesPage');
   }
-
+  
+  irPublicacion(){
+    this.navCtrl.push(PublicacionPage);
+  }
 }
