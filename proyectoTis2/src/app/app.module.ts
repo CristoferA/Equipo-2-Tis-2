@@ -10,7 +10,8 @@ import { FiltroPage } from '../pages/filtro/filtro';
 import { LoginPage } from '../pages/login/login';
 import { CrearPublicacionPage } from '../pages/crear-publicacion/crear-publicacion';
 import { RegistroPage } from '../pages/registro/registro';
-import {CuentaPage} from '../pages/cuenta/cuenta';
+import { CuentaPage} from '../pages/cuenta/cuenta';
+import { MisPublicacionesPage } from '../pages/mis-publicaciones/mis-publicaciones';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -25,7 +26,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     LoginPage,
     CrearPublicacionPage,
     RegistroPage,
-    CuentaPage
+    CuentaPage,
+    MisPublicacionesPage
   ],
   imports: [
     BrowserModule,
@@ -41,7 +43,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     LoginPage,
     CrearPublicacionPage,
     RegistroPage,
-    CuentaPage
+    CuentaPage,
+    MisPublicacionesPage
   ],
   providers: [
     StatusBar,

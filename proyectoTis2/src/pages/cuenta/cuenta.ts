@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { MisPublicacionesPage } from '../mis-publicaciones/mis-publicaciones';
 
-/**
- * Generated class for the CuentaPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -20,6 +15,10 @@ export class CuentaPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CuentaPage');
+  }
+
+  irMisPublicaciones(){
+    this.navCtrl.push(MisPublicacionesPage);
   }
 
 }

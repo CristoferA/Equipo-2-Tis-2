@@ -7,11 +7,12 @@ import { HomePage } from '../pages/home/home';
 
 import { LoginPage } from '../pages/login/login';
 import { CrearPublicacionPage } from '../pages/crear-publicacion/crear-publicacion';
-import {CuentaPage} from '../pages/cuenta/cuenta';
+import { CuentaPage } from '../pages/cuenta/cuenta';
 
 @Component({
   templateUrl: 'app.html'
 })
+
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
