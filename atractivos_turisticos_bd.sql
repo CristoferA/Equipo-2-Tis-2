@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 27, 2021 at 12:01 AM
+-- Generation Time: Jun 02, 2021 at 06:35 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -111,7 +111,8 @@ CREATE TABLE `publicacion` (
 --
 
 INSERT INTO `publicacion` (`id_publicacion`, `nombre_publicacion`, `descripcion_publicacion`, `valor_publicacion`, `region_publicacion`, `tipo_publicacion`, `estado`, `tipo_turismo`, `email_contacto`, `telefono_contacto`, `direccion`, `redes_sociales`, `comuna_publicacion`, `calificacion_publicacion`, `id_moderador`) VALUES
-(2, 'a', '1', 1, '1', 'servicio', 'pendiente', 'negocios', '1', 1, '1', '1', '1', 1, '1');
+(4, 'Torres del paine', 'Estas son las torres del paine, un lugar turistico muy turistiable del sur de chile', 0, 'Magallanes y la Antartica ', 'servicio', 'aprobado', 'natural', 'paine@gmail.com', 912345678, 'Magallanes y la Antartica Chilena', 'paine', 'paine', 10, '1'),
+(5, 'Ahu Tongariki', 'Este es un lugar donde se puede hacer turismo.', 0, 'Isla de pascua Valparaiso', 'servicio', 'aprobado', 'cultural', 'pascua@gmail.com', 912345678, 'rapa nui 123', 'Isla_pascua', 'Rapa nui', 10, '1');
 
 -- --------------------------------------------------------
 
@@ -120,18 +121,20 @@ INSERT INTO `publicacion` (`id_publicacion`, `nombre_publicacion`, `descripcion_
 --
 
 CREATE TABLE `usuario` (
-  `usuario` varchar(50) NOT NULL,
+  `id_usuario` varchar(50) NOT NULL,
   `nombre_usuario` varchar(50) NOT NULL,
   `email_usuario` varchar(100) NOT NULL,
-  `contraseña` varchar(12) NOT NULL
+  `contrasena` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `usuario`
 --
 
-INSERT INTO `usuario` (`usuario`, `nombre_usuario`, `email_usuario`, `contraseña`) VALUES
-('1', '1', '1', '1');
+INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `email_usuario`, `contrasena`) VALUES
+('1', '1', '1', '1'),
+('2', '2', '2', '2'),
+('3', 'asdasdasdasdasd', 'asdasdasdasdsa', 'asd');
 
 -- --------------------------------------------------------
 
@@ -202,7 +205,7 @@ ALTER TABLE `publicacion`
 -- Indexes for table `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`usuario`);
+  ADD PRIMARY KEY (`id_usuario`);
 
 --
 -- Indexes for table `visitante`
@@ -226,7 +229,7 @@ ALTER TABLE `visualiza`
 -- AUTO_INCREMENT for table `publicacion`
 --
 ALTER TABLE `publicacion`
-  MODIFY `id_publicacion` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_publicacion` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `visitante`
@@ -249,19 +252,19 @@ ALTER TABLE `contacta`
 -- Constraints for table `demandante`
 --
 ALTER TABLE `demandante`
-  ADD CONSTRAINT `demandante_usuario` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `demandante_usuario` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `moderador`
 --
 ALTER TABLE `moderador`
-  ADD CONSTRAINT `moderador_usuario` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `moderador_usuario` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `oferente`
 --
 ALTER TABLE `oferente`
-  ADD CONSTRAINT `oferente_usuario` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `oferente_usuario` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `publica`
@@ -287,7 +290,7 @@ ALTER TABLE `visitante`
 --
 ALTER TABLE `visualiza`
   ADD CONSTRAINT `visualiza_publicacion` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id_publicacion`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `visualiza_usuario` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `visualiza_usuario` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
