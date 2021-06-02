@@ -7,12 +7,12 @@
 
 
 
-<ion-header *ngFor="let pub of publicacion">
+<ion-header>
   <ion-navbar padding color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{pub.nombre_publicacion}} 
+    <ion-title *ngFor="let pub of publicacion">{{pub.nombre_publicacion}} 
     </ion-title>
   </ion-navbar>
 </ion-header>
