@@ -35,14 +35,14 @@
   <hr>
   <p>Recomendaciones: </p>
 
-  <ion-card>
+  <ion-card *ngFor="let pub of publicacionesDes" (click)="irPublicacion(pub.id_publicacion)">
 
     <img src="../assets/imgs/paine.jpg">
 
     <ion-card-content>
-      <p>Parque Nacional Torres del Paine</p>
+      <p>{{pub.nombre_publicacion}}</p>
       <p>
-        <ion-icon name="pin"></ion-icon> Magallanes y la antartida chilena
+        <ion-icon name="pin"></ion-icon> {{pub.direccion}}
       </p>
 
     </ion-card-content>
@@ -56,50 +56,12 @@
       <ion-col>
         <button ion-button icon-start clear small>
           <ion-icon name="star"></ion-icon>
-          <ion-icon name="star"></ion-icon>
-          <ion-icon name="star"></ion-icon>
-          <ion-icon name="star"></ion-icon>
-          <ion-icon name="star"></ion-icon>
+          <p>Calificacion: {{pub.calificacion_publicacion}}</p>
         </button>
       </ion-col>
       <ion-col align-self-center text-center>
         <ion-note>
-          Hace 11h
-        </ion-note>
-      </ion-col>
-    </ion-row>
-
-  </ion-card>
-
-  <ion-card>
-
-    <img src="../assets/imgs/pascua.jpg">
-
-    <ion-card-content>
-      <p>A hu tongariki.</p>
-      <p>
-        <ion-icon name="pin"></ion-icon> Isla de pascua, Valparaiso.
-      </p>
-    </ion-card-content>
-
-    <ion-row>
-      <ion-col>
-        <button ion-button icon-start clear small>
-          <button ion-button (click)="irPublicacion()">Ir</button>
-        </button>
-      </ion-col>
-      <ion-col>
-        <button ion-button icon-start clear small>
-          <ion-icon name="star"></ion-icon>
-          <ion-icon name="star"></ion-icon>
-          <ion-icon name="star"></ion-icon>
-          <ion-icon name="star"></ion-icon>
-          <ion-icon name="star"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col align-self-center text-center>
-        <ion-note>
-          Hace 11h
+          
         </ion-note>
       </ion-col>
     </ion-row>

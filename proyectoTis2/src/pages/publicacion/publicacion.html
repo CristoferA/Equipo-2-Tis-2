@@ -7,51 +7,29 @@
 
 
 
-<ion-header>
+<ion-header *ngFor="let pub of publicacion">
   <ion-navbar padding color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Publicacion
+    <ion-title>{{pub.nombre_publicacion}} 
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content >
-
-  <div margin-horizontal><h1>Torres del paine</h1></div>
+<ion-content *ngFor="let pub of publicacion">
 
   <img src="../assets/imgs/paine.jpg">
-<h1></h1>
 
-<ion-grid>
-  <ion-row>
-    <ion-col col-12>This column will take 12 columns</ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col col-6>This column will take 6 columns</ion-col>
-  </ion-row>
-</ion-grid>
 
-<ion-card>
-  <ion-item>
-    <ion-icon name="md-locate" item-start large ></ion-icon>
-    <h2>Magallanes y la Antártica Chilena</h2>
-  </ion-item>
-
-  <ion-item>
-    <span item-start>18 Km</span>
-    <button ion-button icon-start clear item-end>
-      <ion-icon name="navigate"></ion-icon>
-      Ver mapa
-    </button>
-  </ion-item>
-
-</ion-card>
   <ion-card>
     <ion-item>
       <ion-icon name="md-map" item-start large ></ion-icon>
-      <h2>Magallanes y la Antártica Chilena</h2>
+      <h2>{{pub.direccion}}</h2>
+      <button ion-button icon-start clear item-end>
+        <ion-icon name="navigate"></ion-icon>
+        Ver mapa
+      </button>
     </ion-item>
   </ion-card>
 
@@ -60,7 +38,7 @@
       <h3>Descripcion</h3>
     </ion-row> 
     <ion-row >  
-      <p>Aquí va una descripción del lugar o atractivo turístico</p>
+      <p>{{pub.descripcion_publicacion}}</p>
     </ion-row>  
   </ion-grid>
 
@@ -72,7 +50,7 @@
     </ion-row> 
     <ion-row >
       <ion-col col-1> <ion-icon name="md-star" item-start large ></ion-icon> </ion-col>  
-      <ion-col col-10> <p>Calificación 7/10</p> </ion-col>
+      <ion-col > <p>Calificación {{pub.calificacion_publicacion}} /10</p> </ion-col>
     </ion-row>  
   </ion-grid>
 
@@ -94,7 +72,7 @@
       <ion-list>
         <ion-item>
           <ion-icon name="md-call" item-start></ion-icon>
-            Telefono contacto: +56 9 65893252
+            Telefono contacto: +56 {{pub.telefono_contacto}}
         </ion-item>
       </ion-list>
     </ion-row>  
@@ -102,7 +80,7 @@
       <ion-list>
         <ion-item>
           <ion-icon name="md-locate" item-start></ion-icon>
-            Dirección: 
+            Dirección Oficina: 
         </ion-item>
       </ion-list>
     </ion-row>    
