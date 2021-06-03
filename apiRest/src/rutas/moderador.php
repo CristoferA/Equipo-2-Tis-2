@@ -31,8 +31,8 @@ $app->get('/moderador', function (Request $request, Response $response){
 }); 
 
 // GET Lista de una publicacion especifica por ID 
-$app->get('/moderador/{usuario}', function(Request $request, Response $response){
-    $id_usuario = $request->getAttribute('usuario');
+$app->get('/moderador/{id}', function(Request $request, Response $response){
+    $id_usuario = $request->getAttribute('id');
     $sql = "SELECT * FROM moderador WHERE usuario = $id_usuario";
     try{
       $db = new db();
@@ -124,8 +124,8 @@ $app->put('/oferente/editar/{usuario}', function(Request $request, Response $res
 
 //DELETE borrar publicacion
 
-$app->delete('/moderador/delete/{usuario}', function(Request $request, Response $response){
-    $id_usuario = $request->getAttribute('id_usuario');
+$app->delete('/moderador/delete/{id}', function(Request $request, Response $response){
+    $id_usuario = $request->getAttribute('id');
     $sql = "DELETE FROM moderador WHERE usuario = $id_usuario";
 
     try{

@@ -34,7 +34,7 @@ $app->get('/publicacion', function (Request $request, Response $response){
 // GET Lista de una publicacion especifica por ID 
 $app->get('/publicacion/{id_publicacion}', function(Request $request, Response $response){
     $id_publicacion = $request->getAttribute('id_publicacion');
-    $sql = "SELECT * FROM publicacion WHERE id_publicacion = $id_publicacion";
+    $sql = "SELECT * FROM publicacion WHERE id_publicacion = '$id_publicacion'";
     try{
       $db = new db();
       $db = $db->conectionDB();

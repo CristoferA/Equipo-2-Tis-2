@@ -31,10 +31,10 @@ $app->get('/visualiza', function (Request $request, Response $response){
 }); 
 
 // GET Lista de una publicacion especifica por ID 
-$app->get('/visualiza/{usuario}', function(Request $request, Response $response){
-    $usuario = $request->getAttribute('usuario');
-    $id_publicacion = $request->getAttribute('id_publicacion');
-    $sql = "SELECT * FROM visualiza WHERE usuario = $usuario OR id_publicacion = $id_publicacion";
+$app->get('/visualiza/{id}', function(Request $request, Response $response){
+    $usuario = $request->getAttribute('id');
+    $id_publicacion = $request->getAttribute('id');
+    $sql = "SELECT * FROM visualiza WHERE usuario = '$usuario' OR id_publicacion = '$id_publicacion'";
     try{
       $db = new db();
       $db = $db->conectionDB();
@@ -127,8 +127,8 @@ $app->put('/oferente/editar/{usuario}', function(Request $request, Response $res
 
 $app->delete('/visualiza/delete/{id}', function(Request $request, Response $response){
     
-    $visualiza = $request->getParam('visualiza');
-    $id_publicacion = $request->getParam('id_publicacion');
+    $visualiza = $request->getParam('id');
+    $id_publicacion = $request->getParam('id');
     
     $sql = "DELETE FROM visitante WHERE visualiza = $visualiza OR id_publicacion = $id_publicacion";
 

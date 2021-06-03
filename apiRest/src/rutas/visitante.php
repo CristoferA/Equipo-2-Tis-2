@@ -31,10 +31,10 @@ $app->get('/visitante', function (Request $request, Response $response){
 }); 
 
 // GET Lista de una publicacion especifica por ID 
-$app->get('/visitante/{usuario}', function(Request $request, Response $response){
-    $id_oferente = $request->getAttribute('id_visita');
-    $id_publicacion = $request->getAttribute('id_publicacion');
-    $sql = "SELECT * FROM visitante WHERE id_visita = $id_visita OR id_publicacion = $id_publicacion";
+$app->get('/visitante/{id}', function(Request $request, Response $response){
+    $id_oferente = $request->getAttribute('id');
+    $id_publicacion = $request->getAttribute('id');
+    $sql = "SELECT * FROM visitante WHERE id_visita = '$id_visita' OR id_publicacion = '$id_publicacion'";
     try{
       $db = new db();
       $db = $db->conectionDB();
@@ -127,10 +127,10 @@ $app->put('/oferente/editar/{usuario}', function(Request $request, Response $res
 
 $app->delete('/visitante/delete/{id}', function(Request $request, Response $response){
     
-    $id_visita = $request->getParam('id_visita');
-    $id_publicacion = $request->getParam('id_publicacion');
+    $id_visita = $request->getParam('id');
+    $id_publicacion = $request->getParam('id');
     
-    $sql = "DELETE FROM visitante WHERE id_visita = $id_visita OR id_publicacion = $id_publicacion";
+    $sql = "DELETE FROM visitante WHERE id_visita = '$id_visita' OR id_publicacion = '$id_publicacion'";
 
     try{
         $db = new db();

@@ -31,10 +31,10 @@ $app->get('/publica', function (Request $request, Response $response){
 }); 
 
 // GET Lista de una publicacion especifica por ID 
-$app->get('/publica/{usuario}', function(Request $request, Response $response){
-    $id_oferente = $request->getAttribute('id_oferente');
-    $id_publicacion = $request->getAttribute('id_publicacion');
-    $sql = "SELECT * FROM publica WHERE id_oferente = $id_oferente OR id_publicacion = $id_publicacion";
+$app->get('/publica/{id}', function(Request $request, Response $response){
+    $id_oferente = $request->getAttribute('id');
+    $id_publicacion = $request->getAttribute('id');
+    $sql = "SELECT * FROM publica WHERE id_oferente = '$id_oferente' OR id_publicacion = '$id_publicacion'";
     try{
       $db = new db();
       $db = $db->conectionDB();

@@ -122,8 +122,8 @@ $app->put('/oferente/editar/{usuario}', function(Request $request, Response $res
 
 //DELETE borrar publicacion
 
-$app->delete('/demandante/delete/{usuario}', function(Request $request, Response $response){
-    $id_usuario = $request->getAttribute('id_publicacion');
+$app->delete('/demandante/delete/{id}', function(Request $request, Response $response){
+    $id_usuario = $request->getAttribute('id');
     $sql = "DELETE FROM demandante WHERE usuario = $id_usuario";
 
     try{

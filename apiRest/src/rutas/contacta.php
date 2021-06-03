@@ -31,9 +31,10 @@ $app->get('/contacta', function (Request $request, Response $response){
 }); 
 
 // GET Lista de un contacto especifico por ID 
-$app->get('/contacta/{usuario}', function(Request $request, Response $response){
-    $id_usuario = $request->getAttribute('usuario');
-    $sql = "SELECT * FROM contacta WHERE id_oferente = $id_usuario OR id_demandante = $id_usuario";
+$app->get('/contacta/{id}', function(Request $request, Response $response){
+    $id_usuario = $request->getAttribute('id');
+    $id_demandante = $request->getAttribute('id');
+    $sql = "SELECT * FROM contacta WHERE id_oferente = '$id_usuario' OR id_demandante = '$id_demandante'";
     try{
       $db = new db();
       $db = $db->conectionDB();
@@ -124,9 +125,9 @@ $app->put('/contacta/editar/{usuario}', function(Request $request, Response $res
 
 //DELETE borrar publicacion
 
-$app->delete('/contacta/delete/{usuario}', function(Request $request, Response $response){
-    $id_oferente = $request->getAttribute('id_oferente');
-    $id_demandante = $request->getAttribute('id_publicacion');
+$app->delete('/contacta/delete/{id}', function(Request $request, Response $response){
+    $id_oferente = $request->getAttribute('id');
+    $id_demandante = $request->getAttribute('id');
     $sql = "DELETE FROM oferente WHERE id_oferente = $id_oferente OR id_demandante = $id_demandante";
 
     try{
