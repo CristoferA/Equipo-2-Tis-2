@@ -19,12 +19,17 @@ ion-content {
 }
 
 @font-face {
-    font-family: 'Source Sans Pro';
-    src: url('../assets/fonts/source_sans_pro.woff2') format('woff2');
-  }
-  *{
-    font-family: 'Source Sans Pro', sans-serif;
-  }
+  font-family: 'Source Sans Pro';
+  src: url('../assets/fonts/source_sans_pro.woff2') format('woff2');
+
+*{
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+ion-list{
+  background-color: rgb(206, 205, 205)!important;
+}
+}
 
   .centrado{
     text-align: center;

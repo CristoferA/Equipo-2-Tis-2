@@ -13,6 +13,9 @@
 
     <img src="../assets/imgs/logo_empresa1.png" style="height:70px">
     <br>
+    <p>Los mejores atractivos turísticos</p>
+    <p>para visitar a lo largo del pais!</p>
+
     <ion-searchbar></ion-searchbar>
     <br>
 
@@ -23,17 +26,19 @@
     
     <button ion-button round icon-right (click)="irOrdenar">
       Ordenar
+      <ion-select [(ngModel)]="gaming">
+        <ion-option value="nes">Asc</ion-option>
+        <ion-option value="n64">Desc</ion-option>
+      </ion-select>
+      
       <ion-icon name="funnel"></ion-icon>
     </button>
 
-    <p>Los mejores atractivos turísticos</p>
-    <p>para visitar a lo largo del pais!</p>
-
-
   </div>
+  <br>
 
   <hr>
-  <p>Recomendaciones: </p>
+  <p>Lugares mejor valorados: </p>
 
   <ion-card *ngFor="let pub of publicacionesDes" (click)="irPublicacion(pub.id_publicacion)">
 
@@ -50,7 +55,6 @@
     <ion-row>
       <ion-col>
         <button ion-button round icon-start clear small>
-          <button ion-button (click)="irPublicacion()">Ir</button>
         </button>
       </ion-col>
       <ion-col>
