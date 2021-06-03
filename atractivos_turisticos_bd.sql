@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 02, 2021 at 06:35 PM
+-- Generation Time: Jun 03, 2021 at 02:40 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -71,6 +71,13 @@ CREATE TABLE `oferente` (
   `usuario` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `oferente`
+--
+
+INSERT INTO `oferente` (`usuario`) VALUES
+('1');
+
 -- --------------------------------------------------------
 
 --
@@ -81,6 +88,13 @@ CREATE TABLE `publica` (
   `id_oferente` varchar(50) NOT NULL,
   `id_publicacion` int(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `publica`
+--
+
+INSERT INTO `publica` (`id_oferente`, `id_publicacion`) VALUES
+('1', 4);
 
 -- --------------------------------------------------------
 
