@@ -196,3 +196,124 @@ $app->delete('/publicacion/delete/{id}', function(Request $request, Response $re
     echo '{"error" : {"text":'.$e->getMessage().'}';
   }
 });
+
+$app->get('/publicacion_detallada/{id_publicacion}', function (Request $request, Response $response){
+    $id_publicacion = $request->getAttribute('id_publicacion');
+    
+    $sql = "SELECT * FROM publicacion, publica, oferente, usuario 
+    WHERE publicacion.id_publicacion = '$id_publicacion'
+    AND publicacion.id_publicacion = publica.id_publicacion
+    AND publica.id_oferente = oferente.usuario
+    AND oferente.usuario = usuario.id_usuario";
+    try {
+        $db = new db();
+        $db = $db -> conectionDB();
+        $result = $db -> query($sql);
+        
+        if($result -> rowCount() > 0){
+            $publicaciones = $result -> fetchAll (PDO::FETCH_OBJ);
+            echo json_encode($publicaciones);
+
+        }else{
+            echo json_encode("No hay publicaciones aun!.");
+        }
+        $result = null;
+        $db = null;
+
+    }catch(PDOException $e){
+        echo '{"error" : {"texto":'.$e->getMessage().'}';
+    }
+}); 
+
+
+//POST Agregar nueva publicacion ademas agrega 
+//los datos que le corresponden a usuario que publico la 
+//publicacion
+
+$app->post('/publicacion_detallada/new', function(Request $request, Response $response){
+    
+    //estos son los datos que le corresponden a la tabla publicacion sola
+    //id_moderador debe ser asignado de manera aleatoria entre los moderadores que esten
+    //deberia crearse una funcion aleatoria que lo cree aparte, puede ser en ionic o en la apirest
+    
+    $nombre_publicacion = $request->getParam('nombre_publicacion');
+    $descripcion_publicacion = $request->getParam('descripcion_publicacion');
+    $valor_publicacion = $request->getParam('valor_publicacion');
+    $region_publicacion = $request->getParam('region_publicacion');
+    $tipo_publicacion = $request->getParam('tipo_publicacion');
+    $estado = $request->getParam('estado');
+    $tipo_turismo = $request->getParam('tipo_turismo');
+    $email_contacto = $request->getParam('email_contacto');
+    $telefono_contacto = $request->getParam('telefono_contacto');
+    $direccion = $request->getParam('direccion');
+    $redes_sociales = $request->getParam('redes_sociales'); 
+    $comuna_publicacion = $request->getParam('comuna_publicacion'); 
+    $calificacion_publicacion = $request->getParam('calificacion_publicacion'); 
+    $id_moderador = $request->getParam('id_moderador'); 
+    
+
+   
+    $id_oferente = $request->getParam('id_oferente');
+
+
+
+
+    $sql= "INSERT INTO publicacion (nombre_publicacion, descripcion_publicacion, valor_publicacion, region_publicacion,
+    tipo_publicacion, estado, tipo_turismo, email_contacto, telefono_contacto, direccion, redes_sociales, comuna_publicacion,
+    calificacion_publicacion, id_moderador) 
+    VALUES (:nombre_publicacion, :descripcion_publicacion, :valor_publicacion, :region_publicacion,
+    :tipo_publicacion, :estado, :tipo_turismo, :email_contacto, :telefono_contacto, :direccion, :redes_sociales, :comuna_publicacion,
+    :calificacion_publicacion, :id_moderador)";
+
+
+    
+
+
+
+    try{
+        $db = new db();
+        $db = $db -> conectionDB();
+        $result = $db -> prepare ($sql);
+
+
+
+
+
+
+
+        $result->bindParam(':nombre_publicacion',$nombre_publicacion);
+        $result->bindParam(':descripcion_publicacion',$descripcion_publicacion);
+        $result->bindParam(':valor_publicacion',$valor_publicacion);
+        $result->bindParam(':region_publicacion',$region_publicacion);
+        $result->bindParam(':tipo_publicacion',$tipo_publicacion);
+        $result->bindParam(':estado',$estado);
+        $result->bindParam(':tipo_turismo',$tipo_turismo);
+        $result->bindParam(':email_contacto',$email_contacto);
+        $result->bindParam(':telefono_contacto',$telefono_contacto);
+        $result->bindParam(':direccion',$direccion);
+        $result->bindParam(':redes_sociales',$redes_sociales);
+        $result->bindParam(':comuna_publicacion',$comuna_publicacion);
+        $result->bindParam(':calificacion_publicacion',$calificacion_publicacion);
+        $result->bindParam(':id_moderador',$id_moderador);
+        $result->execute();
+
+        $insertId= $db->lastInsertId();
+        $result = $db -> prepare ("INSERT INTO publica (id_oferente, id_publicacion) 
+        VALUES (:id_oferente, :id_publicacion)");
+        $result->bindParam(':id_oferente',$id_oferente);
+        $result->bindParam(':id_publicacion',$insertId);
+       
+
+
+        $result->execute();
+        echo json_encode("Publicacion Guardada");
+        $result=null;
+        $db=null;
+    }catch(PDOException $e){
+        echo '{"error" : {"text":'.$e->getMessage().'}'; 
+    }
+
+
+
+    
+});
