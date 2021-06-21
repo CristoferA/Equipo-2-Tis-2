@@ -18,26 +18,23 @@
     </ion-avatar>
    </div>
 
-  <ion-list>
+   <ion-list>
     <ion-item>
-      <ion-input placeholder="Nombre"></ion-input>
+      <ion-input type="text" [(ngModel)]="id_usuario" placeholder="Usuario"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input placeholder="Apellido"></ion-input>
+      <ion-input type="text" [(ngModel)]="nombre_usuario" placeholder="Nombre completo"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input placeholder="Usuario"></ion-input>
+      <ion-input type="text" [(ngModel)]="contrasena" placeholder="Contraseña" type="password"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input placeholder="Contraseña" type="password"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input placeholder="Correo"></ion-input>
+      <ion-input type="text" [(ngModel)]="email_usuario" placeholder="Correo"></ion-input>
     </ion-item>
   </ion-list>
 
 
-  <button ion-button round (click) = "irLogin()">Enviar</button>
+  <button ion-button round (click) = "register(id_usuario,nombre_usuario,contrasena, email_usuario)">Enviar</button>
 </ion-content>
 
 

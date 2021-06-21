@@ -1,5 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
+import { registerLocaleData } from '@angular/common';
+import { getPositionOfLineAndCharacter } from 'typescript';
+import { FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { ToastController } from 'ionic-angular';
+
 
 /**
  * Generated class for the RegistroPage page.
@@ -13,9 +21,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   selector: 'page-registro',
   templateUrl: 'registro.html',
 })
+
 export class RegistroPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  //IMPORTANTE
+  datos:FormGroup;
+  data:Observable<any>;
+  id_usuario:any;
+  nombre_usuario:any;
+  contrasena:any;
+  email_usuario:any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http) {
   }
 
   ionViewDidLoad() {
@@ -23,5 +40,25 @@ export class RegistroPage {
   }
   irLogin(){
     this.navCtrl.pop();
+  }
+
+  register(){
+
+    var url =  'http://localhost/apiRest/public/usuario/new';
+    let postData= new FormData();
+
+    postData.append('id_usuario', this.id_usuario);
+    postData.append('nombre_usuario', this.nombre_usuario);
+    postData.append('contrasena', this.contrasena);
+    postData.append('email_usuario', this.email_usuario);
+    this.data = this.http.post(url, postData);
+    
+    
+    this.data.subscribe((data) => {
+      
+      this.navCtrl.pop();
+
+    })
+    
   }
 }
