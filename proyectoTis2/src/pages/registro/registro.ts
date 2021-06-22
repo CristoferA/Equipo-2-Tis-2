@@ -2,11 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { registerLocaleData } from '@angular/common';
-import { getPositionOfLineAndCharacter } from 'typescript';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { ToastController } from 'ionic-angular';
+
 
 
 /**

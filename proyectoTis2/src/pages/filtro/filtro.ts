@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 
 import { Http } from '@angular/http';
@@ -23,6 +23,7 @@ export class FiltroPage {
   regiones:any;
   comunas:any;
   id_publicacion:any;
+  regionS:any;
 
   constructor(public navCtrl: NavController, public http: Http) {
 
@@ -37,8 +38,13 @@ export class FiltroPage {
         console.log("Oops!");
       }
     );
+   
+  }
 
-    this.http.get('https://apis.digital.gob.cl/dpa/regiones/'+"04")
+  onOptionsSelected(value:string){
+    console.log("Region seleccionada tiene codigo " + value);
+
+    this.http.get('https://apis.digital.gob.cl/dpa/regiones/'+value+'/comunas')
     .map(response => response.json())
     .subscribe(data2 =>
       {
@@ -49,10 +55,6 @@ export class FiltroPage {
         console.log("Oops!");
       }
     );
-
-
-
-
   }
 
   irHome(){
