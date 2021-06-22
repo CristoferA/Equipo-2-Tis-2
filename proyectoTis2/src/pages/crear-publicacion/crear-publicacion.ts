@@ -80,10 +80,10 @@ export class CrearPublicacionPage {
     postData.append('email_contacto', this.correo);
     postData.append('redes_sociales', this.rrss);
     postData.append('calificacion_publicacion', '0'); //no sé cómo dejar lo de los likes xd
-    postData.append('tipo_publicacion', this.tipo_publicacion);
-    postData.append('tipo_turismo', this.tipo_turismo);
+    postData.append('tipo_publicacion', this.tipo_publicacion); //'producto','servicio','infraestructura'
+    postData.append('tipo_turismo', this.tipo_turismo); //'negocios','urbano','natural','gastronomico','aventura','ecologico','cultural','lujo','diversion','religioso','espacial'
     postData.append('estado','pendiente');
-    postData.append('id_moderador', this.moderador);
+    postData.append('id_moderador', '1');
     postData.append("region_publicacion", this.region);
     postData.append("comuna_publicacion", this.comuna);
     this.data = this.http.post(url, postData);
