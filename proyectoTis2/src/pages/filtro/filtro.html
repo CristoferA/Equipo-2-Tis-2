@@ -6,13 +6,18 @@
 -->
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Filtros</ion-title>
+    <ion-title>Busqueda</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding center class="centrado">
 
   <ion-content padding>
+
+   
+    <ion-searchbar placeholder="Buscar" animated></ion-searchbar>
+    
+    
 
     <br>
   
@@ -21,24 +26,14 @@
     <br>
     <ion-item>
       <ion-label>Region</ion-label>
-      <ion-select placeholder="Selecciona">
-        <ion-option>Región de Arica y Parinacota</ion-option>
-        <ion-option>Región de Tarapacá</ion-option>
-        <ion-option>Región de Antofagasta</ion-option>
-        <ion-option>Región de Atacama</ion-option>
-        <ion-option>Región de Coquimbo</ion-option>
-        <ion-option>Región de Valparaíso</ion-option>
-        <ion-option>Región Metropolitana de Santiago</ion-option>
-        <ion-option>Región del Libertador General Bernardo O'Higgins</ion-option>
-        <ion-option>Región del Maule</ion-option>
-        <ion-option>Región de Ñuble</ion-option>
-        <ion-option>Región del BioBio</ion-option>
+      <ion-select placeholder="Selecciona" name="regionS" id="regionS">
+        <ion-option *ngFor="let reg of regiones">{{reg.nombre}}</ion-option>
       </ion-select>
     </ion-item>
     <br>
     <ion-item>
       <ion-label>Comuna</ion-label>
-      <ion-select placeholder="Selecciona">
+      <ion-select placeholder="Selecciona" name="comunaS" id="comunaS">
         <ion-option>Arica</ion-option>
         <ion-option>Camarones</ion-option>
         <ion-option>Putre</ion-option>
