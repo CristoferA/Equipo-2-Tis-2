@@ -26,35 +26,52 @@
   <ion-list>
 
     <ion-item>
-      <ion-input type="text" [(ngModel)]="name" #ctl="ngModel" placeholder="Nombre"></ion-input>
+      <ion-input type="text" [(ngModel)]="nombre" #ctl="ngModel" placeholder="Nombre"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" [(ngModel)]="description" #ctl="ngModel" placeholder="Descripción"></ion-input>
+      <ion-input type="text" [(ngModel)]="descripcion" #ctl="ngModel" placeholder="Descripción"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" [(ngModel)]="price" #ctl="ngModel" placeholder="Precio"></ion-input>
+      <ion-input type="text" [(ngModel)]="precio" #ctl="ngModel" placeholder="Precio"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" [(ngModel)]="location" #ctl="ngModel" placeholder="Ubicación"></ion-input>
+      <ion-input type="text" [(ngModel)]="ubicacion" #ctl="ngModel" placeholder="Dirección/Ubicación"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" [(ngModel)]="phone" #ctl="ngModel" placeholder="Teléfono"></ion-input>
+      <ion-input type="text" [(ngModel)]="region" #ctl="ngModel" placeholder="Región"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" [(ngModel)]="email" #ctl="ngModel" placeholder="Email"></ion-input>
+      <ion-input type="text" [(ngModel)]="comuna" #ctl="ngModel" placeholder="Comuna"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="telefono" #ctl="ngModel" placeholder="Teléfono"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="correo" #ctl="ngModel" placeholder="Email"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-input type="text" [(ngModel)]="rrss" #ctl="ngModel" placeholder="Redes Sociales"></ion-input>
     </ion-item>
+
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="tipo_publicacion" #ctl="ngModel" placeholder="Tipo de Publicación"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="tipo_turismo" #ctl="ngModel" placeholder="Tipo de Turismo"></ion-input>
+    </ion-item>
+
   </ion-list>
 
-  <div padding>
+  <div>
     <button ion-button round (click)="crearPublicacion()">Enviar</button>
     <!-- <button ion-button round (click)="crearPublicacion(name,description,price,location,phone,email,rrss)">Enviar</button> -->
   </div>
