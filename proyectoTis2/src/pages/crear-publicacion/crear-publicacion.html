@@ -26,36 +26,37 @@
   <ion-list>
 
     <ion-item>
-      <ion-input type="text" placeholder="Nombre"></ion-input>
+      <ion-input type="text" [(ngModel)]="name" #ctl="ngModel" placeholder="Nombre"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" placeholder="Descripción"></ion-input>
+      <ion-input type="text" [(ngModel)]="description" #ctl="ngModel" placeholder="Descripción"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" placeholder="Precio"></ion-input>
+      <ion-input type="text" [(ngModel)]="price" #ctl="ngModel" placeholder="Precio"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" placeholder="Ubicación"></ion-input>
+      <ion-input type="text" [(ngModel)]="location" #ctl="ngModel" placeholder="Ubicación"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" placeholder="Teléfono"></ion-input>
+      <ion-input type="text" [(ngModel)]="phone" #ctl="ngModel" placeholder="Teléfono"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" placeholder="Email"></ion-input>
+      <ion-input type="text" [(ngModel)]="email" #ctl="ngModel" placeholder="Email"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" placeholder="Redes Sociales"></ion-input>
+      <ion-input type="text" [(ngModel)]="rrss" #ctl="ngModel" placeholder="Redes Sociales"></ion-input>
     </ion-item>
   </ion-list>
 
   <div padding>
-    <button ion-button round>Enviar</button>
+    <button ion-button round (click)="crearPublicacion()">Enviar</button>
+    <!-- <button ion-button round (click)="crearPublicacion(name,description,price,location,phone,email,rrss)">Enviar</button> -->
   </div>
 
 </ion-content>
