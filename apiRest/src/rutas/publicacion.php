@@ -252,7 +252,7 @@ $app->post('/publicacion_detallada/new', function(Request $request, Response $re
     $id_moderador = $request->getParam('id_moderador'); 
     
 
-   
+    //id_usuario
     $id_oferente = $request->getParam('id_oferente');
 
 

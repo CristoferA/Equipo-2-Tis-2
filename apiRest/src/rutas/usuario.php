@@ -5,6 +5,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 
+
 //GET de todas las publicaciones
 
 $app->get('/usuario', function (Request $request, Response $response){
