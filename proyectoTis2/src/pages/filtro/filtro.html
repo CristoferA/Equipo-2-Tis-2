@@ -46,32 +46,32 @@
     <ion-item>
       <ion-label>Tipo de publicacion</ion-label>
       <ion-select placeholder="Selecciona">
-        <ion-option>Producto</ion-option>
-        <ion-option>Servicio</ion-option>
-        <ion-option>Infraestructura</ion-option>
+        <ion-option [value]="producto">Producto</ion-option>
+        <ion-option [value]="servicio">Servicio</ion-option>
+        <ion-option [value]="infraestructura">Infraestructura</ion-option>
       </ion-select>
     </ion-item>
     <br>
     <ion-item>
       <ion-label>Tipo de turismo</ion-label>
       <ion-select placeholder="Selecciona">
-        <ion-option>Negocios</ion-option>
-        <ion-option>Urbano</ion-option>
-        <ion-option>Natural</ion-option>
-        <ion-option>Gastronomico</ion-option>
-        <ion-option>Aventura</ion-option>
-        <ion-option>Ecologico</ion-option>
-        <ion-option>Cultural</ion-option>
-        <ion-option>De lujo</ion-option>
-        <ion-option>De diversion</ion-option>
-        <ion-option>Religioso</ion-option>
-        <ion-option>Espacial</ion-option>
+        <ion-option [value]="negocios">Negocios</ion-option>
+        <ion-option [value]="urbano">Urbano</ion-option>
+        <ion-option [value]="natural">Natural</ion-option>
+        <ion-option [value]="gastronomico">Gastronomico</ion-option>
+        <ion-option [value]="aventura">Aventura</ion-option>
+        <ion-option [value]="ecologico">Ecologico</ion-option>
+        <ion-option [value]="cultural">Cultural</ion-option>
+        <ion-option [value]="lujo">De lujo</ion-option>
+        <ion-option [value]="diversion">De diversion</ion-option>
+        <ion-option [value]="religioso">Religioso</ion-option>
+        <ion-option [value]="espacial">Espacial</ion-option>
       </ion-select>
     </ion-item>
   
   </ion-list>
   <br>
-  <button ion-button round (click) = "irHome()">
+  <button ion-button round (click) = "irBusqueda()">
     Aplicar
   </button>
   

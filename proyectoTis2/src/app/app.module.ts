@@ -8,6 +8,7 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { PublicacionPage } from '../pages/publicacion/publicacion';
 import { FiltroPage } from '../pages/filtro/filtro';
+import { BusquedaPage } from '../pages/busqueda/busqueda';
 import { LoginPage } from '../pages/login/login';
 import { CrearPublicacionPage } from '../pages/crear-publicacion/crear-publicacion';
 import { RegistroPage } from '../pages/registro/registro';
@@ -24,6 +25,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ListPage,
     PublicacionPage,
     FiltroPage,
+    BusquedaPage,
     LoginPage,
     CrearPublicacionPage,
     RegistroPage,
@@ -42,6 +44,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ListPage,
     PublicacionPage,
     FiltroPage,
+    BusquedaPage,
     LoginPage,
     CrearPublicacionPage,
     RegistroPage,

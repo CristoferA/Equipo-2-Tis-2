@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
-import { HomePage } from '../home/home';
+import { BusquedaPage } from '../busqueda/busqueda';
 
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -57,8 +57,8 @@ export class FiltroPage {
     );
   }
 
-  irHome(){
-    this.navCtrl.push(HomePage);
+  irBusqueda(){
+    this.navCtrl.push(BusquedaPage);
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad FiltroPage');
