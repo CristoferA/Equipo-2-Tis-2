@@ -24,7 +24,7 @@ require '../src/rutas/publicacion.php';
 require '../src/rutas/usuario.php';
 require '../src/rutas/visitante.php';
 require '../src/rutas/visualiza.php';
-
+require '../src/rutas/login.php';
 
 
 
