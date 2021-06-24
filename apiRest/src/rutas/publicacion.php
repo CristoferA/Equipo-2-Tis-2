@@ -53,6 +53,30 @@ $app->get('/publicacion/{id_publicacion}', function(Request $request, Response $
     }
   }); 
 
+// GET Lista de una publicaciones por parametros 
+$app->get('/publicacion/{nombre_publicacion&region_publicacion&comuna_publicacion}', function(Request $request, Response $response){
+    const nombre_publicacion = request.params.nombre_publicacion;
+    const region_publicacion = request.params.region_publicacion;
+    const comuna_publicacion = request.params.comuna_publicacion;
+    $sql = "SELECT * FROM publicacion WHERE nombre_publicacion LIKE '$nombre_publicacion' OR region_publicacion='$region_publicacion' OR comuna_publicacion='$comuna_publicacion'";
+    try{
+      $db = new db();
+      $db = $db->conectionDB();
+      $result = $db->query($sql);
+  
+      if ($result->rowCount() > 0){
+        $publicacion = $result->fetchAll(PDO::FETCH_OBJ);
+        echo json_encode($publicacion);
+      }else {
+        echo json_encode("No existen publicaciones en la BBDD con este ID.");
+      }
+      $result = null;
+      $db = null;
+    }catch(PDOException $e){
+      echo '{"error" : {"text":'.$e->getMessage().'}';
+    }
+  });   
+
 //POST Agregar nueva publicacion
 
 $app->post('/publicacion/new', function(Request $request, Response $response){
