@@ -54,10 +54,11 @@ $app->get('/publicacion/{id_publicacion}', function(Request $request, Response $
   }); 
 
 // GET Lista de una publicaciones por parametros 
-$app->get('/publicacion/{nombre_publicacion&region_publicacion&comuna_publicacion}', function(Request $request, Response $response){
-    const nombre_publicacion = request.params.nombre_publicacion;
-    const region_publicacion = request.params.region_publicacion;
-    const comuna_publicacion = request.params.comuna_publicacion;
+$app->post('/publicacion/buscar', function(Request $request, Response $response){
+    $nombre_publicacion= $request->getParam('nombre_publicacion');
+    $region_publicacion= $request->getParam('region_publicacion');
+    $comuna_publicacion= $request->getParam('comuna_publicacion');
+    
     $sql = "SELECT * FROM publicacion WHERE nombre_publicacion LIKE '$nombre_publicacion' OR region_publicacion='$region_publicacion' OR comuna_publicacion='$comuna_publicacion'";
     try{
       $db = new db();
