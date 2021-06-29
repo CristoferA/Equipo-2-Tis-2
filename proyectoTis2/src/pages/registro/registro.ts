@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { FormGroup } from '@angular/forms';
+import { registerLocaleData } from '@angular/common';
+import { getPositionOfLineAndCharacter } from 'typescript';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-
+import { ToastController } from 'ionic-angular';
 
 
 /**
@@ -22,6 +24,7 @@ import { Observable } from 'rxjs';
 
 export class RegistroPage {
 
+
   //IMPORTANTE
   datos:FormGroup;
   data:Observable<any>;
@@ -29,9 +32,29 @@ export class RegistroPage {
   nombre_usuario:any;
   contrasena:any;
   email_usuario:any;
+  tipo:any;
+  private todo : FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http) {
+
+  //añadir toast aqui y en la funcion
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, public formBuilder: FormBuilder,private toastCtrl:ToastController) {
+      
+  
+
+    //ionic 3 angular 4
+    
+    this.datos = formBuilder.group({
+      id_usuario:  ['',[Validators.required, Validators.maxLength(20), Validators.minLength(5)]],
+      nombre_usuario: ['',[Validators.required, Validators.maxLength(50), Validators.minLength(5)]],
+      email_usuario: ['',[Validators.compose([Validators.required,Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]), Validators.maxLength(35), Validators.minLength(5)]],
+      contrasena: ['',[Validators.required, Validators.maxLength(30), Validators.minLength(5)]],
+      tipo: ['', Validators.required]
+    });
+
+    
+
   }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegistroPage');
@@ -39,6 +62,7 @@ export class RegistroPage {
   irLogin(){
     this.navCtrl.pop();
   }
+
 
   register(){
 
@@ -53,10 +77,26 @@ export class RegistroPage {
     
     
     this.data.subscribe((data) => {
+
+      this.presentToast("Registro realizado correctamente");
       
       this.navCtrl.pop();
 
     })
-    
+
+  
   }
+
+
+  presentToast(msg: string){
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 2000,
+    });
+    toast.present();
+  }
+
+ 
+
+  
 }
