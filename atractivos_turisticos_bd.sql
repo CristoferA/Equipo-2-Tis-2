@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 03, 2021 at 02:40 AM
+-- Generation Time: Jun 29, 2021 at 02:23 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -21,6 +21,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `atractivos_turisticos_bd`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comentario`
+--
+
+CREATE TABLE `comentario` (
+  `id_comentario` int(11) NOT NULL,
+  `comentario` varchar(1024) NOT NULL,
+  `id_publicacion` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -131,6 +143,18 @@ INSERT INTO `publicacion` (`id_publicacion`, `nombre_publicacion`, `descripcion_
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `review`
+--
+
+CREATE TABLE `review` (
+  `id_review` int(11) NOT NULL,
+  `review` varchar(5000) NOT NULL,
+  `id_publicacion` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `usuario`
 --
 
@@ -177,6 +201,13 @@ CREATE TABLE `visualiza` (
 --
 
 --
+-- Indexes for table `comentario`
+--
+ALTER TABLE `comentario`
+  ADD PRIMARY KEY (`id_comentario`),
+  ADD KEY `comentario_publicacion` (`id_publicacion`);
+
+--
 -- Indexes for table `contacta`
 --
 ALTER TABLE `contacta`
@@ -214,6 +245,13 @@ ALTER TABLE `publica`
 ALTER TABLE `publicacion`
   ADD PRIMARY KEY (`id_publicacion`),
   ADD KEY `publicacion_moderador` (`id_moderador`);
+
+--
+-- Indexes for table `review`
+--
+ALTER TABLE `review`
+  ADD PRIMARY KEY (`id_review`),
+  ADD KEY `review_publicacion` (`id_publicacion`);
 
 --
 -- Indexes for table `usuario`
@@ -256,6 +294,12 @@ ALTER TABLE `visitante`
 --
 
 --
+-- Constraints for table `comentario`
+--
+ALTER TABLE `comentario`
+  ADD CONSTRAINT `comentario_publicacion` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id_publicacion`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `contacta`
 --
 ALTER TABLE `contacta`
@@ -292,6 +336,12 @@ ALTER TABLE `publica`
 --
 ALTER TABLE `publicacion`
   ADD CONSTRAINT `publicacion_moderador` FOREIGN KEY (`id_moderador`) REFERENCES `moderador` (`usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `review`
+--
+ALTER TABLE `review`
+  ADD CONSTRAINT `review_publicacion` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id_publicacion`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `visitante`
