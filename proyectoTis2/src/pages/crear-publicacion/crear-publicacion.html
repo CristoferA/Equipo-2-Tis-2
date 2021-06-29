@@ -38,18 +38,6 @@
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" [(ngModel)]="ubicacion" #ctl="ngModel" placeholder="Dirección/Ubicación"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-input type="text" [(ngModel)]="region" #ctl="ngModel" placeholder="Región"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-input type="text" [(ngModel)]="comuna" #ctl="ngModel" placeholder="Comuna"></ion-input>
-    </ion-item>
-
-    <ion-item>
       <ion-input type="text" [(ngModel)]="telefono" #ctl="ngModel" placeholder="Teléfono"></ion-input>
     </ion-item>
 
@@ -62,11 +50,47 @@
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" [(ngModel)]="tipo_publicacion" #ctl="ngModel" placeholder="Tipo de Publicación"></ion-input>
+      <ion-input type="text" [(ngModel)]="ubicacion" #ctl="ngModel" placeholder="Dirección/Ubicación"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" [(ngModel)]="tipo_turismo" #ctl="ngModel" placeholder="Tipo de Turismo"></ion-input>
+      <ion-label style="padding-left: 8px;">Region</ion-label>
+      <ion-select [(ngModel)]="region" #ctl="ngModel" placeholder="Selecciona" #regionS (ionChange)='onOptionsSelected(regionS.value)'>
+        <ion-option *ngFor="let reg of regiones" [value]="reg.codigo">{{reg.nombre}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label style="padding-left: 8px;">Comuna</ion-label>
+      <ion-select [(ngModel)]="comuna" #ctl="ngModel" placeholder="Selecciona" #comunaS>
+        <ion-option *ngFor="let com of comunas" [value]="com.codigo">{{com.nombre}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label style="padding-left: 8px;">Tipo de publicacion</ion-label>
+      <ion-select [(ngModel)]="tipo_publicacion" #ctl="ngModel" placeholder="Selecciona">
+        <ion-option [value]="producto">Producto</ion-option>
+        <ion-option [value]="servicio">Servicio</ion-option>
+        <ion-option [value]="infraestructura">Infraestructura</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label style="padding-left: 8px;">Tipo de turismo</ion-label>
+      <ion-select [(ngModel)]="tipo_turismo" #ctl="ngModel" placeholder="Selecciona">
+        <ion-option [value]="negocios">Negocios</ion-option>
+        <ion-option [value]="urbano">Urbano</ion-option>
+        <ion-option [value]="natural">Natural</ion-option>
+        <ion-option [value]="gastronomico">Gastronomico</ion-option>
+        <ion-option [value]="aventura">Aventura</ion-option>
+        <ion-option [value]="ecologico">Ecologico</ion-option>
+        <ion-option [value]="cultural">Cultural</ion-option>
+        <ion-option [value]="lujo">De lujo</ion-option>
+        <ion-option [value]="diversion">De diversion</ion-option>
+        <ion-option [value]="religioso">Religioso</ion-option>
+        <ion-option [value]="espacial">Espacial</ion-option>
+      </ion-select>
     </ion-item>
 
   </ion-list>

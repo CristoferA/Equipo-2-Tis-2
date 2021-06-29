@@ -18,25 +18,33 @@
     </ion-avatar>
    </div>
 
-   <ion-list>
+  
+
+  <form [formGroup]="datos">
+  <ion-list>
     <ion-item>
-      <ion-input type="text" [(ngModel)]="id_usuario" placeholder="Usuario"></ion-input>
+      <ion-input type="text" formControlName="id_usuario" [(ngModel)]="id_usuario" required="required" placeholder="Usuario"></ion-input>
     </ion-item>
+ 
     <ion-item>
-      <ion-input type="text" [(ngModel)]="nombre_usuario" placeholder="Nombre completo"></ion-input>
+      <ion-input type="text" formControlName="nombre_usuario"  [(ngModel)]="nombre_usuario" required="required" placeholder="Nombre completo"></ion-input>
     </ion-item>
+
     <ion-item>
-      <ion-input type="text" [(ngModel)]="contrasena" placeholder="Contraseña" type="password"></ion-input>
+      <ion-input type="text" formControlName="contrasena" [(ngModel)]="contrasena" required="required" placeholder="Contraseña" type="password"></ion-input>
     </ion-item>
+
     <ion-item>
-      <ion-input type="text" [(ngModel)]="email_usuario" placeholder="Correo"></ion-input>
+      <ion-input type="text" formControlName="email_usuario" [(ngModel)]="email_usuario" required="required" placeholder="Correo"></ion-input>
     </ion-item>
+
   </ion-list>
+  <button ion-button type="submit" round (click) = "register()">Enviar</button>
+  
+</form>
 
 
-  <button ion-button round (click) = "register(id_usuario,nombre_usuario,contrasena, email_usuario)">Enviar</button>
 </ion-content>
-
 
 
  
