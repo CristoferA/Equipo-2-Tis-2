@@ -1,5 +1,5 @@
 <?php
-error_reporting(-1);
+/*error_reporting(-1);
 ini_set('display_errors', 1);
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -7,11 +7,11 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 //USUARIO OFERENTE LOGEADO GUARDADO EN SESSION
 
-$app->post('/session',function(Request $request, Response $response){
+$app->post('/session_oferente',function(Request $request, Response $response){
     $id_usuario = $request->getParam('id_usuario');
     $contrasena = $request->getParam('contrasena');
 
-    $sql = "SELECT COUNT(id_usuario) FROM usuario , oferente
+    $sql = "SELECT id_usuario FROM usuario , oferente
             WHERE id_usuario='$id_usuario' AND contrasena = '$contrasena' AND usuario.id_usuario = oferente.usuario";
 
     try{
@@ -50,7 +50,7 @@ $app->post('/primer_ingreso',function(Request $request, Response $response){
     $id_usuario=$request->getParam('id_usuario');
     $contrasena=$request->getParam('contrasena');
 
-    $sql="SELECT COUNT(id_usuario) FROM usuario, moderador
+    $sql="SELECT id_usuario FROM usuario, moderador
          WHERE id_usuario='$id_usuario' AND contrasena='$contrasena' AND usuario.id_usuario = moderador.usuario";
     
     try{
@@ -87,7 +87,7 @@ $app->post('/session_moderador',function(Request $request, Response $response){
     $contrasena = $request->getParam('contrasena');
     $codigo=$request->getParam('codigo');
 
-    $sql = "SELECT COUNT(id_usuario) FROM usuario, moderador 
+    $sql = "SELECT id_usuario FROM usuario, moderador 
             WHERE id_usuario='$id_usuario' AND contrasena = '$contrasena' AND usuario.id_usuario = moderador.usuario";
 
     try{
@@ -121,12 +121,11 @@ $app->post('/session_moderador',function(Request $request, Response $response){
 
 //USUARIO GENERICO LOGEADO GUARDADO EN SESSION
 
-$app->post('/session_oferente',function(Request $request, Response $response){
+$app->post('/session',function(Request $request, Response $response){
     $id_usuario = $request->getParam('id_usuario');
     $contrasena = $request->getParam('contrasena');
 
-    $sql = "SELECT COUNT(id_usuario) FROM usuario 
-            WHERE id_usuario='$id_usuario' AND contrasena = '$contrasena'";
+    $sql = "SELECT id_usuario FROM usuario WHERE id_usuario='$id_usuario' AND contrasena ='$contrasena'";
 
     try{
         $db = new db();
@@ -143,8 +142,10 @@ $app->post('/session_oferente',function(Request $request, Response $response){
         $count = $result->rowCount();
 
         $data=$result->fetch(PDO::FETCH_OBJ);
-        if($count){
+        if($count>0){
+            session_start();
             $_SESSION['id_usuario']=$data->id_usuario;
+            
             echo "usuario logeado correctamente";
         }else{
             echo "El nombre de usuario esta incorrecto";
@@ -155,4 +156,7 @@ $app->post('/session_oferente',function(Request $request, Response $response){
     }catch(PDOException $e){
         echo '{"error" : {"texto":'.$e->getMessage().'}'; 
     }
-});
+});*/
+
+
+
