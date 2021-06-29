@@ -18,28 +18,43 @@ import { Http } from '@angular/http';
 })
 export class CrearPublicacionPage {
 
-  datos:FormGroup;
-  data:Observable<any>;
-  nombre:any;
-  descripcion:any;
-  precio:any;
-  ubicacion:any;
-  telefono:any;
-  correo:any;
-  rrss:any;
-  likes:any;
-  tipo_publicacion:any;
-  tipo_turismo:any;
-  estado:any; //"pendiente" o "aprobado"
-  moderador:any;
-  region:any;
-  comuna:any;
+  datos: FormGroup;
+  data: Observable<any>;
+  nombre: any;
+  descripcion: any;
+  precio: any;
+  ubicacion: any;
+  telefono: any;
+  correo: any;
+  rrss: any;
+  likes: any;
+  tipo_publicacion: any;
+  tipo_turismo: any;
+  estado: any; //"pendiente" o "aprobado"
+  moderador: any;
+  region: any;
+  comuna: any;
+
+  //xd
+  regiones: any;
+  comunas: any;
+  regionS: any;
 
   constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams, 
+    public navCtrl: NavController,
+    public navParams: NavParams,
     private http: Http,
     public toastCtrl: ToastController) {
+    this.http.get('https://apis.digital.gob.cl/dpa/regiones')
+      .map(response => response.json())
+      .subscribe(data3 => {
+        this.regiones = data3;
+        console.log(data3);
+      },
+        err => {
+          console.log("Oops!");
+        }
+      );
   }
 
   ionViewDidLoad() {
@@ -54,7 +69,7 @@ export class CrearPublicacionPage {
     toast.present();
   }
 
-  crearPublicacion(){
+  crearPublicacion() {
     var url = 'http://localhost/apiRest/public/publicacion/new';
     let postData = new FormData();
 
@@ -67,8 +82,8 @@ export class CrearPublicacionPage {
     console.log("redes_sociales es: " + this.rrss);
     console.log("likes es: " + this.likes);
     console.log("tipo_publicacion es: " + this.tipo_publicacion);
-    console.log("tipo_turismo es: "+ this.tipo_turismo);
-    console.log("id_moderador es: "+ this.moderador);
+    console.log("tipo_turismo es: " + this.tipo_turismo);
+    console.log("id_moderador es: " + this.moderador);
     console.log("region es: " + this.region);
     console.log("comuna es: " + this.comuna);
 
@@ -82,7 +97,7 @@ export class CrearPublicacionPage {
     postData.append('calificacion_publicacion', '0'); //no sé cómo dejar lo de los likes xd
     postData.append('tipo_publicacion', this.tipo_publicacion); //'producto','servicio','infraestructura'
     postData.append('tipo_turismo', this.tipo_turismo); //'negocios','urbano','natural','gastronomico','aventura','ecologico','cultural','lujo','diversion','religioso','espacial'
-    postData.append('estado','pendiente');
+    postData.append('estado', 'pendiente');
     postData.append('id_moderador', '1');
     postData.append("region_publicacion", this.region);
     postData.append("comuna_publicacion", this.comuna);
@@ -96,6 +111,21 @@ export class CrearPublicacionPage {
       //this.navCtrl.pop();
     })
 
-  }  
+  }
+
+  onOptionsSelected(value: string) {
+    console.log("Region seleccionada tiene codigo " + value);
+
+    this.http.get('https://apis.digital.gob.cl/dpa/regiones/' + value + '/comunas')
+      .map(response => response.json())
+      .subscribe(data2 => {
+        this.comunas = data2;
+        console.log(data2);
+      },
+        err => {
+          console.log("Oops!");
+        }
+      );
+  }
 
 }

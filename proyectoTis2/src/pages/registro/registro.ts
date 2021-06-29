@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { registerLocaleData } from '@angular/common';
-import { getPositionOfLineAndCharacter } from 'typescript';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ToastController } from 'ionic-angular';
@@ -33,9 +31,7 @@ export class RegistroPage {
   contrasena:any;
   email_usuario:any;
   tipo:any;
-  private todo : FormGroup;
-
-
+  
   //añadir toast aqui y en la funcion
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, public formBuilder: FormBuilder,private toastCtrl:ToastController) {
       
