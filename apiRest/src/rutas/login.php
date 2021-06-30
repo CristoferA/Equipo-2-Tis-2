@@ -124,7 +124,7 @@ $app->post('/session_moderador',function(Request $request, Response $response){
 $app->post('/login',function(Request $request, Response $response){
     $id_usuario = $request->getParam('id_usuario');
     $contrasena = $request->getParam('contrasena');
-
+    $contrasena=hash('sha256',$contrasena);
     $sql = "SELECT id_usuario FROM usuario 
     WHERE (id_usuario='$id_usuario' OR email_usuario='$id_usuario') 
     AND contrasena ='$contrasena'";
@@ -132,11 +132,11 @@ $app->post('/login',function(Request $request, Response $response){
     try{
         $db = new db();
         $db = $db -> conectionDB();  
-        
+        $data='';
         $result = $db -> prepare ($sql);
 
         $result->bindParam(':id_usuario',$id_usuario);
-        $contrasena=hash('sha256',$contrasena);
+        
         $result->bindParam(':contrasena',$contrasena);
         $result->execute();
         
@@ -174,15 +174,9 @@ $app->post('/login/signup',function(Request $request, Response $response){
     /*$sql = "SELECT id_usuario FROM usuario 
     WHERE (id_usuario='$id_usuario' OR email_usuario='$email_usuario') 
     AND contrasena =:contrasena";
-*/
+    */
     try{
         $username_check = preg_match('~^[A-Za-z0-9_]{3,20}$~i', $id_usuario);
-        //$email_check=filter_var($email_usuario,FILTRER_VALIDATE_EMAIL);
-        /*$email_check=1;
-        if(!filter_var($email_usuario,FILTRER_VALIDATE_EMAIL)){
-            $email_check=0;
-        }*/
-        //$email_check = preg_match('/[a-zA-Z0-9_-.+]+@[a-zA-Z0-9-]+.[a-zA-Z]+/', $email_usuario);
         $email_check = preg_match('~^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.([a-zA-Z]{2,4})$~i', $email_usuario);
         $password_check = preg_match('~^[A-Za-z0-9!@#$%^&*()_]{6,20}$~i', $contrasena);
         
@@ -210,6 +204,7 @@ $app->post('/login/signup',function(Request $request, Response $response){
                 $stmt1 = $db->prepare($sql1);
                 $stmt1->bindParam("id_usuario", $id_usuario,PDO::PARAM_STR);
                 $contrasena=hash('sha256',$contrasena);
+                //echo $contrasena;
                 $stmt1->bindParam("contrasena", $contrasena,PDO::PARAM_STR);
                 $stmt1->bindParam("email_usuario", $email_usuario,PDO::PARAM_STR);
                 $stmt1->bindParam("nombre_usuario", $nombre_usuario,PDO::PARAM_STR);
@@ -242,7 +237,7 @@ $app->post('/login/signup',function(Request $request, Response $response){
 });
 
 
-
+//DETALLES INTERNOS DE USUARIO
 function internalUserDetails($input) {
     
     try {
