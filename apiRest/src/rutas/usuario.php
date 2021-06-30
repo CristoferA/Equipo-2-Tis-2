@@ -55,7 +55,7 @@ $app->get('/usuario/{id_usuario}', function(Request $request, Response $response
   }); 
 
 //POST Agregar nueva usuario
-
+/*
 $app->post('/usuario/new', function(Request $request, Response $response){
     
     $id_usuario = $request->getParam('id_usuario');
@@ -88,7 +88,7 @@ $app->post('/usuario/new', function(Request $request, Response $response){
     }
 
 });
-
+*/
 //PUT Editar usuario
 
 $app->put('/usuario/editar/{usuario}', function(Request $request, Response $response){

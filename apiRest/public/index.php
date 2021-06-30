@@ -11,6 +11,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 require  '../vendor/autoload.php';
 require '../src/config/db.php';
 
+
 $app = new \Slim\App;
 
 
@@ -30,13 +31,13 @@ require '../src/rutas/visualiza.php';
 require '../src/rutas/login.php';
 
 
-$app->post('/login','login'); /* User login */
-$app->post('/signup','signup'); /* User Signup  */
-$app->get('/getFeed','getFeed'); /* User Feeds  */
-$app->post('/feed','feed'); /* User Feeds  */
-$app->post('/feedUpdate','feedUpdate'); /* User Feeds  */
-$app->post('/feedDelete','feedDelete'); /* User Feeds  */
-$app->post('/getImages', 'getImages');
+//$app->post('/login','login'); /* User login */
+//$app->post('/signup','signup'); /* User Signup  */
+//$app->get('/getFeed','getFeed'); /* User Feeds  */
+//$app->post('/feed','feed'); /* User Feeds  */
+//$app->post('/feedUpdate','feedUpdate'); /* User Feeds  */
+//$app->post('/feedDelete','feedDelete'); /* User Feeds  */
+//$app->post('/getImages', 'getImages');
 
 
 
@@ -53,9 +54,10 @@ $app->run();
 
 /************************* USER LOGIN *************************************/
 /* ### User login ### */
+/*
 function login() {
     
-    $request = \Slim\Slim::getInstance()->request();
+    $request = \Slim\App::getInstance()->request();
     $data = json_decode($request->getBody());
     
     try {
@@ -92,11 +94,12 @@ function login() {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
-
+*/
 
 /* ### User registration ### */
+/*
 function signup() {
-    $request = \Slim\Slim::getInstance()->request();
+    $request = \Slim\App::getInstance()->request();
     $data = json_decode($request->getBody());
     $email_usuario=$data->email_usuario;
     $nombre_usuario=$data->nombre_usuario;
@@ -109,11 +112,10 @@ function signup() {
         $email_check = preg_match('~^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.([a-zA-Z]{2,4})$~i', $email_usuario);
         $password_check = preg_match('~^[A-Za-z0-9!@#$%^&*()_]{6,20}$~i', $contrasena);
         
-        /*echo $email_check.'<br/>'.$email;*/
-        
+       
         if (strlen(trim($id_usuario))>0 && strlen(trim($contrasena))>0 && strlen(trim($email_usuario))>0 && $email_check>0 && $username_check>0 && $password_check>0)
         {
-           /* echo 'here';*/
+           
             $db = getDB();
             $userData = '';
             $sql = "SELECT id_usuario FROM usuario WHERE id_usuario=:id_usuario or email_usuario=:email_usuario";
@@ -126,7 +128,7 @@ function signup() {
             if($mainCount==0)
             {
                 
-                /*Inserting user values*/
+                //Inserting user values
                 $sql1="INSERT INTO usuario(id_usuario,contrasena,email_usuario,nombre_usuario)
                 VALUES(:id_usuario,:contrasena,:email_usuario,:nombre_usuario)";
                 $stmt1 = $db->prepare($sql1);
@@ -161,8 +163,8 @@ function signup() {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
-
-function email() {
+*/
+/*function email() {
     $request = \Slim\Slim::getInstance()->request();
     $data = json_decode($request->getBody());
     $email=$data->email;
@@ -185,6 +187,7 @@ function email() {
             {
                 
                 /*Inserting user values*/
+                /*
                 $sql1="INSERT INTO emailUsers(email)VALUES(:email)";
                 $stmt1 = $db->prepare($sql1);
                 $stmt1->bindParam("email", $email,PDO::PARAM_STR);
@@ -210,9 +213,10 @@ function email() {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
-
+*/
 
 /* ### internal Username Details ### */
+/*
 function internalUserDetails($input) {
     
     try {
@@ -389,6 +393,7 @@ function feedDelete(){
     
 }
 $app->post('/userImage','userImage'); /* User Details */
+/*
 function userImage(){
     $request = \Slim\Slim::getInstance()->request();
     $data = json_decode($request->getBody());
@@ -438,4 +443,4 @@ function getImages(){
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
-}
+}*/
