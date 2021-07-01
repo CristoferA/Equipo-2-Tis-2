@@ -13,7 +13,7 @@ import 'rxjs/add/operator/map';
 })
 export class BusquedaPage {
 
-  publicacionesDes:any;
+  publicacionesBus:any;
   id_publicacion:any;
 
   nombreR = this.navParams.get('nombreB');
@@ -23,6 +23,7 @@ export class BusquedaPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
     let postData = new FormData(); 
+    console.log(this.nombreR);
   
     postData.append('nombre_publicacion', this.nombreR);
     postData.append("region_publicacion", this.regionR);
@@ -32,8 +33,13 @@ export class BusquedaPage {
     .map(response => response.json())
     .subscribe(data =>
       {
-        this.publicacionesDes = data;
-        console.log(data);
+        if (data === "No existen publicaciones en la BBDD con este ID."){
+          console.log("No existen publicaciones en la BBDD con este ID.");
+        } 
+        else {
+          this.publicacionesBus = data;
+          console.log(data);
+        }        
 
       },
       err => {

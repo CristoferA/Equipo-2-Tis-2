@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
 
+
 /**
  * Generated class for the FiltroPage page.
  *
@@ -75,6 +76,7 @@ export class FiltroPage {
     this.regionBusqueda = document.getElementById("regionF").innerText;
     this.comunaBusqueda = document.getElementById("comunaF").innerText;
     this.navCtrl.push(BusquedaPage, {nombreB: this.nombreF, regionB: this.regionBusqueda, comunaB: this.comunaBusqueda});
+
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad FiltroPage');
