@@ -27,8 +27,7 @@
 
     <ion-item>
       <ion-label>Region</ion-label>
-      <ion-select  [(ngModel)]="regionF" #ctl="ngModel"  placeholder="Selecciona" #regionS (ionChange)='onOptionsSelected(regionS.value)'>
-        <ion-option [selected]="true" [value]="a">Selecciona</ion-option>
+      <ion-select id="regionF" [(ngModel)]="regionF" #ctl="ngModel"  placeholder="Selecciona" #regionS (ionChange)='onOptionsSelected(regionS.value)'>
         <ion-option *ngFor="let reg of regiones" [value]="reg.codigo">{{reg.nombre}}</ion-option>
       </ion-select>
     </ion-item>
@@ -37,8 +36,7 @@
 
     <ion-item>
       <ion-label>Comuna</ion-label>
-      <ion-select  [(ngModel)]="comunaF" #ctl="ngModel"  placeholder="Selecciona" #comunaS>
-        <ion-option [selected]="true" value="b">Selecciona</ion-option>
+      <ion-select  id="comunaF" [(ngModel)]="comunaF" #ctl="ngModel"  placeholder="Selecciona" #comunaS>
         <ion-option *ngFor="let com of comunas" [value]="com.codigo">{{com.nombre}}</ion-option>
       </ion-select>
     </ion-item>
@@ -73,8 +71,9 @@
   
   </ion-list>
   <br>
-  <button ion-button round (click)="crearPublicacion()">
-    Aplicar
+
+  <button ion-button round (click)="irBusqueda()">
+    Buscar
   </button>
   
 </ion-content>

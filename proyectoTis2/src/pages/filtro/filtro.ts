@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { BusquedaPage } from '../busqueda/busqueda';
 
 import { Http } from '@angular/http';
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
 
@@ -14,7 +15,6 @@ import 'rxjs/add/operator/map';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-filtro',
   templateUrl: 'filtro.html',
@@ -28,10 +28,16 @@ export class FiltroPage {
 
   datos: FormGroup;
   data: Observable<any>;
-  
+
   nombreF: any;
   regionF: any;
   comunaF: any;
+
+  regionBusqueda: any;
+  comunaBusqueda: any;
+
+  publicacionesDes: any;
+
 
   constructor(public navCtrl: NavController, public http: Http, public navParams: NavParams, public toastCtrl: ToastController) {
 
@@ -66,7 +72,9 @@ export class FiltroPage {
   }
 
   irBusqueda(){
-    this.navCtrl.push(BusquedaPage);
+    this.regionBusqueda = document.getElementById("regionF").innerText;
+    this.comunaBusqueda = document.getElementById("comunaF").innerText;
+    this.navCtrl.push(BusquedaPage, {nombreB: this.nombreF, regionB: this.regionBusqueda, comunaB: this.comunaBusqueda});
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad FiltroPage');
@@ -74,33 +82,41 @@ export class FiltroPage {
 
   mensajeToast() {
     const toast = this.toastCtrl.create({
-      message: 'Publicación subida correctamente y en espera de aprobación.',
-      duration: 3000
+      message: 'Realizando busqueda',
+      duration: 1500
     });
     toast.present();
   }
   
-  crearPublicacion() {
+  /*buscarPublicaciones() {
     var url = 'http://localhost/apiRest/public/publicacion/buscar';
     let postData = new FormData();
   
     console.log("nombre_publicacion es: " + this.nombreF);
-    console.log("region es: " + this.regionF);
-    console.log("comuna es: " + this.comunaF);
+    console.log("region es: " + document.getElementById("regionF").innerText);
+    console.log("comuna es: " + document.getElementById("comunaF").innerText);
   
     postData.append('nombre_publicacion', this.nombreF);
-    postData.append("region_publicacion", this.regionF);
-    postData.append("comuna_publicacion", this.comunaF);
-    this.data = this.http.post(url, postData);
-  
-    this.data.subscribe((data) => {
-      console.log(data);
-  
-      this.mensajeToast();
-  
-      //this.navCtrl.pop();
-    })
-  
+    postData.append("region_publicacion", document.getElementById("regionF").innerText);
+    postData.append("comuna_publicacion", document.getElementById("comunaF").innerText);
+
+    this.http.post(url, postData)
+    .map(response => response.json())
+    .subscribe(data =>
+      {
+        this.publicacionesDes = data;
+        console.log(data);
+        this.mensajeToast();
+      },
+      err => {
+        console.log("Oops!");
+      }
+    );
+
+  }*/
+
+  myFunction() {
+    document.getElementById("apple").innerText = "newTextForApple";
   }
 
 }
