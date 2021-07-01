@@ -44,6 +44,7 @@ $app->post('/login-check',function(Request $request, Response $response){
 //KILL LOGIN
 $app->post('/login-kill',function(Request $request, Response $response){
     $id_usuario = $request->getParam('id_usuario');
+    $token_usuario= $request->getParam('token');
     //echo"holi";
     $sql = "SELECT id_usuario FROM usuario 
     WHERE id_usuario='$id_usuario'";
@@ -62,6 +63,7 @@ $app->post('/login-kill',function(Request $request, Response $response){
         if(!empty($data)){
             $user_id=$data->id_usuario;
             $data->token = null;
+
         }
         $db=null;
     }catch(PDOException $e){
@@ -115,8 +117,8 @@ $app->post('/login',function(Request $request, Response $response){
 //FUNCIONA LA RAJA
 $app->post('/signup',function(Request $request, Response $response){
     $id_usuario = $request->getParam('id_usuario');
-    $contrasena = $request->getParam('contrasena');
     $nombre_usuario=$request->getParam('nombre_usuario');
+    $contrasena = $request->getParam('contrasena');
     $email_usuario=$data=$request->getParam('email_usuario');
 
     /*$sql = "SELECT id_usuario FROM usuario 
