@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 29, 2021 at 02:23 PM
+-- Generation Time: Jul 01, 2021 at 01:27 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -162,7 +162,7 @@ CREATE TABLE `usuario` (
   `id_usuario` varchar(50) NOT NULL,
   `nombre_usuario` varchar(50) NOT NULL,
   `email_usuario` varchar(100) NOT NULL,
-  `contrasena` varchar(12) NOT NULL
+  `contrasena` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -172,7 +172,18 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `email_usuario`, `contrasena`) VALUES
 ('1', '1', '1', '1'),
 ('2', '2', '2', '2'),
-('3', 'asdasdasdasdasd', 'asdasdasdasdsa', 'asd');
+('3', 'asdasdasdasdasd', 'asdasdasdasdsa', 'asd'),
+('abismal12', 'Felipe Espinoza', 'fespinozamea@gmail.cl', 'f69be13983b69f2cafdc618f5a6ca9c5cdc4ddd28ff2b52e3116a6b907c4c614'),
+('abismal13', 'Felipe Espinoza', 'fespinozameaa@gmail.cl', 'f69be13983b69f2cafdc618f5a6ca9c5cdc4ddd28ff2b52e3116a6b907c4c614'),
+('abismal2', 'Felipe Espinoza', 'fespinozameeeee@gmail.cl', 'F1f1f2f3'),
+('abismal20', 'Felipe Espinoza', 'fespinozameaaa@gmail.cl', 'f69be13983b69f2cafdc618f5a6ca9c5cdc4ddd28ff2b52e3116a6b907c4c614'),
+('abismal3', 'Felipe Espinoza', 'fespinozameeeeee@gmail.cl', 'F1f1f2f3'),
+('abismal4', 'Felipe Espinoza', 'fespinozameeeeeee@gmail.cl', 'F1f1f2f3'),
+('abismal5', 'Felipe Espinoza', 'fespinozameeeeeeee@gmail.cl', 'F1f1f2f3'),
+('abismal6', 'Felipe Espinoza', 'fespinozame@gmail.cl', 'F1f1f2f3'),
+('abismal7', 'Felipe Espinoza', 'fespinozamee@gmail.cl', 'F1f1f2f3'),
+('abismal8', 'Felipe Espinoza', 'fespinozameee@gmail.cl', 'F1f1f2f3'),
+('abismal9', 'Felipe Espinoza', 'fespinozameeee@gmail.cl', 'F1f1f2f3');
 
 -- --------------------------------------------------------
 
