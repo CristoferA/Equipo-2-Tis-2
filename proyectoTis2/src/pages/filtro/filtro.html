@@ -15,7 +15,7 @@
   <ion-content padding>
 
    
-    <ion-searchbar placeholder="Buscar" animated></ion-searchbar>
+    <ion-searchbar [(ngModel)]="nombreF" #ctl="ngModel" placeholder="Buscar" animated></ion-searchbar>
     
     
 
@@ -27,7 +27,8 @@
 
     <ion-item>
       <ion-label>Region</ion-label>
-      <ion-select placeholder="Selecciona" #regionS (ionChange)='onOptionsSelected(regionS.value)'>
+      <ion-select  [(ngModel)]="regionF" #ctl="ngModel"  placeholder="Selecciona" #regionS (ionChange)='onOptionsSelected(regionS.value)'>
+        <ion-option [selected]="true" [value]="a">Selecciona</ion-option>
         <ion-option *ngFor="let reg of regiones" [value]="reg.codigo">{{reg.nombre}}</ion-option>
       </ion-select>
     </ion-item>
@@ -36,7 +37,8 @@
 
     <ion-item>
       <ion-label>Comuna</ion-label>
-      <ion-select placeholder="Selecciona" #comunaS>
+      <ion-select  [(ngModel)]="comunaF" #ctl="ngModel"  placeholder="Selecciona" #comunaS>
+        <ion-option [selected]="true" value="b">Selecciona</ion-option>
         <ion-option *ngFor="let com of comunas" [value]="com.codigo">{{com.nombre}}</ion-option>
       </ion-select>
     </ion-item>
@@ -71,7 +73,7 @@
   
   </ion-list>
   <br>
-  <button ion-button round (click) = "irBusqueda()">
+  <button ion-button round (click)="crearPublicacion()">
     Aplicar
   </button>
   
