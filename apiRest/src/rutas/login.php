@@ -116,11 +116,22 @@ $app->post('/login',function(Request $request, Response $response){
 
 //FUNCIONA LA RAJA
 $app->post('/signup',function(Request $request, Response $response){
+    
+    $data = json_decode($request->getBody());
+
+
+    $id_usuario=$data->id_usuario;
+    $nombre_usuario=$data->nombre_usuario;
+    $contrasena=$data->contrasena;
+    $email_usuario=$data->email_usuario;
+
+    /*
     $id_usuario = $request->getParam('id_usuario');
     $nombre_usuario=$request->getParam('nombre_usuario');
     $contrasena = $request->getParam('contrasena');
     $email_usuario=$data=$request->getParam('email_usuario');
-
+    */
+    
     /*$sql = "SELECT id_usuario FROM usuario 
     WHERE (id_usuario='$id_usuario' OR email_usuario='$email_usuario') 
     AND contrasena =:contrasena";
