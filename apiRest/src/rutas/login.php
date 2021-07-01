@@ -5,122 +5,75 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 /*
-//USUARIO OFERENTE LOGEADO GUARDADO EN SESSION
-
-$app->post('/session_oferente',function(Request $request, Response $response){
+//CHECK LOGIN
+$app->post('/login-check',function(Request $request, Response $response){
     $id_usuario = $request->getParam('id_usuario');
-    $contrasena = $request->getParam('contrasena');
-
-    $sql = "SELECT id_usuario FROM usuario , oferente
-            WHERE id_usuario='$id_usuario' AND contrasena = '$contrasena' AND usuario.id_usuario = oferente.usuario";
-
+    //echo"holi";
+    $sql = "SELECT id_usuario FROM usuario 
+    WHERE id_usuario='$id_usuario'";
     try{
         $db = new db();
-        $db = $db -> conectionDB();
-        
-        
-        
+        $db = $db -> conectionDB();  
+        $data='';
         $result = $db -> prepare ($sql);
-
-        $result->bindParam(':id_usuario',$id_usuario);
-        $result->bindParam(':contrasena',$contrasena);
-        $result->bindParam(':usuario',$id_usuario);
+        $result->bindParam(':id_usuario',$id_usuario);   
         $result->execute();
-        
         $count = $result->rowCount();
+        $data=$result->fetch(PDO::FETCH_OBJ);    
 
-        $data=$result->fetch(PDO::FETCH_OBJ);
-        if($count){
-            $_SESSION['id_usuario']=$data->id_usuario;
-            $_SESSION['usuario']=$data->usuario;
-            echo "usuario logeado correctamente";
+        if(empty($data)){
+           
+            echo "No existe este usuario..";
         }else{
-            echo "El nombre de usuario esta incorrecto";
+            $user_id=$data->id_usuario;
+            $data->token=apiToken($user_id)
+            if($data->token==apiToken($user_id)){
+                echo "Esta logeado";
+            }else{
+                echo "No esta logeado";
+            }
+            
         }
-        
-        $result=null;
         $db=null;
     }catch(PDOException $e){
         echo '{"error" : {"texto":'.$e->getMessage().'}'; 
     }
 });
 
-//USUARIO MODERADOR INTENTA LOGEARSE --PRIMER INTENTO
-$app->post('/primer_ingreso',function(Request $request, Response $response){
-    $id_usuario=$request->getParam('id_usuario');
-    $contrasena=$request->getParam('contrasena');
 
-    $sql="SELECT id_usuario FROM usuario, moderador
-         WHERE id_usuario='$id_usuario' AND contrasena='$contrasena' AND usuario.id_usuario = moderador.usuario";
-    
-    try{
-        $db= new db();
-        $db= $db->conectionDB();
-
-        $result = $db-> prepare($sql);
-        
-        $result->bindParam(':id_usuario',$id_usuario);       
-        $result->bindParam(':contrasena',$contrasena);
-        $result->bindParam(':codigo',$codigo);
-        $result->execute();
-
-        
-        $count=$result->rowCount();
-        $data=$result->fetch(PDO::FETCH_OBJ);
-
-        if($count){
-            echo "usuario corresponde a un moderador";
-        }else{
-            echo "usuario normal";
-        }
-        
-    }catch(PDOException $e){
-        echo '{"error" : {"texto":'.$e->getMessage().'}'; 
-    }
-});
-
-
-//USUARIO MODERADOR LOGEADO GUARDADO EN SESSION
-
-$app->post('/session_moderador',function(Request $request, Response $response){
+//KILL LOGIN
+$app->post('/login-kill',function(Request $request, Response $response){
     $id_usuario = $request->getParam('id_usuario');
-    $contrasena = $request->getParam('contrasena');
-    $codigo=$request->getParam('codigo');
-
-    $sql = "SELECT id_usuario FROM usuario, moderador 
-            WHERE id_usuario='$id_usuario' AND contrasena = '$contrasena' AND usuario.id_usuario = moderador.usuario";
-
+    //echo"holi";
+    $sql = "SELECT id_usuario FROM usuario 
+    WHERE id_usuario='$id_usuario'";
     try{
         $db = new db();
-        $db = $db -> conectionDB();
-              
+        $db = $db -> conectionDB();  
+        $data='';
         $result = $db -> prepare ($sql);
+        $result->bindParam(':id_usuario',$id_usuario);   
 
-        $result->bindParam(':id_usuario',$id_usuario);
-        $result->bindParam(':contrasena',$contrasena);
-        $result->bindParam(':usuario',$id_usuario);
-        $result->bindParam(':codigo',$codigo);
         $result->execute();
-        
-        $count = $result->rowCount();
 
-        $data=$result->fetch(PDO::FETCH_OBJ);
-        if($count){
-            $_SESSION['id_usuario']=$data->id_usuario;
-            echo "usuario logeado correctamente";
-        }else{
-            echo "El nombre de usuario esta incorrecto";
+        $count = $result->rowCount();
+        $data=$result->fetch(PDO::FETCH_OBJ);    
+
+        if(!empty($data)){
+            $user_id=$data->id_usuario;
+            $data->token = null;
         }
-        
-        $result=null;
         $db=null;
     }catch(PDOException $e){
         echo '{"error" : {"texto":'.$e->getMessage().'}'; 
     }
-});
 
-//LOGIN QUE VOY A REPARAR AHORA
+});
 */
+
+
+//LOGIN QUE REPARADO AHORA
+
 $app->post('/login',function(Request $request, Response $response){
     $id_usuario = $request->getParam('id_usuario');
     $contrasena = $request->getParam('contrasena');
@@ -133,29 +86,24 @@ $app->post('/login',function(Request $request, Response $response){
         $db = new db();
         $db = $db -> conectionDB();  
         $data='';
+ 
         $result = $db -> prepare ($sql);
-
-        $result->bindParam(':id_usuario',$id_usuario);
-        
+        $result->bindParam(':id_usuario',$id_usuario);        
         $result->bindParam(':contrasena',$contrasena);
         $result->execute();
         
         $count = $result->rowCount();
+        $data=$result->fetch(PDO::FETCH_OBJ);       
 
-        $data=$result->fetch(PDO::FETCH_OBJ);
-
-        if(!empty($userData)){
-
+        if(!empty($data)){
             $user_id=$data->id_usuario;
             $data->token = apiToken($user_id);
-
         }
         $db=null;
 
         if($data){
             $data=json_encode($data);
-            echo '{"data": ' .$data . '}';
-            
+            echo '{"data": ' .$data . '}';            
         }else{
             echo '{"error":{"text":"Bad request wrong username and password"}}';
         }
@@ -165,7 +113,7 @@ $app->post('/login',function(Request $request, Response $response){
 });
 
 //FUNCIONA LA RAJA
-$app->post('/login/signup',function(Request $request, Response $response){
+$app->post('/signup',function(Request $request, Response $response){
     $id_usuario = $request->getParam('id_usuario');
     $contrasena = $request->getParam('contrasena');
     $nombre_usuario=$request->getParam('nombre_usuario');
@@ -259,3 +207,4 @@ function internalUserDetails($input) {
     }
     
 }
+
