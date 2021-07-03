@@ -73,19 +73,19 @@ export class CrearPublicacionPage {
     var url = 'http://localhost/apiRest/public/publicacion/new';
     let postData = new FormData();
 
-    console.log("nombre_publicacion es: " + this.nombre);
-    console.log("descripcion es: " + this.descripcion);
-    console.log("precio es: " + this.precio);
-    console.log("ubicacion es: " + this.ubicacion);
-    console.log("telefono es: " + this.telefono);
-    console.log("email es: " + this.correo);
-    console.log("redes_sociales es: " + this.rrss);
-    console.log("likes es: " + this.likes);
-    console.log("tipo_publicacion es: " + this.tipo_publicacion);
-    console.log("tipo_turismo es: " + this.tipo_turismo);
-    console.log("id_moderador es: " + this.moderador);
-    console.log("region es: " + this.region);
-    console.log("comuna es: " + this.comuna);
+    console.log("El nombre_publicacion es: " + this.nombre);
+    console.log("La descripcion es: " + this.descripcion);
+    console.log("El precio es: " + this.precio);
+    console.log("La ubicacion es: " + this.ubicacion);
+    console.log("El telefono es: " + this.telefono);
+    console.log("El email es: " + this.correo);
+    console.log("Las redes_sociales son: " + this.rrss);
+    console.log("Los likes son: " + this.likes);
+    console.log("El tipo_publicacion es: " + this.tipo_publicacion);
+    console.log("El tipo_turismo es: " + this.tipo_turismo);
+    console.log("El id_moderador es: " + this.moderador);
+    console.log("El id de la region es: " + this.region + ". Y el nombre es: " + document.getElementById("regionID").innerText);
+    console.log("El id de la comuna es: " + this.comuna + ". Y el nombre es: " + document.getElementById("comunaID").innerText);
 
     postData.append('nombre_publicacion', this.nombre);
     postData.append('descripcion_publicacion', this.descripcion);
@@ -99,8 +99,8 @@ export class CrearPublicacionPage {
     postData.append('tipo_turismo', this.tipo_turismo); //'negocios','urbano','natural','gastronomico','aventura','ecologico','cultural','lujo','diversion','religioso','espacial'
     postData.append('estado', 'pendiente');
     postData.append('id_moderador', '1');
-    postData.append("region_publicacion", this.region);
-    postData.append("comuna_publicacion", this.comuna);
+    postData.append("region_publicacion", document.getElementById("regionID").innerText);
+    postData.append("comuna_publicacion", document.getElementById("comunaID").innerText);
     this.data = this.http.post(url, postData);
 
     this.data.subscribe((data) => {

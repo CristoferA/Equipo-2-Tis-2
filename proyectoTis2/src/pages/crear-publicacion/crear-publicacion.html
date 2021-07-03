@@ -55,14 +55,14 @@
 
     <ion-item>
       <ion-label style="padding-left: 8px;">Region</ion-label>
-      <ion-select [(ngModel)]="region" #ctl="ngModel" placeholder="Selecciona" #regionS (ionChange)='onOptionsSelected(regionS.value)'>
+      <ion-select id="regionID" [(ngModel)]="region" #ctl="ngModel" placeholder="Selecciona" #regionS (ionChange)='onOptionsSelected(regionS.value)'>
         <ion-option *ngFor="let reg of regiones" [value]="reg.codigo">{{reg.nombre}}</ion-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-label style="padding-left: 8px;">Comuna</ion-label>
-      <ion-select [(ngModel)]="comuna" #ctl="ngModel" placeholder="Selecciona" #comunaS>
+      <ion-select id="comunaID" [(ngModel)]="comuna" #ctl="ngModel" placeholder="Selecciona" #comunaS>
         <ion-option *ngFor="let com of comunas" [value]="com.codigo">{{com.nombre}}</ion-option>
       </ion-select>
     </ion-item>
