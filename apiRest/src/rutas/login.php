@@ -72,6 +72,41 @@ $app->post('/login-kill',function(Request $request, Response $response){
 
 });
 */
+//$userData
+
+$app->post('/login-check',function(Request $request, Response $response){
+    $id_usuario = $request->getParam('id_usuario');
+    $sql = "SELECT id_usuario FROM usuario 
+    WHERE id_usuario='$id_usuario' ";
+    try{
+       
+        $db = new db();
+        $db = $db -> conectionDB();  
+        $data='';
+ 
+        $result = $db -> prepare ($sql);
+        $result->bindParam(':id_usuario',$id_usuario);        
+        $result->execute();
+        
+        $count = $result->rowCount();
+        $data=$result->fetch(PDO::FETCH_OBJ); 
+        if(!empty($data)){
+            $user_id=$data->id_usuario;
+        }  
+        $db=null;
+        if($userData){
+            $userData=json_encode($userData);
+            echo '{"token": ' .$userData . '}';   
+        }else{
+            echo '{"error":{"text":"No esta logeado"}}';
+        }
+        
+    }catch(PDOException $e){
+        echo '{"error" : {"texto":'.$e->getMessage().'}'; 
+    }
+    
+
+});
 
 
 //LOGIN QUE REPARADO AHORA
@@ -114,10 +149,9 @@ $app->post('/login',function(Request $request, Response $response){
     }
 });
 
-//FUNCIONA LA RAJA
 $app->post('/signup',function(Request $request, Response $response){
-    
-    /*$data = json_decode($request->getBody());
+/*    
+    $data = json_decode($request->getBody());
 
 
     $id_usuario=$data->id_usuario;
@@ -130,7 +164,7 @@ $app->post('/signup',function(Request $request, Response $response){
     $nombre_usuario=$request->getParam('nombre_usuario');
     $contrasena = $request->getParam('contrasena');
     $email_usuario=$data=$request->getParam('email_usuario');
-    
+  
 
     /*$sql = "SELECT id_usuario FROM usuario 
     WHERE (id_usuario='$id_usuario' OR email_usuario='$email_usuario') 
@@ -182,25 +216,19 @@ $app->post('/signup',function(Request $request, Response $response){
                $userData = json_encode($userData);
                 echo '{"userData": ' .$userData . '}';
             } else {
-                echo "estos son los valores ingresados";
-                echo $id_usuario;
-                echo $nombre_usuario;
-                echo $contrasena;
-                echo $email_usuario;
+              
+                
 
                 
-                echo '{"error":{"text":"Enter valid data"}}';
+                echo '{"error":{"text":"Enter valid data '.$id_usuario.','.$nombre_usuario.','.$contrasena.','.$email_usuario.'"}}';
             }
 
            
         }
         else{
-            echo "estos son los valores ingresados";
-            echo $id_usuario;
-            echo $nombre_usuario;
-            echo $contrasena;
-            echo $email_usuario;
-            echo '{"error":{"text":"Enter valid data"}}';
+            
+            
+            echo '{"error":{"text":"Enter valid data '.$id_usuario.','.$nombre_usuario.','.$contrasena.','.$email_usuario.'"}}';
         }
     }
     catch(PDOException $e) {
