@@ -67,34 +67,30 @@ export class LoginPage {
     console.log(usuario);
 
     if (usuario.id_usuario == f.id_usuario && usuario.contrasena == f.contrasena) {
-
-
       this.irHome();
 
     } else {
 
-      let body = JSON.stringify(postData);
-     
+      //let body = JSON.stringify(postData);
+      var respuesta;
       this.http.post(url, f)
-      .map(Response=>Response.json())
-      .subscribe(data =>{
-        if(data=="Error"){
-          console.log("Bad request wrong username and password");
-        }else{
+        .map(Response => Response.json())
+        .subscribe(data => {
           this.token = data;
-          console.log(data);
-          console.log(this.token);
-          //this.irHome();
-        }
-      });
-      if(this.token!="Error"){
-        this.irHome();
-      }else{
-        console.log("Bad request wrong username and password");
-      }
+          respuesta = this.token;
+          if(respuesta.hasOwnProperty('error')){
+            if(respuesta.error.text=="Bad request wrong username and password"){
+              console.log(respuesta.error.text);
+            }
+          }
+         
+          else{
+            localStorage.setItem('token', JSON.stringify(respuesta));
+            this.irHome();
+          }
 
 
-
+        });
 
       /*const alert = await this.alertController.create({
         title: 'Datos incorrectos',
@@ -106,8 +102,8 @@ export class LoginPage {
       
       */
       /**/
-      
-        
+
+
       /*this.id_usuario=response;
       console.log(f.id_usuario);
       localStorage.setItem('auth_token', resp.token);
@@ -116,7 +112,7 @@ export class LoginPage {
 
 */
 
-      
+
       return;
     }
 
