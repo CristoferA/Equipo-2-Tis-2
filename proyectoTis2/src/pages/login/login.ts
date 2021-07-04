@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Http } from '@angular/http';
 import { HomePage } from '../home/home';
 import { ToastController } from 'ionic-angular';
+import { a } from '@angular/core/src/render3';
 
 /**
  * Generated class for the LoginPage page.
@@ -27,8 +28,10 @@ export class LoginPage {
   nombre_usuario: any;
   contrasena: any;
   email_usuario: any;
+  postData: any;
+  token: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public alertController: AlertController, private http: Http,private toastCtrl:ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public alertController: AlertController, private http: Http, private toastCtrl: ToastController) {
 
 
     this.datos = formBuilder.group({
@@ -55,10 +58,11 @@ export class LoginPage {
 
 
   async login() {
+    let postData = new FormData();
     var f = this.datos.value;
-
+    var url = 'http://localhost/apiRest/public/login';
     console.log(f);
-    
+
     var usuario = JSON.parse(localStorage.getItem('usuario'));
     console.log(usuario);
 
@@ -67,37 +71,59 @@ export class LoginPage {
 
       this.irHome();
 
-    }else {
+    } else {
 
-      var url = 'http://localhost/apiRest/public/login';
-      this.data = this.http.post(url, f);
-
-      this.data.subscribe((data) => {
-        console.log(data);
-  
-        this.presentToast("Logeado correctamente");
+      let body = JSON.stringify(postData);
+     
+      this.http.post(url, f)
+      .map(Response=>Response.json())
+      .subscribe(data =>{
+        if(data=="Error"){
+          console.log("Bad request wrong username and password");
+        }else{
+          this.token = data;
+          console.log(data);
+          console.log(this.token);
+          //this.irHome();
+        }
+      });
+      if(this.token!="Error"){
         this.irHome();
-  
-      }), err => {
-        console.log("Oops!");
+      }else{
+        console.log("Bad request wrong username and password");
       }
-  
 
-      const alert = await this.alertController.create({
+
+
+
+      /*const alert = await this.alertController.create({
         title: 'Datos incorrectos',
         message: 'Los datos que ingresaste no son correctos',
         buttons: ['Aceptar']
 
       });
       await alert.present();
+      
+      */
+      /**/
+      
+        
+      /*this.id_usuario=response;
+      console.log(f.id_usuario);
+      localStorage.setItem('auth_token', resp.token);
+
+      localStorage.setItem('usuario', JSON.stringify(usuario));
+
+*/
+
+      
       return;
     }
 
   }
 
 
-
-  presentToast(msg: string){
+  presentToast(msg: string) {
     let toast = this.toastCtrl.create({
       message: msg,
       duration: 2000,
