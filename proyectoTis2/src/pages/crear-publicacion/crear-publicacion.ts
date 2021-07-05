@@ -34,7 +34,7 @@ export class CrearPublicacionPage {
   moderador: any;
   region: any;
   comuna: any;
-
+  //xdd
   //xd
   regiones: any;
   comunas: any;

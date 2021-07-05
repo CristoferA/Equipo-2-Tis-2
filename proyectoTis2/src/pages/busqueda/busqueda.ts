@@ -35,6 +35,7 @@ export class BusquedaPage {
       {
         if (data === "No existen publicaciones en la BBDD con este ID."){
           console.log("No existen publicaciones en la BBDD con este ID.");
+          
         } 
         else {
           this.publicacionesBus = data;

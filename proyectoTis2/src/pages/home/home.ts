@@ -36,6 +36,7 @@ export class HomePage {
   }
 
   irFiltro(){
+    //this.navCtrl.setRoot(FiltroPage);
     this.navCtrl.push(FiltroPage);
   }
 }

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { Http } from '@angular/http';
 import { HomePage } from '../home/home';
 import { ToastController } from 'ionic-angular';
-import { a } from '@angular/core/src/render3';
+
 
 /**
  * Generated class for the LoginPage page.
@@ -30,7 +30,9 @@ export class LoginPage {
   email_usuario: any;
   postData: any;
   token: any;
-
+  oferente: any;
+  moderador: any;
+  //public rootPage: any = HomePage;
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public alertController: AlertController, private http: Http, private toastCtrl: ToastController) {
 
 
@@ -46,29 +48,31 @@ export class LoginPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
-
+  
   irRegistro() {
     this.navCtrl.push(RegistroPage);
-  }
-
+  }/*
+  irHomePage() {
+    this.navCtrl.setRoot(HomePage);
+  }*/
   irHome() {
     this.navCtrl.push(HomePage);
   }
 
-
-
+ 
   async login() {
-    let postData = new FormData();
+    
     var f = this.datos.value;
     var url = 'http://localhost/apiRest/public/login';
     console.log(f);
 
     var usuario = JSON.parse(localStorage.getItem('usuario'));
-    console.log(usuario);
-
+    var token;
+    //this.oferente();
+    
+    //Check usuario normal
     if (usuario.id_usuario == f.id_usuario && usuario.contrasena == f.contrasena) {
       this.irHome();
-
     } else {
 
       //let body = JSON.stringify(postData);
@@ -82,16 +86,17 @@ export class LoginPage {
             if(respuesta.error.text=="Bad request wrong username and password"){
               console.log(respuesta.error.text);
             }
-          }
-         
-          else{
-            localStorage.setItem('token', JSON.stringify(respuesta));
-            this.irHome();
+          }else{
+            localStorage.setItem('respuesta', JSON.stringify(respuesta));
+            token=JSON.parse(localStorage.getItem('respuesta'));
+            console.log(token);
+            //this.irHome();
           }
 
 
         });
 
+        //console.log(token);
       /*const alert = await this.alertController.create({
         title: 'Datos incorrectos',
         message: 'Los datos que ingresaste no son correctos',
@@ -101,20 +106,10 @@ export class LoginPage {
       await alert.present();
       
       */
-      /**/
-
-
-      /*this.id_usuario=response;
-      console.log(f.id_usuario);
-      localStorage.setItem('auth_token', resp.token);
-
-      localStorage.setItem('usuario', JSON.stringify(usuario));
-
-*/
-
-
-      return;
+      
     }
+    
+
 
   }
 

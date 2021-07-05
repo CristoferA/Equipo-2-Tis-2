@@ -8,6 +8,7 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { CrearPublicacionPage } from '../pages/crear-publicacion/crear-publicacion';
 import { CuentaPage } from '../pages/cuenta/cuenta';
+import { CrearPublicacionCheckPage } from '../pages/crear-publicacion-check/crear-publicacion-check';
 
 @Component({
   templateUrl: 'app.html'
@@ -26,7 +27,7 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Publicaciones', component: HomePage },
-      { title: 'Crear publicacion', component: CrearPublicacionPage },
+      { title: 'Crear publicacion', component: CrearPublicacionCheckPage },
       { title: 'Mi Cuenta', component: CuentaPage },
       { title: 'Ingresar', component: LoginPage }
     ];
