@@ -213,7 +213,7 @@ $app->post('/signup',function(Request $request, Response $response){
          
 
             if($userData){
-               $userData = json_encode($userData);
+                $userData = json_encode($userData);
                 echo '{"userData": ' .$userData . '}';
             } else {
               

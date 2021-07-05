@@ -59,7 +59,7 @@ $app->post('/publicacion/buscar', function(Request $request, Response $response)
     $region_publicacion= $request->getParam('region_publicacion');
     $comuna_publicacion= $request->getParam('comuna_publicacion');
     
-    $sql = "SELECT * FROM publicacion WHERE nombre_publicacion LIKE '%$nombre_publicacion%' OR region_publicacion='$region_publicacion' OR comuna_publicacion='$comuna_publicacion'";
+    $sql = "SELECT * FROM publicacion WHERE nombre_publicacion LIKE '$nombre_publicacion%' OR region_publicacion='$region_publicacion' OR comuna_publicacion='$comuna_publicacion'";
     try{
       $db = new db();
       $db = $db->conectionDB();
