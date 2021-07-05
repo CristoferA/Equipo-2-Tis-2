@@ -37,7 +37,7 @@ export class ReviewPage {
       }
     );
 
-    this.http.get('http://localhost/apiRest/public/review/{id_publicacion}')
+    this.http.get('http://localhost/apiRest/public/review/' + this.id_publicacion)
     .map(response => response.json())
     .subscribe(data_rev =>
       {
