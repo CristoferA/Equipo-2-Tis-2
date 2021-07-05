@@ -21,8 +21,11 @@ export class CrearPublicacionCheckPage {
   token: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http) {
+    //localStorage.clear();
+    if('respuesta' in localStorage){
     var token=JSON.parse(localStorage.getItem('respuesta'));
     console.log(token);
+    
     if(token.hasOwnProperty('data')){
       console.log(token.data.id_usuario);
       var a=token.data.id_usuario;
@@ -39,6 +42,7 @@ export class CrearPublicacionCheckPage {
       });
       
     }
+  }
   }
   
   ionViewDidLoad() {

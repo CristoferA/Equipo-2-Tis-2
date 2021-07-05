@@ -71,10 +71,10 @@ export class LoginPage {
     //this.oferente();
     
     //Check usuario normal
-    if (usuario.id_usuario == f.id_usuario && usuario.contrasena == f.contrasena) {
+    /*if (usuario.id_usuario == f.id_usuario && usuario.contrasena == f.contrasena) {
       this.irHome();
     } else {
-
+*/
       //let body = JSON.stringify(postData);
       var respuesta;
       this.http.post(url, f)
@@ -107,7 +107,7 @@ export class LoginPage {
       
       */
       
-    }
+    //}
     
 
 
