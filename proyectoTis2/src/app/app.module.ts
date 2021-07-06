@@ -12,10 +12,10 @@ import { BusquedaPage } from '../pages/busqueda/busqueda';
 import { LoginPage } from '../pages/login/login';
 import { CrearPublicacionPage } from '../pages/crear-publicacion/crear-publicacion';
 import { RegistroPage } from '../pages/registro/registro';
-import { CuentaPage} from '../pages/cuenta/cuenta';
+import { CuentaPage } from '../pages/cuenta/cuenta';
 import { MisPublicacionesPage } from '../pages/mis-publicaciones/mis-publicaciones';
-import { ReviewPage} from '../pages/review/review';
-import { CrearPublicacionCheckPage } from '../pages/crear-publicacion-check/crear-publicacion-check';
+import { ReviewPage } from '../pages/review/review';
+import { CrearReviewPage } from '../pages/crear-review/crear-review';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -34,7 +34,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     CuentaPage,
     MisPublicacionesPage,
     ReviewPage,
-    CrearPublicacionCheckPage
+    CrearPublicacionPage,
+    CrearReviewPage
   ],
   imports: [
     BrowserModule,
@@ -55,7 +56,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     CuentaPage,
     MisPublicacionesPage,
     ReviewPage,
-    CrearPublicacionCheckPage
+    CrearReviewPage
   ],
   providers: [
     StatusBar,
