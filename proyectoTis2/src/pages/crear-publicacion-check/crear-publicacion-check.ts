@@ -16,42 +16,38 @@ import { Observable } from 'rxjs';
   templateUrl: 'crear-publicacion-check.html',
 })
 export class CrearPublicacionCheckPage {
-  
+
   data: Observable<any>;
   token: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
     //localStorage.clear();
-    if('respuesta' in localStorage){
-    var token=JSON.parse(localStorage.getItem('respuesta'));
-    console.log(token);
-    
-    if(token.hasOwnProperty('data')){
-      console.log(token.data.id_usuario);
-      var a=token.data.id_usuario;
-      this.http.get("http://localhost/apiRest/public/oferente/"+a)
-      .map(Response=>Response.json())
-      .subscribe(data =>{
-        if(data==="No existen usuarios en la BBDD con este ID."){
-          console.log("LLEGUE ACA Y ENTRE AL IF");
-          console.log("NO ERES OFERENTE");
-        }else{
-          console.log("ENTRE AL ELSE");
-          console.log("LLEVAR A CREAR PUBLICACION");
-        }
-      });
-      
+    if ('respuesta' in localStorage) {
+      var token = JSON.parse(localStorage.getItem('respuesta'));
+      console.log(token);
+
+      if (token.hasOwnProperty('data')) {
+        console.log(token.data.id_usuario);
+        var a = token.data.id_usuario;
+        this.http.get("http://localhost/apiRest/public/oferente/" + a)
+          .map(Response => Response.json())
+          .subscribe(data => {
+            if (data === "No existen usuarios en la BBDD con este ID.") {
+              console.log("LLEGUE ACA Y ENTRE AL IF");
+              console.log("NO ERES OFERENTE");
+            } else {
+              console.log("ENTRE AL ELSE");
+              console.log("LLEVAR A CREAR PUBLICACION");
+            }
+          });
+      }
     }
   }
-  }
-  
-  ionViewDidLoad() {
-    
 
-    
+  ionViewDidLoad() {
     console.log('ionViewDidLoad CrearPublicacionCheckPage');
   }
-  irLogeo(){
+  irLogeo() {
     this.navCtrl.push(LoginPage);
   }
 

@@ -48,7 +48,7 @@ export class LoginPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
-  
+
   irRegistro() {
     this.navCtrl.push(RegistroPage);
   }/*
@@ -59,9 +59,9 @@ export class LoginPage {
     this.navCtrl.push(HomePage);
   }
 
- 
+
   async login() {
-    
+
     var f = this.datos.value;
     var url = 'http://localhost/apiRest/public/login';
     console.log(f);
@@ -69,46 +69,45 @@ export class LoginPage {
     var usuario = JSON.parse(localStorage.getItem('usuario'));
     var token;
     //this.oferente();
-    
+
     //Check usuario normal
     /*if (usuario.id_usuario == f.id_usuario && usuario.contrasena == f.contrasena) {
       this.irHome();
     } else {
 */
-      //let body = JSON.stringify(postData);
-      var respuesta;
-      this.http.post(url, f)
-        .map(Response => Response.json())
-        .subscribe(data => {
-          this.token = data;
-          respuesta = this.token;
-          if(respuesta.hasOwnProperty('error')){
-            if(respuesta.error.text=="Bad request wrong username and password"){
-              console.log(respuesta.error.text);
-            }
-          }else{
-            localStorage.setItem('respuesta', JSON.stringify(respuesta));
-            token=JSON.parse(localStorage.getItem('respuesta'));
-            console.log(token);
-            //this.irHome();
+    //let body = JSON.stringify(postData);
+    var respuesta;
+    this.http.post(url, f)
+      .map(Response => Response.json())
+      .subscribe(data => {
+        this.token = data;
+        respuesta = this.token;
+        if (respuesta.hasOwnProperty('error')) {
+          if (respuesta.error.text == "Bad request wrong username and password") {
+            console.log(respuesta.error.text);
           }
-
-
-        });
-
-        //console.log(token);
-      /*const alert = await this.alertController.create({
-        title: 'Datos incorrectos',
-        message: 'Los datos que ingresaste no son correctos',
-        buttons: ['Aceptar']
+        } else {
+          localStorage.setItem('respuesta', JSON.stringify(respuesta));
+          token = JSON.parse(localStorage.getItem('respuesta'));
+          console.log(token);
+          //this.irHome();
+        }
 
       });
-      await alert.present();
-      
-      */
-      
-    //}
+
+    //console.log(token);
+    /*const alert = await this.alertController.create({
+      title: 'Datos incorrectos',
+      message: 'Los datos que ingresaste no son correctos',
+      buttons: ['Aceptar']
+
+    });
+    await alert.present();
     
+    */
+
+    //}
+
 
 
   }

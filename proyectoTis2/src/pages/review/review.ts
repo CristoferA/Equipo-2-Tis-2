@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { CrearReviewPage } from '../crear-review/crear-review';
+
 /**
  * Generated class for the ReviewPage page.
  *
@@ -38,7 +39,7 @@ export class ReviewPage {
       }
     );
 
-    this.http.get('http://localhost/apiRest/public/review/{id_publicacion}')
+    this.http.get('http://localhost/apiRest/public/review/' + this.id_publicacion)
     .map(response => response.json())
     .subscribe(data_rev =>
       {
