@@ -33,6 +33,8 @@ export class FiltroPage {
   nombreF: string = '';
   regionF: any;
   comunaF: any;
+  tipoPF: any;
+  tipoTF: any;
 
   nombreBusqueda: any;
   regionBusqueda: any;
@@ -83,9 +85,6 @@ export class FiltroPage {
     this.tipoPubBusqueda = document.getElementById("tipoPF").innerText;
     this.tipoTurBusqueda = document.getElementById("tipoTF").innerText;
 
-    console.log("tipo publicacion es: " + this.tipoPubBusqueda);
-    console.log("tipo turismo es: " + this.tipoTurBusqueda);
-
     this.navCtrl.push(BusquedaPage, {nombreB: this.nombreBusqueda, regionB: this.regionBusqueda, comunaB: this.comunaBusqueda, tipoPB: this.tipoPubBusqueda, tipoTB: this.tipoTurBusqueda});
 
   }
@@ -128,12 +127,16 @@ export class FiltroPage {
 
   }*/
 
-  myFunction() {
-    console.log("nombre_publicacion es: " + this.nombreF);
-    console.log("region es: " + document.getElementById("regionF").innerText);
-    console.log("comuna es: " + document.getElementById("comunaF").innerText);
-    console.log("tipo publicacion es: " + document.getElementById("tipoPF").innerText);
-    console.log("tipo turismo es: " + document.getElementById("tipoTF").innerText);
+  limpiarFiltros() {
+    //console.log("nombre_publicacion es: " + this.nombreF);
+    //console.log("region es: " + document.getElementById("regionF").innerText);
+    //console.log("comuna es: " + document.getElementById("comunaF").innerText);
+    //console.log("tipo publicacion es: " + document.getElementById("tipoPF").innerText);
+    //console.log("tipo turismo es: " + document.getElementById("tipoTF").innerText);
+    this.regionF = [];
+    this.comunaF = [];
+    this.tipoPF = [];
+    this.tipoTF = [];    
   }
 
 }
