@@ -20,6 +20,7 @@ import { CrearPublicacionCheckPage } from '../pages/crear-publicacion-check/crea
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { OferenteCheckPage } from '../pages/oferente-check/oferente-check';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ReviewPage,
     CrearPublicacionPage,
     CrearReviewPage,
-    CrearPublicacionCheckPage
+    CrearPublicacionCheckPage,
+    OferenteCheckPage
   ],
   imports: [
     BrowserModule,
@@ -59,7 +61,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MisPublicacionesPage,
     ReviewPage,
     CrearReviewPage,
-    CrearPublicacionCheckPage
+    CrearPublicacionCheckPage,
+    OferenteCheckPage
   ],
   providers: [
     StatusBar,
