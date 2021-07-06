@@ -58,13 +58,20 @@ $app->post('/publicacion/buscar', function(Request $request, Response $response)
     $nombre_publicacion= $request->getParam('nombre_publicacion');
     $region_publicacion= $request->getParam('region_publicacion');
     $comuna_publicacion= $request->getParam('comuna_publicacion');
+    $tipo_publicacion= $request->getParam('tipo_publicacion');
+    $tipo_turismo= $request->getParam('tipo_turismo');
     
     //$sql = "SELECT * FROM publicacion WHERE nombre_publicacion LIKE '%$nombre_publicacion%' OR region_publicacion='$region_publicacion' OR comuna_publicacion='$comuna_publicacion'";
-    $sql = "SELECT * FROM publicacion WHERE IF((ISNULL('$nombre_publicacion') AND ISNULL(NULL) AND ISNULL(NULL)),
-                                            0,
-                                            (IF(ISNULL('$nombre_publicacion'), 1, nombre_publicacion LIKE '%$nombre_publicacion%')
-                                            AND IF(ISNULL(NULL), 1, region_publicacion='')
-                                            AND IF(ISNULL(NULL), 1, comuna_publicacion='Antártida')))";
+    $sql = "SELECT * FROM publicacion WHERE IF((''='$nombre_publicacion' AND 'Selecciona'='$region_publicacion' AND 'Selecciona'='$comuna_publicacion' AND 'Selecciona'='$tipo_publicacion' AND 'Selecciona'='$tipo_turismo'),
+                                                0,
+                                                (IF(''='$nombre_publicacion', 1, nombre_publicacion LIKE '%$nombre_publicacion%')
+                                                AND IF('Selecciona'='$region_publicacion', 1, region_publicacion='$region_publicacion')
+                                                AND IF('Selecciona'='$comuna_publicacion', 1, comuna_publicacion='$comuna_publicacion')
+                                                AND IF('Selecciona'='$tipo_publicacion', 1, tipo_publicacion='$tipo_publicacion')
+                                                AND IF('Selecciona'='$tipo_turismo', 1, tipo_turismo='$tipo_turismo')
+
+                                                )
+                                            )";
     try{
       $db = new db();
       $db = $db->conectionDB();

@@ -15,7 +15,7 @@
   <ion-content padding>
 
    
-    <ion-searchbar #barraBusqueda [(ngModel)]="nombreF" #ctl="ngModel" placeholder="Buscar" animated ></ion-searchbar>
+    <ion-searchbar id="nombreF" [(ngModel)]="nombreF" #ctl="ngModel" placeholder="Buscar" animated></ion-searchbar>
     
     
 
@@ -45,7 +45,7 @@
 
     <ion-item>
       <ion-label>Tipo de publicacion</ion-label>
-      <ion-select placeholder="Selecciona">
+      <ion-select id="tipoPF" [(ngModel)]="tipoPF" #ctl="ngModel" placeholder="Selecciona">
         <ion-option [value]="producto">Producto</ion-option>
         <ion-option [value]="servicio">Servicio</ion-option>
         <ion-option [value]="infraestructura">Infraestructura</ion-option>
@@ -54,7 +54,7 @@
     <br>
     <ion-item>
       <ion-label>Tipo de turismo</ion-label>
-      <ion-select placeholder="Selecciona">
+      <ion-select id="tipoTF" [(ngModel)]="tipoTF" #ctl="ngModel" placeholder="Selecciona">
         <ion-option [value]="negocios">Negocios</ion-option>
         <ion-option [value]="urbano">Urbano</ion-option>
         <ion-option [value]="natural">Natural</ion-option>
@@ -74,6 +74,10 @@
 
   <button ion-button round (click)="irBusqueda()">
     Buscar
+  </button>
+
+  <button ion-button round (click)="myFunction()">
+    Manzana
   </button>
   
 </ion-content>

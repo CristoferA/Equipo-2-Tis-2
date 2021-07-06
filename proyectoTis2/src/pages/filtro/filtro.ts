@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { BusquedaPage } from '../busqueda/busqueda';
@@ -30,12 +30,16 @@ export class FiltroPage {
   datos: FormGroup;
   data: Observable<any>;
 
-  nombreF: any;
+  nombreF: string = '';
   regionF: any;
   comunaF: any;
 
+  nombreBusqueda: any;
   regionBusqueda: any;
   comunaBusqueda: any;
+  tipoPubBusqueda: any;
+  tipoTurBusqueda: any;
+
 
   publicacionesDes: any;
 
@@ -73,9 +77,16 @@ export class FiltroPage {
   }
 
   irBusqueda(){
+    this.nombreBusqueda = this.nombreF;
     this.regionBusqueda = document.getElementById("regionF").innerText;
     this.comunaBusqueda = document.getElementById("comunaF").innerText;
-    this.navCtrl.push(BusquedaPage, {nombreB: this.nombreF, regionB: this.regionBusqueda, comunaB: this.comunaBusqueda});
+    this.tipoPubBusqueda = document.getElementById("tipoPF").innerText;
+    this.tipoTurBusqueda = document.getElementById("tipoTF").innerText;
+
+    console.log("tipo publicacion es: " + this.tipoPubBusqueda);
+    console.log("tipo turismo es: " + this.tipoTurBusqueda);
+
+    this.navCtrl.push(BusquedaPage, {nombreB: this.nombreBusqueda, regionB: this.regionBusqueda, comunaB: this.comunaBusqueda, tipoPB: this.tipoPubBusqueda, tipoTB: this.tipoTurBusqueda});
 
   }
   ionViewDidLoad() {
@@ -118,7 +129,11 @@ export class FiltroPage {
   }*/
 
   myFunction() {
-    document.getElementById("apple").innerText = "newTextForApple";
+    console.log("nombre_publicacion es: " + this.nombreF);
+    console.log("region es: " + document.getElementById("regionF").innerText);
+    console.log("comuna es: " + document.getElementById("comunaF").innerText);
+    console.log("tipo publicacion es: " + document.getElementById("tipoPF").innerText);
+    console.log("tipo turismo es: " + document.getElementById("tipoTF").innerText);
   }
 
 }

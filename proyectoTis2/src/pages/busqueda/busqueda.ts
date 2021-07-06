@@ -19,6 +19,8 @@ export class BusquedaPage {
   nombreR = this.navParams.get('nombreB');
   regionR = this.navParams.get('regionB');
   comunaR = this.navParams.get('comunaB');
+  tipoPR = this.navParams.get('tipoPB');
+  tipoTR = this.navParams.get('tipoTB');
   //comunaB = this.navParams.get('valor3');
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
@@ -28,6 +30,8 @@ export class BusquedaPage {
     postData.append('nombre_publicacion', this.nombreR);
     postData.append("region_publicacion", this.regionR);
     postData.append("comuna_publicacion", this.comunaR);
+    postData.append("tipo_publicacion", this.tipoPR);
+    postData.append("tipo_turismo", this.tipoTR);
 
     this.http.post('http://localhost/apiRest/public/publicacion/buscar', postData)
     .map(response => response.json())
