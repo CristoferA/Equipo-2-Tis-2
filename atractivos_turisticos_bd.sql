@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 01, 2021 at 01:27 AM
+-- Generation Time: Jul 06, 2021 at 01:07 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -119,7 +119,7 @@ CREATE TABLE `publicacion` (
   `nombre_publicacion` varchar(50) NOT NULL,
   `descripcion_publicacion` varchar(3000) NOT NULL,
   `valor_publicacion` int(9) NOT NULL,
-  `region_publicacion` varchar(30) NOT NULL,
+  `region_publicacion` varchar(40) NOT NULL,
   `tipo_publicacion` set('producto','servicio','infraestructura') NOT NULL,
   `estado` set('pendiente','aprobado','rechazado') NOT NULL,
   `tipo_turismo` set('negocios','urbano','natural','gastronomico','aventura','ecologico','cultural','lujo','diversion','religioso','espacial') NOT NULL,
@@ -127,7 +127,7 @@ CREATE TABLE `publicacion` (
   `telefono_contacto` int(12) NOT NULL,
   `direccion` varchar(100) NOT NULL,
   `redes_sociales` varchar(1000) NOT NULL,
-  `comuna_publicacion` varchar(30) NOT NULL,
+  `comuna_publicacion` varchar(40) NOT NULL,
   `calificacion_publicacion` int(2) NOT NULL,
   `id_moderador` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -151,6 +151,13 @@ CREATE TABLE `review` (
   `review` varchar(5000) NOT NULL,
   `id_publicacion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `review`
+--
+
+INSERT INTO `review` (`id_review`, `review`, `id_publicacion`) VALUES
+(1, 'ejemplo de review', 4);
 
 -- --------------------------------------------------------
 
@@ -177,6 +184,7 @@ INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `email_usuario`, `contras
 ('abismal13', 'Felipe Espinoza', 'fespinozameaa@gmail.cl', 'f69be13983b69f2cafdc618f5a6ca9c5cdc4ddd28ff2b52e3116a6b907c4c614'),
 ('abismal2', 'Felipe Espinoza', 'fespinozameeeee@gmail.cl', 'F1f1f2f3'),
 ('abismal20', 'Felipe Espinoza', 'fespinozameaaa@gmail.cl', 'f69be13983b69f2cafdc618f5a6ca9c5cdc4ddd28ff2b52e3116a6b907c4c614'),
+('abismal22', 'Felipe Espinoza', 'fespinozamei@gmail.cl', 'f69be13983b69f2cafdc618f5a6ca9c5cdc4ddd28ff2b52e3116a6b907c4c614'),
 ('abismal3', 'Felipe Espinoza', 'fespinozameeeeee@gmail.cl', 'F1f1f2f3'),
 ('abismal4', 'Felipe Espinoza', 'fespinozameeeeeee@gmail.cl', 'F1f1f2f3'),
 ('abismal5', 'Felipe Espinoza', 'fespinozameeeeeeee@gmail.cl', 'F1f1f2f3'),
