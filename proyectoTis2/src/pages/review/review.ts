@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { CrearReviewPage } from '../crear-review/crear-review';
 /**
  * Generated class for the ReviewPage page.
  *
@@ -54,6 +55,10 @@ export class ReviewPage {
 
   ionViewDidLoad() {
     console.log('Ya cargó ReviewPage');
+  }
+
+  irCrearReview(id_publicacion){
+    this.navCtrl.push(CrearReviewPage, {valor: id_publicacion});
   }
 
 }

@@ -14,6 +14,13 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content *ngFor="let pub of publicacion">
 
+
+
+  <ion-footer>
+    <ion-toolbar>
+      <ion-title style="text-align: center;" (click)="irCrearReview(pub.id_publicacion)">Agregar Reseña</ion-title>
+    </ion-toolbar>
+  </ion-footer>
 </ion-content>
