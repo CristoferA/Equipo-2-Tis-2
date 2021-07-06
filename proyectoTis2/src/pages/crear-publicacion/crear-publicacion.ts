@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { Http } from '@angular/http';
-
+import { HomePage } from '../home/home';
 /**
  * Generated class for the CrearPublicacionPage page.
  *
@@ -61,9 +61,9 @@ export class CrearPublicacionPage {
     console.log('ionViewDidLoad CrearPublicacionPage');
   }
 
-  mensajeToast() {
+  mensajeToast(msg) {
     const toast = this.toastCtrl.create({
-      message: 'Publicación subida correctamente y en espera de aprobación.',
+      message: msg,
       duration: 3000
     });
     toast.present();
@@ -106,8 +106,8 @@ export class CrearPublicacionPage {
     this.data.subscribe((data) => {
       console.log(data);
 
-      this.mensajeToast();
-
+      this.mensajeToast('Publicación subida correctamente y en espera de aprobación.');
+      this.navCtrl.setRoot(HomePage);
       //this.navCtrl.pop();
     })
 
