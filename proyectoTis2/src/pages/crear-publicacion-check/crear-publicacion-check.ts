@@ -4,6 +4,7 @@ import { LoginPage } from '../login/login';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 import { OferenteCheckPage } from '../oferente-check/oferente-check';
+import { CrearPublicacionPage } from '../crear-publicacion/crear-publicacion';
 /**
  * Generated class for the CrearPublicacionCheckPage page.
  *
@@ -42,11 +43,16 @@ export class CrearPublicacionCheckPage {
         }else{                                      // LLEVA AL FORMULARIO SI SE CUMPLE TODO
           console.log("ENTRE AL ELSE");
           console.log("LLEVAR A CREAR PUBLICACION");
+          this.irCrear();
         }
       });
       
     }
   }
+  }
+
+  irCrear(){
+    this.navCtrl.setRoot(CrearPublicacionPage);
   }
   
   irOferente() {
