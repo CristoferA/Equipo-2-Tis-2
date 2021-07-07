@@ -20,7 +20,7 @@ $app->get('/comentario/{id_publicacion}', function(Request $request, Response $r
         $publicacion = $result->fetchAll(PDO::FETCH_OBJ);
         echo json_encode($publicacion);
       }else {
-        echo json_encode("No existen publicaciones en la BBDD con este ID.");
+        echo "No existen publicaciones en la BBDD con este ID.";
       }
       $result = null;
       $db = null;
