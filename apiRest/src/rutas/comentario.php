@@ -32,13 +32,13 @@ $app->get('/comentario/{id_publicacion}', function(Request $request, Response $r
 
 $app->post('/comentario/new', function(Request $request, Response $response){
     //$id_review = $request->getAttribute('id_review');
-    $review = $request->getParam('review');
+    $comentario = $request->getParam('comentario');
     $id_publicacion = $request->getParam('id_publicacion');    
     $id_usuario = $request->getParam('id_usuario');    
-    $estado = $request->getParam('estado');    
+       
 
-    $sql= "INSERT INTO review (review, id_publicacion, id_usuario, estado) 
-    VALUES (:review, :id_publicacion, :id_usuario, :estado)";
+    $sql= "INSERT INTO comentario (comentario, id_publicacion, id_usuario) 
+    VALUES (:comentario, :id_publicacion, :id_usuario)";
 
     try{
         $db = new db();

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 07, 2021 at 09:13 PM
+-- Generation Time: Jul 07, 2021 at 09:20 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -34,27 +34,6 @@ CREATE TABLE `comentario` (
   `id_publicacion` int(10) NOT NULL,
   `id_usuario` varchar(50) CHARACTER SET utf8mb4 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `contacta`
---
-
-CREATE TABLE `contacta` (
-  `id_oferente` varchar(50) NOT NULL,
-  `id_demandante` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `demandante`
---
-
-CREATE TABLE `demandante` (
-  `usuario` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -196,28 +175,6 @@ INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `email_usuario`, `contras
 ('abismal8', 'Felipe Espinoza', 'fespinozameee@gmail.cl', 'F1f1f2f3'),
 ('abismal9', 'Felipe Espinoza', 'fespinozameeee@gmail.cl', 'F1f1f2f3');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `visitante`
---
-
-CREATE TABLE `visitante` (
-  `id_visita` int(7) NOT NULL,
-  `id_publicacion` int(7) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `visualiza`
---
-
-CREATE TABLE `visualiza` (
-  `usuario` varchar(50) NOT NULL,
-  `id_publicacion` int(7) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 --
 -- Indexes for dumped tables
 --
@@ -229,19 +186,6 @@ ALTER TABLE `comentario`
   ADD PRIMARY KEY (`id_comentario`),
   ADD KEY `comentario_publicacion` (`id_publicacion`),
   ADD KEY `comentario_usuario` (`id_usuario`);
-
---
--- Indexes for table `contacta`
---
-ALTER TABLE `contacta`
-  ADD PRIMARY KEY (`id_oferente`,`id_demandante`),
-  ADD KEY `contacta_demandante` (`id_demandante`);
-
---
--- Indexes for table `demandante`
---
-ALTER TABLE `demandante`
-  ADD PRIMARY KEY (`usuario`);
 
 --
 -- Indexes for table `moderador`
@@ -284,22 +228,14 @@ ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id_usuario`);
 
 --
--- Indexes for table `visitante`
---
-ALTER TABLE `visitante`
-  ADD PRIMARY KEY (`id_visita`,`id_publicacion`),
-  ADD KEY `visitante_publicacion` (`id_publicacion`);
-
---
--- Indexes for table `visualiza`
---
-ALTER TABLE `visualiza`
-  ADD PRIMARY KEY (`usuario`,`id_publicacion`),
-  ADD KEY `visualiza_publicacion` (`id_publicacion`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `comentario`
+--
+ALTER TABLE `comentario`
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `publicacion`
@@ -314,12 +250,6 @@ ALTER TABLE `review`
   MODIFY `id_review` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `visitante`
---
-ALTER TABLE `visitante`
-  MODIFY `id_visita` int(7) NOT NULL AUTO_INCREMENT;
-
---
 -- Constraints for dumped tables
 --
 
@@ -329,19 +259,6 @@ ALTER TABLE `visitante`
 ALTER TABLE `comentario`
   ADD CONSTRAINT `comentario_publicacion` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id_publicacion`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `comentario_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `contacta`
---
-ALTER TABLE `contacta`
-  ADD CONSTRAINT `contacta_demandante` FOREIGN KEY (`id_demandante`) REFERENCES `demandante` (`usuario`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `contacta_oferente` FOREIGN KEY (`id_oferente`) REFERENCES `oferente` (`usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `demandante`
---
-ALTER TABLE `demandante`
-  ADD CONSTRAINT `demandante_usuario` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `moderador`
@@ -374,19 +291,6 @@ ALTER TABLE `publicacion`
 ALTER TABLE `review`
   ADD CONSTRAINT `review_publicacion` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id_publicacion`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `review_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `visitante`
---
-ALTER TABLE `visitante`
-  ADD CONSTRAINT `visitante_publicacion` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id_publicacion`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `visualiza`
---
-ALTER TABLE `visualiza`
-  ADD CONSTRAINT `visualiza_publicacion` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id_publicacion`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `visualiza_usuario` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
