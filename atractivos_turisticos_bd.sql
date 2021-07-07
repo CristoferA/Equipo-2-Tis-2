@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 06, 2021 at 01:07 AM
+-- Generation Time: Jul 07, 2021 at 12:17 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -149,15 +149,10 @@ INSERT INTO `publicacion` (`id_publicacion`, `nombre_publicacion`, `descripcion_
 CREATE TABLE `review` (
   `id_review` int(11) NOT NULL,
   `review` varchar(5000) NOT NULL,
-  `id_publicacion` int(11) NOT NULL
+  `id_publicacion` int(11) NOT NULL,
+  `id_usuario` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+  `estado` set('pendiente','aprobado','rechazado') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `review`
---
-
-INSERT INTO `review` (`id_review`, `review`, `id_publicacion`) VALUES
-(1, 'ejemplo de review', 4);
 
 -- --------------------------------------------------------
 
@@ -270,7 +265,8 @@ ALTER TABLE `publicacion`
 --
 ALTER TABLE `review`
   ADD PRIMARY KEY (`id_review`),
-  ADD KEY `review_publicacion` (`id_publicacion`);
+  ADD KEY `review_publicacion` (`id_publicacion`),
+  ADD KEY `review_usuario` (`id_usuario`);
 
 --
 -- Indexes for table `usuario`
@@ -360,7 +356,8 @@ ALTER TABLE `publicacion`
 -- Constraints for table `review`
 --
 ALTER TABLE `review`
-  ADD CONSTRAINT `review_publicacion` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id_publicacion`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `review_publicacion` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id_publicacion`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `review_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `visitante`
