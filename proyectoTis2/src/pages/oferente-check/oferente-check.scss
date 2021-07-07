@@ -13,4 +13,16 @@ page-oferente-check {
       }
 
 
+    ion-list {
+        margin: 10;
+        padding: 0;
+        display: block;
+        list-style-type: none;
+    }
+
+    h1, h4{
+        color: rgb(31, 136, 155);
+        font-weight: bold;
+    }
+
 }

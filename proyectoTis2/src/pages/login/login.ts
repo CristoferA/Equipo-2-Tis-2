@@ -56,7 +56,7 @@ export class LoginPage {
     this.navCtrl.setRoot(HomePage);
   }*/
   irHome() {
-    this.navCtrl.push(HomePage);
+    this.navCtrl.setRoot(HomePage);
   }
 
 

@@ -10,11 +10,25 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Crear-publicacion-check</ion-title>
+    <ion-title>Crear publicacion check</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding center text-center class="bg">
-  <h1>No estas logeado, para publicar debes estar logeado y ser un oferente</h1>
-  <a (click) = "irLogeo()">LOGEARTE</a>
+  <br><br><br><br><br><br><br><br><br><br>
+  <h1>No estas logeado</h1>
+  <h2>Para publicar debes estar logeado y ser un oferente</h2>
+  <br><br>
+
+  <button ion-button type="submit" round (click)="irLogeo()">ir a logearse </button>
+
+
+
+  <div class="centrado">
+    <br><br><br><br><br><br><br><br>
+    <ion-icon name="logo-facebook" style="zoom:3.0"></ion-icon>
+    <ion-icon name="logo-instagram" style="zoom:3.0"></ion-icon>
+    <ion-icon name="logo-twitter" style="zoom:3.0"></ion-icon>
+  </div>
+  
 </ion-content>
