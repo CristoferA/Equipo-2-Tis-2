@@ -16,7 +16,24 @@
   </ion-header>
 </div>
 
-<ion-content padding>
+<ion-content>
+
+  <div *ngIf ="comentario" style="padding-top: 55px;">
+    <!-- <div *ngFor="let pub of publicacion"> No me acuerdo por qué puse esto pero funciona sin él-->
+      <ion-card *ngFor="let com of comentario">
+        <ion-card-content>
+
+          <!-- Reseña -->
+          <p> {{com.comentario}} </p>
+
+        </ion-card-content>
+      </ion-card>
+    <!-- </div> -->
+  </div>
+
+  <div *ngIf ="!comentario">
+    <p> Esta publicación no tiene reseñas. </p>
+  </div>
 
 </ion-content>
 
