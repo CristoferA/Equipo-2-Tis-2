@@ -31,10 +31,11 @@ $app->get('/comentario/{id_publicacion}', function(Request $request, Response $r
 
 
 $app->post('/comentario/new', function(Request $request, Response $response){
-    //$id_review = $request->getAttribute('id_review');
+    //$id_comentario = $request->getAttribute('id_comentario');
     $comentario = $request->getParam('comentario');
     $id_publicacion = $request->getParam('id_publicacion');    
     $id_usuario = $request->getParam('id_usuario');    
+    $like = $request -> getParam('like');
        
 
     $sql= "INSERT INTO comentario (comentario, id_publicacion, id_usuario) 
@@ -54,6 +55,39 @@ $app->post('/comentario/new', function(Request $request, Response $response){
 
         $result->execute();
         echo json_encode("comentario Guardada");
+        $result=null;
+        $db=null;
+    }catch(PDOException $e){
+        echo '{"error" : {"text":'.$e->getMessage().'}'; 
+    }
+
+});
+
+
+$app->post('/comentario/like', function(Request $request, Response $response){
+    $id_comentario = $request->getAttribute('id_comentario');
+    $likes = $request -> getParam('likes');  
+       
+    $sql = "UPDATE comentario SET likes: likes WHERE id_comentario = '$id_comentario'";
+
+    /*$sql= "INSERT INTO comentario (comentario, id_publicacion, id_usuario) 
+    VALUES (:comentario, :id_publicacion, :id_usuario)";*/
+
+    try{
+        $db = new db();
+        $db = $db -> conectionDB();
+        $result = $db -> prepare ($sql);
+
+        //$result->bindParam(':id_review',$id_review);
+        
+        $result->bindParam(':id_publicacion',$id_publicacion);
+        $result->bindParam(':likes',$likes);
+        
+    
+        
+
+        $result->execute();
+        echo json_encode("Like Guardada");
         $result=null;
         $db=null;
     }catch(PDOException $e){
