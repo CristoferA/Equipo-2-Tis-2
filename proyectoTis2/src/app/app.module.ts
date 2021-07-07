@@ -17,6 +17,8 @@ import { MisPublicacionesPage } from '../pages/mis-publicaciones/mis-publicacion
 import { ReviewPage } from '../pages/review/review';
 import { CrearReviewPage } from '../pages/crear-review/crear-review';
 import { CrearPublicacionCheckPage } from '../pages/crear-publicacion-check/crear-publicacion-check';
+import { ComentarioPage } from '../pages/comentario/comentario';
+import { CrearComentarioPage } from '../pages/crear-comentario/crear-comentario';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -39,7 +41,9 @@ import { OferenteCheckPage } from '../pages/oferente-check/oferente-check';
     CrearPublicacionPage,
     CrearReviewPage,
     CrearPublicacionCheckPage,
-    OferenteCheckPage
+    OferenteCheckPage,
+    ComentarioPage,
+    CrearComentarioPage
   ],
   imports: [
     BrowserModule,
@@ -62,7 +66,9 @@ import { OferenteCheckPage } from '../pages/oferente-check/oferente-check';
     ReviewPage,
     CrearReviewPage,
     CrearPublicacionCheckPage,
-    OferenteCheckPage
+    OferenteCheckPage,
+    ComentarioPage,
+    CrearComentarioPage
   ],
   providers: [
     StatusBar,

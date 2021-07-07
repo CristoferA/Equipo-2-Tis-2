@@ -16,26 +16,63 @@
   </ion-header>
 </div>
 
-<ion-content *ngFor="let pub of publicacion">
-  <div>
-    <ion-card *ngFor="let rev of review">
-      <ion-card-content>
+<ion-content>
 
-        <!-- Usuario -->
-        <p> Abismal13:</p>
+  <div *ngIf ="review" style="padding-top: 55px;">
+    <!-- <div *ngFor="let pub of publicacion"> No me acuerdo por qué puse esto pero funciona sin él-->
+      <ion-card *ngFor="let rev of review">
+        <ion-card-content>
 
-        <!-- Reseña -->
-        <p> {{rev.review}} </p>
+          <!-- Usuario -->
+          <p> (Nombre de usuario): </p>
 
-      </ion-card-content>
-    </ion-card>
+          <!-- Reseña -->
+          <p> {{rev.review}} </p>
+
+        </ion-card-content>
+      </ion-card>
+    <!-- </div> -->
   </div>
 
-  <div>
-    <ion-footer>
-      <ion-toolbar>
-        <ion-title style="text-align: center;" (click)="irCrearReview(pub.id_publicacion)">Agregar Reseña</ion-title>
-      </ion-toolbar>
-    </ion-footer>
+  <div *ngIf ="!review">
+    <p> Esta publicación no tiene reseñas. </p>
   </div>
+
+  <!--
+   <div ng-switch on="rev.review" *ngFor="let rev of review">
+    <div ng-switch-when=>
+      <p> Esta publicación no tiene reseñas. </p>
+
+        Acá entra cuando la consulta SQL:
+          SELECT * FROM review JOIN publicacion USING(id_publicacion)
+        no arroja resultados.
+   
+    </div>
+    <div ng-switch-default style="padding-top: 15px;">
+      <ion-card>
+        <ion-card-content>
+
+          <p> (Nombre de usuario):</p>
+
+          <p> {{rev.review}} </p>
+
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+  -->
 </ion-content>
+
+<div *ngFor="let pub of publicacion">
+  <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="irCrearReview(pub.id_publicacion)"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</div>
+
+<!--<div>
+  <ion-footer>
+    <ion-toolbar>
+      <ion-title style="text-align: center;" (click)="irCrearReview(pub.id_publicacion)">Agregar Reseña</ion-title>
+    </ion-toolbar>
+  </ion-footer>
+</div> -->

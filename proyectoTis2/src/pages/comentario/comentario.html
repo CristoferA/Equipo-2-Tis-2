@@ -1,0 +1,27 @@
+<!--
+  Generated template for the ComentarioPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<div>
+  <ion-header>
+    <ion-navbar color="primary">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title *ngFor="let pub of publicacion">Comentarios de {{pub.nombre_publicacion}}
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+</div>
+
+<ion-content padding>
+
+</ion-content>
+
+<div *ngFor="let pub of publicacion">
+  <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="irCrearComentario(pub.id_publicacion)"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</div>

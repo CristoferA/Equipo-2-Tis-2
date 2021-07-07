@@ -1,23 +1,25 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-//import { connectableObservableDescriptor } from 'rxjs/observable/ConnectableObservable';
 import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
-import { ReviewPage } from '../review/review';
-import { ComentarioPage } from '../comentario/comentario';
+import { CrearComentarioPage } from '../crear-comentario/crear-comentario';
+/**
+ * Generated class for the ComentarioPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 
 @IonicPage()
 @Component({
-  selector: 'page-publicacion',
-  templateUrl: 'publicacion.html',
+  selector: 'page-comentario',
+  templateUrl: 'comentario.html',
 })
-export class PublicacionPage {
+export class ComentarioPage {
 
   publicacion:any;
   id_publicacion = this.navParams.get('valor');
   data:Observable<any>;
-  id_review:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
 
@@ -37,15 +39,11 @@ export class PublicacionPage {
   }
 
   ionViewDidLoad() {
-    console.log('Ya cargó PublicacionPage');
+    console.log('Ya cargó ComentarioPage');
   }
 
-  irReview(id_publicacion){
-    this.navCtrl.push(ReviewPage, {valor: id_publicacion});
-  }
-
-  irComentario(id_publicacion){
-    this.navCtrl.push(ComentarioPage, {valor: id_publicacion});
+  irCrearComentario(id_publicacion){
+    this.navCtrl.push(CrearComentarioPage, {valor: id_publicacion});
   }
 
 }

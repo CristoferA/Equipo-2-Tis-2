@@ -23,7 +23,7 @@ export class CrearReviewPage {
   id_publicacion = this.navParams.get('valor');
   data_pub: Observable<any>;
   data_rev: Observable<any>;
-
+  usuario:any; 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public toastCtrl: ToastController) {
 
     this.http.get('http://localhost/apiRest/public/publicacion/' + this.id_publicacion)
@@ -37,15 +37,17 @@ export class CrearReviewPage {
           console.log("Oops!");
         }
       );
+    
     //localStorage.clear(); //pa probar cuando no se ha logeado
     if ('respuesta' in localStorage) {
       var token = JSON.parse(localStorage.getItem('respuesta'));
       console.log(token);
 
       if (token.hasOwnProperty('data')) {
-        console.log(token.data.id_usuario);
+        console.log("El id del usuario es: " + token.data.id_usuario);
         console.log("ENTRÓ AL IF.");
         console.log("Llevar a crearReview"); //DEJARLO PASAR NOMAS
+        this.usuario = token.data.id_usuario;
       }
     } else {
       console.log("NO ENTRÓ AL IF. ENTRÓ AL ELSE");
@@ -73,16 +75,19 @@ export class CrearReviewPage {
 
     console.log("El id_publicacion es: " + this.id_publicacion);
     console.log("La reseña es: " + this.review);
+    console.log("El id_usuario es: " + this.usuario);
+    console.log("El estado es: " + "pendiente");
 
     postData.append('id_publicacion', this.id_publicacion);
     postData.append('review', this.review);
-
+    postData.append('id_usuario', this.usuario);
+    postData.append('estado', "pendiente");
     this.data_rev = this.http.post(url, postData);
 
     this.data_rev.subscribe((data_rev) => {
       console.log(data_rev);
 
-      this.mensajeToast('Reseña enviada correctamente.');
+      this.mensajeToast('Reseña enviada correctamente y pendiente de aprobación.');
       this.navCtrl.setRoot(HomePage);
     })
   }

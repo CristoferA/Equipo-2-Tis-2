@@ -23,7 +23,7 @@ export class ReviewPage {
   id_publicacion = this.navParams.get('valor');
   data_pub:Observable<any>;
   data_rev:Observable<any>;
-
+  
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
     
     this.http.get('http://localhost/apiRest/public/publicacion/' + this.id_publicacion)
