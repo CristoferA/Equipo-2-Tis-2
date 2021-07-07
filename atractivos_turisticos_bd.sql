@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 07, 2021 at 12:17 AM
+-- Generation Time: Jul 07, 2021 at 09:13 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -31,7 +31,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `comentario` (
   `id_comentario` int(11) NOT NULL,
   `comentario` varchar(1024) NOT NULL,
-  `id_publicacion` int(10) NOT NULL
+  `id_publicacion` int(10) NOT NULL,
+  `id_usuario` varchar(50) CHARACTER SET utf8mb4 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -148,11 +149,18 @@ INSERT INTO `publicacion` (`id_publicacion`, `nombre_publicacion`, `descripcion_
 
 CREATE TABLE `review` (
   `id_review` int(11) NOT NULL,
-  `review` varchar(5000) NOT NULL,
+  `review` varchar(5000) CHARACTER SET utf8mb4 NOT NULL,
   `id_publicacion` int(11) NOT NULL,
   `id_usuario` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
   `estado` set('pendiente','aprobado','rechazado') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `review`
+--
+
+INSERT INTO `review` (`id_review`, `review`, `id_publicacion`, `id_usuario`, `estado`) VALUES
+(1, 'Ejemplo de review', 4, 'abismal13', 'pendiente');
 
 -- --------------------------------------------------------
 
@@ -219,7 +227,8 @@ CREATE TABLE `visualiza` (
 --
 ALTER TABLE `comentario`
   ADD PRIMARY KEY (`id_comentario`),
-  ADD KEY `comentario_publicacion` (`id_publicacion`);
+  ADD KEY `comentario_publicacion` (`id_publicacion`),
+  ADD KEY `comentario_usuario` (`id_usuario`);
 
 --
 -- Indexes for table `contacta`
@@ -299,6 +308,12 @@ ALTER TABLE `publicacion`
   MODIFY `id_publicacion` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `review`
+--
+ALTER TABLE `review`
+  MODIFY `id_review` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `visitante`
 --
 ALTER TABLE `visitante`
@@ -312,7 +327,8 @@ ALTER TABLE `visitante`
 -- Constraints for table `comentario`
 --
 ALTER TABLE `comentario`
-  ADD CONSTRAINT `comentario_publicacion` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id_publicacion`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `comentario_publicacion` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id_publicacion`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `comentario_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `contacta`
