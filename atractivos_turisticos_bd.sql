@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 07, 2021 at 09:58 PM
+-- Generation Time: Jul 07, 2021 at 10:39 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -30,9 +30,22 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `comentario` (
   `id_comentario` int(11) NOT NULL,
-  `comentario` varchar(1024) NOT NULL,
+  `comentario` varchar(1024) CHARACTER SET utf8mb4 NOT NULL,
   `id_publicacion` int(10) NOT NULL,
-  `id_usuario` varchar(50) CHARACTER SET utf8mb4 NOT NULL
+  `id_usuario` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+  `likes` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contra`
+--
+
+CREATE TABLE `contra` (
+  `id_contra` int(11) NOT NULL,
+  `id_review` int(11) NOT NULL,
+  `texto` varchar(100) CHARACTER SET utf8mb4 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -70,6 +83,18 @@ CREATE TABLE `oferente` (
 INSERT INTO `oferente` (`usuario`) VALUES
 ('1'),
 ('abismal20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pro`
+--
+
+CREATE TABLE `pro` (
+  `id_pro` int(11) NOT NULL,
+  `id_review` int(11) NOT NULL,
+  `texto` varchar(100) CHARACTER SET utf8mb4 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -189,6 +214,13 @@ ALTER TABLE `comentario`
   ADD KEY `comentario_usuario` (`id_usuario`);
 
 --
+-- Indexes for table `contra`
+--
+ALTER TABLE `contra`
+  ADD PRIMARY KEY (`id_contra`),
+  ADD KEY `contra_review_FK` (`id_review`);
+
+--
 -- Indexes for table `moderador`
 --
 ALTER TABLE `moderador`
@@ -199,6 +231,13 @@ ALTER TABLE `moderador`
 --
 ALTER TABLE `oferente`
   ADD PRIMARY KEY (`usuario`);
+
+--
+-- Indexes for table `pro`
+--
+ALTER TABLE `pro`
+  ADD PRIMARY KEY (`id_pro`),
+  ADD KEY `pro_review_FK` (`id_review`);
 
 --
 -- Indexes for table `publica`
@@ -239,6 +278,18 @@ ALTER TABLE `comentario`
   MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `contra`
+--
+ALTER TABLE `contra`
+  MODIFY `id_contra` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pro`
+--
+ALTER TABLE `pro`
+  MODIFY `id_pro` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `publicacion`
 --
 ALTER TABLE `publicacion`
@@ -262,6 +313,12 @@ ALTER TABLE `comentario`
   ADD CONSTRAINT `comentario_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `contra`
+--
+ALTER TABLE `contra`
+  ADD CONSTRAINT `contra_review_FK` FOREIGN KEY (`id_review`) REFERENCES `review` (`id_review`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `moderador`
 --
 ALTER TABLE `moderador`
@@ -272,6 +329,12 @@ ALTER TABLE `moderador`
 --
 ALTER TABLE `oferente`
   ADD CONSTRAINT `oferente_usuario` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `pro`
+--
+ALTER TABLE `pro`
+  ADD CONSTRAINT `pro_review_FK` FOREIGN KEY (`id_review`) REFERENCES `review` (`id_review`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `publica`
