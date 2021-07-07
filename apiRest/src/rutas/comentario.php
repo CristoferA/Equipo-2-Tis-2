@@ -46,14 +46,14 @@ $app->post('/comentario/new', function(Request $request, Response $response){
         $result = $db -> prepare ($sql);
 
         //$result->bindParam(':id_review',$id_review);
-        $result->bindParam(':review',$review);
+        $result->bindParam(':comentario',$comentario);
         $result->bindParam(':id_publicacion',$id_publicacion);
         $result->bindParam(':id_usuario',$id_usuario);
-        $result->bindParam(':estado',$estado);
+    
         
 
         $result->execute();
-        echo json_encode("review Guardada");
+        echo json_encode("comentario Guardada");
         $result=null;
         $db=null;
     }catch(PDOException $e){
