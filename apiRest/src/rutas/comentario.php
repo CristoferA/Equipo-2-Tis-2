@@ -6,10 +6,11 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 
 
+
 // GET Lista de una publicacion especifica por ID 
-$app->get('/review/{id_publicacion}', function(Request $request, Response $response){
+$app->get('/comentario/{id_publicacion}', function(Request $request, Response $response){
     $id_publicacion = $request->getAttribute('id_publicacion');
-    $sql = "SELECT * FROM review WHERE id_publicacion = '$id_publicacion'";
+    $sql = "SELECT * FROM comentario WHERE id_publicacion = '$id_publicacion'";
     try{
       $db = new db();
       $db = $db->conectionDB();
@@ -19,7 +20,7 @@ $app->get('/review/{id_publicacion}', function(Request $request, Response $respo
         $publicacion = $result->fetchAll(PDO::FETCH_OBJ);
         echo json_encode($publicacion);
       }else {
-        echo "No existen publicaciones en la BBDD con este ID.";
+        echo json_encode("No existen publicaciones en la BBDD con este ID.");
       }
       $result = null;
       $db = null;
@@ -29,7 +30,7 @@ $app->get('/review/{id_publicacion}', function(Request $request, Response $respo
   }); 
 
 
-$app->post('/review/new', function(Request $request, Response $response){
+$app->post('/comentario/new', function(Request $request, Response $response){
     //$id_review = $request->getAttribute('id_review');
     $review = $request->getParam('review');
     $id_publicacion = $request->getParam('id_publicacion');    
