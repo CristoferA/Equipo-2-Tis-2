@@ -21,7 +21,7 @@ export class PublicacionPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
 
-    this.http.get('http://localhost/apiRest/public/publicacion/'+this.id_publicacion)
+    this.http.get('http://localhost/apiRest/public/publicacion_detallada/'+this.id_publicacion)
     .map(response => response.json())
     .subscribe(data =>
       {

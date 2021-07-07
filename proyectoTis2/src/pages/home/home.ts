@@ -14,15 +14,18 @@ export class HomePage {
 
   publicacionesDes:any;
   id_publicacion:any;
+  estado: any;
+
 
   constructor(public navCtrl: NavController, public http: Http) {
-
+    var a;
     this.http.get('http://localhost/apiRest/public/publicacion')
     .map(response => response.json())
     .subscribe(data =>
       {
+        
         this.publicacionesDes = data;
-        console.log(data);
+        
       },
       err => {
         console.log("Oops!");

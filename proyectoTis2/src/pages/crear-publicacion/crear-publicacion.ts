@@ -70,9 +70,9 @@ export class CrearPublicacionPage {
   }
 
   crearPublicacion() {
-    var url = 'http://localhost/apiRest/public/publicacion/new';
+    var url = 'http://localhost/apiRest/public/publicacion_detallada/new';
     let postData = new FormData();
-
+    
     console.log("El nombre_publicacion es: " + this.nombre);
     console.log("La descripcion es: " + this.descripcion);
     console.log("El precio es: " + this.precio);
@@ -87,29 +87,43 @@ export class CrearPublicacionPage {
     console.log("El id de la region es: " + this.region + ". Y el nombre es: " + document.getElementById("regionID").innerText);
     console.log("El id de la comuna es: " + this.comuna + ". Y el nombre es: " + document.getElementById("comunaID").innerText);
 
-    postData.append('nombre_publicacion', this.nombre);
-    postData.append('descripcion_publicacion', this.descripcion);
-    postData.append('valor_publicacion', this.precio);
-    postData.append('direccion', this.ubicacion);
-    postData.append('telefono_contacto', this.telefono);
-    postData.append('email_contacto', this.correo);
-    postData.append('redes_sociales', this.rrss);
-    postData.append('calificacion_publicacion', '0'); //no sé cómo dejar lo de los likes xd
-    postData.append('tipo_publicacion', this.tipo_publicacion); //'producto','servicio','infraestructura'
-    postData.append('tipo_turismo', this.tipo_turismo); //'negocios','urbano','natural','gastronomico','aventura','ecologico','cultural','lujo','diversion','religioso','espacial'
-    postData.append('estado', 'pendiente');
-    postData.append('id_moderador', '1');
-    postData.append("region_publicacion", document.getElementById("regionID").innerText);
-    postData.append("comuna_publicacion", document.getElementById("comunaID").innerText);
-    this.data = this.http.post(url, postData);
 
-    this.data.subscribe((data) => {
-      console.log(data);
+    if('respuesta' in localStorage){        //si esta logeado
+      var token=JSON.parse(localStorage.getItem('respuesta'));
+      console.log(token);
+      
+      if(token.hasOwnProperty('data')){   //solo si hay datos entra
+        var id_oferente = token.data.id_usuario; 
+        postData.append('nombre_publicacion', this.nombre);
+        postData.append('descripcion_publicacion', this.descripcion);
+        postData.append('valor_publicacion', this.precio);
+        postData.append('direccion', this.ubicacion);
+        postData.append('telefono_contacto', this.telefono);
+        postData.append('email_contacto', this.correo);
+        postData.append('redes_sociales', this.rrss);
+        postData.append('calificacion_publicacion', '0'); //no sé cómo dejar lo de los likes xd
+        postData.append('tipo_publicacion', this.tipo_publicacion); //'producto','servicio','infraestructura'
+        postData.append('tipo_turismo', this.tipo_turismo); //'negocios','urbano','natural','gastronomico','aventura','ecologico','cultural','lujo','diversion','religioso','espacial'
+        postData.append('estado', 'pendiente');
+        postData.append('id_moderador', '1');
+        postData.append("region_publicacion", document.getElementById("regionID").innerText);
+        postData.append("comuna_publicacion", document.getElementById("comunaID").innerText);
+        postData.append('id_oferente',id_oferente);
+        this.data = this.http.post(url, postData);
 
-      this.mensajeToast('Publicación subida correctamente y en espera de aprobación.');
-      this.navCtrl.setRoot(HomePage);
-      //this.navCtrl.pop();
-    })
+        this.data.subscribe((data) => {
+          console.log(data);
+
+          this.mensajeToast('Publicación subida correctamente y en espera de aprobación.');
+          this.navCtrl.setRoot(HomePage);
+          //this.navCtrl.pop();
+        })
+      }
+    }
+
+    
+
+    
 
   }
 
