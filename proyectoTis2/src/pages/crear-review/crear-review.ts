@@ -23,7 +23,8 @@ export class CrearReviewPage {
   id_publicacion = this.navParams.get('valor');
   data_pub: Observable<any>;
   data_rev: Observable<any>;
-  usuario:any; 
+  usuario: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public toastCtrl: ToastController) {
 
     this.http.get('http://localhost/apiRest/public/publicacion/' + this.id_publicacion)
@@ -37,7 +38,7 @@ export class CrearReviewPage {
           console.log("Oops!");
         }
       );
-    
+
     //localStorage.clear(); //pa probar cuando no se ha logeado
     if ('respuesta' in localStorage) {
       var token = JSON.parse(localStorage.getItem('respuesta'));
