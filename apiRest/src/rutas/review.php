@@ -98,7 +98,8 @@ $app->get('/pro/{id_review}', function(Request $request, Response $response){
 
     if ($result->rowCount() > 0){
       $publicacion = $result->fetchAll(PDO::FETCH_OBJ);
-      echo json_encode($publicacion);
+      $publicacion =json_encode($publicacion);
+      echo '{"pro": ' .$publicacion . '}';
     }else {
       echo "No existen publicaciones en la BBDD con este ID.";
     }
@@ -121,7 +122,8 @@ $app->get('/contra/{id_review}', function(Request $request, Response $response){
 
     if ($result->rowCount() > 0){
       $publicacion = $result->fetchAll(PDO::FETCH_OBJ);
-      echo json_encode($publicacion);
+      $publicacion = json_encode($publicacion);
+      echo '{"contra": ' .$publicacion . '}';
     }else {
       echo "No existen publicaciones en la BBDD con este ID.";
     }

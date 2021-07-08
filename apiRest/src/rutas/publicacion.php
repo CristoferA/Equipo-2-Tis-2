@@ -18,7 +18,9 @@ $app->get('/publicacion', function (Request $request, Response $response){
         
         if($result -> rowCount() > 0){
             $publicaciones = $result -> fetchAll (PDO::FETCH_OBJ);
-            echo json_encode($publicaciones);
+            $publicaciones = json_encode($publicaciones);
+
+            echo '{"publicaciones": ' .$publicaciones . '}';
 
         }else{
             echo json_encode("No hay publicaciones aun!.");
