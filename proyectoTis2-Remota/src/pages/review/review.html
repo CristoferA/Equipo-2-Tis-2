@@ -1,0 +1,90 @@
+<!--
+  Generated template for the ReviewPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<div>
+  <ion-header>
+    <ion-navbar color="primary">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title *ngFor="let pub of publicacion">Reseñas de {{pub.nombre_publicacion}}
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+</div>
+
+<ion-content>
+
+  <div *ngIf="review" style="padding-top: 55px;">
+    <!-- <div *ngFor="let pub of publicacion"> No me acuerdo por qué puse esto pero funciona sin él-->
+    <ion-card *ngFor="let rev of review">
+      <ion-card-content>
+
+        <!-- Usuario -->
+        <b> {{rev.id_usuario}} </b>
+
+        <!-- Reseña -->
+        <p> {{rev.review}} </p>
+
+        <!-- Pros 
+        <div *ngFor="let pro of pros">
+          <p> {{pro.texto_pro}}</p>
+        </div>
+
+         Contras 
+        <div>
+          <p></p>
+        </div>-->
+
+      </ion-card-content>
+    </ion-card>
+    <!-- </div> -->
+  </div>
+
+  <div *ngIf="!review">
+    <p> Esta publicación no tiene reseñas. </p>
+  </div>
+
+  <!--
+   <div ng-switch on="rev.review" *ngFor="let rev of review">
+    <div ng-switch-when=>
+      <p> Esta publicación no tiene reseñas. </p>
+
+        Acá entra cuando la consulta SQL:
+          SELECT * FROM review JOIN publicacion USING(id_publicacion)
+        no arroja resultados.
+   
+    </div>
+    <div ng-switch-default style="padding-top: 15px;">
+      <ion-card>
+        <ion-card-content>
+
+          <p> (Nombre de usuario):</p>
+
+          <p> {{rev.review}} </p>
+
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+  -->
+</ion-content>
+
+<div *ngFor="let pub of publicacion">
+  <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="irCrearReview(pub.id_publicacion)">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</div>
+
+<!--<div>
+  <ion-footer>
+    <ion-toolbar>
+      <ion-title style="text-align: center;" (click)="irCrearReview(pub.id_publicacion)">Agregar Reseña</ion-title>
+    </ion-toolbar>
+  </ion-footer>
+</div> -->

@@ -1,0 +1,30 @@
+<ion-menu [content]="content" type="overlay" >
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content >
+  <img src="../assets/imgs/menu.jpg">
+  
+    <ion-list >
+      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        {{p.title}}
+      </button>
+      
+    </ion-list>
+
+    <div class="centrado" style="height: 300px;">
+      <ion-icon name="logo-facebook" style="zoom:2.0"></ion-icon>
+      <ion-icon name="logo-instagram" style="zoom:2.0"></ion-icon>
+      <ion-icon name="logo-twitter" style="zoom:2.0"></ion-icon>
+    </div>
+ 
+
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

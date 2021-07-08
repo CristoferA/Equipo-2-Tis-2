@@ -1,0 +1,51 @@
+<!--
+  Generated template for the ComentarioPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<div>
+  <ion-header>
+    <ion-navbar color="primary">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title *ngFor="let pub of publicacion">Comentarios de {{pub.nombre_publicacion}}
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+</div>
+
+<ion-content>
+
+  <div *ngIf="comentario" style="padding-top: 55px;">
+    <!-- <div *ngFor="let pub of publicacion"> No me acuerdo por qué puse esto pero funciona sin él-->
+    <ion-card *ngFor="let com of comentario">
+      <ion-card-content>
+
+        <!-- Usuario -->
+        <b> {{com.id_usuario}} </b>
+
+        <!-- Comentario -->
+        <p> {{com.comentario}} </p>
+
+        <a (click)="darLike()"> Me gusta </a>
+
+      </ion-card-content>
+    </ion-card>
+    <!-- </div> -->
+  </div>
+
+  <div *ngIf="!comentario">
+    <p> Esta publicación no tiene reseñas. </p>
+  </div>
+
+</ion-content>
+
+<div *ngFor="let pub of publicacion">
+  <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="irCrearComentario(pub.id_publicacion)">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</div>
