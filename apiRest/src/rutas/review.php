@@ -138,11 +138,11 @@ $app->get('/contra/{id_review}', function(Request $request, Response $response){
 $app->post('/pro/new', function(Request $request, Response $response){
   //$id_review = $request->getAttribute('id_review');
   $id_review = $request->getAtribute('id_review');
-  $texto = $request->getAtribute('texto');
+  $texto_pro = $request->getAtribute('texto_pro');
 
 
-  $sql= "INSERT INTO pro (id_review, texto) 
-  VALUES (:id_review, :texto)";
+  $sql= "INSERT INTO pro (id_review, texto_pro) 
+  VALUES (:id_review, :texto_pro)";
 
   try{
       $db = new db();
@@ -151,7 +151,7 @@ $app->post('/pro/new', function(Request $request, Response $response){
 
       //$result->bindParam(':id_review',$id_review);
       $result->bindParam(':id_review',$id_review);
-      $result->bindParam(':texto',$texto);
+      $result->bindParam(':texto_pro',$texto_pro);
       
       
 
@@ -170,11 +170,11 @@ $app->post('/pro/new', function(Request $request, Response $response){
 $app->post('/contra/new', function(Request $request, Response $response){
   //$id_review = $request->getAttribute('id_review');
   $id_review = $request->getAtribute('id_review');
-  $texto = $request->getAtribute('texto');
+  $texto_contra = $request->getAtribute('texto_contra');
 
 
   $sql= "INSERT INTO contra (id_review, texto) 
-  VALUES (:id_review, :texto)";
+  VALUES (:id_review, :texto_contra)";
 
   try{
       $db = new db();
@@ -183,7 +183,7 @@ $app->post('/contra/new', function(Request $request, Response $response){
 
       //$result->bindParam(':id_review',$id_review);
       $result->bindParam(':id_review',$id_review);
-      $result->bindParam(':texto',$texto);
+      $result->bindParam(':texto_contra',$texto_contra);
       
       
 
