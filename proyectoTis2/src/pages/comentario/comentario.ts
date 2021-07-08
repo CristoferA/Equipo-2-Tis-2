@@ -23,7 +23,7 @@ export class ComentarioPage {
   data_pub:Observable<any>;
   data_com:Observable<any>;
   data_likes:Observable<any>;
-  //likes = 0;
+  likes = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
 
@@ -63,11 +63,11 @@ export class ComentarioPage {
     this.navCtrl.push(CrearComentarioPage, {valor: id_publicacion});
   }
 
-  /*darLike(){
+  darLike(){
     this.likes = this.likes + 1;
     console.log(this.likes);
     return this.likes;
-  }*/
+  }
 
   /*darLike(){
     var url = 'http://localhost/apiRest/public/comentario/likes';
