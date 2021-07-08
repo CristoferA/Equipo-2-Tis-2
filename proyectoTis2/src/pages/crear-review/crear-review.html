@@ -10,18 +10,65 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title style="padding-right: 10px;" *ngFor="let pub of publicacion">Haciendo una reseña para
-      {{pub.nombre_publicacion}}
-    </ion-title>
+      {{pub.nombre_publicacion}} </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
+  <ion-list>
 
-  <ion-item>
-    <ion-textarea autoGrow required maxlength="5000" rows="10" placeholder="Escriba su reseña..." [(ngModel)]="review"></ion-textarea>
-  </ion-item>
+    <div id="reviews" style="padding-left: 10px; padding-right: 10px;">
+      <p>Escriba su reseña:</p>
+      <ion-item>
+        <ion-textarea autoGrow required maxlength="5000" rows="10" placeholder="Escriba su reseña..."
+          [(ngModel)]="review"></ion-textarea>
+      </ion-item>
+    </div>
 
-  <div style="text-align: center;">
+    <hr>
+
+    <div id="pros" style="padding-left: 10px; padding-right: 10px;">
+      <p>Escriba los pros:</p>
+      <ion-item>
+        <p>Pro 1:</p>
+        <ion-textarea autoGrow maxlength="100" rows="2" placeholder="Escriba un pro..."
+          [(ngModel)]="pro_1"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <p>Pro 2:</p>
+        <ion-textarea autoGrow maxlength="100" rows="2" placeholder="Escriba un pro..."
+          [(ngModel)]="pro_2"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <p>Pro 3:</p>
+        <ion-textarea autoGrow maxlength="100" rows="2" placeholder="Escriba un pro..."
+          [(ngModel)]="pro_3"></ion-textarea>
+      </ion-item>
+    </div>
+
+    <hr>
+
+    <div id="contras" style="padding-left: 10px; padding-right: 10px;">
+      <p>Escriba los contras:</p>
+      <ion-item>
+        <p>Contra 1:</p>
+        <ion-textarea autoGrow maxlength="100" rows="2" placeholder="Escriba un contra..."
+          [(ngModel)]="contra_1"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <p>Contra 2:</p>
+        <ion-textarea autoGrow maxlength="100" rows="2" placeholder="Escriba un contra..."
+          [(ngModel)]="contra_2"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <p>Contra 3:</p>
+        <ion-textarea autoGrow maxlength="100" rows="2" placeholder="Escriba un contra..."
+          [(ngModel)]="contra_3"></ion-textarea>
+      </ion-item>
+    </div>
+  </ion-list>
+
+  <div style="text-align: center; padding-bottom: 20px;">
     <button ion-button round (click)="crearReview()">Enviar</button>
   </div>
 </ion-content>
