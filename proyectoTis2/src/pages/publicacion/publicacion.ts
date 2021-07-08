@@ -4,8 +4,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
+
 import { ReviewPage } from '../review/review';
 import { ComentarioPage } from '../comentario/comentario';
+import { PublicacionesOferentePage } from '../publicaciones-oferente/publicaciones-oferente';
+
+
 
 @IonicPage()
 @Component({
@@ -18,6 +22,7 @@ export class PublicacionPage {
   id_publicacion = this.navParams.get('valor');
   data:Observable<any>;
   id_review:any;
+  oferente:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
 
@@ -47,5 +52,12 @@ export class PublicacionPage {
   irComentario(id_publicacion){
     this.navCtrl.push(ComentarioPage, {valor: id_publicacion});
   }
+
+  verPubUsuario(oferente){
+    this.navCtrl.push(PublicacionesOferentePage, {valor: oferente});
+    console.log(oferente);
+
+  }
+
 
 }

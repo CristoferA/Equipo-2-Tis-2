@@ -4,7 +4,7 @@
       <ion-icon name="menu" style="zoom:1.3;"></ion-icon>
     </button>
 
-    <ion-title text-align="center">Busqueda</ion-title>
+    <ion-title *ngFor="let pub of publicaciones | slice:0:1; let first = first;" text-align="center" >{{pub.nombre_usuario}}</ion-title>
 
 
   </ion-navbar>
@@ -32,7 +32,7 @@
   </ion-row>  
   <hr>
   <!-- Muestra de publicaciones -->
-  <ion-card *ngFor="let pub of publicacionesBus" (click)="irPublicacion(pub.id_publicacion)">
+  <ion-card *ngFor="let pub of publicaciones" (click)="irPublicacion(pub.id_publicacion)">
 
     <img src="../assets/imgs/paine.jpg">
 

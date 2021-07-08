@@ -9,6 +9,7 @@ import { ListPage } from '../pages/list/list';
 import { PublicacionPage } from '../pages/publicacion/publicacion';
 import { FiltroPage } from '../pages/filtro/filtro';
 import { BusquedaPage } from '../pages/busqueda/busqueda';
+import { PublicacionesOferentePage } from '../pages/publicaciones-oferente/publicaciones-oferente';
 import { LoginPage } from '../pages/login/login';
 import { CrearPublicacionPage } from '../pages/crear-publicacion/crear-publicacion';
 import { RegistroPage } from '../pages/registro/registro';
@@ -32,6 +33,7 @@ import { OferenteCheckPage } from '../pages/oferente-check/oferente-check';
     PublicacionPage,
     FiltroPage,
     BusquedaPage,
+    PublicacionesOferentePage,
     LoginPage,
     CrearPublicacionPage,
     RegistroPage,
@@ -58,6 +60,7 @@ import { OferenteCheckPage } from '../pages/oferente-check/oferente-check';
     PublicacionPage,
     FiltroPage,
     BusquedaPage,
+    PublicacionesOferentePage,
     LoginPage,
     CrearPublicacionPage,
     RegistroPage,

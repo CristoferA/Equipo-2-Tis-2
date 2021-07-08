@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 08, 2021 at 02:41 AM
+-- Generation Time: Jul 08, 2021 at 04:20 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -156,8 +156,8 @@ CREATE TABLE `publicacion` (
 --
 
 INSERT INTO `publicacion` (`id_publicacion`, `nombre_publicacion`, `descripcion_publicacion`, `valor_publicacion`, `region_publicacion`, `tipo_publicacion`, `estado`, `tipo_turismo`, `email_contacto`, `telefono_contacto`, `direccion`, `redes_sociales`, `comuna_publicacion`, `calificacion_publicacion`, `id_moderador`) VALUES
-(4, 'Torres del paine', 'Estas son las torres del paine, un lugar turistico muy turistiable del sur de chile', 0, 'Magallanes y la Antartica ', 'servicio', 'aprobado', 'natural', 'paine@gmail.com', 912345678, 'Magallanes y la Antartica Chilena', 'paine', 'paine', 10, '1'),
-(5, 'Ahu Tongariki', 'Este es un lugar donde se puede hacer turismo.', 0, 'Isla de pascua Valparaiso', 'servicio', 'aprobado', 'cultural', 'pascua@gmail.com', 912345678, 'rapa nui 123', 'Isla_pascua', 'Rapa nui', 10, '1'),
+(4, 'Torres del paine', 'Estas son las torres del paine, un lugar turistico muy turistiable del sur de chile', 0, 'Magallanes y de la Antártica Chilena', 'servicio', 'aprobado', 'natural', 'paine@gmail.com', 912345678, 'Magallanes y la Antartica Chilena', 'Paine', 'Torres del Paine', 10, '1'),
+(5, 'Ahu Tongariki', 'Este es un lugar donde se puede hacer turismo.', 0, 'Valparaíso', 'servicio', 'aprobado', 'cultural', 'pascua@gmail.com', 912345678, 'rapa nui 123', 'Isla de Pascua', 'Isla de Pascua', 10, '1'),
 (6, 'Termas de Chillan ', 'Las termas de chillan el mejor lugar para pasar el invierno!', 50000, 'Ñuble', 'infraestructura', 'aprobado', 'natural', 'termito@gmail.com', 978781717, 'Las trancas', 'facebook', 'Pinto', 0, '1');
 
 -- --------------------------------------------------------
