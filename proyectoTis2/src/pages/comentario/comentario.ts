@@ -22,6 +22,8 @@ export class ComentarioPage {
   id_publicacion = this.navParams.get('valor');
   data_pub:Observable<any>;
   data_com:Observable<any>;
+  data_likes:Observable<any>;
+  //likes = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
 
@@ -61,4 +63,25 @@ export class ComentarioPage {
     this.navCtrl.push(CrearComentarioPage, {valor: id_publicacion});
   }
 
+  /*darLike(){
+    this.likes = this.likes + 1;
+    console.log(this.likes);
+    return this.likes;
+  }*/
+
+  /*darLike(){
+    var url = 'http://localhost/apiRest/public/comentario/likes';
+    let postData = new FormData();
+    let num = this.likes;
+    var stringForm = num.toString();
+
+    console.log("this.likes es: " + stringForm);
+
+    postData.append('likes',stringForm+1);
+
+    this.data_likes = this.http.post(url, postData);
+    this.data_likes.subscribe((data_likes) => {
+      console.log(data_likes);
+    })
+  }*/
 }

@@ -20,10 +20,6 @@ $app->get('/publicacion', function (Request $request, Response $response){
             $publicaciones = $result -> fetchAll (PDO::FETCH_OBJ);
             echo json_encode($publicaciones);
 
-            /*
-            echo '{"publicaciones": ' .$publicaciones . '}';
-            */
-
         }else{
             echo json_encode("No hay publicaciones aun!.");
         }

@@ -18,23 +18,33 @@
 
 <ion-content>
 
-  <div *ngIf ="review" style="padding-top: 55px;">
+  <div *ngIf="review" style="padding-top: 55px;">
     <!-- <div *ngFor="let pub of publicacion"> No me acuerdo por qué puse esto pero funciona sin él-->
-      <ion-card *ngFor="let rev of review">
-        <ion-card-content>
+    <ion-card *ngFor="let rev of review">
+      <ion-card-content>
 
-          <!-- Usuario -->
-          <p> {{rev.id_usuario}} </p>
+        <!-- Usuario -->
+        <b> {{rev.id_usuario}} </b>
 
-          <!-- Reseña -->
-          <p> {{rev.review}} </p>
+        <!-- Reseña -->
+        <p> {{rev.review}} </p>
 
-        </ion-card-content>
-      </ion-card>
+        <!-- Pros 
+        <div *ngFor="let pro of pros">
+          <p> {{pro.texto_pro}}</p>
+        </div>
+
+         Contras 
+        <div>
+          <p></p>
+        </div>-->
+
+      </ion-card-content>
+    </ion-card>
     <!-- </div> -->
   </div>
 
-  <div *ngIf ="!review">
+  <div *ngIf="!review">
     <p> Esta publicación no tiene reseñas. </p>
   </div>
 
@@ -65,7 +75,9 @@
 
 <div *ngFor="let pub of publicacion">
   <ion-fab right bottom>
-    <button ion-fab color="primary" (click)="irCrearReview(pub.id_publicacion)"><ion-icon name="add"></ion-icon></button>
+    <button ion-fab color="primary" (click)="irCrearReview(pub.id_publicacion)">
+      <ion-icon name="add"></ion-icon>
+    </button>
   </ion-fab>
 </div>
 
