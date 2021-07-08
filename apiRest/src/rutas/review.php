@@ -64,11 +64,56 @@ $app->post('/review/new', function(Request $request, Response $response){
 // GET Lista de una publicacion especifica por ID 
 $app->get('/review/{id_publicacion}', function(Request $request, Response $response){
   $id_publicacion = $request->getAttribute('id_publicacion');
-  $sql = "SELECT * FROM review, usuario, pro, contra 
+  $sql = "SELECT * FROM review, usuario
   WHERE id_publicacion = '$id_publicacion' 
-  AND usuario.id_usuario = review.id_usuario
-  AND review.id_review = pro.id_review
-  AND review.id_review = contra.id_review";
+  AND usuario.id_usuario = review.id_usuario";
+  try{
+    $db = new db();
+    $db = $db->conectionDB();
+    $result = $db->query($sql);
+
+    if ($result->rowCount() > 0){
+      $publicacion = $result->fetchAll(PDO::FETCH_OBJ);
+      echo json_encode($publicacion);
+    }else {
+      echo "No existen publicaciones en la BBDD con este ID.";
+    }
+    $result = null;
+    $db = null;
+  }catch(PDOException $e){
+    echo '{"error" : {"text":'.$e->getMessage().'}';
+  }
+}); 
+
+
+// GET Lista de una publicacion especifica por ID 
+$app->get('/pro/{id_review}', function(Request $request, Response $response){
+  $id_review = $request->getAttribute('id_review');
+  $sql = "SELECT * FROM pro
+  WHERE id_review = '$id_review'";
+  try{
+    $db = new db();
+    $db = $db->conectionDB();
+    $result = $db->query($sql);
+
+    if ($result->rowCount() > 0){
+      $publicacion = $result->fetchAll(PDO::FETCH_OBJ);
+      echo json_encode($publicacion);
+    }else {
+      echo "No existen publicaciones en la BBDD con este ID.";
+    }
+    $result = null;
+    $db = null;
+  }catch(PDOException $e){
+    echo '{"error" : {"text":'.$e->getMessage().'}';
+  }
+}); 
+
+// GET Lista de una publicacion especifica por ID 
+$app->get('/contra/{id_review}', function(Request $request, Response $response){
+  $id_review = $request->getAttribute('id_review');
+  $sql = "SELECT * FROM contra
+  WHERE id_review = '$id_review'";
   try{
     $db = new db();
     $db = $db->conectionDB();
