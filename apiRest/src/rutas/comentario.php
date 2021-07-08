@@ -38,8 +38,8 @@ $app->post('/comentario/new', function(Request $request, Response $response){
     $likes = $request -> getParam('likes');
        
 
-    $sql= "INSERT INTO comentario (comentario, id_publicacion, id_usuario) 
-    VALUES (:comentario, :id_publicacion, :id_usuario)";
+    $sql= "INSERT INTO comentario (comentario, id_publicacion, id_usuario, likes) 
+    VALUES (:comentario, :id_publicacion, :id_usuario ,:likes )";
 
     try{
         $db = new db();
@@ -50,7 +50,7 @@ $app->post('/comentario/new', function(Request $request, Response $response){
         $result->bindParam(':comentario',$comentario);
         $result->bindParam(':id_publicacion',$id_publicacion);
         $result->bindParam(':id_usuario',$id_usuario);
-        $result->bindParam(':id_usuario',$likes);
+        $result->bindParam(':likes',$likes);
     
         
 
@@ -69,7 +69,7 @@ $app->post('/comentario/like', function(Request $request, Response $response){
     $id_comentario = $request->getAttribute('id_comentario');
     $likes = $request -> getParam('likes');  
        
-    $sql = "UPDATE comentario SET likes: likes WHERE id_comentario = '$id_comentario'";
+    $sql = "UPDATE comentario SET likes: likes+1 WHERE id_comentario = '$id_comentario'";
 
     /*$sql= "INSERT INTO comentario (comentario, id_publicacion, id_usuario) 
     VALUES (:comentario, :id_publicacion, :id_usuario)";*/
