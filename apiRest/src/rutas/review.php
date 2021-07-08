@@ -52,11 +52,13 @@ $app->post('/review/new', function(Request $request, Response $response){
         
 
         $result->execute();
-        $data=$result->fetch(PDO::FETCH_OBJ);  
+        
+        echo "Review Guarda";
+        /*$data=$result->fetch(PDO::FETCH_OBJ);  
         $data = json_encode($data);
 
        
-        echo '{"data": ' .$data . '}';    
+        echo '{"data": ' .$data . '}';  */  
         
         $result=null;
         $db=null;
