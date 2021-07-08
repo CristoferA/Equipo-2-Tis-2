@@ -35,7 +35,7 @@ $app->get('/usuario', function (Request $request, Response $response){
 // GET Lista de un usuario especifica por ID 
 $app->get('/usuario/{id_usuario}', function(Request $request, Response $response){
     $id_usuario = $request->getAttribute('id_usuario');
-    $sql = "SELECT * FROM usuario WHERE id_usuario = $id_usuario";
+    $sql = "SELECT * FROM usuario WHERE id_usuario = '$id_usuario'";
     try{
       $db = new db();
       $db = $db->conectionDB();
