@@ -1,3 +1,4 @@
+
 <!--
   Generated template for the CuentaPage page.
 
@@ -14,13 +15,14 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding center text-center>
+<ion-content padding center text-center >
+  
   <div style="display: flex; justify-content: center;">
     <ion-avatar>
       <img src="../assets/imgs/avatar.png" style="height:125px">
     </ion-avatar>
   </div>
-  <h1 style="display: flex; justify-content: center;">Nombre Apellido</h1>
+  <h1 style="display: flex; justify-content: center;" *ngFor="let cue of cuenta">{{cue.nombre_usuario}}</h1>
 
   <button ion-button type="submit" round (click)="cerrar()">Cerrar Sesión</button>
 
@@ -37,25 +39,20 @@
     </ion-segment>
   </ion-toolbar>
 
-  <ion-list>
+  <ion-list *ngFor="let cue of cuenta">
 
-    <ion-item>
-      <ion-label stacked>Nombre Usuario</ion-label>
+    <ion-item >
+      <ion-label stacked>{{cue.id_usuario}}</ion-label>
       <ion-input type="text"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>Nombre</ion-label>
+      <ion-label stacked>{{cue.nombre_usuario}}</ion-label>
       <ion-input type="text"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>Correo</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked>Teléfono</ion-label>
+      <ion-label stacked>{{cue.email_usuario}}</ion-label>
       <ion-input type="text"></ion-input>
     </ion-item>
 
