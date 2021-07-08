@@ -5,6 +5,7 @@ import { HomePage } from '../home/home';
 import { Observable } from 'rxjs';
 import { Http } from '@angular/http';
 import { LoginPage } from '../login/login';
+import { MisPublicacionesGuardadasPage } from '../mis-publicaciones-guardadas/mis-publicaciones-guardadas';
 
 @IonicPage()
 @Component({
@@ -66,6 +67,10 @@ export class CuentaPage {
   cerrar(){
       localStorage.clear();
       this.irHome();
+  }
+
+  PublicacionesGuardadas(){
+    this.navCtrl.push(MisPublicacionesGuardadasPage);
   }
 
 }

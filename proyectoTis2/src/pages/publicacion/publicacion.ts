@@ -10,7 +10,6 @@ import { ComentarioPage } from '../comentario/comentario';
 import { PublicacionesOferentePage } from '../publicaciones-oferente/publicaciones-oferente';
 
 
-
 @IonicPage()
 @Component({
   selector: 'page-publicacion',
@@ -23,6 +22,7 @@ export class PublicacionPage {
   data:Observable<any>;
   id_review:any;
   oferente:any;
+  
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
 
@@ -56,6 +56,30 @@ export class PublicacionPage {
   verPubUsuario(oferente){
     this.navCtrl.push(PublicacionesOferentePage, {valor: oferente});
     console.log(oferente);
+
+  }
+
+  irPublicacionesGuardadas(){
+    let postData = new FormData();
+    
+    if('respuesta' in localStorage){
+    var respuesta = JSON.parse(localStorage.getItem('respuesta'));
+    var id_usuario = respuesta.data.id_usuario;
+    console.log(id_usuario);  
+
+    var url =  'http://localhost/apiRest/public/guardar_publicacion/new';
+    
+    postData.append('id_usuario', id_usuario);
+    postData.append('id_publicacion', this.id_publicacion);
+    this.data = this.http.post(url, postData);
+    this.data.subscribe((data) => {
+      console.log(data);
+      this.navCtrl.pop();
+
+    }), err => {
+      console.log("Oops!");
+    }
+  }
 
   }
 

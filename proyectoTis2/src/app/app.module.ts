@@ -24,6 +24,7 @@ import { CrearComentarioPage } from '../pages/crear-comentario/crear-comentario'
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { OferenteCheckPage } from '../pages/oferente-check/oferente-check';
+import { MisPublicacionesGuardadasPage } from '../pages/mis-publicaciones-guardadas/mis-publicaciones-guardadas';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { OferenteCheckPage } from '../pages/oferente-check/oferente-check';
     CrearPublicacionCheckPage,
     OferenteCheckPage,
     ComentarioPage,
-    CrearComentarioPage
+    CrearComentarioPage,
+    MisPublicacionesGuardadasPage
   ],
   imports: [
     BrowserModule,
@@ -71,7 +73,8 @@ import { OferenteCheckPage } from '../pages/oferente-check/oferente-check';
     CrearPublicacionCheckPage,
     OferenteCheckPage,
     ComentarioPage,
-    CrearComentarioPage
+    CrearComentarioPage,
+    MisPublicacionesGuardadasPage
   ],
   providers: [
     StatusBar,
