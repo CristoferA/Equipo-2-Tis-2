@@ -52,7 +52,12 @@ $app->post('/review/new', function(Request $request, Response $response){
         
 
         $result->execute();
-        echo json_encode("review Guardada");
+        $data=$result->fetch(PDO::FETCH_OBJ);  
+        $data = json_encode($data);
+
+       
+        echo '{"data": ' .$data . '}';    
+        
         $result=null;
         $db=null;
     }catch(PDOException $e){
