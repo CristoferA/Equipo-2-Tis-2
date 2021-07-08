@@ -64,9 +64,11 @@ $app->post('/review/new', function(Request $request, Response $response){
 // GET Lista de una publicacion especifica por ID 
 $app->get('/review/{id_publicacion}', function(Request $request, Response $response){
   $id_publicacion = $request->getAttribute('id_publicacion');
-  $sql = "SELECT * FROM review, usuario 
+  $sql = "SELECT * FROM review, usuario, pro, contra 
   WHERE id_publicacion = '$id_publicacion' 
-  AND usuario.id_usuario = review.id_usuario";
+  AND usuario.id_usuario = review.id_usuario
+  AND review.id_review = pro.id_review
+  AND review.id_review = contra.id_review";
   try{
     $db = new db();
     $db = $db->conectionDB();
@@ -84,3 +86,66 @@ $app->get('/review/{id_publicacion}', function(Request $request, Response $respo
     echo '{"error" : {"text":'.$e->getMessage().'}';
   }
 }); 
+
+
+$app->post('/pro/new', function(Request $request, Response $response){
+  //$id_review = $request->getAttribute('id_review');
+  $id_review = $request->getAtribute('id_review');
+  $texto = $request->getAtribute('texto');
+
+
+  $sql= "INSERT INTO pro (id_review, texto) 
+  VALUES (:id_review, :texto)";
+
+  try{
+      $db = new db();
+      $db = $db -> conectionDB();
+      $result = $db -> prepare ($sql);
+
+      //$result->bindParam(':id_review',$id_review);
+      $result->bindParam(':id_review',$id_review);
+      $result->bindParam(':texto',$texto);
+      
+      
+
+      $result->execute();
+      echo json_encode("review Guardada");
+      $result=null;
+      $db=null;
+  }catch(PDOException $e){
+      echo '{"error" : {"text":'.$e->getMessage().'}'; 
+  }
+
+});
+
+
+
+$app->post('/contra/new', function(Request $request, Response $response){
+  //$id_review = $request->getAttribute('id_review');
+  $id_review = $request->getAtribute('id_review');
+  $texto = $request->getAtribute('texto');
+
+
+  $sql= "INSERT INTO contra (id_review, texto) 
+  VALUES (:id_review, :texto)";
+
+  try{
+      $db = new db();
+      $db = $db -> conectionDB();
+      $result = $db -> prepare ($sql);
+
+      //$result->bindParam(':id_review',$id_review);
+      $result->bindParam(':id_review',$id_review);
+      $result->bindParam(':texto',$texto);
+      
+      
+
+      $result->execute();
+      echo json_encode("review Guardada");
+      $result=null;
+      $db=null;
+  }catch(PDOException $e){
+      echo '{"error" : {"text":'.$e->getMessage().'}'; 
+  }
+
+});
