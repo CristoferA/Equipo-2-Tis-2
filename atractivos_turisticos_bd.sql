@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 07, 2021 at 10:39 PM
+-- Generation Time: Jul 08, 2021 at 02:41 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -46,6 +46,17 @@ CREATE TABLE `contra` (
   `id_contra` int(11) NOT NULL,
   `id_review` int(11) NOT NULL,
   `texto` varchar(100) CHARACTER SET utf8mb4 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `guarda`
+--
+
+CREATE TABLE `guarda` (
+  `id_usuario` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+  `id_publicacion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -112,7 +123,9 @@ CREATE TABLE `publica` (
 --
 
 INSERT INTO `publica` (`id_oferente`, `id_publicacion`) VALUES
-('1', 4);
+('1', 4),
+('abismal20', 5),
+('abismal20', 6);
 
 -- --------------------------------------------------------
 
@@ -144,7 +157,8 @@ CREATE TABLE `publicacion` (
 
 INSERT INTO `publicacion` (`id_publicacion`, `nombre_publicacion`, `descripcion_publicacion`, `valor_publicacion`, `region_publicacion`, `tipo_publicacion`, `estado`, `tipo_turismo`, `email_contacto`, `telefono_contacto`, `direccion`, `redes_sociales`, `comuna_publicacion`, `calificacion_publicacion`, `id_moderador`) VALUES
 (4, 'Torres del paine', 'Estas son las torres del paine, un lugar turistico muy turistiable del sur de chile', 0, 'Magallanes y la Antartica ', 'servicio', 'aprobado', 'natural', 'paine@gmail.com', 912345678, 'Magallanes y la Antartica Chilena', 'paine', 'paine', 10, '1'),
-(5, 'Ahu Tongariki', 'Este es un lugar donde se puede hacer turismo.', 0, 'Isla de pascua Valparaiso', 'servicio', 'aprobado', 'cultural', 'pascua@gmail.com', 912345678, 'rapa nui 123', 'Isla_pascua', 'Rapa nui', 10, '1');
+(5, 'Ahu Tongariki', 'Este es un lugar donde se puede hacer turismo.', 0, 'Isla de pascua Valparaiso', 'servicio', 'aprobado', 'cultural', 'pascua@gmail.com', 912345678, 'rapa nui 123', 'Isla_pascua', 'Rapa nui', 10, '1'),
+(6, 'Termas de Chillan ', 'Las termas de chillan el mejor lugar para pasar el invierno!', 50000, 'Ñuble', 'infraestructura', 'aprobado', 'natural', 'termito@gmail.com', 978781717, 'Las trancas', 'facebook', 'Pinto', 0, '1');
 
 -- --------------------------------------------------------
 
@@ -221,6 +235,13 @@ ALTER TABLE `contra`
   ADD KEY `contra_review_FK` (`id_review`);
 
 --
+-- Indexes for table `guarda`
+--
+ALTER TABLE `guarda`
+  ADD PRIMARY KEY (`id_usuario`,`id_publicacion`),
+  ADD KEY `guarda_publicacion` (`id_publicacion`);
+
+--
 -- Indexes for table `moderador`
 --
 ALTER TABLE `moderador`
@@ -293,7 +314,7 @@ ALTER TABLE `pro`
 -- AUTO_INCREMENT for table `publicacion`
 --
 ALTER TABLE `publicacion`
-  MODIFY `id_publicacion` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_publicacion` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `review`
@@ -317,6 +338,13 @@ ALTER TABLE `comentario`
 --
 ALTER TABLE `contra`
   ADD CONSTRAINT `contra_review_FK` FOREIGN KEY (`id_review`) REFERENCES `review` (`id_review`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `guarda`
+--
+ALTER TABLE `guarda`
+  ADD CONSTRAINT `guarda_publicacion` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id_publicacion`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `usuario_guarda` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `moderador`
