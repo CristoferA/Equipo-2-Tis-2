@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { ReviewPage } from '../review/review';
 import { ComentarioPage } from '../comentario/comentario';
 import { PublicacionesOferentePage } from '../publicaciones-oferente/publicaciones-oferente';
-
+import { ToastController } from 'ionic-angular';
 
 
 @IonicPage()
@@ -23,8 +23,9 @@ export class PublicacionPage {
   data:Observable<any>;
   id_review:any;
   oferente:any;
+  
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl:ToastController) {
 
     this.http.get('http://localhost/apiRest/public/publicacion_detallada/'+this.id_publicacion)
     .map(response => response.json())
@@ -60,4 +61,42 @@ export class PublicacionPage {
   }
 
 
+
+  irPublicacionesGuardadas(){
+    let postData = new FormData();
+    
+    if('respuesta' in localStorage){
+    var respuesta = JSON.parse(localStorage.getItem('respuesta'));
+    var id_usuario = respuesta.data.id_usuario;
+    console.log(id_usuario);  
+
+    var url =  'http://localhost/apiRest/public/guardar_publicacion/new';
+    
+    postData.append('id_usuario', id_usuario);
+    postData.append('id_publicacion', this.id_publicacion);
+    this.data = this.http.post(url, postData);
+    this.data.subscribe((data) => {
+      console.log(data);
+      this.navCtrl.pop();
+
+    }), err => {
+      console.log("Oops!");
+    }
+  }else{
+
+    this.presentToast("Para guardar debes iniciar sesion");
+  }
+
+  }
+
+  presentToast(msg: string){
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 2000,
+    });
+    toast.present();
+  }
+
+
 }
+

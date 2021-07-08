@@ -30,12 +30,15 @@
     </ion-item>
   </ion-card>
 
+  <button ion-button type="submit"(click)="irPublicacionesGuardadas()" style="float:right;"><ion-icon name="md-bookmark" ></ion-icon></button>
+
   <ion-grid margin-horizontal>
+    
     <ion-row>
       <h3>Descripción</h3>
     </ion-row>
     <ion-row>
-      <p style="padding-right: 15px;">{{pub.descripcion_publicacion}}</p>
+      <p>{{pub.descripcion_publicacion}}</p>
     </ion-row>
   </ion-grid>
 
