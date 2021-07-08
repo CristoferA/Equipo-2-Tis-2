@@ -22,6 +22,7 @@ export class CrearComentarioPage {
   publicacion:any;
   comentario:any;
   usuario:any;
+  likes:any;
   id_publicacion = this.navParams.get('valor');
   data_pub:Observable<any>;
   data_comment:Observable<any>;
@@ -74,15 +75,20 @@ export class CrearComentarioPage {
   }
   crearComentario() {
     var url = 'http://localhost/apiRest/public/comentario/new';
+    let num = 0;
+    var stringForm = num.toString();
     let postData = new FormData();
 
     console.log("El id_publicacion es: " + this.id_publicacion);
     console.log("El comentario es: " + this.comentario);
     console.log("El usuario es: " + this.usuario);
+    console.log("this.likes es: " + stringForm);
 
     postData.append('id_publicacion', this.id_publicacion);
     postData.append('comentario', this.comentario);
     postData.append('id_usuario', this.usuario);
+    postData.append('likes', stringForm);
+
     this.data_comment = this.http.post(url, postData);
 
     this.data_comment.subscribe((data_comment) => {
