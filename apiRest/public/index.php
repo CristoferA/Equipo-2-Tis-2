@@ -29,6 +29,7 @@ require '../src/rutas/usuario.php';
 require '../src/rutas/login.php';
 require '../src/rutas/review.php';
 require '../src/rutas/comentario.php';
+require '../src/rutas/guardar.php';
 
 
 $app->run();
