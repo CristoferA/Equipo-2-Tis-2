@@ -35,7 +35,7 @@ $app->post('/comentario/new', function(Request $request, Response $response){
     $comentario = $request->getParam('comentario');
     $id_publicacion = $request->getParam('id_publicacion');    
     $id_usuario = $request->getParam('id_usuario');    
-    $like = $request -> getParam('like');
+    $likes = $request -> getParam('likes');
        
 
     $sql= "INSERT INTO comentario (comentario, id_publicacion, id_usuario) 
@@ -50,6 +50,7 @@ $app->post('/comentario/new', function(Request $request, Response $response){
         $result->bindParam(':comentario',$comentario);
         $result->bindParam(':id_publicacion',$id_publicacion);
         $result->bindParam(':id_usuario',$id_usuario);
+        $result->bindParam(':id_usuario',$likes);
     
         
 

@@ -150,3 +150,41 @@ $app->delete('/usuario/delete/{usuario}', function(Request $request, Response $r
     echo '{"error" : {"text":'.$e->getMessage().'}';
   }
 });
+
+
+
+$app->get('/usuario_publicacion/{id_usuario}', function (Request $request, Response $response){
+    $id_usuario = $request->getAttribute('id_usuario');
+
+
+    $sql = "SELECT * FROM  publicacion, publica, oferente, usuario  
+    WHERE usuario.id_usuario='$id_usuario' 
+    AND usuario.id_usuario = oferente.usuario
+    AND oferente.usuario = publica.id_oferente
+    AND publica.id_publicacion = publicacion.id_publicacion";
+
+    
+    /*$sql = "SELECT * FROM publicacion, publica, oferente, usuario 
+    WHERE publicacion.id_publicacion = '$id_publicacion'
+    AND publicacion.id_publicacion = publica.id_publicacion
+    AND publica.id_oferente = oferente.usuario
+    AND oferente.usuario = usuario.id_usuario";*/
+    try {
+        $db = new db();
+        $db = $db -> conectionDB();
+        $result = $db -> query($sql);
+        
+        if($result -> rowCount() > 0){
+            $usuarios = $result -> fetchAll (PDO::FETCH_OBJ);
+            echo json_encode($usuarios);
+
+        }else{
+            echo json_encode("Este usuario no tiene publicaciones publicadas!.");
+        }
+        $result = null;
+        $db = null;
+
+    }catch(PDOException $e){
+        echo '{"error" : {"texto":'.$e->getMessage().'}';
+    }
+}); 
