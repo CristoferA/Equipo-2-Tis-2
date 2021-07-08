@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { ReviewPage } from '../review/review';
 import { ComentarioPage } from '../comentario/comentario';
 import { PublicacionesOferentePage } from '../publicaciones-oferente/publicaciones-oferente';
+import { ToastController } from 'ionic-angular';
 
 
 @IonicPage()
@@ -24,7 +25,7 @@ export class PublicacionPage {
   oferente:any;
   
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl:ToastController) {
 
     this.http.get('http://localhost/apiRest/public/publicacion_detallada/'+this.id_publicacion)
     .map(response => response.json())
@@ -59,6 +60,8 @@ export class PublicacionPage {
 
   }
 
+
+
   irPublicacionesGuardadas(){
     let postData = new FormData();
     
@@ -79,9 +82,21 @@ export class PublicacionPage {
     }), err => {
       console.log("Oops!");
     }
+  }else{
+
+    this.presentToast("Para guardar debes iniciar sesion");
   }
 
+  }
+
+  presentToast(msg: string){
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 2000,
+    });
+    toast.present();
   }
 
 
 }
+
