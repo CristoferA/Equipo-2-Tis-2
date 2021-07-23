@@ -18,7 +18,7 @@ export class HomePage {
 
 
   constructor(public navCtrl: NavController, public http: Http) {
-    var a;
+    
     this.http.get('http://localhost/apiRest/public/publicacion')
     .map(response => response.json())
     .subscribe(data =>
@@ -41,5 +41,8 @@ export class HomePage {
   irFiltro(){
     //this.navCtrl.setRoot(FiltroPage);
     this.navCtrl.push(FiltroPage);
+  }
+  irOrdenar(){
+    
   }
 }

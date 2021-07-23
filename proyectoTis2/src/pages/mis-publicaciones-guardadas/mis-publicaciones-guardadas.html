@@ -11,7 +11,9 @@
 </ion-header>
 
 <ion-content padding>
+  <ng-container *ngIf= "publicacionesGuardadas?.length; else nopub"> 
 
+  
   <ion-card *ngFor="let pub of publicacionesGuardadas" (click)="irPublicacion(pub.id_publicacion)">
     
     <img src="../assets/imgs/paine.jpg">
@@ -43,5 +45,10 @@
     </ion-row>
  
   </ion-card>
+  </ng-container> 
+  <ng-template #nopub>
+    <p>NO TIENES PUBLICACIONES GUARDADAS</p>
+  </ng-template>
 
+  
 </ion-content>
