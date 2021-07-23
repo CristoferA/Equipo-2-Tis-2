@@ -10,7 +10,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 $app->get('/publicacion', function (Request $request, Response $response){
     
     
-    $sql = "SELECT * FROM publicacion";
+    $sql = "SELECT * FROM publicacion WHERE estado='aprobado'";
     try {
         $db = new db();
         $db = $db -> conectionDB();

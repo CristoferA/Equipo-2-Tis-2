@@ -66,7 +66,8 @@ $app->get('/review/{id_publicacion}', function(Request $request, Response $respo
   $id_publicacion = $request->getAttribute('id_publicacion');
   $sql = "SELECT * FROM review, usuario 
   WHERE id_publicacion = '$id_publicacion' 
-  AND usuario.id_usuario = review.id_usuario";
+  AND usuario.id_usuario = review.id_usuario
+  AND review.estado='aprobado'";
   try{
     $db = new db();
     $db = $db->conectionDB();

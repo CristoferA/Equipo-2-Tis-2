@@ -161,7 +161,8 @@ $app->get('/usuario_publicacion/{id_usuario}', function (Request $request, Respo
     WHERE usuario.id_usuario='$id_usuario' 
     AND usuario.id_usuario = oferente.usuario
     AND oferente.usuario = publica.id_oferente
-    AND publica.id_publicacion = publicacion.id_publicacion";
+    AND publica.id_publicacion = publicacion.id_publicacion
+    AND publicacion.estado= 'aprobado'";
 
     
     /*$sql = "SELECT * FROM publicacion, publica, oferente, usuario 

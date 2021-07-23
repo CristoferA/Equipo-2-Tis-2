@@ -20,7 +20,7 @@ export class MisPublicacionesGuardadasPage {
   
   data:Observable<any>;
   id_usuario:any;
-  publicacionesGuardadas:any;
+  publicacionesGuardadas: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
     
@@ -32,8 +32,11 @@ export class MisPublicacionesGuardadasPage {
     this.http.get('http://localhost/apiRest/public/publicaciones_guardadas/'+id_usuario)
     .map(response => response.json())
     .subscribe(data =>{
+      
         this.publicacionesGuardadas = data;
-        console.log(data);  
+        console.log(data);
+      
+          
       },
       err => {
         console.log("Oops!");

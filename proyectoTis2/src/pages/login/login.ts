@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Http } from '@angular/http';
 import { HomePage } from '../home/home';
+import { CuentaPage } from '../cuenta/cuenta';
 import { ToastController } from 'ionic-angular';
 
 
@@ -42,7 +43,9 @@ export class LoginPage {
       email_usuario: ['', [Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]), Validators.maxLength(35), Validators.minLength(5)]],
       contrasena: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(5)]],
     });
-
+    if('respuesta' in localStorage){
+      this.irCuenta();
+    }
   }
 
   ionViewDidLoad() {
@@ -57,6 +60,9 @@ export class LoginPage {
   }*/
   irHome() {
     this.navCtrl.setRoot(HomePage);
+  }
+  irCuenta() {
+    this.navCtrl.setRoot(CuentaPage);
   }
 
 

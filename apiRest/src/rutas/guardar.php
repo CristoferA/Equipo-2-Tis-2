@@ -13,7 +13,8 @@ $app->get('/publicaciones_guardadas/{id_usuario}', function(Request $request, Re
     $sql="SELECT * FROM usuario, publicacion, guarda
     WHERE usuario.id_usuario ='$id_usuario'
     AND usuario.id_usuario = guarda.id_usuario
-    AND guarda.id_publicacion = publicacion.id_publicacion";
+    AND guarda.id_publicacion = publicacion.id_publicacion
+    AND publicacion.estado = 'aprobado'";
 
     try{
 
@@ -25,7 +26,8 @@ $app->get('/publicaciones_guardadas/{id_usuario}', function(Request $request, Re
           $usuario = $result->fetchAll(PDO::FETCH_OBJ);
           echo json_encode($usuario);
         }else {
-          echo json_encode("No existen usuarios en la BBDD con este ID.");
+         
+            echo "No existen usuarios en la BBDD con este ID.";
         }
         $result = null;
         $db = null;
