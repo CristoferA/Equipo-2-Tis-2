@@ -31,6 +31,56 @@ $app->get('/publicacion', function (Request $request, Response $response){
     }
 }); 
 
+//ORDENA POR NOMBRE DE FORMA ASCENDENTE
+$app->get('/publicacion_ordenada_ASC', function (Request $request, Response $response){
+    
+    
+    $sql = "SELECT * FROM publicacion WHERE estado='aprobado' ORDER BY nombre_publicacion ASC";
+    try {
+        $db = new db();
+        $db = $db -> conectionDB();
+        $result = $db -> query($sql);
+        
+        if($result -> rowCount() > 0){
+            $publicaciones = $result -> fetchAll (PDO::FETCH_OBJ);
+            echo json_encode($publicaciones);
+
+        }else{
+            echo json_encode("No hay publicaciones aun!.");
+        }
+        $result = null;
+        $db = null;
+
+    }catch(PDOException $e){
+        echo '{"error" : {"texto":'.$e->getMessage().'}';
+    }
+}); 
+
+//ORDENA POR NOMBRE DE FORMA DESCENDENTE
+$app->get('/publicacion_ordenada_DES', function (Request $request, Response $response){
+    
+    
+    $sql = "SELECT * FROM publicacion WHERE estado='aprobado' ORDER BY nombre_publicacion DESC";
+    try {
+        $db = new db();
+        $db = $db -> conectionDB();
+        $result = $db -> query($sql);
+        
+        if($result -> rowCount() > 0){
+            $publicaciones = $result -> fetchAll (PDO::FETCH_OBJ);
+            echo json_encode($publicaciones);
+
+        }else{
+            echo json_encode("No hay publicaciones aun!.");
+        }
+        $result = null;
+        $db = null;
+
+    }catch(PDOException $e){
+        echo '{"error" : {"texto":'.$e->getMessage().'}';
+    }
+}); 
+
 // GET Lista de una publicacion especifica por ID 
 $app->get('/publicacion/{id_publicacion}', function(Request $request, Response $response){
     $id_publicacion = $request->getAttribute('id_publicacion');

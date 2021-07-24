@@ -4,74 +4,7 @@ ini_set('display_errors', 1);
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-/*
-//CHECK LOGIN
-$app->post('/login-check',function(Request $request, Response $response){
-    $id_usuario = $request->getParam('id_usuario');
-    //echo"holi";
-    $sql = "SELECT id_usuario FROM usuario 
-    WHERE id_usuario='$id_usuario'";
-    try{
-        $db = new db();
-        $db = $db -> conectionDB();  
-        $data='';
-        $result = $db -> prepare ($sql);
-        $result->bindParam(':id_usuario',$id_usuario);   
-        $result->execute();
-        $count = $result->rowCount();
-        $data=$result->fetch(PDO::FETCH_OBJ);    
 
-        if(empty($data)){
-           
-            echo "No existe este usuario..";
-        }else{
-            $user_id=$data->id_usuario;
-            $data->token=apiToken($user_id)
-            if($data->token==apiToken($user_id)){
-                echo "Esta logeado";
-            }else{
-                echo "No esta logeado";
-            }
-            
-        }
-        $db=null;
-    }catch(PDOException $e){
-        echo '{"error" : {"texto":'.$e->getMessage().'}'; 
-    }
-});
-
-
-//KILL LOGIN
-$app->post('/login-kill',function(Request $request, Response $response){
-    $id_usuario = $request->getParam('id_usuario');
-    $token_usuario= $request->getParam('token');
-    //echo"holi";
-    $sql = "SELECT id_usuario FROM usuario 
-    WHERE id_usuario='$id_usuario'";
-    try{
-        $db = new db();
-        $db = $db -> conectionDB();  
-        $data='';
-        $result = $db -> prepare ($sql);
-        $result->bindParam(':id_usuario',$id_usuario);   
-
-        $result->execute();
-
-        $count = $result->rowCount();
-        $data=$result->fetch(PDO::FETCH_OBJ);    
-
-        if(!empty($data)){
-            $user_id=$data->id_usuario;
-            $data->token = null;
-
-        }
-        $db=null;
-    }catch(PDOException $e){
-        echo '{"error" : {"texto":'.$e->getMessage().'}'; 
-    }
-
-});
-*/
 //$userData
 
 $app->post('/login-check',function(Request $request, Response $response){
@@ -110,6 +43,83 @@ $app->post('/login-check',function(Request $request, Response $response){
 
 
 //LOGIN QUE REPARADO AHORA
+/*
+$app->post('/login',function(Request $request, Response $response){
+    $id_usuario = $request->getParam('id_usuario');
+    $contrasena = $request->getParam('contrasena');
+    $contrasena=hash('sha256',$contrasena);
+    $sql = "SELECT id_usuario FROM usuario 
+    WHERE (id_usuario='$id_usuario' OR email_usuario='$id_usuario') 
+    AND contrasena ='$contrasena'";
+
+    try{
+        $db = new db();
+        $db = $db -> conectionDB();  
+        $data='';
+ 
+        $result = $db -> prepare ($sql);
+        $result->bindParam(':id_usuario',$id_usuario);        
+        $result->bindParam(':contrasena',$contrasena);
+        $result->execute();
+        
+        $count = $result->rowCount();
+        $data=$result->fetch(PDO::FETCH_OBJ);       
+        //$result=null;
+        $count = null;
+        if(!empty($data)){
+            $count=null;       
+            //$data='';
+            //esto es si el usuario cuenta como oferente
+            
+            $sql2="SELECT usuario FROM oferente WHERE usuario='$id_usuario'";
+            $result2= $db -> prepare ($sql2);
+            $result2->bindParam(':usuario',$id_usuario);
+            $result2->excecute();
+            
+            $count=$result2->rowCount();
+            $data2=$result2->fetch(PDO::FETCH_OBJ);
+            /*if($count>0){
+                    
+                $user_id=$data2->id_usuario;
+                $data2->token = apiToken($user_id);
+                /*if($data){
+                    
+                    echo '{"data": Es OFERENTE}';            
+                }*/
+            //}
+            /*
+            $count= null;
+            $sql="SELECT usuario FROM moderador WHERE usuario='$id_usuario'";
+            $result= $db -> prepare ($sql);
+            $result->bindParam(':usuario',$id_usuario);
+            $result->excecute();
+            $count=$result->rowCount();
+            if($count>0){
+                $user_id=$data->id_usuario;
+                $data->token = apiToken($user_id);
+                if($data){
+                    
+                    echo '{"data": Es MODERADOR}';             
+                }
+            }
+            //esto es si el usuario no cuenta ni como oferente ni como moderador
+            
+            $user_id=$data->id_usuario;
+            $data->token = apiToken($user_id);
+        }
+        $db=null;
+
+        if($data){
+            $data=json_encode($data);
+            echo '{"data": ' .$data . '}';            
+        }else{
+            echo '{"error":{"text":"Bad request wrong username and password"}}';
+        }
+    }catch(PDOException $e){
+        echo '{"error" : {"texto":'.$e->getMessage().'}'; 
+    }
+});*/
+// ACA ESTA EL LOGIN VIEJO POR SI DEJA DE FUNCIONAR EL NUEVO
 
 $app->post('/login',function(Request $request, Response $response){
     $id_usuario = $request->getParam('id_usuario');
@@ -149,6 +159,9 @@ $app->post('/login',function(Request $request, Response $response){
     }
 });
 
+
+
+//
 $app->post('/signup',function(Request $request, Response $response){
 /*    
     $data = json_decode($request->getBody());
@@ -261,3 +274,71 @@ function internalUserDetails($input) {
     
 }
 
+/*
+//CHECK LOGIN
+$app->post('/login-check',function(Request $request, Response $response){
+    $id_usuario = $request->getParam('id_usuario');
+    //echo"holi";
+    $sql = "SELECT id_usuario FROM usuario 
+    WHERE id_usuario='$id_usuario'";
+    try{
+        $db = new db();
+        $db = $db -> conectionDB();  
+        $data='';
+        $result = $db -> prepare ($sql);
+        $result->bindParam(':id_usuario',$id_usuario);   
+        $result->execute();
+        $count = $result->rowCount();
+        $data=$result->fetch(PDO::FETCH_OBJ);    
+
+        if(empty($data)){
+           
+            echo "No existe este usuario..";
+        }else{
+            $user_id=$data->id_usuario;
+            $data->token=apiToken($user_id)
+            if($data->token==apiToken($user_id)){
+                echo "Esta logeado";
+            }else{
+                echo "No esta logeado";
+            }
+            
+        }
+        $db=null;
+    }catch(PDOException $e){
+        echo '{"error" : {"texto":'.$e->getMessage().'}'; 
+    }
+});
+
+
+//KILL LOGIN
+$app->post('/login-kill',function(Request $request, Response $response){
+    $id_usuario = $request->getParam('id_usuario');
+    $token_usuario= $request->getParam('token');
+    //echo"holi";
+    $sql = "SELECT id_usuario FROM usuario 
+    WHERE id_usuario='$id_usuario'";
+    try{
+        $db = new db();
+        $db = $db -> conectionDB();  
+        $data='';
+        $result = $db -> prepare ($sql);
+        $result->bindParam(':id_usuario',$id_usuario);   
+
+        $result->execute();
+
+        $count = $result->rowCount();
+        $data=$result->fetch(PDO::FETCH_OBJ);    
+
+        if(!empty($data)){
+            $user_id=$data->id_usuario;
+            $data->token = null;
+
+        }
+        $db=null;
+    }catch(PDOException $e){
+        echo '{"error" : {"texto":'.$e->getMessage().'}'; 
+    }
+
+});
+*/
