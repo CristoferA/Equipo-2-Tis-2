@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { Observable } from 'rxjs';
 import { Http } from '@angular/http';
 import { HomePage } from '../home/home';
+import { AgregarEtiquetaPage } from '../agregar-etiqueta/agregar-etiqueta';
 /**
  * Generated class for the CrearPublicacionPage page.
  *
@@ -17,6 +18,9 @@ import { HomePage } from '../home/home';
   templateUrl: 'crear-publicacion.html',
 })
 export class CrearPublicacionPage {
+
+  publicacionesDes:any;
+  id_publicacion: any;
 
   datos: FormGroup;
   data: Observable<any>;
@@ -109,15 +113,18 @@ export class CrearPublicacionPage {
         postData.append("region_publicacion", document.getElementById("regionID").innerText);
         postData.append("comuna_publicacion", document.getElementById("comunaID").innerText);
         postData.append('id_oferente',id_oferente);
-        this.data = this.http.post(url, postData);
+        var id;
+        this.http.post(url, postData)
+        .map(response => response.json())
+        .subscribe(datas =>
+          {
+            console.log(datas);
+            id=datas;
+            this.mensajeToast('Publicación subida correctamente y en espera de aprobación.');
+            this.irAgregarEtiqueta(id);
+          });
 
-        this.data.subscribe((data) => {
-          console.log(data);
-
-          this.mensajeToast('Publicación subida correctamente y en espera de aprobación.');
-          this.navCtrl.setRoot(HomePage);
-          //this.navCtrl.pop();
-        })
+        
       }
     }
 
@@ -125,6 +132,11 @@ export class CrearPublicacionPage {
 
     
 
+  }
+
+  irAgregarEtiqueta(id){
+    this.navCtrl.push(AgregarEtiquetaPage, {valor: id})
+    
   }
 
   onOptionsSelected(value: string) {

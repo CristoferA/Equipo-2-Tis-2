@@ -17,6 +17,7 @@ export class HomePage {
   estado: any;
 
 
+
   constructor(public navCtrl: NavController, public http: Http) {
     
     this.http.get('http://localhost/apiRest/public/publicacion')
@@ -42,7 +43,5 @@ export class HomePage {
     //this.navCtrl.setRoot(FiltroPage);
     this.navCtrl.push(FiltroPage);
   }
-  irOrdenar(){
-    
-  }
+  
 }

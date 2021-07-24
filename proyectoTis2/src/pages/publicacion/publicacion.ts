@@ -23,6 +23,7 @@ export class PublicacionPage {
   data:Observable<any>;
   id_review:any;
   oferente:any;
+  etiqueta: any;
   
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl:ToastController) {
@@ -39,6 +40,17 @@ export class PublicacionPage {
         console.log("Oops!");
       }
     );
+
+    this.http.get('http://localhost/apiRest/public/etiqueta/'+this.id_publicacion)
+    .map(response => response.json())
+    .subscribe(datas=>
+      {
+        this.etiqueta = datas;
+        console.log(datas);
+      },
+      err => {
+        console.log("Oops!");
+      });
 
   }
 

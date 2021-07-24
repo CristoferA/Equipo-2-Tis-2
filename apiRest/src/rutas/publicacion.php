@@ -283,6 +283,29 @@ $app->delete('/publicacion/delete/{id}', function(Request $request, Response $re
     echo '{"error" : {"text":'.$e->getMessage().'}';
   }
 });
+$app->post('/ultima_publicacion', function (Request $request, Response $response){
+    $sql = "SELECT MAX(id_publicacion) AS max_id_publicacion FROM publicacion";
+
+    try{
+
+        $db = new db();
+        $db = $db -> conectionDB();
+        $result = $db -> query($sql);
+        
+        if($result -> rowCount() > 0){
+            $publicaciones = $result -> fetchAll (PDO::FETCH_OBJ);
+            echo json_encode($publicaciones);
+            echo '{"data": ' .$data . '}';    
+
+        }else{
+            echo json_encode("No hay publicaciones aun!.");
+        }
+        $result = null;
+        $db = null;
+    }catch(PDOException $e){
+        echo '{"error" : {"texto":'.$e->getMessage().'}';
+    }
+});
 
 $app->get('/publicacion_detallada/{id_publicacion}', function (Request $request, Response $response){
     $id_publicacion = $request->getAttribute('id_publicacion');
@@ -291,7 +314,8 @@ $app->get('/publicacion_detallada/{id_publicacion}', function (Request $request,
     WHERE publicacion.id_publicacion = '$id_publicacion'
     AND publicacion.id_publicacion = publica.id_publicacion
     AND publica.id_oferente = oferente.usuario
-    AND oferente.usuario = usuario.id_usuario";
+    AND oferente.usuario = usuario.id_usuario
+    ";
     try {
         $db = new db();
         $db = $db -> conectionDB();
@@ -393,7 +417,8 @@ $app->post('/publicacion_detallada/new', function(Request $request, Response $re
 
 
         $result->execute();
-        echo json_encode("Publicacion Guardada");
+        
+        echo json_encode($insertId);
         $result=null;
         $db=null;
     }catch(PDOException $e){

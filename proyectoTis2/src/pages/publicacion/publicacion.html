@@ -62,7 +62,7 @@
   </ion-grid>
 
   <hr>
-
+  
   <ion-grid margin-horizontal>
     <ion-row>
       <h3>Datos de contacto</h3>
@@ -100,6 +100,21 @@
   </ion-grid>
   <br>
 
+  <hr>
+  <ion-grid margin-horizontal>
+    <ion-row>
+      <h3>Etiquetas:</h3>
+      <ion-content *ngFor= "let et of etiqueta">
+        <ion-item (click)="verPubUsuario(pub.usuario)">
+          <ion-icon name="md-contact" item-start></ion-icon>
+          Representante: {{et.etiqueta}}
+        </ion-item>
+      </ion-content>
+    </ion-row>
+    <ion-row>
+    </ion-row>
+  </ion-grid>
+  
   <br><br>
-
+  
 </ion-content>
