@@ -21,7 +21,6 @@ export class CrearPublicacionPage {
 
   publicacionesDes:any;
   id_publicacion: any;
-
   datos: FormGroup;
   data: Observable<any>;
   nombre: any;
@@ -40,6 +39,7 @@ export class CrearPublicacionPage {
   comuna: any;
   //xdd
   //xd
+  //xddddddddd
   regiones: any;
   comunas: any;
   regionS: any;
@@ -123,20 +123,12 @@ export class CrearPublicacionPage {
             this.mensajeToast('Publicación subida correctamente y en espera de aprobación.');
             this.irAgregarEtiqueta(id);
           });
-
-        
       }
     }
-
-    
-
-    
-
   }
 
   irAgregarEtiqueta(id){
     this.navCtrl.push(AgregarEtiquetaPage, {valor: id})
-    
   }
 
   onOptionsSelected(value: string) {

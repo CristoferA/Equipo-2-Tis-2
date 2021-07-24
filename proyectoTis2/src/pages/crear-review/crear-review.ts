@@ -23,19 +23,8 @@ export class CrearReviewPage {
   id_publicacion = this.navParams.get('valor');
   data_pub: Observable<any>;
   data_rev: Observable<any>;
-  data_pro1: Observable<any>;
-  data_pro2: Observable<any>;
-  data_pro3: Observable<any>;
-  data_contra1: Observable<any>;
-  data_contra2: Observable<any>;
-  data_contra3: Observable<any>;
   usuario: any;
-  pro_1: any;
-  pro_2: any;
-  pro_3: any;
-  contra_1: any;
-  contra_2: any;
-  contra_3: any;
+  calificacion: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public toastCtrl: ToastController) {
 
@@ -93,15 +82,6 @@ export class CrearReviewPage {
     console.log("El id_usuario es: " + this.usuario);
     console.log("El estado es: " + "pendiente");
 
-    /*
-    console.log("El pro 1 es: " + this.pro_1);
-    console.log("El pro 2 es: " + this.pro_2);
-    console.log("El pro 3 es: " + this.pro_3);
-    console.log("El contra 1 es: " + this.contra_1);
-    console.log("El contra 2 es: " + this.contra_2);
-    console.log("El contra 3 es: " + this.contra_3);
-    */
-
     postData.append('id_publicacion', this.id_publicacion);
     postData.append('review', this.review);
     postData.append('id_usuario', this.usuario);
@@ -116,75 +96,6 @@ export class CrearReviewPage {
       console.log("OopsReview!");
     });
 
-    /*this.data_rev = this.http.post(url_review, postData);
-
-    this.data_rev.subscribe((data_rev) => {
-      console.log(data_rev);
-
-      this.mensajeToast('Reseña enviada correctamente y pendiente de aprobación.');
-      this.navCtrl.setRoot(HomePage);
-    })
-
-    postData.append('texto_pro',this.pro_1);
-    this.http.post(url_pro, postData)
-    .map(response =>response.json())
-    .subscribe(data=>{
-      console.log(data);
-    },
-    err => {
-      console.log("OopsPro1!");
-    });
-    
-    postData.append('texto_pro',this.pro_2);
-    this.http.post(url_pro, postData)
-    .map(response =>response.json())
-    .subscribe(data=>{
-      console.log(data);
-    },
-    err => {
-      console.log("OopsPro2!");
-    });
-
-    postData.append('texto_pro',this.pro_3);
-    this.http.post(url_pro, postData)
-    .map(response =>response.json())
-    .subscribe(data=>{
-      console.log(data);
-    },
-    err => {
-      console.log("OopsPro3!");
-    });
-
-    postData.append('texto_contra',this.contra_1);
-    this.http.post(url_contra, postData)
-    .map(response =>response.json())
-    .subscribe(data=>{
-      console.log(data);
-    },
-    err => {
-      console.log("OopsContra1!");
-    });
-
-    postData.append('texto_contra',this.contra_2);
-    this.http.post(url_contra, postData)
-    .map(response =>response.json())
-    .subscribe(data=>{
-      console.log(data);
-    },
-    err => {
-      console.log("OopsContra2!");
-    });
-
-    postData.append('texto_contra',this.contra_3);
-    this.http.post(url_contra, postData)
-    .map(response =>response.json())
-    .subscribe(data=>{
-      console.log(data);
-    },
-    err => {
-      console.log("OopsContra3!");
-    });*/
-    
     this.mensajeToast('Reseña enviada correctamente y pendiente de aprobación.');
     this.navCtrl.setRoot(HomePage);
   }
