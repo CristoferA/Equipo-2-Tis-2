@@ -31,6 +31,47 @@ $app->get('/etiqueta/{id}', function (Request $request, Response $response){
         echo '{"error" : {"texto":'.$e->getMessage().'}';
     }
 }); 
+//GET de todas las etiqueta
+
+$app->get('/etiqueta_publicacion/{id_etiqueta}', function (Request $request, Response $response){
+    $id_etiqueta = $request->getAttribute('id_etiqueta');
+
+    $sql = "SELECT etiqueta FROM etiqueta WHERE id_etiqueta = '$id_etiqueta'"; 
+
+    
+    try {
+        $db = new db();
+        $db = $db -> conectionDB();
+        $result = $db -> query($sql);
+        
+        if($result -> rowCount() > 0){
+            $value = $result -> fetch (PDO::FETCH_OBJ);
+            $etiqueta = $value->etiqueta;
+            $result =null;
+
+
+            $sql2 = "SELECT * FROM etiqueta, publicacion 
+            WHERE etiqueta='$etiqueta' 
+            AND etiqueta.id_publicacion = publicacion.id_publicacion
+            AND publicacion.estado = 'aprobado'";
+            
+            $result = $db -> query($sql2);
+            if($result -> rowCount() > 0){
+                $usuarios = $result->fetchAll (PDO::FETCH_OBJ);
+                echo json_encode($usuarios);
+            }
+            
+
+        }else{
+            echo "No hay publicaciones aun!.";
+        }
+        $result = null;
+        $db = null;
+
+    }catch(PDOException $e){
+        echo '{"error" : {"texto":'.$e->getMessage().'}';
+    }
+}); 
 
 
 //POST Agregar nueva etiqueta

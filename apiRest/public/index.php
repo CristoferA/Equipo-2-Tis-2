@@ -33,6 +33,5 @@ require '../src/rutas/guardar.php';
 require '../src/rutas/etiqueta.php';
 require '../src/rutas/historial.php';
 
-
 $app->run();
 
