@@ -104,13 +104,12 @@
   <ion-grid margin-horizontal>
     <ion-row>
       <h3>Etiquetas:</h3>
-      <ion-content *ngFor= "let et of etiqueta">
-        <ion-item (click)="verPubUsuario(pub.usuario)">
-          <ion-icon name="md-contact" item-start></ion-icon>
-          Representante: {{et.etiqueta}}
-        </ion-item>
-      </ion-content>
     </ion-row>
+      <div class="a">
+        <p *ngFor="let et of etiqueta" (click)="verPubEtiqueta(et.id_etiqueta)">{{et.etiqueta}}</p>
+      </div>
+      
+    
     <ion-row>
     </ion-row>
   </ion-grid>

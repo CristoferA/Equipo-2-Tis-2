@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Http } from '@angular/http';
 import { LoginPage } from '../login/login';
 import { MisPublicacionesGuardadasPage } from '../mis-publicaciones-guardadas/mis-publicaciones-guardadas';
+import { HistorialPage } from '../historial/historial';
 
 @IonicPage()
 @Component({
@@ -71,6 +72,10 @@ export class CuentaPage {
 
   PublicacionesGuardadas(){
     this.navCtrl.push(MisPublicacionesGuardadasPage);
+  }
+
+  Historial(){
+    this.navCtrl.push(HistorialPage);
   }
 
 }
