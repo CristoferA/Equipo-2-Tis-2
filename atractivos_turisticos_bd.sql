@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 08, 2021 at 04:20 AM
+-- Generation Time: Jul 24, 2021 at 12:53 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -57,6 +57,25 @@ CREATE TABLE `contra` (
 CREATE TABLE `guarda` (
   `id_usuario` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
   `id_publicacion` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `guarda`
+--
+
+INSERT INTO `guarda` (`id_usuario`, `id_publicacion`) VALUES
+('abismal20', 4),
+('abismal20', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `historial`
+--
+
+CREATE TABLE `historial` (
+  `id_usuario` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+  `id_publicacion` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -213,7 +232,8 @@ INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `email_usuario`, `contras
 ('abismal6', 'Felipe Espinoza', 'fespinozame@gmail.cl', 'F1f1f2f3'),
 ('abismal7', 'Felipe Espinoza', 'fespinozamee@gmail.cl', 'F1f1f2f3'),
 ('abismal8', 'Felipe Espinoza', 'fespinozameee@gmail.cl', 'F1f1f2f3'),
-('abismal9', 'Felipe Espinoza', 'fespinozameeee@gmail.cl', 'F1f1f2f3');
+('abismal9', 'Felipe Espinoza', 'fespinozameeee@gmail.cl', 'F1f1f2f3'),
+('Monopp', 'Cristian', 'mono@gmail.com', '3cd80e3f8e9c9708855495b6ea5473e2ff37fa0354ea52471b01474b468fde9c');
 
 --
 -- Indexes for dumped tables
@@ -240,6 +260,13 @@ ALTER TABLE `contra`
 ALTER TABLE `guarda`
   ADD PRIMARY KEY (`id_usuario`,`id_publicacion`),
   ADD KEY `guarda_publicacion` (`id_publicacion`);
+
+--
+-- Indexes for table `historial`
+--
+ALTER TABLE `historial`
+  ADD PRIMARY KEY (`id_usuario`,`id_publicacion`) USING BTREE,
+  ADD KEY `historial_publicacion` (`id_publicacion`);
 
 --
 -- Indexes for table `moderador`
@@ -345,6 +372,13 @@ ALTER TABLE `contra`
 ALTER TABLE `guarda`
   ADD CONSTRAINT `guarda_publicacion` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id_publicacion`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `usuario_guarda` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `historial`
+--
+ALTER TABLE `historial`
+  ADD CONSTRAINT `historial_publicacion` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id_publicacion`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `usuario_historial` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `moderador`
