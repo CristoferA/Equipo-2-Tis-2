@@ -21,11 +21,13 @@ import { CrearPublicacionCheckPage } from '../pages/crear-publicacion-check/crea
 import { ComentarioPage } from '../pages/comentario/comentario';
 import { CrearComentarioPage } from '../pages/crear-comentario/crear-comentario';
 import { AgregarEtiquetaPage } from '../pages/agregar-etiqueta/agregar-etiqueta';
-
+import { EtiquetaPublicacionPage } from '../pages/etiqueta-publicacion/etiqueta-publicacion';
+import { HistorialPage } from '../pages/historial/historial';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { OferenteCheckPage } from '../pages/oferente-check/oferente-check';
 import { MisPublicacionesGuardadasPage } from '../pages/mis-publicaciones-guardadas/mis-publicaciones-guardadas';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { MisPublicacionesGuardadasPage } from '../pages/mis-publicaciones-guarda
     ComentarioPage,
     CrearComentarioPage,
     MisPublicacionesGuardadasPage,
-    AgregarEtiquetaPage
+    AgregarEtiquetaPage,
+    EtiquetaPublicacionPage,
+    HistorialPage
   ],
   imports: [
     BrowserModule,
@@ -77,7 +81,9 @@ import { MisPublicacionesGuardadasPage } from '../pages/mis-publicaciones-guarda
     ComentarioPage,
     CrearComentarioPage,
     MisPublicacionesGuardadasPage,
-    AgregarEtiquetaPage
+    AgregarEtiquetaPage,
+    EtiquetaPublicacionPage,
+    HistorialPage
   ],
   providers: [
     StatusBar,

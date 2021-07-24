@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { ReviewPage } from '../review/review';
 import { ComentarioPage } from '../comentario/comentario';
 import { PublicacionesOferentePage } from '../publicaciones-oferente/publicaciones-oferente';
+import { EtiquetaPublicacionPage } from '../etiqueta-publicacion/etiqueta-publicacion';
 import { ToastController } from 'ionic-angular';
 
 
@@ -70,6 +71,9 @@ export class PublicacionPage {
     this.navCtrl.push(PublicacionesOferentePage, {valor: oferente});
     console.log(oferente);
 
+  }
+  verPubEtiqueta(etiqueta){
+    this.navCtrl.push(EtiquetaPublicacionPage, {valor: etiqueta});
   }
 
 
