@@ -10,7 +10,57 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 $app->get('/publicacion', function (Request $request, Response $response){
     
     
-    $sql = "SELECT * FROM publicacion";
+    $sql = "SELECT * FROM publicacion WHERE estado='aprobado'";
+    try {
+        $db = new db();
+        $db = $db -> conectionDB();
+        $result = $db -> query($sql);
+        
+        if($result -> rowCount() > 0){
+            $publicaciones = $result -> fetchAll (PDO::FETCH_OBJ);
+            echo json_encode($publicaciones);
+
+        }else{
+            echo json_encode("No hay publicaciones aun!.");
+        }
+        $result = null;
+        $db = null;
+
+    }catch(PDOException $e){
+        echo '{"error" : {"texto":'.$e->getMessage().'}';
+    }
+}); 
+
+//ORDENA POR NOMBRE DE FORMA ASCENDENTE
+$app->get('/publicacion_ordenada_ASC', function (Request $request, Response $response){
+    
+    
+    $sql = "SELECT * FROM publicacion WHERE estado='aprobado' ORDER BY nombre_publicacion ASC";
+    try {
+        $db = new db();
+        $db = $db -> conectionDB();
+        $result = $db -> query($sql);
+        
+        if($result -> rowCount() > 0){
+            $publicaciones = $result -> fetchAll (PDO::FETCH_OBJ);
+            echo json_encode($publicaciones);
+
+        }else{
+            echo json_encode("No hay publicaciones aun!.");
+        }
+        $result = null;
+        $db = null;
+
+    }catch(PDOException $e){
+        echo '{"error" : {"texto":'.$e->getMessage().'}';
+    }
+}); 
+
+//ORDENA POR NOMBRE DE FORMA DESCENDENTE
+$app->get('/publicacion_ordenada_DES', function (Request $request, Response $response){
+    
+    
+    $sql = "SELECT * FROM publicacion WHERE estado='aprobado' ORDER BY nombre_publicacion DESC";
     try {
         $db = new db();
         $db = $db -> conectionDB();
@@ -58,8 +108,20 @@ $app->post('/publicacion/buscar', function(Request $request, Response $response)
     $nombre_publicacion= $request->getParam('nombre_publicacion');
     $region_publicacion= $request->getParam('region_publicacion');
     $comuna_publicacion= $request->getParam('comuna_publicacion');
+    $tipo_publicacion= $request->getParam('tipo_publicacion');
+    $tipo_turismo= $request->getParam('tipo_turismo');
     
-    $sql = "SELECT * FROM publicacion WHERE nombre_publicacion LIKE '$nombre_publicacion%' OR region_publicacion='$region_publicacion' OR comuna_publicacion='$comuna_publicacion'";
+    //$sql = "SELECT * FROM publicacion WHERE nombre_publicacion LIKE '%$nombre_publicacion%' OR region_publicacion='$region_publicacion' OR comuna_publicacion='$comuna_publicacion'";
+    $sql = "SELECT * FROM publicacion WHERE IF((''='$nombre_publicacion' AND 'Selecciona'='$region_publicacion' AND 'Selecciona'='$comuna_publicacion' AND 'Selecciona'='$tipo_publicacion' AND 'Selecciona'='$tipo_turismo'),
+                                                0,
+                                                (IF(''='$nombre_publicacion', 1, nombre_publicacion LIKE '%$nombre_publicacion%')
+                                                AND IF('Selecciona'='$region_publicacion', 1, region_publicacion='$region_publicacion')
+                                                AND IF('Selecciona'='$comuna_publicacion', 1, comuna_publicacion='$comuna_publicacion')
+                                                AND IF('Selecciona'='$tipo_publicacion', 1, tipo_publicacion='$tipo_publicacion')
+                                                AND IF('Selecciona'='$tipo_turismo', 1, tipo_turismo='$tipo_turismo')
+
+                                                )
+                                            )";
     try{
       $db = new db();
       $db = $db->conectionDB();
@@ -221,6 +283,9 @@ $app->delete('/publicacion/delete/{id}', function(Request $request, Response $re
     echo '{"error" : {"text":'.$e->getMessage().'}';
   }
 });
+$app->get('/ultima-publicacion', function (Request $request, Response $response){
+
+});
 
 $app->get('/publicacion_detallada/{id_publicacion}', function (Request $request, Response $response){
     $id_publicacion = $request->getAttribute('id_publicacion');
@@ -229,7 +294,8 @@ $app->get('/publicacion_detallada/{id_publicacion}', function (Request $request,
     WHERE publicacion.id_publicacion = '$id_publicacion'
     AND publicacion.id_publicacion = publica.id_publicacion
     AND publica.id_oferente = oferente.usuario
-    AND oferente.usuario = usuario.id_usuario";
+    AND oferente.usuario = usuario.id_usuario
+    ";
     try {
         $db = new db();
         $db = $db -> conectionDB();

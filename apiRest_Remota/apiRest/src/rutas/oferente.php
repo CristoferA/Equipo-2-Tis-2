@@ -33,7 +33,7 @@ $app->get('/oferente', function (Request $request, Response $response){
 // GET Lista de una publicacion especifica por ID 
 $app->get('/oferente/{id}', function(Request $request, Response $response){
     $id_usuario = $request->getAttribute('id');
-    $sql = "SELECT * FROM oferente WHERE usuario = $id_usuario";
+    $sql = "SELECT * FROM oferente WHERE usuario = '$id_usuario'";
     try{
       $db = new db();
       $db = $db->conectionDB();
