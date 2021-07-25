@@ -39,7 +39,7 @@ $app->post('/review/new', function(Request $request, Response $response){
 
 
     $sql= "INSERT INTO review (review, id_publicacion, id_usuario, estado, calificacion_review) 
-    VALUES (:review, :id_publicacion, :id_usuario, :estado, calificacion_review)";
+    VALUES (:review, :id_publicacion, :id_usuario, :estado, :calificacion_review)";
 
     try{
         $db = new db();

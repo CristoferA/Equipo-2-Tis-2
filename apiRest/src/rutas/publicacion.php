@@ -341,15 +341,32 @@ $app->get('/publicacion_similar/{id_publicacion}', function (Request $request, R
     
     $sql = "SELECT 	* FROM publicacion 
     WHERE id_publicacion = '$id_publicacion'";
-    $sql2 = "SELECT * FROM publicacion 
-    WHERE region_publicacion = '$region_publicacion'";
+    
     try {
         $db = new db();
         $db = $db -> conectionDB();
         $result = $db -> query($sql);
         
         if($result -> rowCount() > 0){
-            $publicaciones = $result -> fetchAll (PDO::FETCH_OBJ);
+            $value = $result -> fetch (PDO::FETCH_OBJ);
+
+            $region_publicacion = $value -> region_publicacion;
+            $tipo_turismo =  $value -> tipo_publicacion;
+
+            $sql2 = "SELECT * FROM publicacion 
+            WHERE (region_publicacion = '$region_publicacion'
+            OR tipo_turismo = '$tipo_turismo')
+            AND estado = 'aprobado'";
+
+            $result = $db -> query($sql2);
+
+            if($result -> rowCount() > 0){
+  
+                $publicaciones = $result -> fetchAll(PDO::FETCH_OBJ);
+                echo json_encode($publicaciones);
+            }else{
+                echo "No hay publicaciones similares a esta!";
+            }
             echo json_encode($publicaciones);
 
         }else{
