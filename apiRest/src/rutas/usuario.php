@@ -165,11 +165,6 @@ $app->get('/usuario_publicacion/{id_usuario}', function (Request $request, Respo
     AND publicacion.estado= 'aprobado'";
 
     
-    /*$sql = "SELECT * FROM publicacion, publica, oferente, usuario 
-    WHERE publicacion.id_publicacion = '$id_publicacion'
-    AND publicacion.id_publicacion = publica.id_publicacion
-    AND publica.id_oferente = oferente.usuario
-    AND oferente.usuario = usuario.id_usuario";*/
     try {
         $db = new db();
         $db = $db -> conectionDB();

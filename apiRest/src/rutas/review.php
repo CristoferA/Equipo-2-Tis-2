@@ -34,10 +34,12 @@ $app->post('/review/new', function(Request $request, Response $response){
     $review = $request->getParam('review');
     $id_publicacion = $request->getParam('id_publicacion');    
     $id_usuario = $request->getParam('id_usuario');    
-    $estado = $request->getParam('estado');    
+    $estado = $request->getParam('estado');   
+    $calificacion_review = $request->getParam('calificacion_review');  
 
-    $sql= "INSERT INTO review (review, id_publicacion, id_usuario, estado) 
-    VALUES (:review, :id_publicacion, :id_usuario, :estado)";
+
+    $sql= "INSERT INTO review (review, id_publicacion, id_usuario, estado, calificacion_review) 
+    VALUES (:review, :id_publicacion, :id_usuario, :estado, calificacion_review)";
 
     try{
         $db = new db();
@@ -49,6 +51,7 @@ $app->post('/review/new', function(Request $request, Response $response){
         $result->bindParam(':id_publicacion',$id_publicacion);
         $result->bindParam(':id_usuario',$id_usuario);
         $result->bindParam(':estado',$estado);
+        $result->bindParam(':calificacion_review',$calificacion_review);
         
 
         $result->execute();

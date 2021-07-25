@@ -315,7 +315,7 @@ $app->get('/publicacion_detallada/{id_publicacion}', function (Request $request,
     AND publicacion.id_publicacion = publica.id_publicacion
     AND publica.id_oferente = oferente.usuario
     AND oferente.usuario = usuario.id_usuario
-    ";
+    ORDER BY valor_publicacion DESC";
     try {
         $db = new db();
         $db = $db -> conectionDB();
@@ -336,6 +336,32 @@ $app->get('/publicacion_detallada/{id_publicacion}', function (Request $request,
     }
 }); 
 
+$app->get('/publicacion_similar/{id_publicacion}', function (Request $request, Response $response){
+    $id_publicacion = $request->getAttribute('id_publicacion');
+    
+    $sql = "SELECT 	* FROM publicacion 
+    WHERE id_publicacion = '$id_publicacion'";
+    $sql2 = "SELECT * FROM publicacion 
+    WHERE region_publicacion = '$region_publicacion'";
+    try {
+        $db = new db();
+        $db = $db -> conectionDB();
+        $result = $db -> query($sql);
+        
+        if($result -> rowCount() > 0){
+            $publicaciones = $result -> fetchAll (PDO::FETCH_OBJ);
+            echo json_encode($publicaciones);
+
+        }else{
+            echo json_encode("No hay publicaciones aun!.");
+        }
+        $result = null;
+        $db = null;
+
+    }catch(PDOException $e){
+        echo '{"error" : {"texto":'.$e->getMessage().'}';
+    }
+}); 
 
 //POST Agregar nueva publicacion ademas agrega 
 //los datos que le corresponden a usuario que publico la 
