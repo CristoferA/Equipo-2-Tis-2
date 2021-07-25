@@ -30,8 +30,8 @@
       </ion-buttons>
     </ion-col>
   </ion-row>  
-  <hr>
   <!-- Muestra de publicaciones -->
+  <hr>
   <ion-card *ngFor="let pub of publicacionesBus" (click)="irPublicacion(pub.id_publicacion)">
 
     <img src="../assets/imgs/paine.jpg">
@@ -62,10 +62,13 @@
             <p>Calificacion: {{pub.calificacion_publicacion}}/10</p>
           </button>
         </ion-col>
-        <ion-col align-self-center text-center></ion-col>
+        <ion-col align-self-center text-end>
+          <ion-icon icon-only name="eye" style="zoom:1;"> {{pub.visitas}}</ion-icon>
+        </ion-col>
       </ion-row>
     </ion-card-content>
-
   </ion-card>
+  <!-- ---------------------- -->
+
 
 </ion-content>

@@ -132,7 +132,7 @@ export class PublicacionPage {
   agregarVisita(){
     console.log(this.id_publicacion);
 
-    this.http.post('http://localhost/apiRest/public/publicacion/visita/'+this.id_publicacion)
+    this.http.get('http://localhost/apiRest/public/publicacion/visita/'+this.id_publicacion)
     .map(response => response.json())
     .subscribe(data =>
       {
