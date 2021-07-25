@@ -352,11 +352,13 @@ $app->get('/publicacion_similar/{id_publicacion}', function (Request $request, R
 
             $region_publicacion = $value -> region_publicacion;
             $tipo_turismo =  $value -> tipo_publicacion;
-
+            $result = null;
             $sql2 = "SELECT * FROM publicacion 
             WHERE (region_publicacion = '$region_publicacion'
-            OR tipo_turismo = '$tipo_turismo')
-            AND estado = 'aprobado'";
+            OR tipo_turismo = '$tipo_turismo' 
+            OR tipo_publicacion = '$tipo_turismo')
+            AND estado = 'aprobado'
+            AND NOT id_publicacion = '$id_publicacion'";
 
             $result = $db -> query($sql2);
 
@@ -367,7 +369,7 @@ $app->get('/publicacion_similar/{id_publicacion}', function (Request $request, R
             }else{
                 echo "No hay publicaciones similares a esta!";
             }
-            echo json_encode($publicaciones);
+            
 
         }else{
             echo json_encode("No hay publicaciones aun!.");
