@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams  } from 'ionic-angular';
 import { PublicacionPage } from '../publicacion/publicacion';
 import { FiltroPage } from '../filtro/filtro';
-import { ToastController } from 'ionic-angular';
+
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
@@ -19,7 +19,7 @@ export class HomePage {
   data:Observable<any>;
 
 
-  constructor(public navCtrl: NavController, public http: Http, private toastCtrl:ToastController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public http: Http, public navParams: NavParams) {
     
     this.http.get('http://localhost/apiRest/public/publicacion')
     .map(response => response.json())
@@ -37,7 +37,7 @@ export class HomePage {
   }
   
   irPublicacion(id_publicacion){
-    this.navCtrl.push(PublicacionPage, {valor: id_publicacion});
+    
     
     let postData = new FormData();
     
@@ -67,12 +67,5 @@ export class HomePage {
     this.navCtrl.push(FiltroPage);
   }
 
-  presentToast(msg: string){
-    let toast = this.toastCtrl.create({
-      message: msg,
-      duration: 2000,
-    });
-    toast.present();
-  }
   
 }
