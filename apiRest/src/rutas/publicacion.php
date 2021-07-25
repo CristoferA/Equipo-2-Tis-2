@@ -99,7 +99,7 @@ $app->get('/publicacion/{id_publicacion}', function(Request $request, Response $
     }
   }); 
 
-// GET Lista de una publicaciones por parametros 
+//  Lista de una publicaciones por parametros 
 $app->post('/publicacion/buscar', function(Request $request, Response $response){
     $nombre_publicacion= $request->getParam('nombre_publicacion');
     $region_publicacion= $request->getParam('region_publicacion');
@@ -190,6 +190,28 @@ $app->post('/publicacion/new', function(Request $request, Response $response){
     }
 
 });
+
+//PUT agregar visita publicacion
+$app->post('/publicacion/visita/{id_publicacion}', function(Request $request, Response $response){
+    $id_publicacion = $request->getAttribute('id_publicacion');
+    $sql = "UPDATE publicacion SET visitas = visitas+1  WHERE id_publicacion = $id_publicacion";
+
+    try{
+      $db = new db();
+      $db = $db->conectionDB();
+      $result = $db->query($sql);
+  
+      if ($result->rowCount() > 0){
+        echo json_encode("Visita agregada.");
+      }else {
+        echo json_encode("No existe publicacion en la BBDD con este ID.");
+      }
+      $result = null;
+      $db = null;
+    }catch(PDOException $e){
+      echo '{"error" : {"text":'.$e->getMessage().'}';
+    }
+  });   
 
 //PUT Editar publicacion
 
