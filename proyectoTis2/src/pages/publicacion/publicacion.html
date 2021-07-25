@@ -10,8 +10,14 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title *ngFor="let pub of publicacion">{{pub.nombre_publicacion}}
-    </ion-title>
+    <ion-title *ngFor="let pub of publicacion">{{pub.nombre_publicacion}}</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only >
+          <ion-icon name="eye" style="zoom:0.8;" *ngFor="let pub of publicacion"> {{pub.visitas}}</ion-icon>
+      </button>
+    </ion-buttons>
+    
   </ion-navbar>
 </ion-header>
 

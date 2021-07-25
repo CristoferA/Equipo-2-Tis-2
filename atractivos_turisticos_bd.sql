@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 25, 2021 at 12:07 AM
+-- Generation Time: Jul 25, 2021 at 12:57 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -63,9 +63,6 @@ INSERT INTO `etiqueta` (`id_publicacion`, `etiqueta`, `id_etiqueta`) VALUES
 (4, '#ardilla', 1),
 (4, '#ardillaa', 2),
 (4, '#ardillaa', 3),
-(26, '#ardilla', 4),
-(26, '#ardillita', 5),
-(26, '#etiqueta', 6),
 (29, '#GALLETAS', 7),
 (29, '#SURR', 8);
 
@@ -104,7 +101,9 @@ CREATE TABLE `historial` (
 --
 
 INSERT INTO `historial` (`id_usuario`, `id_publicacion`) VALUES
-('abismal20', 4);
+('abismal20', 4),
+('abismal20', 5),
+('abismal20', 6);
 
 -- --------------------------------------------------------
 
@@ -161,14 +160,6 @@ INSERT INTO `publica` (`id_oferente`, `id_publicacion`) VALUES
 ('1', 4),
 ('abismal20', 5),
 ('abismal20', 6),
-('abismal20', 7),
-('abismal20', 8),
-('abismal20', 9),
-('abismal20', 10),
-('abismal20', 25),
-('abismal20', 26),
-('abismal20', 27),
-('abismal20', 28),
 ('abismal20', 29);
 
 -- --------------------------------------------------------
@@ -192,26 +183,19 @@ CREATE TABLE `publicacion` (
   `redes_sociales` varchar(1000) NOT NULL,
   `comuna_publicacion` varchar(40) NOT NULL,
   `calificacion_publicacion` int(2) NOT NULL,
-  `id_moderador` varchar(50) NOT NULL
+  `id_moderador` varchar(50) NOT NULL,
+  `visitas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `publicacion`
 --
 
-INSERT INTO `publicacion` (`id_publicacion`, `nombre_publicacion`, `descripcion_publicacion`, `valor_publicacion`, `region_publicacion`, `tipo_publicacion`, `estado`, `tipo_turismo`, `email_contacto`, `telefono_contacto`, `direccion`, `redes_sociales`, `comuna_publicacion`, `calificacion_publicacion`, `id_moderador`) VALUES
-(4, 'Torres del paine', 'Estas son las torres del paine, un lugar turistico muy turistiable del sur de chile', 0, 'Magallanes y de la Antártica Chilena', 'servicio', 'aprobado', 'natural', 'paine@gmail.com', 912345678, 'Magallanes y la Antartica Chilena', 'Paine', 'Torres del Paine', 10, '1'),
-(5, 'Ahu Tongariki', 'Este es un lugar donde se puede hacer turismo.', 0, 'Valparaíso', 'servicio', 'aprobado', 'cultural', 'pascua@gmail.com', 912345678, 'rapa nui 123', 'Isla de Pascua', 'Isla de Pascua', 10, '1'),
-(6, 'Termas de Chillan ', 'Las termas de chillan el mejor lugar para pasar el invierno!', 50000, 'Ñuble', 'infraestructura', 'aprobado', 'natural', 'termito@gmail.com', 978781717, 'Las trancas', 'facebook', 'Pinto', 0, '1'),
-(7, 'AAAA', 'aSDASDSAD', 12312, 'Tarapacá', 'servicio', 'pendiente', 'religioso', 'fghjk@gasd.cl', 131415123, 'calle falsa 123', 'faceboo', 'Huara', 0, '1'),
-(8, 'adsasdasd', 'asdasdasd', 123, 'Arica y Parinacota', 'infraestructura', 'pendiente', 'natural', 'e@asd', 123123, '123213', 'a', 'Putre', 0, '1'),
-(9, 'asdasd', 'asdasd', 123123, 'Antofagasta', 'infraestructura', 'pendiente', 'aventura', 'sadas', 123123, 'asdasd', 'asdasd', 'Mejillones', 0, '1'),
-(10, 'asdas', '1asedasd', 123213, 'Tarapacá', 'infraestructura', 'pendiente', 'aventura', 'asadasd', 123123, 'asdasd', 'asdasd', 'Colchane', 0, '1'),
-(25, '123123', '123123', 12313, 'Tarapacá', 'producto', 'pendiente', 'natural', '13123', 123123, '123123', '123123', 'Colchane', 0, '1'),
-(26, '12312', '123123', 123123, 'Antofagasta', 'infraestructura', 'pendiente', 'gastronomico', '123123', 123123, '123123', '12123', 'María Elena', 0, '1'),
-(27, '123123', '123123', 123123, 'Arica y Parinacota', 'servicio', 'pendiente', 'natural', '123123', 123123, '123123', '12312', 'General Lagos', 0, '1'),
-(28, '123123', '123123', 123123, 'Coquimbo', 'servicio', 'pendiente', 'religioso', '123123', 123123, '123123', '123123', 'Monte Patria', 0, '1'),
-(29, '123123123', '121434123', 123123, 'Tarapacá', 'servicio', 'aprobado', 'natural', '1231231', 123123, '123123123', '12312312312', 'Huara', 0, '1');
+INSERT INTO `publicacion` (`id_publicacion`, `nombre_publicacion`, `descripcion_publicacion`, `valor_publicacion`, `region_publicacion`, `tipo_publicacion`, `estado`, `tipo_turismo`, `email_contacto`, `telefono_contacto`, `direccion`, `redes_sociales`, `comuna_publicacion`, `calificacion_publicacion`, `id_moderador`, `visitas`) VALUES
+(4, 'Torres del paine', 'Estas son las torres del paine, un lugar turistico muy turistiable del sur de chile', 0, 'Magallanes y de la Antártica Chilena', 'servicio', 'aprobado', 'natural', 'paine@gmail.com', 912345678, 'Magallanes y la Antartica Chilena', 'Paine', 'Torres del Paine', 10, '1', 5),
+(5, 'Ahu Tongariki', 'Este es un lugar donde se puede hacer turismo.', 0, 'Valparaíso', 'servicio', 'aprobado', 'cultural', 'pascua@gmail.com', 912345678, 'rapa nui 123', 'Isla de Pascua', 'Isla de Pascua', 10, '1', 7),
+(6, 'Termas de Chillan ', 'Las termas de chillan el mejor lugar para pasar el invierno!', 50000, 'Ñuble', 'infraestructura', 'aprobado', 'natural', 'termito@gmail.com', 978781717, 'Las trancas', 'facebook', 'Pinto', 0, '1', 9),
+(29, '123123123', '121434123', 123123, 'Tarapacá', 'servicio', 'aprobado', 'natural', '1231231', 123123, '123123123', '12312312312', 'Huara', 0, '1', 2);
 
 -- --------------------------------------------------------
 
