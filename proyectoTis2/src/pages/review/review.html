@@ -19,7 +19,6 @@
 <ion-content>
 
   <div *ngIf="review" style="padding-top: 55px;">
-    <!-- <div *ngFor="let pub of publicacion"> No me acuerdo por qué puse esto pero funciona sin él-->
     <ion-card *ngFor="let rev of review">
       <ion-card-content>
 
@@ -29,19 +28,12 @@
         <!-- Reseña -->
         <p> {{rev.review}} </p>
 
-        <!-- Pros 
-        <div *ngFor="let pro of pros">
-          <p> {{pro.texto_pro}}</p>
-        </div>
-
-         Contras 
-        <div>
-          <p></p>
-        </div>-->
+        <!-- Calificación -->
+        <hr>
+        <p> Calificación: {{rev.calificacion_review}}</p>
 
       </ion-card-content>
     </ion-card>
-    <!-- </div> -->
   </div>
 
   <div *ngIf="!review">
@@ -80,11 +72,3 @@
     </button>
   </ion-fab>
 </div>
-
-<!--<div>
-  <ion-footer>
-    <ion-toolbar>
-      <ion-title style="text-align: center;" (click)="irCrearReview(pub.id_publicacion)">Agregar Reseña</ion-title>
-    </ion-toolbar>
-  </ion-footer>
-</div> -->

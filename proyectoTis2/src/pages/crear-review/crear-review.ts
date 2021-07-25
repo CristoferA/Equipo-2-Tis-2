@@ -73,31 +73,33 @@ export class CrearReviewPage {
 
   crearReview() {
     var url_review = 'http://localhost/apiRest/public/review/new';
-    //var url_pro = 'http://localhost/apiRest/public/pro/new';
-    //var url_contra = 'http://localhost/apiRest/public/contra/new';
+
     let postData = new FormData();
 
     console.log("El id_publicacion es: " + this.id_publicacion);
     console.log("La reseña es: " + this.review);
     console.log("El id_usuario es: " + this.usuario);
     console.log("El estado es: " + "pendiente");
+    console.log("La calificacion es: " + this.calificacion);
 
-    postData.append('id_publicacion', this.id_publicacion);
     postData.append('review', this.review);
+    postData.append('id_publicacion', this.id_publicacion); 
     postData.append('id_usuario', this.usuario);
     postData.append('estado', "pendiente");
+    postData.append('calificacion_review', this.calificacion);
 
-    this.http.post(url_review, postData)
-    .map(response =>response.json())
-    .subscribe(data=>{
-      console.log(data);
+    this.data_rev = this.http.post(url_review, postData);
+
+    this.data_rev.subscribe(data_rev=>{
+      this.mensajeToast('Reseña enviada correctamente y pendiente de aprobación.');
+      console.log(data_rev);
+      this.navCtrl.setRoot(HomePage);
     },
     err => {
+      this.mensajeToast('Hubo un error, inténtalo más tarde.');
       console.log("OopsReview!");
     });
 
-    this.mensajeToast('Reseña enviada correctamente y pendiente de aprobación.');
-    this.navCtrl.setRoot(HomePage);
   }
 
   irLogeo() {
