@@ -196,15 +196,20 @@ $app->post('/publicacion/new', function(Request $request, Response $response){
 
 });
 //PUT agregar visita publicacion
-$app->post('/publicacion/visita/{id_publicacion}', function(Request $request, Response $response){
-    $id_publicacion = $request->getAttribute('id_publicacion');
+$app->post('/publicacion/visita/', function(Request $request, Response $response){
+    $id_publicacion = $request->getParam('id_publicacion');
     $sql = "UPDATE publicacion SET visitas = visitas+1  WHERE id_publicacion = $id_publicacion";
 
     try{
       $db = new db();
       $db = $db->conectionDB();
-      $result = $db->query($sql);
+
+      $result = $db -> prepare ($sql);
+      $result->bindParam(':id_publicacion',$id_publicacion);
+      //$result = $db->query($sql);
   
+      $result->execute();
+      
       if ($result->rowCount() > 0){
         echo json_encode("Visita agregada.");
       }else {
