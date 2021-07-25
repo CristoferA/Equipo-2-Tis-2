@@ -88,6 +88,7 @@ export class FiltroPage {
     this.navCtrl.push(BusquedaPage, {nombreB: this.nombreBusqueda, regionB: this.regionBusqueda, comunaB: this.comunaBusqueda, tipoPB: this.tipoPubBusqueda, tipoTB: this.tipoTurBusqueda});
 
   }
+  
   ionViewDidLoad() {
     console.log('ionViewDidLoad FiltroPage');
   }
