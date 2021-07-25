@@ -34,6 +34,7 @@ export class PublicacionPage {
     .subscribe(data =>
       {
         this.publicacion = data;
+        this.agregarVisita();
 
         console.log(data);
       },
@@ -129,27 +130,28 @@ export class PublicacionPage {
     toast.present();
   }
   agregarVisita(){
-    let postData = new FormData();
-    
-    var respuesta = JSON.parse(localStorage.getItem('respuesta'));
-    var id_usuario = respuesta.data.id_usuario;
-    console.log(id_usuario);  
+    console.log(this.id_publicacion);
 
-    var url =  'http://localhost/apiRest/public/guardar_publicacion/new';
-    
-    postData.append('id_usuario', id_usuario);
-    postData.append('id_publicacion', this.id_publicacion);
-    this.data = this.http.post(url, postData);
-    this.data.subscribe((data) => {
-      console.log(data);
-      this.navCtrl.pop();
+    this.http.post('http://localhost/apiRest/public/publicacion/visita/'+this.id_publicacion)
+    .map(response => response.json())
+    .subscribe(data =>
+      {
+        if (data === "No existe publicacion en la BBDD con este ID."){
+          console.log("No existe publicacion en la BBDD con este ID.");
+          
+        } 
+        else {
+          console.log(data);
+        }        
 
-    }), err => {
-      console.log("Oops!");
-    }
-
-
+      },
+      err => {
+        console.log("Oops!");
+      }
+    );
   }
+
+  
 
 
 }
