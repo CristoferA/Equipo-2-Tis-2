@@ -114,5 +114,29 @@ export class PublicacionPage {
   }
 
 
+  agregarVisita(){
+    let postData = new FormData();
+    
+    var respuesta = JSON.parse(localStorage.getItem('respuesta'));
+    var id_usuario = respuesta.data.id_usuario;
+    console.log(id_usuario);  
+
+    var url =  'http://localhost/apiRest/public/guardar_publicacion/new';
+    
+    postData.append('id_usuario', id_usuario);
+    postData.append('id_publicacion', this.id_publicacion);
+    this.data = this.http.post(url, postData);
+    this.data.subscribe((data) => {
+      console.log(data);
+      this.navCtrl.pop();
+
+    }), err => {
+      console.log("Oops!");
+    }
+
+
+  }
+
+
 }
 
