@@ -276,6 +276,7 @@ $app->delete('/publicacion/delete/{id}', function(Request $request, Response $re
     echo '{"error" : {"text":'.$e->getMessage().'}';
   }
 });
+
 $app->post('/ultima_publicacion', function (Request $request, Response $response){
     $sql = "SELECT MAX(id_publicacion) AS max_id_publicacion FROM publicacion";
 
