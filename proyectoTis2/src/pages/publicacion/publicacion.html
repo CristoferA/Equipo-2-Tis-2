@@ -13,11 +13,11 @@
     <ion-title *ngFor="let pub of publicacion">{{pub.nombre_publicacion}}</ion-title>
 
     <ion-buttons end>
-      <button ion-button icon-only >
-          <ion-icon name="eye" style="zoom:0.8;" *ngFor="let pub of publicacion"> {{pub.visitas}}</ion-icon>
+      <button ion-button icon-only>
+        <ion-icon name="eye" style="zoom:0.8;" *ngFor="let pub of publicacion"> {{pub.visitas}}</ion-icon>
       </button>
     </ion-buttons>
-    
+
   </ion-navbar>
 </ion-header>
 
@@ -29,14 +29,16 @@
     <ion-item>
       <ion-icon name="md-map" item-start large></ion-icon>
       <h2>{{pub.direccion}}</h2>
-      
+
     </ion-item>
   </ion-card>
 
-  <button ion-button type="submit"(click)="irPublicacionesGuardadas()" style="float:right;"><ion-icon name="md-bookmark" ></ion-icon></button>
+  <button ion-button type="submit" (click)="irPublicacionesGuardadas()" style="float:right;">
+    <ion-icon name="md-bookmark"></ion-icon>
+  </button>
 
   <ion-grid margin-horizontal>
-    
+
     <ion-row>
       <h3>Descripción</h3>
     </ion-row>
@@ -64,11 +66,11 @@
         <button ion-button (click)="irReview(pub.id_publicacion)">Ver reseñas</button>
       </ion-col>
     </ion-row>
-    
+
   </ion-grid>
 
   <hr>
-  
+
   <ion-grid margin-horizontal>
     <ion-row>
       <h3>Datos de contacto</h3>
@@ -97,29 +99,61 @@
         </ion-item>
       </ion-list>
     </ion-row>        -->
-    <ion-grid margin-horizontal>
+
+
+
+
+
+
+
+    <ion-grid margin-horizontal *ngIf="etiqueta?.length;">
       <ion-row>
         <h3>Etiquetas:</h3>
       </ion-row>
-        <div class="a">
-          <p *ngFor="let et of etiqueta" (click)="verPubEtiqueta(et.id_etiqueta)">{{et.etiqueta}}</p>
-        </div>
-        
-      
+      <div class="a">
+        <p *ngFor="let et of etiqueta" (click)="verPubEtiqueta(et.id_etiqueta)">{{et.etiqueta}}</p>
+      </div>
+
+
       <ion-row>
       </ion-row>
     </ion-grid>
-  <br>
-
-  <hr>
-  <div class="centrado">
     <br>
-    <ion-icon  name="logo-facebook" style="zoom:3.0"></ion-icon>
-    <ion-icon  name="logo-instagram" style="zoom:3.0"></ion-icon>
-    <ion-icon  name="logo-twitter" style="zoom:3.0"></ion-icon>
-  </div>
-</ion-grid>
-  
+
+    <ion-row>
+      <h3>Tambien te podria interesar...</h3>
+    </ion-row>
+
+
+    <ion-card *ngFor="let simp of similarPub" (click)="verPub(simp.id_publicacion)">
+      <ion-card-content>
+
+        Usuario
+        <b> {{simp.nombre_publicacion}} </b>
+
+
+
+        <p> {{simp.direccion}} </p>
+        <p>Calificacion: {{simp.calificacion_publicacion}}</p>
+
+        <p>Valor: {{simp.valor_publicacion}}</p>
+
+
+
+      </ion-card-content>
+    </ion-card>
+    <!-- </div> -->
+
+
+    <hr>
+    <div class="centrado">
+      <br>
+      <ion-icon name="logo-facebook" style="zoom:3.0"></ion-icon>
+      <ion-icon name="logo-instagram" style="zoom:3.0"></ion-icon>
+      <ion-icon name="logo-twitter" style="zoom:3.0"></ion-icon>
+    </div>
+  </ion-grid>
+
   <br><br>
-  
+
 </ion-content>

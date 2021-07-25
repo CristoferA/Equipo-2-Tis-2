@@ -25,7 +25,7 @@ export class PublicacionPage {
   id_review:any;
   oferente:any;
   etiqueta: any;
-  
+  similarPub : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl:ToastController) {
 
@@ -53,6 +53,18 @@ export class PublicacionPage {
         console.log("Oops!");
       });
 
+
+      this.http.get('http://localhost/apiRest/public//publicacion_similar/'+this.id_publicacion)
+      .map(response => response.json())
+      .subscribe(data => {
+
+        this.similarPub = data;
+
+      },
+        err => {
+          console.log("Oops!");
+        }
+      );  
   }
 
   ionViewDidLoad() {
@@ -105,6 +117,10 @@ export class PublicacionPage {
 
   }
 
+  verPub(id_publicacion){
+    this.navCtrl.push(PublicacionPage, { valor: id_publicacion });
+  }
+
   presentToast(msg: string){
     let toast = this.toastCtrl.create({
       message: msg,
@@ -112,8 +128,6 @@ export class PublicacionPage {
     });
     toast.present();
   }
-
-
   agregarVisita(){
     let postData = new FormData();
     

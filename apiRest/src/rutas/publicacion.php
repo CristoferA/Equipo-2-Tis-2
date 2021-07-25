@@ -4,10 +4,12 @@ ini_set('display_errors', 1);
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
+
 //GET de todas las publicaciones
 
 $app->get('/publicacion', function (Request $request, Response $response){
-      
+    
+    
     $sql = "SELECT * FROM publicacion WHERE estado='aprobado'";
     try {
         $db = new db();
@@ -31,7 +33,8 @@ $app->get('/publicacion', function (Request $request, Response $response){
 
 //ORDENA POR NOMBRE DE FORMA ASCENDENTE
 $app->get('/publicacion_ordenada_ASC', function (Request $request, Response $response){
-     
+    
+    
     $sql = "SELECT * FROM publicacion WHERE estado='aprobado' ORDER BY nombre_publicacion ASC";
     try {
         $db = new db();
@@ -55,6 +58,7 @@ $app->get('/publicacion_ordenada_ASC', function (Request $request, Response $res
 
 //ORDENA POR NOMBRE DE FORMA DESCENDENTE
 $app->get('/publicacion_ordenada_DES', function (Request $request, Response $response){
+    
     
     $sql = "SELECT * FROM publicacion WHERE estado='aprobado' ORDER BY nombre_publicacion DESC";
     try {
@@ -99,7 +103,7 @@ $app->get('/publicacion/{id_publicacion}', function(Request $request, Response $
     }
   }); 
 
-//  Lista de una publicaciones por parametros 
+// GET Lista de una publicaciones por parametros 
 $app->post('/publicacion/buscar', function(Request $request, Response $response){
     $nombre_publicacion= $request->getParam('nombre_publicacion');
     $region_publicacion= $request->getParam('region_publicacion');
@@ -181,6 +185,7 @@ $app->post('/publicacion/new', function(Request $request, Response $response){
         $result->bindParam(':calificacion_publicacion',$calificacion_publicacion);
         $result->bindParam(':id_moderador',$id_moderador);
 
+
         $result->execute();
         echo json_encode("Publicacion Guardada");
         $result=null;
@@ -190,7 +195,6 @@ $app->post('/publicacion/new', function(Request $request, Response $response){
     }
 
 });
-
 //PUT agregar visita publicacion
 $app->post('/publicacion/visita/{id_publicacion}', function(Request $request, Response $response){
     $id_publicacion = $request->getAttribute('id_publicacion');
@@ -232,6 +236,7 @@ $app->put('/publicacion/editar/{id_publicacion}', function(Request $request, Res
     $comuna_publicacion = $request->getAttribute('comuna_publicacion'); 
     $calificacion_publicacion = $request->getAttribute('calificacion_publicacion'); 
     
+
     $sql = "UPDATE publicacion 
     SET nombre_publicacion =:nombre_publicacion,
     descripcion_publicacion =:descripcion_publicacion,
@@ -276,6 +281,7 @@ $app->put('/publicacion/editar/{id_publicacion}', function(Request $request, Res
     }
 });
 
+
 //DELETE borrar publicacion
 
 $app->delete('/publicacion/delete/{id}', function(Request $request, Response $response){
@@ -298,7 +304,6 @@ $app->delete('/publicacion/delete/{id}', function(Request $request, Response $re
     echo '{"error" : {"text":'.$e->getMessage().'}';
   }
 });
-
 $app->post('/ultima_publicacion', function (Request $request, Response $response){
     $sql = "SELECT MAX(id_publicacion) AS max_id_publicacion FROM publicacion";
 
@@ -374,17 +379,20 @@ $app->get('/publicacion_similar/{id_publicacion}', function (Request $request, R
             OR tipo_turismo = '$tipo_turismo' 
             OR tipo_publicacion = '$tipo_turismo')
             AND estado = 'aprobado'
-            AND NOT id_publicacion = '$id_publicacion'";
+            AND NOT id_publicacion = '$id_publicacion'
+            ORDER BY region_publicacion DESC";
 
             $result = $db -> query($sql2);
 
             if($result -> rowCount() > 0){
-                  $publicaciones = $result -> fetchAll(PDO::FETCH_OBJ);
+  
+                $publicaciones = $result -> fetchAll(PDO::FETCH_OBJ);
                 echo json_encode($publicaciones);
             }else{
                 echo "No hay publicaciones similares a esta!";
             }
-        
+            
+
         }else{
             echo json_encode("No hay publicaciones aun!.");
         }
@@ -425,6 +433,9 @@ $app->post('/publicacion_detallada/new', function(Request $request, Response $re
     //id_usuario
     $id_oferente = $request->getParam('id_oferente');
 
+
+
+
     $sql= "INSERT INTO publicacion (nombre_publicacion, descripcion_publicacion, valor_publicacion, region_publicacion,
     tipo_publicacion, estado, tipo_turismo, email_contacto, telefono_contacto, direccion, redes_sociales, comuna_publicacion,
     calificacion_publicacion, id_moderador) 
@@ -432,10 +443,21 @@ $app->post('/publicacion_detallada/new', function(Request $request, Response $re
     :tipo_publicacion, :estado, :tipo_turismo, :email_contacto, :telefono_contacto, :direccion, :redes_sociales, :comuna_publicacion,
     :calificacion_publicacion, :id_moderador)";
 
+
+    
+
+
+
     try{
         $db = new db();
         $db = $db -> conectionDB();
         $result = $db -> prepare ($sql);
+
+
+
+
+
+
 
         $result->bindParam(':nombre_publicacion',$nombre_publicacion);
         $result->bindParam(':descripcion_publicacion',$descripcion_publicacion);
@@ -459,6 +481,8 @@ $app->post('/publicacion_detallada/new', function(Request $request, Response $re
         $result->bindParam(':id_oferente',$id_oferente);
         $result->bindParam(':id_publicacion',$insertId);
        
+
+
         $result->execute();
         
         echo json_encode($insertId);
@@ -467,5 +491,8 @@ $app->post('/publicacion_detallada/new', function(Request $request, Response $re
     }catch(PDOException $e){
         echo '{"error" : {"text":'.$e->getMessage().'}'; 
     }
+
+
+
     
 });

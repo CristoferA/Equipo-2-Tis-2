@@ -66,10 +66,12 @@ $app->post('/comentario/new', function(Request $request, Response $response){
 
 
 $app->post('/comentario/like', function(Request $request, Response $response){
-    $id_comentario = $request->getAttribute('id_comentario');
-    $likes = $request -> getParam('likes');  
+    $id_comentario = $request->getParam('id_comentario');
+     
        
-    $sql = "UPDATE comentario SET likes: likes+1 WHERE id_comentario = '$id_comentario'";
+    $sql = "UPDATE comentario 
+            SET likes = likes+1 
+            WHERE id_comentario = '$id_comentario'";
 
     /*$sql= "INSERT INTO comentario (comentario, id_publicacion, id_usuario) 
     VALUES (:comentario, :id_publicacion, :id_usuario)";*/
@@ -81,14 +83,21 @@ $app->post('/comentario/like', function(Request $request, Response $response){
 
         //$result->bindParam(':id_review',$id_review);
         
-        $result->bindParam(':id_publicacion',$id_publicacion);
-        $result->bindParam(':likes',$likes);
+        $result->bindParam(':id_comentario',$id_comentario);
+        
         
     
         
 
         $result->execute();
-        echo json_encode("Like Guardada");
+
+        $count = $result->rowCount();
+        if($count = $result->rowCount()){
+          echo "Ta bueno";
+        } else{
+          echo "ta malo";
+        }
+       
         $result=null;
         $db=null;
     }catch(PDOException $e){
