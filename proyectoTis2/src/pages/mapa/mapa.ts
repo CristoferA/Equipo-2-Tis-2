@@ -13,8 +13,12 @@ export class MapaPage {
 
   id_publicacion:any;
 
+  direccionPub = this.navParams.get('direccionP');
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
+
+    console.log("Direccion recibida: " + this.direccionPub);
 
 
 

@@ -28,6 +28,8 @@ export class PublicacionPage {
   etiqueta: any;
   similarPub : any;
 
+  direccionPub: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl:ToastController) {
 
     this.http.get('http://localhost/apiRest/public/publicacion_detallada/'+this.id_publicacion)
@@ -153,7 +155,7 @@ export class PublicacionPage {
   }
 
   irMapa(){
-    this.navCtrl.push(MapaPage);
+    this.navCtrl.push(MapaPage, {direccionP: direccionP.innerText});
   }
 
 
