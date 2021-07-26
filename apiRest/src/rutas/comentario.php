@@ -10,7 +10,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 // GET Lista de una publicacion especifica por ID 
 $app->get('/comentario/{id_publicacion}', function(Request $request, Response $response){
     $id_publicacion = $request->getAttribute('id_publicacion');
-    $sql = "SELECT * FROM comentario WHERE id_publicacion = '$id_publicacion'";
+    $sql = "SELECT * FROM comentario WHERE id_publicacion = '$id_publicacion' ORDER BY likes DESC";
     try{
       $db = new db();
       $db = $db->conectionDB();
@@ -64,44 +64,74 @@ $app->post('/comentario/new', function(Request $request, Response $response){
 
 });
 
-
 $app->post('/comentario/like', function(Request $request, Response $response){
-    $id_comentario = $request->getParam('id_comentario');
+  $id_comentario = $request->getParam('id_comentario');
+      
+  $sql = "UPDATE comentario 
+          SET likes = likes+1 
+          WHERE id_comentario = '$id_comentario'";
+
+  /*$sql= "INSERT INTO comentario (comentario, id_publicacion, id_usuario) 
+  VALUES (:comentario, :id_publicacion, :id_usuario)";*/
+
+  try{
+      $db = new db();
+      $db = $db -> conectionDB();
+      $result = $db -> prepare ($sql);
+
+      //$result->bindParam(':id_review',$id_review);
+      
+      $result->bindParam(':id_comentario',$id_comentario);
+      
+      $result->execute();
+
+      $count = $result->rowCount();
+      if($count>0){
+        echo "Ta bueno";
+      } else{
+        echo "ta malo";
+      }
      
-       
-    $sql = "UPDATE comentario 
-            SET likes = likes+1 
-            WHERE id_comentario = '$id_comentario'";
+      $result=null;
+      $db=null;
+  }catch(PDOException $e){
+      echo '{"error" : {"text":'.$e->getMessage().'}'; 
+  }
 
-    /*$sql= "INSERT INTO comentario (comentario, id_publicacion, id_usuario) 
-    VALUES (:comentario, :id_publicacion, :id_usuario)";*/
+});
 
-    try{
-        $db = new db();
-        $db = $db -> conectionDB();
-        $result = $db -> prepare ($sql);
+$app->post('/comentario/dislike', function(Request $request, Response $response){
+  $id_comentario = $request->getParam('id_comentario');
+      
+  $sql = "UPDATE comentario 
+          SET likes = likes-1 
+          WHERE id_comentario = '$id_comentario'";
 
-        //$result->bindParam(':id_review',$id_review);
-        
-        $result->bindParam(':id_comentario',$id_comentario);
-        
-        
-    
-        
+  /*$sql= "INSERT INTO comentario (comentario, id_publicacion, id_usuario) 
+  VALUES (:comentario, :id_publicacion, :id_usuario)";*/
 
-        $result->execute();
+  try{
+      $db = new db();
+      $db = $db -> conectionDB();
+      $result = $db -> prepare ($sql);
 
-        $count = $result->rowCount();
-        if($count = $result->rowCount()){
-          echo "Ta bueno";
-        } else{
-          echo "ta malo";
-        }
-       
-        $result=null;
-        $db=null;
-    }catch(PDOException $e){
-        echo '{"error" : {"text":'.$e->getMessage().'}'; 
-    }
+      //$result->bindParam(':id_review',$id_review);
+      
+      $result->bindParam(':id_comentario',$id_comentario);
+      
+      $result->execute();
+
+      $count = $result->rowCount();
+      if($count>0){
+        echo "Ta bueno";
+      } else{
+        echo "ta malo";
+      }
+     
+      $result=null;
+      $db=null;
+  }catch(PDOException $e){
+      echo '{"error" : {"text":'.$e->getMessage().'}'; 
+  }
 
 });

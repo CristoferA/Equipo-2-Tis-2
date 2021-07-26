@@ -37,7 +37,6 @@ export class HomePage {
 
   irPublicacion(id_publicacion) {
 
-
     let postData = new FormData();
 
     if ('respuesta' in localStorage) {

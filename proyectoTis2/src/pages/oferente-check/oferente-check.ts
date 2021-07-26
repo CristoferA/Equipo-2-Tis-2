@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { LoginPage } from '../login/login';
+//import { LoginPage } from '../login/login';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs';
+//import { Observable } from 'rxjs';
 
 /**
  * Generated class for the OferenteCheckPage page.

@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { Http } from '@angular/http';
-import { HomePage } from '../home/home';
+//import { HomePage } from '../home/home';
 import { AgregarEtiquetaPage } from '../agregar-etiqueta/agregar-etiqueta';
 /**
  * Generated class for the CrearPublicacionPage page.

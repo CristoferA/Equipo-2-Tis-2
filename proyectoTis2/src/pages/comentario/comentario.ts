@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { CrearComentarioPage } from '../crear-comentario/crear-comentario';
@@ -17,41 +17,40 @@ import { CrearComentarioPage } from '../crear-comentario/crear-comentario';
 })
 export class ComentarioPage {
 
-  publicacion:any;
-  comentario:any;
+  publicacion: any;
+  comentario: any;
   id_publicacion = this.navParams.get('valor');
-  data_pub:Observable<any>;
-  data_com:Observable<any>;
-  data_likes:Observable<any>;
-  like:any;
+  id_comentario = this.navParams.get('valor');;
+  data_pub: Observable<any>;
+  data_com: Observable<any>;
+  data_likes: Observable<any>;
+  data_dislike: Observable<any>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public toastCtrl: ToastController) {
 
-    this.http.get('http://localhost/apiRest/public/publicacion/'+this.id_publicacion)
-    .map(response => response.json())
-    .subscribe(data_pub =>
-      {
+    this.http.get('http://localhost/apiRest/public/publicacion/' + this.id_publicacion)
+      .map(response => response.json())
+      .subscribe(data_pub => {
         this.publicacion = data_pub;
 
         console.log(data_pub);
       },
-      err => {
-        console.log("Oops!");
-      }
-    );
+        err => {
+          console.log("Oops!");
+        }
+      );
 
     this.http.get('http://localhost/apiRest/public/comentario/' + this.id_publicacion)
-    .map(response => response.json())
-    .subscribe(data_com =>
-      {
+      .map(response => response.json())
+      .subscribe(data_com => {
         this.comentario = data_com;
 
         console.log(data_com);
       },
-      err => {
-        console.log("Oops!");
-      }
-    );
+        err => {
+          console.log("Oops!");
+        }
+      );
 
   }
 
@@ -59,35 +58,81 @@ export class ComentarioPage {
     console.log('Ya cargó ComentarioPage');
   }
 
-  irCrearComentario(id_publicacion){
-    this.navCtrl.push(CrearComentarioPage, {valor: id_publicacion});
+  irCrearComentario(id_publicacion) {
+    this.navCtrl.push(CrearComentarioPage, { valor: id_publicacion });
   }
 
-  /*darLike(){
-    this.likes = this.likes + 1;
-    console.log(this.likes);
-    return this.likes;
-  }*/
+  mensajeToast(msg) {
+    const toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
+    });
+    toast.present();
+  }
 
-  darLike(){
-    var url = 'http://localhost/apiRest/public/comentario/likes';
-    let postData = new FormData();
+  darLike(id_comentario) {
+    console.log('Entró a darLike()');
+    if ('respuesta' in localStorage) {
+      var respuesta = JSON.parse(localStorage.getItem('respuesta'));
+      var id_usuario = respuesta.data.id_usuario;
+      console.log('El usuario logeado es: ' + id_usuario);
 
-    //let num = this.likes;
-    //var numero_likes: number = num;
-    //var stringForm = num.toString();
+      let le_dio_like:boolean = false;
+      if (!le_dio_like) {
+        var url = 'http://localhost/apiRest/public/comentario/like';
+        let postData = new FormData();
 
-    console.log("this.likes es: " + this.like);
+        console.log("id_comentario es: " + id_comentario);
 
-    postData.append('likes',this.like);
+        postData.append('id_comentario', id_comentario);
 
-    this.data_likes = this.http.post(url, postData);
-    this.data_likes.subscribe((data_likes) => {
-      console.log(data_likes);
-      location.reload();
-    },
-    err => {
-      console.log("OopsLikes!");
-    })
+        this.data_likes = this.http.post(url, postData);
+        this.data_likes.subscribe((data_likes) => {
+          this.mensajeToast('Te gusta este comentario.');
+          console.log(data_likes);
+          le_dio_like = true;
+        },
+          err => {
+            console.log("OopsLikes!");
+          })
+      } else {
+        this.mensajeToast('Ya le diste "me gusta" a este comentario.');
+      }
+    } else {
+      this.mensajeToast('Debe iniciar sesión para darle "me gusta" a un comentario.');
+    }
+  }
+
+  darDislike(id_comentario) {
+    console.log('Entró a darDislike()');
+    if ('respuesta' in localStorage) {
+      var respuesta = JSON.parse(localStorage.getItem('respuesta'));
+      var id_usuario = respuesta.data.id_usuario;
+      console.log('El usuario logeado es: ' + id_usuario);
+
+      let le_dio_like:boolean = false;
+      if (!le_dio_like) {
+        var url = 'http://localhost/apiRest/public/comentario/dislike';
+        let postData = new FormData();
+
+        console.log("id_comentario es: " + id_comentario);
+
+        postData.append('id_comentario', id_comentario);
+
+        this.data_dislike = this.http.post(url, postData);
+        this.data_dislike.subscribe((data_dislike) => {
+          this.mensajeToast('No te gusta este comentario.');
+          console.log(data_dislike);
+          le_dio_like = true;
+        },
+          err => {
+            console.log("OopsLikes!");
+          })
+      } else {
+        this.mensajeToast('Ya le diste "me gusta" a este comentario.');
+      }
+    } else {
+      this.mensajeToast('Debe iniciar sesión para darle "me gusta" a un comentario.');
+    }
   }
 }
