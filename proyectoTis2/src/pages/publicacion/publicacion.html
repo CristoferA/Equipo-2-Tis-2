@@ -25,11 +25,10 @@
 
   <img src="../assets/imgs/paine.jpg">
 
-  <ion-card (click)="irMapa()">
+  <ion-card (click)="irMapa(pub.direccion)" style="zoom:0.8;">
     <ion-item>
       <ion-icon name="md-map" item-start large></ion-icon>
-      <h2 id="direccionP">{{pub.direccion}}</h2>
-
+      <ion-label position="floating">{{pub.direccion}}</ion-label>
     </ion-item>
   </ion-card>
 
