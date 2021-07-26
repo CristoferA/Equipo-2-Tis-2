@@ -155,7 +155,7 @@ export class PublicacionPage {
   }
 
   irMapa(){
-    this.navCtrl.push(MapaPage, {direccionP: direccionP.innerText});
+    //this.navCtrl.push(MapaPage, {direccionP: direccionP.innerText});
   }
 
 
