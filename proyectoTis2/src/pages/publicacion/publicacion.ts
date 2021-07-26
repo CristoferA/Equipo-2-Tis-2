@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { ReviewPage } from '../review/review';
 import { ComentarioPage } from '../comentario/comentario';
 import { PublicacionesOferentePage } from '../publicaciones-oferente/publicaciones-oferente';
+import { MapaPage } from '../mapa/mapa';
 import { EtiquetaPublicacionPage } from '../etiqueta-publicacion/etiqueta-publicacion';
 import { ToastController } from 'ionic-angular';
 
@@ -151,7 +152,9 @@ export class PublicacionPage {
     );
   }
 
-  
+  irMapa(){
+    this.navCtrl.push(MapaPage);
+  }
 
 
 }
