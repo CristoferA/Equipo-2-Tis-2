@@ -23,7 +23,7 @@ export class ComentarioPage {
   data_pub:Observable<any>;
   data_com:Observable<any>;
   data_likes:Observable<any>;
-  likes:any;
+  like:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
 
@@ -72,12 +72,14 @@ export class ComentarioPage {
   darLike(){
     var url = 'http://localhost/apiRest/public/comentario/likes';
     let postData = new FormData();
-    let num = this.likes;
-    var stringForm = num.toString();
 
-    console.log("this.likes es: " + this.likes);
+    //let num = this.likes;
+    //var numero_likes: number = num;
+    //var stringForm = num.toString();
 
-    postData.append('likes',stringForm);
+    console.log("this.likes es: " + this.like);
+
+    postData.append('likes',this.like);
 
     this.data_likes = this.http.post(url, postData);
     this.data_likes.subscribe((data_likes) => {
