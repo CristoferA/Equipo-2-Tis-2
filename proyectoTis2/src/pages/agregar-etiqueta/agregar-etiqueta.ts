@@ -1,15 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-/**
- * Generated class for the AgregarEtiquetaPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -21,9 +15,9 @@ export class AgregarEtiquetaPage {
   publicacion: any;
   publicacionesDes: any;
   etiqueta: any;
-  id= this.navParams.get('valor');
+  id = this.navParams.get('valor');
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http ) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public toastCtrl: ToastController) {
     console.log(this.id);
   }
 
@@ -31,32 +25,38 @@ export class AgregarEtiquetaPage {
     console.log('ionViewDidLoad AgregarEtiquetaPage');
   }
 
+  mensajeToast(msg) {
+    const toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
+    });
+    toast.present();
+  }
 
-  crearEtiqueta(){
+  crearEtiqueta() {
 
     let postData = new FormData();
     postData.append('etiqueta', this.etiqueta);
-    postData.append('id_publicacion',this.id);
+    postData.append('id_publicacion', this.id);
 
-    this.http.post('http://localhost/apiRest/public/etiqueta/new',postData)
-    .map(response => response.json())
-    .subscribe(data =>
-      {
+    this.http.post('http://localhost/apiRest/public/etiqueta/new', postData)
+      .map(response => response.json())
+      .subscribe(data => {
         console.log(data);
-        this.etiqueta="";
-        postData= null;
+        this.etiqueta = "";
+        postData = null;
       },
-      err => {
-        console.log("Oops!");
-        this.etiqueta="";
-        postData= null;
+        err => {
+          console.log("Oops!");
+          this.etiqueta = "";
+          postData = null;
 
-        //AQUI PODRIAN PONER UN TOAST??? que diga ETIQUETA NO VALIDA O ALGO ASI
-      }
+          this.mensajeToast('Etiqueta no válida.')
+        }
       );
   }
 
-  irHome(){
+  irHome() {
     //AQUI PODRIAN PONER UN TOAST??? que diga PUBLICACION EN ESPERA DE APROBACION
     this.navCtrl.setRoot(HomePage);
   }
