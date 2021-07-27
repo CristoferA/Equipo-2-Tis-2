@@ -426,7 +426,9 @@ $app->post('/publicacion_detallada/new', function(Request $request, Response $re
     $direccion = $request->getParam('direccion');
     $redes_sociales = $request->getParam('redes_sociales'); 
     $comuna_publicacion = $request->getParam('comuna_publicacion'); 
-    $calificacion_publicacion = $request->getParam('calificacion_publicacion'); 
+    $calificacion_publicacion = $request->getParam('calificacion_publicacion');
+    $visitas = $request->getParam('visitas');  
+
     $id_moderador = $request->getParam('id_moderador'); 
     
 
@@ -438,10 +440,10 @@ $app->post('/publicacion_detallada/new', function(Request $request, Response $re
 
     $sql= "INSERT INTO publicacion (nombre_publicacion, descripcion_publicacion, valor_publicacion, region_publicacion,
     tipo_publicacion, estado, tipo_turismo, email_contacto, telefono_contacto, direccion, redes_sociales, comuna_publicacion,
-    calificacion_publicacion, id_moderador) 
+    calificacion_publicacion, id_moderador, visitas) 
     VALUES (:nombre_publicacion, :descripcion_publicacion, :valor_publicacion, :region_publicacion,
     :tipo_publicacion, :estado, :tipo_turismo, :email_contacto, :telefono_contacto, :direccion, :redes_sociales, :comuna_publicacion,
-    :calificacion_publicacion, :id_moderador)";
+    :calificacion_publicacion, :id_moderador, :visitas)";
 
 
     
@@ -473,6 +475,8 @@ $app->post('/publicacion_detallada/new', function(Request $request, Response $re
         $result->bindParam(':comuna_publicacion',$comuna_publicacion);
         $result->bindParam(':calificacion_publicacion',$calificacion_publicacion);
         $result->bindParam(':id_moderador',$id_moderador);
+        $result->bindParam(':visitas',$visitas);
+        
         $result->execute();
 
         $insertId= $db->lastInsertId();
