@@ -18,14 +18,6 @@
 
   <img src="../assets/imgs/paine.jpg">
 
-  <!-- Botón para guardar la publicación -->
-  <ion-buttons end>
-    <button ion-button end round (click)="irPublicacionesGuardadas()" style="zoom:0.9;">
-      Guardar Publicación &nbsp;
-      <ion-icon name="md-bookmark" style="zoom:1.5;"></ion-icon>
-    </button>
-  </ion-buttons>
-
   <!-- Mapa -->
   <ion-card (click)="irMapa(pub.direccion)" style="zoom:0.8;">
     <ion-item>
@@ -34,26 +26,34 @@
     </ion-item>
   </ion-card>
 
+  <!-- Botón para guardar la publicación -->
+  <div style="text-align: center;">
+    <button ion-button end round (click)="irPublicacionesGuardadas()" style="zoom:0.9;">
+      Guardar Publicación &nbsp;
+      <ion-icon name="md-bookmark" style="zoom:1.5;"></ion-icon>
+    </button>
+  </div>
+
   <!-- Descripción de la publicación -->
-  <ion-grid padding>
+  <ion-grid padding style="padding-bottom: 0px; padding-top: 0px;">
     <ion-row>
-      <h3>Descripción</h3>
+      <h3 style="padding-top: 14px; margin: 0px;">Descripción</h3>
     </ion-row>
     <ion-row>
-      <p>{{pub.descripcion_publicacion}}</p>
+      <p style="text-align: justify; margin-bottom: 7px;">{{pub.descripcion_publicacion}}</p>
     </ion-row>
   </ion-grid>
 
   <hr>
 
   <!-- Opiniones (comentarios y reseñas) y calificación de la publicación-->
-  <ion-grid padding>
+  <ion-grid padding style="padding-bottom: 0px; padding-top: 0px;">
     <ion-row>
-      <h3>Opiniones y valoraciones</h3>
+      <h3 style="padding-top: 7px; padding-bottom: 7px; margin: 0px;">Opiniones y valoraciones</h3>
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-icon name="md-star" item-start large></ion-icon> Calificación {{pub.calificacion_publicacion}}/10
+        <ion-icon name="md-star" item-start large></ion-icon> Calificación: {{pub.calificacion_publicacion}}/10
       </ion-col>
     </ion-row>
     <ion-row>
@@ -69,9 +69,9 @@
   <hr>
 
   <!-- Datos de contacto de la publicación -->
-  <ion-grid padding>
+  <ion-grid padding style="padding-bottom: 0px; padding-top: 0px;">
     <ion-row>
-      <h3>Datos de contacto</h3>
+      <h3 style="padding-top: 7px; padding-bottom: 12px; margin: 0px;">Datos de contacto</h3>
     </ion-row>
     <ion-row>
       <ion-list no-margin>
@@ -94,16 +94,16 @@
   <hr>
 
   <!-- Etiquetas/Hashtags de la publicación -->
-  <ion-grid margin-horizontal *ngIf="etiqueta?.length;">
+  <ion-grid padding style="padding-bottom: 0px; padding-top: 0px;" *ngIf="etiqueta?.length;">
     <ion-row>
-      <h3>Etiquetas:</h3>
+      <h3 style="padding-top: 7px; padding-bottom: 7px; margin: 0px;">Etiquetas:</h3>
     </ion-row>
 
     <div class="a">
-      <p *ngFor="let et of etiqueta" (click)="verPubEtiqueta(et.id_etiqueta)">{{et.etiqueta}}</p>
+      <p *ngFor="let et of etiqueta" (click)="verPubEtiqueta(et.id_etiqueta)" style="text-align: justify; margin-bottom: 7px;">{{et.etiqueta}}</p>
     </div>
   </ion-grid>
-  
+
   <hr>
 
   <!-- Publicaciones similares -->

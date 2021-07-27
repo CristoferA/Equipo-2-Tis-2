@@ -1,30 +1,30 @@
 page-historial {
-    
-
     ion-content {
         background-color: hsl(187, 71%, 77%) !important;
     }
 
-    h1{
+    h1 {
         color: rgb(52, 147, 163);
         font-weight: bold;
     }
 
-    h3{
+    h3 {
         color: rgb(52, 147, 163);
         font-weight: bold;
     }
-    
-    h2,p {
+
+    h2,
+    p {
         color: black;
     }
 
     .card {
-        background-color: #ccf8fc; 
-        h2{
+        background-color: #ccf8fc;
+        h2 {
             font-weight: bold;
         }
-      }
+    }
+
     ion-list {
         margin: 10;
         padding: 0;
@@ -32,6 +32,11 @@ page-historial {
         list-style-type: none;
     }
 
-
-
+    .center {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        width: 50%;
+    }
 }

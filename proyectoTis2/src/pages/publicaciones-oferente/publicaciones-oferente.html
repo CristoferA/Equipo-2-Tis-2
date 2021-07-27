@@ -4,20 +4,19 @@
       <ion-icon name="menu" style="zoom:1.3;"></ion-icon>
     </button>
 
-    <ion-title *ngFor="let pub of publicaciones | slice:0:1; let first = first;" text-align="center" >{{pub.nombre_usuario}}</ion-title>
-
+    <ion-title *ngFor="let pub of publicaciones | slice:0:1; let first = first;" text-align="center">Publicaciones de
+      {{pub.nombre_usuario}}</ion-title>
 
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
-
   <ion-row>
-    <ion-col >
+    <ion-col>
       <p style="margin-top: 8px">Publicaciones encontradas: </p>
     </ion-col>
-    <ion-col >
+    <ion-col>
       <ion-buttons end>
         <button ion-button round icon-right (click)="irOrdenar" style="zoom:0.8;">
           Ordenar
@@ -29,7 +28,8 @@
         </button>
       </ion-buttons>
     </ion-col>
-  </ion-row>  
+  </ion-row>
+
   <!-- Muestra de publicaciones -->
   <hr>
   <ion-card *ngFor="let pub of publicaciones" (click)="irPublicacion(pub.id_publicacion)">
@@ -42,13 +42,17 @@
           <p>{{pub.nombre_publicacion}}</p>
         </ion-col>
         <ion-col class="ion-align-self-end">
-          <p><ion-icon name="logo-usd"></ion-icon> {{pub.valor_publicacion}}</p>
+          <p>
+            <ion-icon name="logo-usd"></ion-icon> {{pub.valor_publicacion}}
+          </p>
         </ion-col>
       </ion-row>
-      
+
       <ion-row>
         <ion-col>
-          <p><ion-icon name="pin"></ion-icon> {{pub.direccion}}</p>
+          <p>
+            <ion-icon name="pin"></ion-icon> {{pub.direccion}}
+          </p>
         </ion-col>
       </ion-row>
 
@@ -68,6 +72,6 @@
       </ion-row>
     </ion-card-content>
   </ion-card>
-  <!-- ---------------------- -->
+  <!-------------------------->
 
 </ion-content>
