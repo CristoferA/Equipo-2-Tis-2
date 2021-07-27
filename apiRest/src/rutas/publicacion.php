@@ -336,7 +336,7 @@ $app->get('/publicacion_detallada/{id_publicacion}', function (Request $request,
     AND publicacion.id_publicacion = publica.id_publicacion
     AND publica.id_oferente = oferente.usuario
     AND oferente.usuario = usuario.id_usuario
-    ORDER BY valor_publicacion DESC";
+    ORDER BY visitas DESC";
     try {
         $db = new db();
         $db = $db -> conectionDB();
@@ -377,7 +377,7 @@ $app->get('/publicacion_similar/{id_publicacion}', function (Request $request, R
             $sql2 = "SELECT * FROM publicacion 
             WHERE (region_publicacion = '$region_publicacion'
             OR tipo_turismo = '$tipo_turismo' 
-            OR tipo_publicacion = '$tipo_turismo')
+            OR tipo_publicacion = '$tipo_publicacion')
             AND estado = 'aprobado'
             AND NOT id_publicacion = '$id_publicacion'
             ORDER BY region_publicacion DESC";

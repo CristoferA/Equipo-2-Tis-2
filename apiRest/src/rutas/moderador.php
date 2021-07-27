@@ -4,6 +4,105 @@ ini_set('display_errors', 1);
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
+// GET Lista de una publicacion especifica por ID 
+$app->post('/publicacion_aprobada', function(Request $request, Response $response){
+    $id_publicacion = $request->getParam('id_publicacion');
+    $sql = "SELECT * FROM publicacion WHERE id_publicacion = '$id_publicacion'";
+    try{
+      $db = new db();
+      $db = $db->conectionDB();
+      $result = $db->prepare($sql);
+
+      $result->bindParam(':id_publicacion',$id_publicacion);
+
+      $result->execute();
+      echo json_encode("OJALA PESQUE");
+  
+     /* if ($result->rowCount() > 0){
+        $publicacion = $result->fetchAll(PDO::FETCH_OBJ);
+        echo json_encode($publicacion);
+      }else {
+        echo json_encode("No existen publicaciones en la BBDD con este ID.");
+      }*/
+      $result = null;
+      $db = null;
+    }catch(PDOException $e){
+      echo '{"error" : {"text":'.$e->getMessage().'}';
+    }
+  }); 
+
+
+
+$app->get('/publicacion_moderador',function(Request $reques, Response $response){
+
+    $sql = "SELECT * FROM publicacion ORDER BY estado ASC";
+    try {
+        $db = new db();
+        $db = $db->conectionDB();
+
+        $result = $db ->query($sql);
+
+        $result ->rowCount();
+        if($result ->rowCount()>0){
+
+            $publicaciones = $result -> fetchAll(PDO::FETCH_OBJ);
+            echo json_encode($publicaciones);
+
+        }else{
+            echo json_encode("WOPS");
+        }
+    }catch(PDOException $e){
+        echo '{"error" : {"texto":'.$e->getMessage().'}';
+    }
+});
+
+
+
+
+//LOGIN MOD
+
+
+$app->post('/login-moderador',function(Request $request, Response $response){
+    $id_usuario = $request->getParam('id_usuario');
+    $contrasena = $request->getParam('contrasena');
+    $codigo = $request ->getParam('codigo');
+    $contrasena=hash('sha256',$contrasena);
+    $sql = "SELECT id_usuario FROM usuario, moderador 
+    WHERE (id_usuario='$id_usuario' OR email_usuario='$id_usuario') 
+    AND contrasena ='$contrasena' AND codigo = '$codigo'";
+
+    try{
+        $db = new db();
+        $db = $db -> conectionDB();  
+        $data='';
+ 
+        $result = $db -> prepare ($sql);
+        $result->bindParam(':id_usuario',$id_usuario);        
+        $result->bindParam(':contrasena',$contrasena);
+        $result->bindParam(':codigo',$codigo);
+        $result->execute();
+        
+        $count = $result->rowCount();
+        $data=$result->fetch(PDO::FETCH_OBJ);       
+
+        if(!empty($data)){
+            $user_id=$data->id_usuario;
+            $data->token = apiToken($user_id);
+        }
+        $db=null;
+
+        if($data){
+            $data=json_encode($data);
+            echo '{"data": ' .$data . '}';            
+        }else{
+            echo '{"error":{"text":"Bad request wrong username and password"}}';
+        }
+    }catch(PDOException $e){
+        echo '{"error" : {"texto":'.$e->getMessage().'}'; 
+    }
+});
+
+
 //GET de todas las publicaciones
 
 $app->get('/moderador', function (Request $request, Response $response){
