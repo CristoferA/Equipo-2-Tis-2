@@ -17,25 +17,23 @@
 
 <ion-content padding>
 
-  <div class="centrado">
+  <div style="text-align: center;">
     <img src="../assets/imgs/logo_empresa1.png" style="height:70px">
-    <br>
-    <p>Los mejores atractivos turísticos</p>
-    <p>para visitar a lo largo del pais!</p>
+    <h4 style="text-align: center; padding-bottom: 10px; padding-top: 10px; margin: 0px;"> Los mejores atractivos turísticos para visitar a lo largo del pais! </h4>
   </div>
   <hr>
 
   <ion-row>
     <ion-col>
-      <p style="margin-top: 8px">Lugares mejor valorados: </p>
+      <p style="margin-top: 8px"> Lugares mejor valorados: </p>
     </ion-col>
     <ion-col>
       <ion-buttons end>
         <button ion-button round icon-right (click)="irOrdenar" style="zoom:0.8;">
           Ordenar
-          <ion-select [(ngModel)]="gaming">
-            <ion-option value="nes">Asc</ion-option>
-            <ion-option value="n64">Desc</ion-option>
+          <ion-select>
+            <ion-option> Asc </ion-option>
+            <ion-option> Desc </ion-option>
           </ion-select>
           <ion-icon name="funnel"></ion-icon>
         </button>
@@ -77,7 +75,7 @@
         <ion-col>
           <button ion-button icon-start clear small>
             <ion-icon name="star"></ion-icon>
-            <p>Calificacion: {{pub.calificacion_publicacion}}/10</p>
+            <p>Calificación: {{pub.calificacion_publicacion}}/10</p>
           </button>
         </ion-col>
 
