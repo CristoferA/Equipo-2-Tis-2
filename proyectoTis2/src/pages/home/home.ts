@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { PublicacionPage } from '../publicacion/publicacion';
 import { FiltroPage } from '../filtro/filtro';
@@ -11,7 +11,8 @@ import { Observable } from 'rxjs/Observable';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage implements OnInit{
+
 
   publicacionesDes: any;
   id_publicacion = this.navParams.get('valor');
@@ -26,12 +27,17 @@ export class HomePage {
       .subscribe(data => {
 
         this.publicacionesDes = data;
+        console.log(this.publicacionesDes);
 
       },
         err => {
           console.log("Oops!");
         }
       );
+
+  }
+
+  ngOnInit(){
 
   }
 
@@ -67,5 +73,24 @@ export class HomePage {
     this.navCtrl.push(FiltroPage);
   }
 
+  ordenarPubAsc($event){
+    //this.publicacionesDes.sort((a,b) => a.nombre_publicacion.localeCompare(b.nombre_publicacion));
+    if($event == "Asc"){
+      console.log($event);
+      this.publicacionesDes.sort((a,b) => a.nombre_publicacion.localeCompare(b.nombre_publicacion));
+      console.log(this.publicacionesDes);
+    }else{
+      console.log($event);
+      
+      console.log(this.publicacionesDes);
+    }
+  }
+
+  ordenarPubDes(){
+    this.publicacionesDes = this.publicacionesDes.reverse()
+    console.log(this.publicacionesDes);
+  }
+
+  ////////////////////////
 
 }
