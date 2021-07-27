@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { PublicacionPage } from '../pages/publicacion/publicacion';
 import { FiltroPage } from '../pages/filtro/filtro';
 import { BusquedaPage } from '../pages/busqueda/busqueda';
@@ -34,7 +33,6 @@ import { MisPublicacionesGuardadasPage } from '../pages/mis-publicaciones-guarda
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
     PublicacionPage,
     FiltroPage,
     BusquedaPage,
@@ -66,7 +64,6 @@ import { MisPublicacionesGuardadasPage } from '../pages/mis-publicaciones-guarda
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
     PublicacionPage,
     FiltroPage,
     BusquedaPage,
