@@ -1,9 +1,3 @@
-<!--
-  Generated template for the ReviewPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <div>
   <ion-header>
     <ion-navbar color="primary">
@@ -40,29 +34,6 @@
     <p> Esta publicación no tiene reseñas. </p>
   </div>
 
-  <!--
-   <div ng-switch on="rev.review" *ngFor="let rev of review">
-    <div ng-switch-when=>
-      <p> Esta publicación no tiene reseñas. </p>
-
-        Acá entra cuando la consulta SQL:
-          SELECT * FROM review JOIN publicacion USING(id_publicacion)
-        no arroja resultados.
-   
-    </div>
-    <div ng-switch-default style="padding-top: 15px;">
-      <ion-card>
-        <ion-card-content>
-
-          <p> (Nombre de usuario):</p>
-
-          <p> {{rev.review}} </p>
-
-        </ion-card-content>
-      </ion-card>
-    </div>
-  </div>
-  -->
 </ion-content>
 
 <div *ngFor="let pub of publicacion">
