@@ -415,6 +415,7 @@ $app->post('/publicacion_detallada/new', function (Request $request, Response $r
     $comuna_publicacion = $request->getParam('comuna_publicacion');
     $calificacion_publicacion = $request->getParam('calificacion_publicacion');
     $id_moderador = $request->getParam('id_moderador');
+    $visitas = $request->getParam('visitas'); 
 
     //id_usuario
     $id_oferente = $request->getParam('id_oferente');
@@ -445,6 +446,7 @@ $app->post('/publicacion_detallada/new', function (Request $request, Response $r
         $result->bindParam(':comuna_publicacion', $comuna_publicacion);
         $result->bindParam(':calificacion_publicacion', $calificacion_publicacion);
         $result->bindParam(':id_moderador', $id_moderador);
+        $result->bindParam(':visitas',$visitas);
         $result->execute();
 
         $insertId = $db->lastInsertId();
