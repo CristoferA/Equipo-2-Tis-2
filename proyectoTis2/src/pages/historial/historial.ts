@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PublicacionPage } from '../publicacion/publicacion';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
+import { CuentaPage } from '../cuenta/cuenta';
 
 /**
  * Generated class for the HistorialPage page.
@@ -64,8 +65,8 @@ export class HistorialPage {
     this.http.delete('http://localhost/apiRest/public/historial_publicacion/delete/'+id_usuario)
     .subscribe(data => {
       console.log(data);
+      this.navCtrl.setRoot(CuentaPage);
     });
-
   
   }
 }
