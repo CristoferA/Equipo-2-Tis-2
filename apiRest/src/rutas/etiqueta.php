@@ -4,9 +4,7 @@ ini_set('display_errors', 1);
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-
 //GET de todas las etiqueta
-
 $app->get('/etiqueta/{id}', function (Request $request, Response $response){
     $id_publicacion = $request->getAttribute('id');
 
@@ -31,8 +29,8 @@ $app->get('/etiqueta/{id}', function (Request $request, Response $response){
         echo '{"error" : {"texto":'.$e->getMessage().'}';
     }
 }); 
-//GET de todas las etiqueta
 
+//GET de todas las etiqueta
 $app->get('/etiqueta_publicacion/{id_etiqueta}', function (Request $request, Response $response){
     $id_etiqueta = $request->getAttribute('id_etiqueta');
 
@@ -73,16 +71,12 @@ $app->get('/etiqueta_publicacion/{id_etiqueta}', function (Request $request, Res
     }
 }); 
 
-
 //POST Agregar nueva etiqueta
-
 $app->post('/etiqueta/new', function(Request $request, Response $response){
     
     $etiqueta = $request->getParam('etiqueta');
     $id_publicacion = $request->getParam('id_publicacion');
-    
-     
-    
+   
     $sql= "SELECT * FROM etiqueta 
     WHERE etiqueta = '$etiqueta' AND id_publicacion ='$id_publicacion'";
 
@@ -91,8 +85,7 @@ $app->post('/etiqueta/new', function(Request $request, Response $response){
 
     try{
        
-
-        $etiqueta_check = preg_match('~^\#[a-zA-Z0-9]{2,15}$~i', $etiqueta);
+        $etiqueta_check = preg_match('~^\#[a-zA-Z0-9]{2,20}$~i', $etiqueta);
         if ($etiqueta_check>0){
             $db = new db();
             $db = $db -> conectionDB();
@@ -100,12 +93,7 @@ $app->post('/etiqueta/new', function(Request $request, Response $response){
             $result->bindParam(':etiqueta',$etiqueta);
             $result->bindParam(':id_publicacion',$id_publicacion);
             
-           
-            
-    
-    
             $result->execute();
-
 
             $count = $result ->rowCount();
             if($count > 0){

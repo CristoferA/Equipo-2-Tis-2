@@ -34,7 +34,6 @@ export class AgregarEtiquetaPage {
   }
 
   crearEtiqueta() {
-
     let postData = new FormData();
     postData.append('etiqueta', this.etiqueta);
     postData.append('id_publicacion', this.id);
@@ -45,6 +44,7 @@ export class AgregarEtiquetaPage {
         console.log(data);
         this.etiqueta = "";
         postData = null;
+        this.mensajeToast('Etiqueta agregada.')
       },
         err => {
           console.log("Oops!");
@@ -57,7 +57,6 @@ export class AgregarEtiquetaPage {
   }
 
   irHome() {
-    //AQUI PODRIAN PONER UN TOAST??? que diga PUBLICACION EN ESPERA DE APROBACION
     this.navCtrl.setRoot(HomePage);
   }
 
