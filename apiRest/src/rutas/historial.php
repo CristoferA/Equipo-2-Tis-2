@@ -77,13 +77,13 @@ $app->delete('/historial_publicacion/delete/{id_usuario}', function(Request $req
     
     $id_usuario = $request ->getAttribute('id_usuario');
     
-    $sql="DELETE FROM historial WHERE id_usuario = $id_usuario";
+    $sql="DELETE FROM historial WHERE id_usuario = '$id_usuario'";
     
         try{
             $db = new db();
             $db = $db -> conectionDB();
             $result = $db -> prepare ($sql);
-            $result = execute();
+            $result -> execute();
     
     
             if($result ->rowCount()>0){

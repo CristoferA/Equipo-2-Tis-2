@@ -4,10 +4,14 @@ ini_set('display_errors', 1);
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-// GET Lista de una publicacion especifica por ID 
-$app->post('/publicacion_aprobada', function(Request $request, Response $response){
+// POST APRUEBA publicacion
+$app->post('/aprobar_publicacion', function(Request $request, Response $response){
     $id_publicacion = $request->getParam('id_publicacion');
-    $sql = "SELECT * FROM publicacion WHERE id_publicacion = '$id_publicacion'";
+
+    $sql="UPDATE publicacion 
+        SET estado = 'aprobado'
+        WHERE id_publicacion= '$id_publicacion'";
+    //$sql = "SELECT * FROM publicacion WHERE id_publicacion = '$id_publicacion'";
     try{
       $db = new db();
       $db = $db->conectionDB();
@@ -16,7 +20,37 @@ $app->post('/publicacion_aprobada', function(Request $request, Response $respons
       $result->bindParam(':id_publicacion',$id_publicacion);
 
       $result->execute();
-      echo json_encode("OJALA PESQUE");
+      echo json_encode("Publicacion Aprobada");
+  
+     /* if ($result->rowCount() > 0){
+        $publicacion = $result->fetchAll(PDO::FETCH_OBJ);
+        echo json_encode($publicacion);
+      }else {
+        echo json_encode("No existen publicaciones en la BBDD con este ID.");
+      }*/
+      $result = null;
+      $db = null;
+    }catch(PDOException $e){
+      echo '{"error" : {"text":'.$e->getMessage().'}';
+    }
+  }); 
+// POST RECHAZA publicacion
+$app->post('/rechazar_publicacion', function(Request $request, Response $response){
+    $id_publicacion = $request->getParam('id_publicacion');
+
+    $sql="UPDATE publicacion 
+        SET estado = 'rechazado'
+        WHERE id_publicacion= '$id_publicacion'";
+    //$sql = "SELECT * FROM publicacion WHERE id_publicacion = '$id_publicacion'";
+    try{
+      $db = new db();
+      $db = $db->conectionDB();
+      $result = $db->prepare($sql);
+
+      $result->bindParam(':id_publicacion',$id_publicacion);
+
+      $result->execute();
+      echo json_encode("Publicacion Rechazada");
   
      /* if ($result->rowCount() > 0){
         $publicacion = $result->fetchAll(PDO::FETCH_OBJ);
@@ -32,10 +66,60 @@ $app->post('/publicacion_aprobada', function(Request $request, Response $respons
   }); 
 
 
+$app->get('/publicacion_pendiente',function(Request $reques, Response $response){
 
-$app->get('/publicacion_moderador',function(Request $reques, Response $response){
+    $sql = "SELECT * FROM publicacion WHERE  estado='pendiente' ORDER BY estado ASC";
+    //$sql = "SELECT * FROM publicacion  ORDER BY estado ASC";
+    try {
+        $db = new db();
+        $db = $db->conectionDB();
 
-    $sql = "SELECT * FROM publicacion ORDER BY estado ASC";
+        $result = $db ->query($sql);
+
+        $result ->rowCount();
+        if($result ->rowCount()>0){
+
+            $publicaciones = $result -> fetchAll(PDO::FETCH_OBJ);
+            echo json_encode($publicaciones);
+
+        }else{
+            echo json_encode("WOPS");
+        }
+    }catch(PDOException $e){
+        echo '{"error" : {"texto":'.$e->getMessage().'}';
+    }
+});
+
+
+$app->get('/publicacion_rechazada',function(Request $reques, Response $response){
+
+    $sql = "SELECT * FROM publicacion WHERE  estado='rechazado' ORDER BY estado ASC";
+    //$sql = "SELECT * FROM publicacion  ORDER BY estado ASC";
+    try {
+        $db = new db();
+        $db = $db->conectionDB();
+
+        $result = $db ->query($sql);
+
+        $result ->rowCount();
+        if($result ->rowCount()>0){
+
+            $publicaciones = $result -> fetchAll(PDO::FETCH_OBJ);
+            echo json_encode($publicaciones);
+
+        }else{
+            echo json_encode("WOPS");
+        }
+    }catch(PDOException $e){
+        echo '{"error" : {"texto":'.$e->getMessage().'}';
+    }
+});
+
+
+$app->get('/publicacion_aprobada',function(Request $reques, Response $response){
+
+    $sql = "SELECT * FROM publicacion WHERE  estado='aprobado' ";
+    //$sql = "SELECT * FROM publicacion  ORDER BY estado ASC";
     try {
         $db = new db();
         $db = $db->conectionDB();

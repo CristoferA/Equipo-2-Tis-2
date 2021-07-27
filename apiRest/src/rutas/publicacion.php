@@ -291,8 +291,8 @@ $app->delete('/publicacion/delete/{id}', function(Request $request, Response $re
     try{
         $db = new db();
         $db = $db->conectionBD();
-        $result = $db_>prepare($sql);
-        $result = execute();
+        $result = $db->prepare($sql);
+        $result -> execute();
 
         if($result->rowCount()>0){
             echo json_encode("Publicacion Eliminada");
