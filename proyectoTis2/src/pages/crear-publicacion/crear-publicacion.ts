@@ -34,12 +34,13 @@ export class CrearPublicacionPage {
   tipo_publicacion: any;
   tipo_turismo: any;
   estado: any; //"pendiente" o "aprobado"
-  moderador: any;
+  //moderador: any;
   region: any;
   comuna: any;
   //xdd
   //xd
   //xddddddddd
+  //xddddddddddd
   regiones: any;
   comunas: any;
   regionS: any;
@@ -87,7 +88,7 @@ export class CrearPublicacionPage {
     console.log("Los likes son: " + this.likes);
     console.log("El tipo_publicacion es: " + this.tipo_publicacion);
     console.log("El tipo_turismo es: " + this.tipo_turismo);
-    console.log("El id_moderador es: " + this.moderador);
+    //console.log("El id_moderador es: " + this.moderador);
     console.log("El id de la region es: " + this.region + ". Y el nombre es: " + document.getElementById("regionID").innerText);
     console.log("El id de la comuna es: " + this.comuna + ". Y el nombre es: " + document.getElementById("comunaID").innerText);
 
@@ -110,7 +111,7 @@ export class CrearPublicacionPage {
         postData.append('tipo_publicacion', this.tipo_publicacion); //'producto','servicio','infraestructura'
         postData.append('tipo_turismo', this.tipo_turismo); //'negocios','urbano','natural','gastronomico','aventura','ecologico','cultural','lujo','diversion','religioso','espacial'
         postData.append('estado', 'pendiente');
-        postData.append('id_moderador', '1');
+        //postData.append('id_moderador', '1');
         postData.append("region_publicacion", document.getElementById("regionID").innerText);
         postData.append("comuna_publicacion", document.getElementById("comunaID").innerText);
         postData.append('visitas', '0');
@@ -126,11 +127,7 @@ export class CrearPublicacionPage {
             this.mensajeToast('Publicación subida correctamente y en espera de aprobación.');
             this.irAgregarEtiqueta(id);
           });
-      }else{
-        console.log("AAA");
       }
-    }else{
-      console.log("EEEE");
     }
   }
 
