@@ -98,6 +98,7 @@ export class CrearPublicacionPage {
       
       if(token.hasOwnProperty('data')){   //solo si hay datos entra
         var id_oferente = token.data.id_usuario; 
+        //var visitas= '0';
         postData.append('nombre_publicacion', this.nombre);
         postData.append('descripcion_publicacion', this.descripcion);
         postData.append('valor_publicacion', this.precio);
@@ -112,7 +113,9 @@ export class CrearPublicacionPage {
         postData.append('id_moderador', '1');
         postData.append("region_publicacion", document.getElementById("regionID").innerText);
         postData.append("comuna_publicacion", document.getElementById("comunaID").innerText);
+        postData.append('visitas', '0');
         postData.append('id_oferente',id_oferente);
+
         var id;
         this.http.post(url, postData)
         .map(response => response.json())
@@ -123,7 +126,11 @@ export class CrearPublicacionPage {
             this.mensajeToast('Publicación subida correctamente y en espera de aprobación.');
             this.irAgregarEtiqueta(id);
           });
+      }else{
+        console.log("AAA");
       }
+    }else{
+      console.log("EEEE");
     }
   }
 

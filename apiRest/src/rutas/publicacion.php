@@ -421,10 +421,10 @@ $app->post('/publicacion_detallada/new', function (Request $request, Response $r
 
     $sql = "INSERT INTO publicacion (nombre_publicacion, descripcion_publicacion, valor_publicacion, region_publicacion,
     tipo_publicacion, estado, tipo_turismo, email_contacto, telefono_contacto, direccion, redes_sociales, comuna_publicacion,
-    calificacion_publicacion, id_moderador) 
+    calificacion_publicacion, id_moderador, visitas) 
     VALUES (:nombre_publicacion, :descripcion_publicacion, :valor_publicacion, :region_publicacion,
     :tipo_publicacion, :estado, :tipo_turismo, :email_contacto, :telefono_contacto, :direccion, :redes_sociales, :comuna_publicacion,
-    :calificacion_publicacion, :id_moderador)";
+    :calificacion_publicacion, :id_moderador, :visitas)";
 
     try {
         $db = new db();
