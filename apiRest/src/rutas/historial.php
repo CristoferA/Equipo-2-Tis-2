@@ -69,3 +69,31 @@ $app->post('/historial_publicacion/new', function(Request $request, Response $re
     }
 
 });
+
+// Eliminar Historial usuario
+
+
+$app->delete('/historial_publicacion/delete/{id_usuario}', function(Request $request, Response $response){
+    
+    $id_usuario = $request ->getAttribute('id_usuario');
+    
+    $sql="DELETE FROM historial WHERE id_usuario = $id_usuario";
+    
+        try{
+            $db = new db();
+            $db = $db -> conectionDB();
+            $result = $db -> prepare ($sql);
+            $result = execute();
+    
+    
+            if($result ->rowCount()>0){
+                echo json_encode("Historial del usuario eliminado");
+            }else{
+                echo json_encode("No existe este usuario en la BBDD");
+            }
+    
+        }catch(PDOException $e){
+            echo '{"error" : {"text":'.$e->getMessage().'}'; 
+        }
+    
+    });

@@ -11,6 +11,14 @@
 </ion-header>
 
 <ion-content padding>
+  <br>
+  <ion-buttons start><button ion-button end round (click)="limpiarHistorial()" style="zoom:0.9;" placeholder="asda ">
+    Borrar Historial &nbsp;
+    <ion-icon name="trash" style="zoom:1.5;"></ion-icon>
+  </button></ion-buttons>
+  <br>
+  <hr>
+  <br>
 
   <ion-card *ngFor="let pub of publicacionesHistorial" (click)="irPublicacion(pub.id_publicacion)">
     

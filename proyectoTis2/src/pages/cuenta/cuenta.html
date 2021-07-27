@@ -27,7 +27,7 @@
   <button ion-button type="submit" round (click)="cerrar()">Cerrar Sesión</button>
   <button ion-button type="submit" round (click)="Historial()">Historial</button>
 
-  <br><br>
+  <br><br><br>
 
   <ion-toolbar>
     <ion-segment>
@@ -35,7 +35,7 @@
         Información
       </ion-segment-button>
       <ion-segment-button (click)="PublicacionesGuardadas()">
-        Publicaciones
+        Publicaciones guardadas
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -43,22 +43,22 @@
   <ion-list *ngFor="let cue of cuenta">
 
     <ion-item >
-      <ion-label stacked>{{cue.id_usuario}}</ion-label>
+      <ion-label stacked>Usuario: {{cue.id_usuario}}</ion-label>
       <ion-input type="text"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>{{cue.nombre_usuario}}</ion-label>
+      <ion-label stacked>Nombre: {{cue.nombre_usuario}}</ion-label>
       <ion-input type="text"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>{{cue.email_usuario}}</ion-label>
+      <ion-label stacked>Email: {{cue.email_usuario}}</ion-label>
       <ion-input type="text"></ion-input>
     </ion-item>
 
   </ion-list>
 
-  <button ion-button round>Editar</button>
+
 
 </ion-content>

@@ -54,5 +54,21 @@ export class HistorialPage {
     this.navCtrl.push(PublicacionPage, {valor: id_publicacion});
   }
 
+  limpiarHistorial() {
+
+    if('respuesta' in localStorage){
+      var respuesta = JSON.parse(localStorage.getItem('respuesta'));
+      var id_usuario = respuesta.data.id_usuario;
+      console.log(id_usuario);  
+
+    this.http.delete('http://localhost/apiRest/public/historial_publicacion/delete/'+id_usuario)
+    .subscribe(data => {
+      console.log(data);
+    });
+
+  
+  }
+}
+
 
 }

@@ -32,9 +32,10 @@
     </ion-item>
   </ion-card>
 
-  <button ion-button type="submit" (click)="irPublicacionesGuardadas()" style="float:right;">
-    <ion-icon name="md-bookmark"></ion-icon>
-  </button>
+  <ion-buttons end><button ion-button end round (click)="irPublicacionesGuardadas()" style="zoom:0.9;" placeholder="asda ">
+    Guardar &nbsp;
+  <ion-icon name="md-bookmark" style="zoom:1.5;"></ion-icon>
+</button></ion-buttons>
 
   <ion-grid margin-horizontal>
 
@@ -123,7 +124,7 @@
       <h3>Tambien te podria interesar...</h3>
     </ion-row>
 
-
+    <ion-grid padding-right >
     <ion-card *ngFor="let simp of similarPub" (click)="verPub(simp.id_publicacion)">
       <ion-card-content>
 
@@ -142,7 +143,7 @@
       </ion-card-content>
     </ion-card>
     <!-- </div> -->
-
+  </ion-grid>
 
     <hr>
     <div class="centrado">
