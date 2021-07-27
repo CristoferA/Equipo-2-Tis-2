@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 25, 2021 at 12:57 AM
+-- Generation Time: Jul 27, 2021 at 07:25 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -41,7 +41,7 @@ CREATE TABLE `comentario` (
 --
 
 INSERT INTO `comentario` (`id_comentario`, `comentario`, `id_publicacion`, `id_usuario`, `likes`) VALUES
-(1, 'asdasd', 5, 'abismal22', 0);
+(1, 'asdasd', 5, 'abismal22', 2);
 
 -- --------------------------------------------------------
 
@@ -101,9 +101,9 @@ CREATE TABLE `historial` (
 --
 
 INSERT INTO `historial` (`id_usuario`, `id_publicacion`) VALUES
-('abismal20', 4),
-('abismal20', 5),
-('abismal20', 6);
+('abismal13', 4),
+('abismal13', 5),
+('abismal13', 6);
 
 -- --------------------------------------------------------
 
@@ -160,7 +160,9 @@ INSERT INTO `publica` (`id_oferente`, `id_publicacion`) VALUES
 ('1', 4),
 ('abismal20', 5),
 ('abismal20', 6),
-('abismal20', 29);
+('abismal20', 29),
+('abismal20', 30),
+('abismal20', 31);
 
 -- --------------------------------------------------------
 
@@ -183,7 +185,6 @@ CREATE TABLE `publicacion` (
   `redes_sociales` varchar(1000) NOT NULL,
   `comuna_publicacion` varchar(40) NOT NULL,
   `calificacion_publicacion` int(2) NOT NULL,
-  `id_moderador` varchar(50) NOT NULL,
   `visitas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -191,11 +192,13 @@ CREATE TABLE `publicacion` (
 -- Dumping data for table `publicacion`
 --
 
-INSERT INTO `publicacion` (`id_publicacion`, `nombre_publicacion`, `descripcion_publicacion`, `valor_publicacion`, `region_publicacion`, `tipo_publicacion`, `estado`, `tipo_turismo`, `email_contacto`, `telefono_contacto`, `direccion`, `redes_sociales`, `comuna_publicacion`, `calificacion_publicacion`, `id_moderador`, `visitas`) VALUES
-(4, 'Torres del paine', 'Estas son las torres del paine, un lugar turistico muy turistiable del sur de chile', 0, 'Magallanes y de la Antártica Chilena', 'servicio', 'aprobado', 'natural', 'paine@gmail.com', 912345678, 'Magallanes y la Antartica Chilena', 'Paine', 'Torres del Paine', 10, '1', 5),
-(5, 'Ahu Tongariki', 'Este es un lugar donde se puede hacer turismo.', 0, 'Valparaíso', 'servicio', 'aprobado', 'cultural', 'pascua@gmail.com', 912345678, 'rapa nui 123', 'Isla de Pascua', 'Isla de Pascua', 10, '1', 7),
-(6, 'Termas de Chillan ', 'Las termas de chillan el mejor lugar para pasar el invierno!', 50000, 'Ñuble', 'infraestructura', 'aprobado', 'natural', 'termito@gmail.com', 978781717, 'Las trancas', 'facebook', 'Pinto', 0, '1', 9),
-(29, '123123123', '121434123', 123123, 'Tarapacá', 'servicio', 'aprobado', 'natural', '1231231', 123123, '123123123', '12312312312', 'Huara', 0, '1', 2);
+INSERT INTO `publicacion` (`id_publicacion`, `nombre_publicacion`, `descripcion_publicacion`, `valor_publicacion`, `region_publicacion`, `tipo_publicacion`, `estado`, `tipo_turismo`, `email_contacto`, `telefono_contacto`, `direccion`, `redes_sociales`, `comuna_publicacion`, `calificacion_publicacion`, `visitas`) VALUES
+(4, 'Torres del paine', 'Estas son las torres del paine, un lugar turistico muy turistiable del sur de chile', 0, 'Magallanes y de la Antártica Chilena', 'servicio', 'aprobado', 'natural', 'paine@gmail.com', 912345678, 'Magallanes y la Antartica Chilena', 'Paine', 'Torres del Paine', 10, 18),
+(5, 'Ahu Tongariki', 'Este es un lugar donde se puede hacer turismo.', 0, 'Valparaíso', 'servicio', 'aprobado', 'cultural', 'pascua@gmail.com', 912345678, 'rapa nui 123', 'Isla de Pascua', 'Isla de Pascua', 10, 10),
+(6, 'Termas de Chillan ', 'Las termas de chillan el mejor lugar para pasar el invierno!', 50000, 'Ñuble', 'infraestructura', 'aprobado', 'natural', 'termito@gmail.com', 978781717, 'Las trancas', 'facebook', 'Pinto', 0, 11),
+(29, '123123123', '121434123', 123123, 'Tarapacá', 'servicio', 'rechazado', 'natural', '1231231', 123123, '123123123', '12312312312', 'Huara', 0, 2),
+(30, '12312', '12312', 12, 'Arica y Parinacota', 'infraestructura', 'rechazado', 'gastronomico', '123123', 123123, '12312', '12312', 'Camarones', 0, 0),
+(31, '12312', '12312', 12, 'Arica y Parinacota', 'infraestructura', 'rechazado', 'gastronomico', '123123', 123123, '12312', '12312', 'Camarones', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -309,8 +312,7 @@ ALTER TABLE `publica`
 -- Indexes for table `publicacion`
 --
 ALTER TABLE `publicacion`
-  ADD PRIMARY KEY (`id_publicacion`),
-  ADD KEY `publicacion_moderador` (`id_moderador`);
+  ADD PRIMARY KEY (`id_publicacion`);
 
 --
 -- Indexes for table `review`
@@ -346,7 +348,7 @@ ALTER TABLE `etiqueta`
 -- AUTO_INCREMENT for table `publicacion`
 --
 ALTER TABLE `publicacion`
-  MODIFY `id_publicacion` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_publicacion` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `review`
@@ -403,12 +405,6 @@ ALTER TABLE `oferente`
 ALTER TABLE `publica`
   ADD CONSTRAINT `publica_oferente` FOREIGN KEY (`id_oferente`) REFERENCES `oferente` (`usuario`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `publica_publicacion` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id_publicacion`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `publicacion`
---
-ALTER TABLE `publicacion`
-  ADD CONSTRAINT `publicacion_moderador` FOREIGN KEY (`id_moderador`) REFERENCES `moderador` (`usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `review`
