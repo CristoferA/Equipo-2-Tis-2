@@ -81,6 +81,12 @@ export class HomePage implements OnInit{
     }else if($event == "Des"){
       console.log($event);
       this.publicacionesDes.sort((a,b) =>  a.nombre_publicacion.toLowerCase() < b.nombre_publicacion.toLowerCase() ? 1 : a.nombre_publicacion.toLowerCase() > b.nombre_publicacion.toLowerCase() ? -1 : 0);   
+    }else if($event == "MenP"){
+      console.log($event);
+      this.publicacionesDes.sort((a,b) =>  a.valor_publicacion < b.valor_publicacion ? -1 : a.valor_publicacion > b.valor_publicacion ? 1 : 0);   
+    }else{
+      console.log($event);
+      this.publicacionesDes.sort((a,b) =>  a.valor_publicacion < b.valor_publicacion ? 1 : a.valor_publicacion > b.valor_publicacion ? -1 : 0);   
     }
 
   }
