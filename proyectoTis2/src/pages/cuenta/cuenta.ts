@@ -7,6 +7,7 @@ import { Http } from '@angular/http';
 import { LoginPage } from '../login/login';
 import { MisPublicacionesGuardadasPage } from '../mis-publicaciones-guardadas/mis-publicaciones-guardadas';
 import { HistorialPage } from '../historial/historial';
+import { EditCuentaPage } from '../edit-cuenta/edit-cuenta';
 
 @IonicPage()
 @Component({
@@ -76,6 +77,10 @@ export class CuentaPage {
 
   Historial(){
     this.navCtrl.push(HistorialPage);
+  }
+
+  editarInfo(){
+    this.navCtrl.push(EditCuentaPage);
   }
 
 }

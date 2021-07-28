@@ -4,6 +4,7 @@ import { PublicacionPage } from '../publicacion/publicacion';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 import { CuentaPage } from '../cuenta/cuenta';
+import { ToastController } from 'ionic-angular';
 
 /**
  * Generated class for the HistorialPage page.
@@ -23,7 +24,7 @@ export class HistorialPage {
   id_usuario:any;
   publicacionesHistorial: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http,private toastCtrl:ToastController) {
 
     var respuesta = JSON.parse(localStorage.getItem('respuesta'));
     var id_usuario = respuesta.data.id_usuario;
@@ -65,10 +66,19 @@ export class HistorialPage {
     this.http.delete('http://localhost/apiRest/public/historial_publicacion/delete/'+id_usuario)
     .subscribe(data => {
       console.log(data);
+      this.presentToast("Historial borrado");
       this.navCtrl.setRoot(CuentaPage);
     });
   
   }
+}
+
+presentToast(msg: string){
+  let toast = this.toastCtrl.create({
+    message: msg,
+    duration: 2000,
+  });
+  toast.present();
 }
 
 

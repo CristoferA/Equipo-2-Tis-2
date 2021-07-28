@@ -27,7 +27,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { OferenteCheckPage } from '../pages/oferente-check/oferente-check';
 import { MisPublicacionesGuardadasPage } from '../pages/mis-publicaciones-guardadas/mis-publicaciones-guardadas';
-
+import { EditCuentaPage } from '../pages/edit-cuenta/edit-cuenta';
 
 @NgModule({
   declarations: [
@@ -53,7 +53,8 @@ import { MisPublicacionesGuardadasPage } from '../pages/mis-publicaciones-guarda
     MisPublicacionesGuardadasPage,
     AgregarEtiquetaPage,
     EtiquetaPublicacionPage,
-    HistorialPage
+    HistorialPage,
+    EditCuentaPage
   ],
   imports: [
     BrowserModule,
@@ -83,7 +84,8 @@ import { MisPublicacionesGuardadasPage } from '../pages/mis-publicaciones-guarda
     MisPublicacionesGuardadasPage,
     AgregarEtiquetaPage,
     EtiquetaPublicacionPage,
-    HistorialPage
+    HistorialPage,
+    EditCuentaPage
   ],
   providers: [
     StatusBar,
