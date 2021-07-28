@@ -69,3 +69,28 @@ $app->post('/guardar_publicacion/new', function(Request $request, Response $resp
     }
 
 });
+
+$app->delete('/guardar_publicacion/delete/{id_usuario}', function(Request $request, Response $response){
+    
+    $id_usuario = $request ->getAttribute('id_usuario');
+    
+    $sql="DELETE FROM guarda WHERE id_usuario = '$id_usuario'";
+    
+        try{
+            $db = new db();
+            $db = $db -> conectionDB();
+            $result = $db -> prepare ($sql);
+            $result -> execute();
+    
+    
+            if($result ->rowCount()>0){
+                echo json_encode("Publicaciones guardadas eliminadas");
+            }else{
+                echo json_encode("No existe este usuario en la BBDD");
+            }
+    
+        }catch(PDOException $e){
+            echo '{"error" : {"text":'.$e->getMessage().'}'; 
+        }
+    
+    });

@@ -3,7 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 import { PublicacionPage } from '../publicacion/publicacion';
-
+import { CuentaPage } from '../cuenta/cuenta';
+import { ToastController } from 'ionic-angular';
 /**
  * Generated class for the MisPublicacionesGuardadasPage page.
  *
@@ -22,7 +23,7 @@ export class MisPublicacionesGuardadasPage {
   id_usuario:any;
   publicacionesGuardadas: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http,private toastCtrl:ToastController) {
     
     
     var respuesta = JSON.parse(localStorage.getItem('respuesta'));
@@ -51,5 +52,30 @@ export class MisPublicacionesGuardadasPage {
   irPublicacion(id_publicacion){
     this.navCtrl.push(PublicacionPage, {valor: id_publicacion});
   }
+
+  limpiarGuardados() {
+
+    if('respuesta' in localStorage){
+      var respuesta = JSON.parse(localStorage.getItem('respuesta'));
+      var id_usuario = respuesta.data.id_usuario;
+      console.log(id_usuario);  
+
+    this.http.delete('http://localhost/apiRest/public/guardar_publicacion/delete/'+id_usuario)
+    .subscribe(data => {
+      console.log(data);
+      this.presentToast("Publicaciones guardas eliminadas");
+      this.navCtrl.setRoot(CuentaPage);
+    });
+  
+  }
+}
+
+presentToast(msg: string){
+  let toast = this.toastCtrl.create({
+    message: msg,
+    duration: 2000,
+  });
+  toast.present();
+}
 
 }
