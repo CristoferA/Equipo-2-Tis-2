@@ -74,21 +74,15 @@ export class HomePage implements OnInit{
   }
 
   ordenarPubAsc($event){
-    //this.publicacionesDes.sort((a,b) => a.nombre_publicacion.localeCompare(b.nombre_publicacion));
     if($event == "Asc"){
       console.log($event);
-      this.publicacionesDes.sort((a,b) => a.nombre_publicacion.localeCompare(b.nombre_publicacion));
-      console.log(this.publicacionesDes);
-    }else{
+      //this.publicacionesDes.sort((a,b) => a.nombre_publicacion.localeCompare(b.nombre_publicacion));
+      this.publicacionesDes.sort((a,b) => a.nombre_publicacion.toLowerCase() < b.nombre_publicacion.toLowerCase() ? -1 : a.nombre_publicacion.toLowerCase() > b.nombre_publicacion.toLowerCase() ? 1 : 0);
+    }else if($event == "Des"){
       console.log($event);
-      
-      console.log(this.publicacionesDes);
+      this.publicacionesDes.sort((a,b) =>  a.nombre_publicacion.toLowerCase() < b.nombre_publicacion.toLowerCase() ? 1 : a.nombre_publicacion.toLowerCase() > b.nombre_publicacion.toLowerCase() ? -1 : 0);   
     }
-  }
 
-  ordenarPubDes(){
-    this.publicacionesDes = this.publicacionesDes.reverse()
-    console.log(this.publicacionesDes);
   }
 
   ////////////////////////
