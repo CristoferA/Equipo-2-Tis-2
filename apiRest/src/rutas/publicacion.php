@@ -31,6 +31,32 @@ $app->get('/publicacion', function (Request $request, Response $response){
     }
 }); 
 
+//GET publicaciones en orden destacadas
+
+$app->get('/publicacion/destacadas', function (Request $request, Response $response){
+    
+    
+    $sql = "SELECT * FROM publicacion WHERE estado='aprobado' ORDER BY calificacion_publicacion DESC, visitas DESC";
+    try {
+        $db = new db();
+        $db = $db -> conectionDB();
+        $result = $db -> query($sql);
+        
+        if($result -> rowCount() > 0){
+            $publicaciones = $result -> fetchAll (PDO::FETCH_OBJ);
+            echo json_encode($publicaciones);
+
+        }else{
+            echo json_encode("No hay publicaciones aun!.");
+        }
+        $result = null;
+        $db = null;
+
+    }catch(PDOException $e){
+        echo '{"error" : {"texto":'.$e->getMessage().'}';
+    }
+}); 
+
 //ORDENA POR NOMBRE DE FORMA ASCENDENTE
 $app->get('/publicacion_ordenada_ASC', function (Request $request, Response $response){
     

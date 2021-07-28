@@ -22,7 +22,7 @@ export class HomePage implements OnInit{
 
   constructor(public navCtrl: NavController, public http: Http, public navParams: NavParams) {
 
-    this.http.get('http://localhost/apiRest/public/publicacion')
+    this.http.get('http://localhost/apiRest/public/publicacion/destacadas')
       .map(response => response.json())
       .subscribe(data => {
 
