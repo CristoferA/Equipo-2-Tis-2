@@ -1,5 +1,6 @@
 <?php
 //Using GET
+//$var_value = $_POST['varname'];
 $var_value = $_GET['varname'];
 
 $postdata = array ( 
@@ -11,7 +12,7 @@ print_r($postdata);
 
 $postdata = json_encode($postdata);
 echo $postdata;
-$url ="http://localhost/apiRest/public/publicacion_rechazada";
+$url ="http://localhost/apiRest/public/rechazar_publicacion";
 $curl = curl_init($url);
 
 //curl_setopt($curl, CURLOPT_HEADER, false);
@@ -31,5 +32,5 @@ echo "<pre> $postResult</pre>";
 echo "Publicacion rechazada";
 ?>
 
-<a href="publicaciones.php">
+<a href="publicaciones_rechazadas.php">
 <input name="submit" type="submit" value="Volver" class="btn solid" />

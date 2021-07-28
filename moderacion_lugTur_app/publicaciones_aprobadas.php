@@ -15,7 +15,7 @@ $response=json_decode($response_json, true);
 </a>
  
  <hr>
- <h1>ESTAS SON LAS PUBLICACIONES QUE TIENE ASIGNADAS POR REVISAR</h1>
+ <h1>ESTAS SON LAS PUBLICACIONES QUE ESTAN APROBADAS</h1>
  <hr>
 <?php
 foreach($response as $key => $result) {
@@ -47,8 +47,7 @@ foreach($response as $key => $result) {
     echo $result['comuna_publicacion'], '<br>';
     echo 'Calificacion publicacion : ';
     echo $result['calificacion_publicacion'], '<br>';
-    echo 'Id moderador : ';
-    echo $result['id_moderador'], '<br>';
+    
     echo 'Visitas : ';
     echo $result['visitas'], '<br>';
 

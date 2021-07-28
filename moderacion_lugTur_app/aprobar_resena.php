@@ -3,15 +3,15 @@
 $var_value = $_GET['varname'];
 
 $postdata = array ( 
-    "id_publicacion" => $var_value 
+    "id_review" => $var_value 
 );
 
-echo 'Haz aprobado la publicacion: '.$var_value.'';
+echo 'Haz aprobado la reseña: '.$var_value.'';
 print_r($postdata);
 
 $postdata = json_encode($postdata);
 echo $postdata;
-$url ="http://localhost/apiRest/public/aprobar_publicacion";
+$url ="http://localhost/apiRest/public/aprobar_resena";
 $curl = curl_init($url);
 
 //curl_setopt($curl, CURLOPT_HEADER, false);
@@ -28,8 +28,8 @@ if (curl_errno($curl)) {
 curl_close($curl); 
 echo "<pre> $postResult</pre>";
 
-echo "Publicacion Aprobada";
+echo "Review Aprobada";
 ?>
 
-<a href="publicaciones_aprobadas.php">
+<a href="resena_aprobada.php">
 <input name="submit" type="submit" value="Volver" class="btn solid" />
