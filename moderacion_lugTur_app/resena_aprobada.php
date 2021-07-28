@@ -37,14 +37,14 @@ foreach($response as $key => $result) {
 
     //Hay que adaptar los div si sobra tiempo 
     echo '</div>'; ?>
-    <a href="aprobar_resena.php?varname=<?php echo $result['id_review'] ?>">
+    <a href="aprobar_resena.php?varname=<?php echo $result['id_review'].'&var='.$result['id_publicacion'] ?>">
     <?php
     echo '<input name="submit" type="submit" value="Aprobar resena: '.$result['id_review'].'" class="btn solid" />';
     ?>
     </a>
 
 
-    <a href="rechazar_resena.php?varname=<?php echo $result['id_review'] ?>">
+    <a href="rechazar_resena.php?varname=<?php echo $result['id_review'].'&var='.$result['id_publicacion'] ?>">
     <?php
     echo '<input name="submit" type="submit" value="Rechazar publicacion: '.$result['id_review'].'" class="btn solid" />';
     ?>

@@ -1,9 +1,11 @@
 <?php
 //Using GET
 $var_value = $_GET['varname'];
+$var_value2 = $_GET['var'];
 
 $postdata = array ( 
-    "id_review" => $var_value 
+    "id_review" => $var_value,
+    "id_publicacion" => $var_value2
 );
 
 echo 'Haz aprobado la reseña: '.$var_value.'';
