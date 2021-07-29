@@ -52,6 +52,49 @@ $app->get('/oferente/{id}', function(Request $request, Response $response){
     }
   }); 
 
+// GET Lista de una publicacion especifica por ID 
+$app->get('/usuario_oferente', function(Request $request, Response $response){
+    //$id_usuario = $request->getAttribute('id');
+    $sql = "SELECT id_usuario,nombre_usuario,email_usuario FROM oferente, usuario WHERE oferente.usuario= usuario.id_usuario";
+    try{
+      $db = new db();
+      $db = $db->conectionDB();
+      $result = $db->query($sql);
+  
+      if ($result->rowCount() > 0){
+        $usuario = $result->fetchAll(PDO::FETCH_OBJ);
+        echo json_encode($usuario);
+      }else {
+        echo json_encode("No existen usuarios en la BBDD con este ID.");
+      }
+      $result = null;
+      $db = null;
+    }catch(PDOException $e){
+      echo '{"error" : {"text":'.$e->getMessage().'}';
+    }
+  }); 
+// GET Lista de una publicacion especifica por ID 
+$app->get('/usuario_no_oferente', function(Request $request, Response $response){
+    //$id_usuario = $request->getAttribute('id');
+    $sql = "SELECT DISTINCT (id_usuario),nombre_usuario,email_usuario 
+    FROM usuario WHERE id_usuario NOT IN (SELECT * FROM oferente) ";
+    try{
+      $db = new db();
+      $db = $db->conectionDB();
+      $result = $db->query($sql);
+  
+      if ($result->rowCount() > 0){
+        $usuario = $result->fetchAll(PDO::FETCH_OBJ);
+        echo json_encode($usuario);
+      }else {
+        echo json_encode("No existen usuarios en la BBDD con este ID.");
+      }
+      $result = null;
+      $db = null;
+    }catch(PDOException $e){
+      echo '{"error" : {"text":'.$e->getMessage().'}';
+    }
+  });
 //POST Agregar nueva publicacion
 
 $app->post('/oferente/new', function(Request $request, Response $response){
