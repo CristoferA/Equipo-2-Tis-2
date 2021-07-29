@@ -61,4 +61,25 @@ export class BusquedaPage {
   irFiltro(){
     this.navCtrl.push(FiltroPage);
   }
+
+  ordenarPubAsc($event){
+    if($event == "Asc"){
+      console.log($event);
+      //this.publicacionesBus.sort((a,b) => a.nombre_publicacion.localeCompare(b.nombre_publicacion));
+      this.publicacionesBus.sort((a,b) => a.nombre_publicacion.toLowerCase() < b.nombre_publicacion.toLowerCase() ? -1 : a.nombre_publicacion.toLowerCase() > b.nombre_publicacion.toLowerCase() ? 1 : 0);
+    }else if($event == "Des"){
+      console.log($event);
+      this.publicacionesBus.sort((a,b) =>  a.nombre_publicacion.toLowerCase() < b.nombre_publicacion.toLowerCase() ? 1 : a.nombre_publicacion.toLowerCase() > b.nombre_publicacion.toLowerCase() ? -1 : 0);   
+    }else if($event == "MenP"){
+      console.log($event);
+      this.publicacionesBus.sort((a,b) =>  a.valor_publicacion < b.valor_publicacion ? -1 : a.valor_publicacion > b.valor_publicacion ? 1 : 0);   
+    }else{
+      console.log($event);
+      this.publicacionesBus.sort((a,b) =>  a.valor_publicacion < b.valor_publicacion ? 1 : a.valor_publicacion > b.valor_publicacion ? -1 : 0);   
+    }
+
+  }
+
+
+
 }
