@@ -216,18 +216,16 @@ $app->get('/usuario_publicacion/{id_usuario}', function (Request $request, Respo
 }); 
 
 
-//editar cuenta
 $app->post('/usuario/editar', function(Request $request, Response $response){
-    
+
     $id_usuario = $request->getParam('id_usuario');
     $nombre_usuario = $request->getParam('nombre_usuario');
     $email_usuario = $request->getParam('email_usuario');
-    
-    $sql = "UPDATE usuario 
-            SET id_usuario =:id_usuario,
-                nombre_usuario =:nombre_usuario,
-                email_usuario =:email_usuario,
-            WHERE id_usuario = $id_usuario";
+
+    $sql = " UPDATE usuario 
+             SET nombre_usuario ='$nombre_usuario',
+                 email_usuario ='$email_usuario'
+             WHERE id_usuario = '$id_usuario'";
 
     try {
         $db = new db();
@@ -237,8 +235,9 @@ $app->post('/usuario/editar', function(Request $request, Response $response){
         $result->bindParam(':id_usuario',$id_usuario);
         $result->bindParam(':nombre_usuario',$nombre_usuario);
         $result->bindParam(':email_usuario',$email_usuario);
-        
-        $result->excecute();
+
+
+        $result->execute();
         echo json_encode("Usuario modificado.");
 
         $result = null;

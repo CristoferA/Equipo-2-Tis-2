@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 import { CuentaPage } from '../cuenta/cuenta';
 
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 /**
  * Generated class for the EditCuentaPage page.
  *
@@ -18,41 +18,38 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
   templateUrl: 'edit-cuenta.html',
 })
 export class EditCuentaPage {
-  datos:FormGroup;
-  data:Observable<any>;
-  id_usuario:any;
-  nombre_usuario:any;
-  email_usuario:any;
+  datos: FormGroup;
+  data: Observable<any>;
+  id_usuario: any;
+  nombre_usuario: any;
+  email_usuario: any;
   cuenta: any;
 
-
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, public formBuilder: FormBuilder, public alertController: AlertController) {
-
-
     var respuesta = JSON.parse(localStorage.getItem('respuesta'));
     var id_usuario = respuesta.data.id_usuario;
-    console.log(id_usuario);  
-    
+    console.log(id_usuario);
 
-    this.http.get('http://localhost/apiRest/public/usuario/'+id_usuario)
-    .map(response => response.json())
-    .subscribe(data =>{
-      
+
+    this.http.get('http://localhost/apiRest/public/usuario/' + id_usuario)
+      .map(response => response.json())
+      .subscribe(data => {
+
         this.cuenta = data;
         console.log(data);
-        
-      },
-      err => {
-        console.log("Oops!");
-      }
-    );
 
+      },
+        err => {
+          console.log("Oops!");
+        }
+      );
     this.datos = formBuilder.group({
-      id_usuario:  ['',[Validators.required, Validators.maxLength(20), Validators.minLength(5)]],
-      nombre_usuario: ['',[Validators.required, Validators.maxLength(50), Validators.minLength(5)]],
-      email_usuario: ['',[Validators.compose([Validators.required,Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]), Validators.maxLength(35), Validators.minLength(5)]],
-      
+      id_usuario: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(5)]],
+      nombre_usuario: ['', [Validators.required, Validators.maxLength(50), Validators.minLength(5)]],
+      email_usuario: ['', [Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]), Validators.maxLength(35), Validators.minLength(5)]],
+
     });
+
 
 
   }
@@ -61,36 +58,34 @@ export class EditCuentaPage {
     console.log('ionViewDidLoad EditCuentaPage');
   }
 
-  cancelar(){
+  cancelar() {
     this.navCtrl.setRoot(CuentaPage);
   }
 
-  guardar(){
+  guardar() {
 
-    
-    
-    if('respuesta' in localStorage){
-    var respuesta = JSON.parse(localStorage.getItem('respuesta'));
-    var id_usuario = respuesta.data.id_usuario;
-    console.log(id_usuario);  
+    if ('respuesta' in localStorage) {
+      var respuesta = JSON.parse(localStorage.getItem('respuesta'));
+      var id_usuario = respuesta.data.id_usuario;
+      console.log(id_usuario);
+      var url = 'http://localhost/apiRest/public/usuario/editar';
+      let postData = new FormData();
 
-    var url =  'http://localhost/apiRest/public/usuario/editar';
-    let postData = new FormData();
+      postData.append('id_usuario', this.id_usuario);
+      postData.append('nombre_usuario', this.nombre_usuario);
+      postData.append('email_usuario', this.email_usuario);
 
-    postData.append('id_usuario', this.id_usuario);
-    postData.append('nombre_usuario', this.nombre_usuario);
-    postData.append('email_usuario', this.email_usuario);
 
-   this.http.post(url, postData)
-   .map(response => response.json())   
-   .subscribe((data) => {
-      console.log(data);
-      this.navCtrl.pop();
+      this.http.post(url, postData)
+        .map(response => response.json())
+        .subscribe((data) => {
+          console.log(data);
+          this.navCtrl.pop();
 
-    }), err => {
-      console.log("Oops!");
+        }), err => {
+          console.log("Oops!");
+        }
+
     }
   }
-
-}
 }

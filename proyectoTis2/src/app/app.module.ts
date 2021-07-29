@@ -28,6 +28,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { OferenteCheckPage } from '../pages/oferente-check/oferente-check';
 import { MisPublicacionesGuardadasPage } from '../pages/mis-publicaciones-guardadas/mis-publicaciones-guardadas';
 import { EditCuentaPage } from '../pages/edit-cuenta/edit-cuenta';
+import { EliminarPublicacionPage } from '../pages/eliminar-publicacion/eliminar-publicacion';
+import { EditarPublicacionPage } from '../pages/editar-publicacion/editar-publicacion';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { EditCuentaPage } from '../pages/edit-cuenta/edit-cuenta';
     AgregarEtiquetaPage,
     EtiquetaPublicacionPage,
     HistorialPage,
-    EditCuentaPage
+    EditCuentaPage,
+    EliminarPublicacionPage,
+    EditarPublicacionPage
   ],
   imports: [
     BrowserModule,
@@ -85,7 +89,9 @@ import { EditCuentaPage } from '../pages/edit-cuenta/edit-cuenta';
     AgregarEtiquetaPage,
     EtiquetaPublicacionPage,
     HistorialPage,
-    EditCuentaPage
+    EditCuentaPage,
+    EliminarPublicacionPage,
+    EditarPublicacionPage
   ],
   providers: [
     StatusBar,

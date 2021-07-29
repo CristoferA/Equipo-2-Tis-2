@@ -39,7 +39,7 @@ export class PublicacionesOferentePage {
   irPublicacion(id_publicacion){
     this.navCtrl.push(PublicacionPage, {valor: id_publicacion});
   }
-
+  
   ordenarPubAsc($event){
     if($event == "Asc"){
       console.log($event);
@@ -57,7 +57,4 @@ export class PublicacionesOferentePage {
     }
 
   }
-  
-
-
 }

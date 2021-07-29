@@ -242,7 +242,7 @@ $app->get('/publicacion/visita/{id_publicacion}', function(Request $request, Res
       echo '{"error" : {"text":'.$e->getMessage().'}';
     }
   });   
-
+/*
 //PUT Editar publicacion
 
 $app->put('/publicacion/editar/{id_publicacion}', function(Request $request, Response $response){
@@ -306,18 +306,84 @@ $app->put('/publicacion/editar/{id_publicacion}', function(Request $request, Res
         echo '{"error" : {"text":'.$e->getMessage().'}'; 
     }
 });
+*/
+//PUT Editar publicacion
 
+$app->post('/publicacion/editar', function(Request $request, Response $response){
+    
+    $id_publicacion = $request->getParam('id_publicacion');
+
+    $nombre_publicacion = $request->getParam('nombre_publicacion');
+    $descripcion_publicacion = $request->getParam('descripcion_publicacion');
+    $valor_publicacion = $request->getParam('valor_publicacion');
+    $region_publicacion = $request->getParam('region_publicacion');
+    $tipo_publicacion = $request->getParam('tipo_publicacion');
+    //$estado = 'pendiente'; 
+    $tipo_turismo = $request->getParam('tipo_turismo');
+    $email_contacto = $request->getParam('email_contacto');
+    $telefono_contacto = $request->getParam('telefono_contacto');
+    $direccion = $request->getParam('direccion');
+    $redes_sociales = $request->getParam('redes_sociales');
+    $comuna_publicacion = $request->getParam('comuna_publicacion');
+   // $redes_sociales = $request->getParam('redes_sociales');
+
+
+     
+    
+
+    $sql = "UPDATE publicacion 
+    SET nombre_publicacion ='$nombre_publicacion',
+    descripcion_publicacion ='$descripcion_publicacion',
+    valor_publicacion ='$valor_publicacion',
+    region_publicacion ='$region_publicacion',
+    tipo_publicacion ='$tipo_publicacion',
+    estado ='pendiente',
+    tipo_turismo ='$tipo_turismo',
+    email_contacto ='$email_contacto',
+    telefono_contacto ='$telefono_contacto',
+    direccion ='$direccion',
+    redes_sociales ='$redes_sociales',
+    comuna_publicacion ='$comuna_publicacion'
+    WHERE id_publicacion = '$id_publicacion'";
+
+    try {
+        $db = new db();
+        $db = $db->conectionDB();
+        $result = $db->prepare($sql);
+
+        $result->bindParam(':id_publicacion',$id_publicacion);
+        $result->bindParam(':nombre_publicacion',$nombre_publicacion);
+        $result->bindParam(':descripcion_publicacion',$descripcion_publicacion);
+        $result->bindParam(':valor_publicacion',$valor_publicacion);
+        $result->bindParam(':tipo_publicacion',$tipo_publicacion);
+        //$result->bindParam(':estado',$estado);
+        $result->bindParam(':tipo_turismo',$tipo_turismo);
+        $result->bindParam(':email_contacto',$email_contacto);
+        $result->bindParam(':telefono_contacto',$telefono_contacto);
+        $result->bindParam(':direccion',$direccion);
+        $result->bindParam(':redes_sociales',$redes_sociales);
+        $result->bindParam(':comuna_publicacion',$comuna_publicacion);
+        
+        $result->execute();
+        echo json_encode("Publicacion modificada.");
+
+        $result = null;
+        $db = null;
+    }catch(PDOException $e){
+        echo '{"error" : {"text":'.$e->getMessage().'}'; 
+    }
+});
 
 //DELETE borrar publicacion
 
-$app->delete('/publicacion/delete/{id}', function(Request $request, Response $response){
+$app->delete('/publicacion/delete/{id_publicacion}', function(Request $request, Response $response){
     $id_publicacion = $request->getAttribute('id_publicacion');
-    $sql = "DELETE FROM publicacion WHERE id_publicacion = $id_publicacion";
+    $sql = "DELETE FROM publicacion WHERE id_publicacion = '$id_publicacion'";
 
     try{
         $db = new db();
-        $db = $db->conectionBD();
-        $result = $db->prepare($sql);
+        $db = $db->conectionDB();
+        $result = $db -> prepare ($sql);
         $result -> execute();
 
         if($result->rowCount()>0){
@@ -526,3 +592,4 @@ $app->post('/publicacion_detallada/new', function(Request $request, Response $re
 
     
 });
+

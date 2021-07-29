@@ -7,6 +7,9 @@ import { Observable } from 'rxjs/Observable';
 import { LoginPage } from '../login/login';
 import { PublicacionPage } from '../publicacion/publicacion';
 import { HomePage } from '../home/home';
+import { EliminarPublicacionPage } from '../eliminar-publicacion/eliminar-publicacion';
+import { EditarPublicacionPage } from '../editar-publicacion/editar-publicacion';
+
 /**
  * Generated class for the MisPublicacionesPage page.
  *
@@ -84,7 +87,13 @@ export class MisPublicacionesPage {
     //colocar Un toast que diga que se logee
     this.navCtrl.setRoot(LoginPage);
   }
+  irEliminarPublicacion(id_publicacion){
+    this.navCtrl.push(EliminarPublicacionPage, { valor: id_publicacion });
+  }
   irPublicacion(id_publicacion) {
     this.navCtrl.push(PublicacionPage, { valor: id_publicacion });
+  }
+  irEditarPublicacion(id_publicacion) {
+    this.navCtrl.push(EditarPublicacionPage, { valor: id_publicacion });
   }
 }

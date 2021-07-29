@@ -40,7 +40,7 @@
   <!-- Muestra de publicaciones -->
   <hr>
   <ng-container *ngIf= "publicaciones?.length; else nopub"> 
-  <ion-card *ngFor="let pub of publicaciones" (click)="irPublicacion(pub.id_publicacion)">
+  <ion-card *ngFor="let pub of publicaciones" >
 
     <img src="../assets/imgs/paine.jpg">
 
@@ -54,8 +54,9 @@
             <ion-icon name="logo-usd"></ion-icon> {{pub.valor_publicacion}}
           </p>
         </ion-col>
+        
       </ion-row>
-
+      <p> {{pub.estado}}</p>
       <ion-row>
         <ion-col>
           <p>
@@ -78,7 +79,22 @@
           <ion-icon icon-only name="eye" style="zoom:1;"> {{pub.visitas}}</ion-icon>
         </ion-col>
       </ion-row>
+     
     </ion-card-content>
+     <div style="text-align: center;">
+        <ion-buttons start><button ion-button end round (click)="irEliminarPublicacion(pub.id_publicacion)" style="zoom:0.9;" placeholder="asda ">
+            Borrar &nbsp;
+            <ion-icon name="trash" style="zoom:1.5;"></ion-icon>
+          </button></ion-buttons>
+          <ion-buttons start><button ion-button end round (click)="irEditarPublicacion(pub.id_publicacion)" style="zoom:0.9;" placeholder="asda ">
+            Editar &nbsp;
+            <ion-icon name="trash" style="zoom:1.5;"></ion-icon>
+          </button></ion-buttons>
+          <ion-buttons start><button ion-button end round (click)="irPublicacion(pub.id_publicacion)" style="zoom:0.9;" placeholder="asda ">
+            Ver &nbsp;
+            <ion-icon name="trash" style="zoom:1.5;"></ion-icon>
+          </button></ion-buttons>
+      </div>
   </ion-card>
 </ng-container> 
 <ng-template #nopub>

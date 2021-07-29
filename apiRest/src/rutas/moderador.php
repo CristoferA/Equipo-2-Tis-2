@@ -82,7 +82,7 @@ $app->post('/rechazar_resena', function(Request $request, Response $response){
       $result = $db -> prepare ($sql2);
       $result->bindParam(':id_review',$id_review);
       $result->bindParam(':id_publicacion',$id_publicacion);
-      
+      $result->execute();  
       echo json_encode("Review Rechazada");
   
      
