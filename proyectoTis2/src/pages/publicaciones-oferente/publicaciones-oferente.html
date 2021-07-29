@@ -17,12 +17,14 @@
       <p style="margin-top: 8px">Publicaciones encontradas: </p>
     </ion-col>
     <ion-col>
-      <ion-buttons end>
-        <button ion-button round icon-right (click)="irOrdenar" style="zoom:0.8;">
-          Ordenar
-          <ion-select [(ngModel)]="gaming">
-            <ion-option value="nes">Asc</ion-option>
-            <ion-option value="n64">Desc</ion-option>
+      <ion-buttons end style="zoom:0.6;">
+        <button ion-button round icon-right>
+          Ordenar&nbsp;
+          <ion-select interface="action-sheet" (ionChange)="ordenarPubAsc($event)" > 
+            <ion-option value="Asc"> Nombre Asc. </ion-option>
+            <ion-option value="Des"> Nombre Desc. </ion-option>
+            <ion-option value="MenP"> Menor Precio </ion-option>
+            <ion-option value="MayP"> Mayor Precio </ion-option>
           </ion-select>
           <ion-icon name="funnel"></ion-icon>
         </button>
