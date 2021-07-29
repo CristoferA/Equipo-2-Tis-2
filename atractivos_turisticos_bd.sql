@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 29, 2021 at 04:35 AM
+-- Generation Time: Jul 29, 2021 at 04:38 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -51,7 +51,7 @@ INSERT INTO `comentario` (`id_comentario`, `comentario`, `id_publicacion`, `id_u
 
 CREATE TABLE `etiqueta` (
   `id_publicacion` int(11) NOT NULL,
-  `etiqueta` varchar(10) CHARACTER SET utf8mb4 NOT NULL,
+  `etiqueta` varchar(20) CHARACTER SET utf8mb4 NOT NULL,
   `id_etiqueta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
