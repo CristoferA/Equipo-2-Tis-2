@@ -70,6 +70,7 @@ $app->post('/guardar_publicacion/new', function(Request $request, Response $resp
 
 });
 
+
 $app->delete('/guardar_publicacion/delete/{id_usuario}', function(Request $request, Response $response){
     
     $id_usuario = $request ->getAttribute('id_usuario');

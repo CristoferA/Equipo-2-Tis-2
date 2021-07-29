@@ -52,6 +52,7 @@ $app->get('/oferente/{id}', function(Request $request, Response $response){
     }
   }); 
 
+
 // GET Lista de una publicacion especifica por ID 
 $app->get('/usuario_oferente', function(Request $request, Response $response){
     //$id_usuario = $request->getAttribute('id');
@@ -162,18 +163,19 @@ $app->put('/oferente/editar/{usuario}', function(Request $request, Response $res
     }
 });
 */
-
 //DELETE borrar publicacion
 
-$app->delete('/oferente/delete/{id}', function(Request $request, Response $response){
-    $id_usuario = $request->getAttribute('id');
-    $sql = "DELETE FROM oferente WHERE usuario = $id_usuario";
+$app->post('/oferente/delete', function(Request $request, Response $response){
+    $usuario = $request->getParam('usuario');
+    $sql = "DELETE FROM oferente WHERE usuario = $usuario";
 
     try{
         $db = new db();
         $db = $db->conectionBD();
         $result = $db_>prepare($sql);
         $result = execute();
+
+        //eliminar tambien las publicaciones del oferente
 
         if($result->rowCount()>0){
             echo json_encode("Usuario Eliminado");
