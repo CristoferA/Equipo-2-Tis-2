@@ -89,7 +89,7 @@ $app->post('/usuario/new', function(Request $request, Response $response){
 
 });
 */
-//PUT Editar usuario
+/*//PUT Editar usuario
 
 $app->put('/usuario/editar/{usuario}', function(Request $request, Response $response){
     
@@ -125,7 +125,7 @@ $app->put('/usuario/editar/{usuario}', function(Request $request, Response $resp
     }catch(PDOException $e){
         echo '{"error" : {"text":'.$e->getMessage().'}'; 
     }
-});
+});*/
 
 
 //DELETE borrar publicacion
@@ -221,10 +221,11 @@ $app->post('/usuario/editar', function(Request $request, Response $response){
     $id_usuario = $request->getParam('id_usuario');
     $nombre_usuario = $request->getParam('nombre_usuario');
     $email_usuario = $request->getParam('email_usuario');
+    
+
 
     $sql = " UPDATE usuario 
-             SET nombre_usuario ='$nombre_usuario',
-                 email_usuario ='$email_usuario'
+             SET  nombre_usuario ='$nombre_usuario', email_usuario ='$email_usuario'
              WHERE id_usuario = '$id_usuario'";
 
     try {
@@ -238,7 +239,10 @@ $app->post('/usuario/editar', function(Request $request, Response $response){
 
 
         $result->execute();
+        //$data=$result->fetch(PDO::FETCH_OBJ);
+  
         echo json_encode("Usuario modificado.");
+
 
         $result = null;
         $db = null;
