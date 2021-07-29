@@ -19,24 +19,6 @@
 </ion-header>
 <ion-content padding>
 
-  <ion-row>
-    <ion-col>
-      <p style="margin-top: 8px">Publicaciones encontradas: </p>
-    </ion-col>
-    <ion-col>
-      <ion-buttons end>
-        <button ion-button round icon-right (click)="irOrdenar" style="zoom:0.8;">
-          Ordenar
-          <ion-select [(ngModel)]="gaming">
-            <ion-option value="nes">Asc</ion-option>
-            <ion-option value="n64">Desc</ion-option>
-          </ion-select>
-          <ion-icon name="funnel"></ion-icon>
-        </button>
-      </ion-buttons>
-    </ion-col>
-  </ion-row>
-
   <!-- Muestra de publicaciones -->
   <hr>
   <ng-container *ngIf= "publicaciones?.length; else nopub"> 
@@ -81,20 +63,24 @@
       </ion-row>
      
     </ion-card-content>
-     <div style="text-align: center;">
-        <ion-buttons start><button ion-button end round (click)="irEliminarPublicacion(pub.id_publicacion)" style="zoom:0.9;" placeholder="asda ">
+    <hr>
+    <ion-row padding>
+
+      <ion-buttons start><button ion-button end round (click)="irPublicacion(pub.id_publicacion)" style="zoom:0.8;" placeholder="asda ">
+        Ver &nbsp;
+        <ion-icon name="md-eye" style="zoom:1.5;"></ion-icon>
+      </button></ion-buttons>
+      <ion-buttons start><button ion-button end round (click)="irEditarPublicacion(pub.id_publicacion)" style="zoom:0.8;" placeholder="asda ">
+        Editar &nbsp;
+        <ion-icon name="create" style="zoom:1.5;"></ion-icon>
+      </button></ion-buttons>
+        <ion-buttons start><button ion-button end round (click)="irEliminarPublicacion(pub.id_publicacion)" style="zoom:0.8;" placeholder="asda ">
             Borrar &nbsp;
-            <ion-icon name="trash" style="zoom:1.5;"></ion-icon>
-          </button></ion-buttons>
-          <ion-buttons start><button ion-button end round (click)="irEditarPublicacion(pub.id_publicacion)" style="zoom:0.9;" placeholder="asda ">
-            Editar &nbsp;
-            <ion-icon name="trash" style="zoom:1.5;"></ion-icon>
-          </button></ion-buttons>
-          <ion-buttons start><button ion-button end round (click)="irPublicacion(pub.id_publicacion)" style="zoom:0.9;" placeholder="asda ">
-            Ver &nbsp;
-            <ion-icon name="trash" style="zoom:1.5;"></ion-icon>
-          </button></ion-buttons>
-      </div>
+          <ion-icon name="trash" style="zoom:1.5;"></ion-icon>
+      </button></ion-buttons>
+        
+    </ion-row>
+    <br>
   </ion-card>
 </ng-container> 
 <ng-template #nopub>
