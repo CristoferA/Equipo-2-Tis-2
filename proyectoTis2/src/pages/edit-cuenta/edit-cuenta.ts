@@ -25,7 +25,27 @@ export class EditCuentaPage {
   email_usuario:any;
   cuenta: any;
 
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, public formBuilder: FormBuilder, public alertController: AlertController) {
+
+
+    var respuesta = JSON.parse(localStorage.getItem('respuesta'));
+    var id_usuario = respuesta.data.id_usuario;
+    console.log(id_usuario);  
+    
+
+    this.http.get('http://localhost/apiRest/public/usuario/'+id_usuario)
+    .map(response => response.json())
+    .subscribe(data =>{
+      
+        this.cuenta = data;
+        console.log(data);
+        
+      },
+      err => {
+        console.log("Oops!");
+      }
+    );
 
     this.datos = formBuilder.group({
       id_usuario:  ['',[Validators.required, Validators.maxLength(20), Validators.minLength(5)]],
@@ -45,44 +65,32 @@ export class EditCuentaPage {
     this.navCtrl.setRoot(CuentaPage);
   }
 
-  async guardar(){
+  guardar(){
 
-    var f = this.datos.value;
-    if(this.datos.invalid){
-      const alert = await this.alertController.create({
-        title: 'Datos incompletos',
-        message: 'Tienes que llenar todos los datos',
-        buttons: ['Aceptar']
-
-      });
-        await alert.present();
-        return;
-    }
-
-    console.log(this.id_usuario);
-    console.log(this.nombre_usuario);
-    console.log(this.email_usuario);
-
-    var usuario ={
-      id_usuario: f.id_usuario,
-      nombre_usuario: f.nombre_usuario,
-      email_usuario: f.email_usuario
-    }
-
-    localStorage.setItem('usuario', JSON.stringify(usuario));
-
+    
+    
+    if('respuesta' in localStorage){
+    var respuesta = JSON.parse(localStorage.getItem('respuesta'));
+    var id_usuario = respuesta.data.id_usuario;
+    console.log(id_usuario);  
 
     var url =  'http://localhost/apiRest/public/usuario/editar';
-    this.data = this.http.put(url, usuario);
+    let postData = new FormData();
 
+    postData.append('id_usuario', this.id_usuario);
+    postData.append('nombre_usuario', this.nombre_usuario);
+    postData.append('email_usuario', this.email_usuario);
 
-    this.data.subscribe((data) => {
+   this.http.post(url, postData)
+   .map(response => response.json())   
+   .subscribe((data) => {
       console.log(data);
       this.navCtrl.pop();
 
     }), err => {
       console.log("Oops!");
     }
+  }
 
 }
 }

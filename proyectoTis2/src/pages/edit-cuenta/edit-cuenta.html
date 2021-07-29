@@ -33,31 +33,27 @@
     </ion-toolbar>
   
 
-    <form [formGroup]="datos">
-      <ion-list >
-        <ion-item>
-          <ion-label color="primary" stacked>Usuario</ion-label>
-          <ion-input type="text" formControlName="id_usuario" [(ngModel)]="id_usuario" ngModel required placeholder="Usuario"></ion-input>
-        </ion-item>
-     
-        <ion-item>
-          <ion-label color="primary" stacked>Nombre</ion-label>
-          <ion-input type="text" formControlName="nombre_usuario" [(ngModel)]="nombre_usuario" ngModel required placeholder="Nombre completo"></ion-input>
-        </ion-item>
-    
-        <ion-item>
-          <ion-label color="primary" stacked>Email</ion-label>
-          <ion-input type="email" formControlName="email_usuario" [(ngModel)]="email_usuario" ngModel required placeholder="Correo"></ion-input>
-        </ion-item>
-    
-        <br>
-        <button ion-button type="submit" round (click)="guardar()">Guardar</button> 
-        <button ion-button type="submit" round (click)="cancelar()">Cancelar</button> 
-    
-      </ion-list>
-      
-      
-    </form>
+    <ion-list *ngFor="let cue of cuenta">
+  
+      <ion-item>
+        <ion-label color="primary" stacked>Usuario</ion-label>
+        <ion-input type="text" [(ngModel)]="id_usuario" placeholder="{{cue.id_usuario}}"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label color="primary" stacked>Nombre</ion-label>
+        <ion-input type="text" [(ngModel)]="nombre_usuario" placeholder="{{cue.nombre_usuario}}"></ion-input> 
+      </ion-item>
+  
+      <ion-item style="padding-bottom: 5px;">
+        <ion-label color="primary" stacked>Email</ion-label>
+       <ion-input type="email" [(ngModel)]="email_usuario" placeholder="{{cue.email_usuario}}"></ion-input>
+      </ion-item>
+  
+    </ion-list>
+  
+    <button ion-button type="submit" round (click)="guardar()">Guardar</button> 
+    <button ion-button type="submit" round (click)="cancelar()">Cancelar</button> 
 
 
 
