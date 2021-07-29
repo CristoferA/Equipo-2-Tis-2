@@ -1,9 +1,9 @@
 <?php
     class db {
         private $dbHost = 'localhost';
-        private $dbUser = 'tisiicl_admin_bd_turismo';
-        private $dbPass = 'holasoyeladmindelabd';
-        private $dbName = 'tisiicl_atractivos_turisticos_bd';
+        private $dbUser = 'edeincl1_admin_turismo_bd';
+        private $dbPass = ' rDCM5LL74KX{';
+        private $dbName = 'edeincl1_atractivos_turisticos_bd';
         //aqui me conecto a la bd
         public function conectionDB(){
             $mysqlConnect = "mysql:host=$this->dbHost;dbname=$this->dbName";
