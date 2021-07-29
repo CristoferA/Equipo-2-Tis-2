@@ -39,5 +39,5 @@
     "@ionic/app-scripts": "3.2.4",
     "typescript": "2.6.2"
   },
-  "description": "An Ionic project"
+  "description": "APP Móvil que consiste en un catálogo de atractivos turísticos y sitios de interés a lo largo de Chile"
 }
