@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 27, 2021 at 07:25 PM
+-- Generation Time: Jul 29, 2021 at 04:35 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -102,7 +102,9 @@ CREATE TABLE `historial` (
 
 INSERT INTO `historial` (`id_usuario`, `id_publicacion`) VALUES
 ('abismal13', 4),
+('abismal20', 4),
 ('abismal13', 5),
+('abismal20', 5),
 ('abismal13', 6);
 
 -- --------------------------------------------------------
@@ -121,7 +123,8 @@ CREATE TABLE `moderador` (
 --
 
 INSERT INTO `moderador` (`usuario`, `codigo_acceso`) VALUES
-('1', '1');
+('1', '1'),
+('abismal22', '123');
 
 -- --------------------------------------------------------
 
@@ -160,9 +163,7 @@ INSERT INTO `publica` (`id_oferente`, `id_publicacion`) VALUES
 ('1', 4),
 ('abismal20', 5),
 ('abismal20', 6),
-('abismal20', 29),
-('abismal20', 30),
-('abismal20', 31);
+('abismal20', 29);
 
 -- --------------------------------------------------------
 
@@ -193,12 +194,10 @@ CREATE TABLE `publicacion` (
 --
 
 INSERT INTO `publicacion` (`id_publicacion`, `nombre_publicacion`, `descripcion_publicacion`, `valor_publicacion`, `region_publicacion`, `tipo_publicacion`, `estado`, `tipo_turismo`, `email_contacto`, `telefono_contacto`, `direccion`, `redes_sociales`, `comuna_publicacion`, `calificacion_publicacion`, `visitas`) VALUES
-(4, 'Torres del paine', 'Estas son las torres del paine, un lugar turistico muy turistiable del sur de chile', 0, 'Magallanes y de la Antártica Chilena', 'servicio', 'aprobado', 'natural', 'paine@gmail.com', 912345678, 'Magallanes y la Antartica Chilena', 'Paine', 'Torres del Paine', 10, 18),
-(5, 'Ahu Tongariki', 'Este es un lugar donde se puede hacer turismo.', 0, 'Valparaíso', 'servicio', 'aprobado', 'cultural', 'pascua@gmail.com', 912345678, 'rapa nui 123', 'Isla de Pascua', 'Isla de Pascua', 10, 10),
-(6, 'Termas de Chillan ', 'Las termas de chillan el mejor lugar para pasar el invierno!', 50000, 'Ñuble', 'infraestructura', 'aprobado', 'natural', 'termito@gmail.com', 978781717, 'Las trancas', 'facebook', 'Pinto', 0, 11),
-(29, '123123123', '121434123', 123123, 'Tarapacá', 'servicio', 'rechazado', 'natural', '1231231', 123123, '123123123', '12312312312', 'Huara', 0, 2),
-(30, '12312', '12312', 12, 'Arica y Parinacota', 'infraestructura', 'rechazado', 'gastronomico', '123123', 123123, '12312', '12312', 'Camarones', 0, 0),
-(31, '12312', '12312', 12, 'Arica y Parinacota', 'infraestructura', 'rechazado', 'gastronomico', '123123', 123123, '12312', '12312', 'Camarones', 0, 0);
+(4, 'Torres del paine', 'Estas son las torres del paine, un lugar turistico muy turistiable del sur de chile', 0, 'Magallanes y de la Antártica Chilena', 'servicio', 'aprobado', 'natural', 'paine@gmail.com', 912345678, 'Magallanes y la Antartica Chilena', 'Paine', 'Torres del Paine', 0, 19),
+(5, 'Ahu Tongariki', 'Este es un lugar donde se puede hacer turismo.', 0, 'Valparaíso', 'servicio', 'aprobado', 'cultural', 'pascua@gmail.com', 912345678, 'rapa nui 123', 'Isla de Pascua', 'Isla de Pascua', 10, 21),
+(6, 'Termas de Chillan ', 'Las termas de chillan el mejor lugar para pasar el invierno!', 50000, 'Ñuble', 'infraestructura', 'aprobado', 'natural', 'termito@gmail.com', 978781717, 'Las trancas', 'facebook', 'Pinto', 6, 12),
+(29, '13123123123123123123123123', '213123', 123213, 'Arica y Parinacota', 'producto', 'pendiente', 'natural', '123123', 123123, '123123', '123123', 'Arica', 0, 2);
 
 -- --------------------------------------------------------
 
@@ -220,7 +219,11 @@ CREATE TABLE `review` (
 --
 
 INSERT INTO `review` (`id_review`, `review`, `id_publicacion`, `id_usuario`, `estado`, `calificacion_review`) VALUES
-(1, 'Ejemplo de review', 4, 'abismal13', 'pendiente', 0);
+(1, 'Ejemplo de review', 4, 'abismal13', 'aprobado', 0),
+(2, 'ZXZX', 6, 'abismal13', 'aprobado', 10),
+(3, 'asdasdasd', 6, 'abismal13', 'aprobado', 4),
+(4, 'asdsdgsdgsfsd', 6, 'abismal13', 'aprobado', 7),
+(5, 'asdasd', 6, 'abismal13', 'aprobado', 3);
 
 -- --------------------------------------------------------
 
@@ -248,7 +251,7 @@ INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `email_usuario`, `contras
 ('abismal2', 'Felipe Espinoza', 'fespinozameeeee@gmail.cl', 'F1f1f2f3'),
 ('abismal20', 'Felipe Espinoza', 'fespinozameaaa@gmail.cl', 'f69be13983b69f2cafdc618f5a6ca9c5cdc4ddd28ff2b52e3116a6b907c4c614'),
 ('abismal22', 'Felipe Espinoza', 'fespinozamei@gmail.cl', 'f69be13983b69f2cafdc618f5a6ca9c5cdc4ddd28ff2b52e3116a6b907c4c614'),
-('abismal3', 'Felipe Espinoza', 'fespinozameeeeee@gmail.cl', 'F1f1f2f3'),
+('abismal3', 'Andronico', '213123123', 'F1f1f2f3'),
 ('abismal4', 'Felipe Espinoza', 'fespinozameeeeeee@gmail.cl', 'F1f1f2f3'),
 ('abismal5', 'Felipe Espinoza', 'fespinozameeeeeeee@gmail.cl', 'F1f1f2f3'),
 ('abismal6', 'Felipe Espinoza', 'fespinozame@gmail.cl', 'F1f1f2f3'),
@@ -354,7 +357,7 @@ ALTER TABLE `publicacion`
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `id_review` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_review` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
