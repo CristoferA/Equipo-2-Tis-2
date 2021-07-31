@@ -6,13 +6,19 @@
 
 <ion-content padding center text-center class="bg">
 
-  <div style="display: flex; justify-content: center;">
-    <ion-avatar >
-      <img src="../assets/imgs/avatar.png" style="height:125px;">
-    </ion-avatar>
+  <div style="display: flex; justify-content: center; zoom:0.8;">
+    <ion-avatar (click)="abrirGaleria()">
+      <img src="../assets/imgs/avatarC.png" style="height:125px;">
+    </ion-avatar>     
   </div>
 
   <form [formGroup]="datos">
+    <!--<ion-item text-center>
+      <button ion-button icon-left large (click)="abrirGaleria()">
+        <ion-icon name="images"></ion-icon>
+        Añadir fotos
+      </button>
+    </ion-item>-->
 
     <ion-list>
 
@@ -36,11 +42,31 @@
           placeholder="Correo"></ion-input>
       </ion-item>
 
+      <!--<div id="LoadedImages" *ngIf="fotos">
+        <ion-item text-center *ngFor="let fot of fotos; let i = index">
+          <ion-icon name="close-circle" (click)="borrarFoto(i)"></ion-icon>
+          <img [src]="fot" class="imagenes">
+        </ion-item>
+      </div>
+      <ion-list *ngFor="let image of images">
+        <ion-item>
+          <img src={{image}} />
+        </ion-item>
+      </ion-list>-->
+      <div id="LoadedImages">
+        <ion-item text-center *ngFor="let foto of fotos; let i = index">
+          <ion-icon name="close-circle" (click)="borrarFoto(i)"></ion-icon>
+          <img src={{foto}} class="imagenes" />
+        </ion-item>
+      </div>
+
       <div style="padding-top: 5px;">
         <button ion-button type="submit" round (click)="register()">Enviar</button>
       </div>
 
     </ion-list>
+
+
 
   </form>
 

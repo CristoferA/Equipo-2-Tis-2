@@ -6,6 +6,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ToastController } from 'ionic-angular';
 
+//Plugins
+import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
+import { File } from '@ionic-native/file';
+
 
 /**
  * Generated class for the RegistroPage page.
@@ -30,15 +34,19 @@ export class RegistroPage {
   nombre_usuario:any;
   contrasena:any;
   email_usuario:any;
+  foto_usuario:any;
   tipo:any;
+
+  fotos:any=[];
+  images:any=[];
 
   
   
   //añadir toast aqui y en la funcion
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, public formBuilder: FormBuilder,private toastCtrl:ToastController, public alertController: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, public formBuilder: FormBuilder,private toastCtrl:ToastController, public alertController: AlertController, private imagePicker: ImagePicker, private file: File) {
       
-  
-
+    //File plugin
+    //this.file.checkDir(this.file.dataDirectory, 'mydir').then(_ => console.log('Directory exists')).catch(err => console.log('Directory doesn\'t exist'));
     //ionic 3 angular 4
     
     this.datos = formBuilder.group({
@@ -76,19 +84,19 @@ export class RegistroPage {
     console.log(this.nombre_usuario);
     console.log(this.contrasena);
     console.log(this.email_usuario);
+    console.log(this.fotos);
 
     var usuario ={
       id_usuario: f.id_usuario,
       nombre_usuario: f.nombre_usuario,
       contrasena: f.contrasena,
-      email_usuario: f.email_usuario
+      email_usuario: f.email_usuario,
+      foto_usuario: this.fotos
     }
 
     localStorage.setItem('usuario', JSON.stringify(usuario));
 
 
-    //http://localhost/apiRest/public/signup
-    //https://edein.cl/equipo2/apiRest/public/signup
     var url =  'https://edein.cl/equipo2/apiRest/public/signup';
     this.data = this.http.post(url, usuario);
 
@@ -129,6 +137,34 @@ export class RegistroPage {
       duration: 2000,
     });
     toast.present();
+  }
+
+  abrirGaleria(){
+
+      
+      var options: ImagePickerOptions = {
+                maximumImagesCount: 1,
+                width: 100,
+                height: 100
+      }
+
+      /*this.imagePicker.getPictures(options).then((results) => {
+              this.fotos = results;
+      }, (err) => { });*/
+      this.imagePicker.getPictures(options).then((results) => {
+        for (var i = 0; i < results.length; i++) {
+            let filename = results[i].substring(results[i].lastIndexOf('/')+1);
+            let path = results[i].substring(0,results[i].lastIndexOf('/')+1);
+            this.file.readAsDataURL(path, filename).then((base64string)=>{
+              this.fotos.push(base64string);
+            })
+        }
+      }, (err) => { });
+
+  }
+
+  borrarFoto(index) {
+    this.fotos.splice(index, 1);
   }
 
  
