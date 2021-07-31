@@ -35,15 +35,17 @@ $app->get('/usuario', function (Request $request, Response $response){
 // GET Lista de un usuario especifica por ID 
 $app->get('/usuario/{id_usuario}', function(Request $request, Response $response){
     $id_usuario = $request->getAttribute('id_usuario');
+   
     $sql = "SELECT * FROM usuario WHERE id_usuario = '$id_usuario'";
     try{
+        
       $db = new db();
       $db = $db->conectionDB();
       $result = $db->query($sql);
-  
+      
       if ($result->rowCount() > 0){
-        $usuario = $result->fetchAll(PDO::FETCH_OBJ);
-        echo json_encode($usuario);
+        $usuarios = $result->fetchAll(PDO::FETCH_OBJ);
+        echo json_encode($usuarios);
       }else {
         echo json_encode("No existen usuarios en la BBDD con este ID.");
       }
@@ -216,33 +218,39 @@ $app->get('/usuario_publicacion/{id_usuario}', function (Request $request, Respo
 }); 
 
 
+//insertar usuario editado
+
 $app->post('/usuario/editar', function(Request $request, Response $response){
 
     $id_usuario = $request->getParam('id_usuario');
+    $contrasena = $request->getParam('contrasena');
+    $contrasena=hash('sha256',$contrasena);
     $nombre_usuario = $request->getParam('nombre_usuario');
     $email_usuario = $request->getParam('email_usuario');
-    
-
 
     $sql = " UPDATE usuario 
-             SET  nombre_usuario ='$nombre_usuario', email_usuario ='$email_usuario'
+             SET  contrasena ='$contrasena', nombre_usuario ='$nombre_usuario', email_usuario ='$email_usuario'
              WHERE id_usuario = '$id_usuario'";
 
     try {
+
+        $username_check = preg_match('~^[A-Za-z0-9_]{3,20}$~i', $nombre_usuario);
+        $email_check = preg_match('~^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.([a-zA-Z]{2,4})$~i', $email_usuario);
+        $password_check = preg_match('~^[A-Za-z0-9!@#$%^&*()_]{6,20}$~i', $contrasena);
+
         $db = new db();
         $db = $db->conectionDB();
         $result = $db->prepare($sql);
 
         $result->bindParam(':id_usuario',$id_usuario);
+        $contrasena=hash('sha256',$contrasena);
+        $result->bindParam(':contrasena',$contrasena);
         $result->bindParam(':nombre_usuario',$nombre_usuario);
         $result->bindParam(':email_usuario',$email_usuario);
 
 
         $result->execute();
-        //$data=$result->fetch(PDO::FETCH_OBJ);
-  
         echo json_encode("Usuario modificado.");
-
 
         $result = null;
         $db = null;
