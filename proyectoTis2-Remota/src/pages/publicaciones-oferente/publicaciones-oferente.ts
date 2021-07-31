@@ -24,7 +24,7 @@ export class PublicacionesOferentePage {
 
     //http://localhost/apiRest/public/usuario_publicacion/
     //https://edein.cl/equipo2/apiRest/public/usuario_publicacion/
-    this.http.get('http://localhost/apiRest/public/usuario_publicacion/'+this.oferente)
+    this.http.get('https://edein.cl/equipo2/apiRest/public/usuario_publicacion/'+this.oferente)
     .map(response => response.json())
     .subscribe(data =>
       {
