@@ -464,7 +464,8 @@ $app->get('/publicacion_similar/{id_publicacion}', function (Request $request, R
             $value = $result -> fetch (PDO::FETCH_OBJ);
 
             $region_publicacion = $value -> region_publicacion;
-            $tipo_turismo =  $value -> tipo_publicacion;
+            $tipo_turismo =  $value -> tipo_turismo;
+            $tipo_publicacion =  $value -> tipo_publicacion;
             $result = null;
             $sql2 = "SELECT * FROM publicacion 
             WHERE (region_publicacion = '$region_publicacion'
@@ -481,7 +482,7 @@ $app->get('/publicacion_similar/{id_publicacion}', function (Request $request, R
                 $publicaciones = $result -> fetchAll(PDO::FETCH_OBJ);
                 echo json_encode($publicaciones);
             }else{
-                echo "No hay publicaciones similares a esta!";
+                echo json_encode($tipo_publicacion);
             }
             
 
