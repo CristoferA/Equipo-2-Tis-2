@@ -35,7 +35,10 @@ export class EliminarPublicacionPage {
   direccionS : any;  
   direccionPub: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
-    this.http.get('http://localhost/apiRest/public/publicacion_detallada/'+this.id_publicacion)
+
+    //http://localhost/apiRest/public/publicacion_detallada/
+    //https://edein.cl/equipo2/apiRest/public/publicacion_detallada/
+    this.http.get('https://edein.cl/equipo2/apiRest/public/publicacion_detallada/'+this.id_publicacion)
     .map(response => response.json())
     .subscribe(data =>
       {
@@ -63,7 +66,9 @@ export class EliminarPublicacionPage {
     console.log("Holi");
     console.log(this.id_publicacion);
     var a = this.id_publicacion;
-    this.http.delete('http://localhost/apiRest/public/publicacion/delete/'+a)
+    //http://localhost/apiRest/public/publicacion/delete/
+    //https://edein.cl/equipo2/apiRest/public/publicacion/delete/
+    this.http.delete('https://edein.cl/equipo2/apiRest/public/publicacion/delete/'+a)
     .subscribe(data =>{
       console.log("ARDILLA");
       console.log(data);

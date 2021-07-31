@@ -46,7 +46,9 @@ export class EditarPublicacionPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl:ToastController) {
    
-    this.http.get('http://localhost/apiRest/public/publicacion_detallada/'+this.id_publicacion)
+    //http://localhost/apiRest/public/publicacion_detallada/
+    //https://edein.cl/equipo2/apiRest/public/publicacion_detallada/
+    this.http.get('https://edein.cl/equipo2/apiRest/public/publicacion_detallada/'+this.id_publicacion)
     .map(response => response.json())
     .subscribe(data =>
       {
@@ -95,7 +97,9 @@ export class EditarPublicacionPage {
   }
 
   editarPublicacion(){
-    var url = 'http://localhost/apiRest/public/publicacion/editar';
+    //http://localhost/apiRest/public/publicacion/editar
+    //https://edein.cl/equipo2/apiRest/public/publicacion/editar
+    var url = 'https://edein.cl/equipo2/apiRest/public/publicacion/editar';
     let postData = new FormData();
 
     console.log("El nombre_publicacion es: " + this.nombre);

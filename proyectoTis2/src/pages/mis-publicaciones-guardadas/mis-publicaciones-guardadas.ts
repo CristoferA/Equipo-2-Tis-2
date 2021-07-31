@@ -30,7 +30,10 @@ export class MisPublicacionesGuardadasPage {
     var id_usuario = respuesta.data.id_usuario;
     console.log(id_usuario);  
 
-    this.http.get('http://localhost/apiRest/public/publicaciones_guardadas/'+id_usuario)
+
+    //http://localhost/apiRest/public/publicaciones_guardadas/
+    //https://edein.cl/equipo2/apiRest/public/publicaciones_guardadas/
+    this.http.get('https://edein.cl/equipo2/apiRest/public/publicaciones_guardadas/'+id_usuario)
     .map(response => response.json())
     .subscribe(data =>{
       
@@ -60,7 +63,10 @@ export class MisPublicacionesGuardadasPage {
       var id_usuario = respuesta.data.id_usuario;
       console.log(id_usuario);  
 
-    this.http.delete('http://localhost/apiRest/public/guardar_publicacion/delete/'+id_usuario)
+
+    //http://localhost/apiRest/public/guardar_publicacion/delete/
+    //https://edein.cl/equipo2/apiRest/public/guardar_publicacion/delete/
+    this.http.delete('https://edein.cl/equipo2/apiRest/public/guardar_publicacion/delete/'+id_usuario)
     .subscribe(data => {
       console.log(data);
       this.presentToast("Publicaciones guardas eliminadas");

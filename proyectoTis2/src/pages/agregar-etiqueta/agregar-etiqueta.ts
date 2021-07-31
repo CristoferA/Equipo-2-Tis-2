@@ -37,8 +37,9 @@ export class AgregarEtiquetaPage {
     let postData = new FormData();
     postData.append('etiqueta', this.etiqueta);
     postData.append('id_publicacion', this.id);
-
-    this.http.post('http://localhost/apiRest/public/etiqueta/new', postData)
+    //http://localhost/apiRest/public/etiqueta/new
+    //https://edein.cl/equipo2/apiRest/public/etiqueta/new
+    this.http.post('https://edein.cl/equipo2/apiRest/public/etiqueta/new', postData)
       .map(response => response.json())
       .subscribe(data => {
         console.log(data);

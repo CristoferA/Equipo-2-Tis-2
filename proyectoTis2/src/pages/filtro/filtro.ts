@@ -48,6 +48,7 @@ export class FiltroPage {
 
   constructor(public navCtrl: NavController, public http: Http, public navParams: NavParams, public toastCtrl: ToastController) {
 
+    
     this.http.get('https://apis.digital.gob.cl/dpa/regiones')
     .map(response => response.json())
     .subscribe(data =>

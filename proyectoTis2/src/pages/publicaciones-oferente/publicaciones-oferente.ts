@@ -21,7 +21,10 @@ export class PublicacionesOferentePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
 
-    this.http.get('http://localhost/apiRest/public/usuario_publicacion/'+this.oferente)
+
+    //http://localhost/apiRest/public/usuario_publicacion/
+    //https://edein.cl/equipo2/apiRest/public/usuario_publicacion/
+    this.http.get('https://edein.cl/equipo2/apiRest/public/usuario_publicacion/'+this.oferente)
     .map(response => response.json())
     .subscribe(data =>
       {

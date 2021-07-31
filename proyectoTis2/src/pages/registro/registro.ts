@@ -87,7 +87,9 @@ export class RegistroPage {
     localStorage.setItem('usuario', JSON.stringify(usuario));
 
 
-    var url =  'http://localhost/apiRest/public/signup';
+    //http://localhost/apiRest/public/signup
+    //https://edein.cl/equipo2/apiRest/public/signup
+    var url =  'https://edein.cl/equipo2/apiRest/public/signup';
     this.data = this.http.post(url, usuario);
 
 

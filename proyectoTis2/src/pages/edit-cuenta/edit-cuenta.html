@@ -21,6 +21,7 @@
     </div>
     <h1 style="display: flex; justify-content: center;" *ngFor="let cue of cuenta">{{cue.nombre_usuario}}</h1>
 
+  
     <br><br><br>
   
     <ion-toolbar>
@@ -35,26 +36,24 @@
     <ion-list *ngFor="let cue of cuenta">
   
       <ion-item>
-        <ion-input type="text" [(ngModel)]="id_usuario" placeholder="Usuario: {{cue.id_usuario}}"></ion-input>
+        <ion-label color="primary" stacked>Usuario</ion-label>
+        <ion-input type="text" [(ngModel)]="id_usuario" placeholder="{{cue.id_usuario}}"></ion-input>
       </ion-item>
+  
       <ion-item>
-        <ion-input type="text" [(ngModel)]="contrasena" placeholder="Contraseña: "></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input type="text" [(ngModel)]="nombre_usuario" placeholder="Nombre: {{cue.nombre_usuario}}"></ion-input> 
+        <ion-label color="primary" stacked>Nombre</ion-label>
+        <ion-input type="text" [(ngModel)]="nombre_usuario" placeholder="{{cue.nombre_usuario}}"></ion-input> 
       </ion-item>
   
       <ion-item style="padding-bottom: 5px;">
-       <ion-input type="text" [(ngModel)]="email_usuario" placeholder="Email: {{cue.email_usuario}}"></ion-input>
+        <ion-label color="primary" stacked>Email</ion-label>
+       <ion-input type="email" [(ngModel)]="email_usuario" placeholder="{{cue.email_usuario}}"></ion-input>
       </ion-item>
   
     </ion-list>
-    
-    <div>
-      <button ion-button round (click)="guardar()">Guardar</button> 
-      <button ion-button round (click)="cancelar()">Cancelar</button> 
-    </div>
-    
+  
+    <button ion-button type="submit" round (click)="guardar()">Guardar</button> 
+    <button ion-button type="submit" round (click)="cancelar()">Cancelar</button> 
 
 
 

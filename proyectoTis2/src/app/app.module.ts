@@ -31,6 +31,10 @@ import { EditCuentaPage } from '../pages/edit-cuenta/edit-cuenta';
 import { EliminarPublicacionPage } from '../pages/eliminar-publicacion/eliminar-publicacion';
 import { EditarPublicacionPage } from '../pages/editar-publicacion/editar-publicacion';
 
+//Plugins
+import { ImagePicker } from '@ionic-native/image-picker';
+import { File } from '@ionic-native/file';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -96,7 +100,9 @@ import { EditarPublicacionPage } from '../pages/editar-publicacion/editar-public
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ImagePicker,
+    File
   ]
 })
 export class AppModule {

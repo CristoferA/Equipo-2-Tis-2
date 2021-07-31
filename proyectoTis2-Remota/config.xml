@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter2" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="io.ionic.turistico" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Turistico</name>
-    <description>La mejor app de turismo DEL MUNDO.</description>
-    <author email="hi@ionicframework.com" href="http://ionicframework.com/">Crazy banana Team</author>
+    <description>APP Móvil que consiste en un catálogo de atractivos turísticos y sitios de interés a lo largo de Chile.</description>
+    <author email="hi@ionicframework.com" href="http://ionicframework.com/">Equipo 2</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

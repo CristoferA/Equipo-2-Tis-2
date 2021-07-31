@@ -75,7 +75,9 @@ export class CrearPublicacionPage {
   }
 
   crearPublicacion() {
-    var url = 'http://localhost/apiRest/public/publicacion_detallada/new';
+    //http://localhost/apiRest/public/publicacion_detallada/new
+    //https://edein.cl/equipo2/apiRest/public/publicacion_detallada/new
+    var url = 'https://edein.cl/equipo2/apiRest/public/publicacion_detallada/new';
     let postData = new FormData();
     
     console.log("El nombre_publicacion es: " + this.nombre);

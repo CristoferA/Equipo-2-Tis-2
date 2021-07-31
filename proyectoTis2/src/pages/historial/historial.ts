@@ -31,7 +31,9 @@ export class HistorialPage {
     console.log(id_usuario);  
     
 
-    this.http.get('http://localhost/apiRest/public/publicaciones_historial/'+id_usuario)
+    //http://localhost/apiRest/public/publicaciones_historial/
+    //https://edein.cl/equipo2/apiRest/public/publicaciones_historial/
+    this.http.get('https://edein.cl/equipo2/apiRest/public/publicaciones_historial/'+id_usuario)
     .map(response => response.json())
     .subscribe(data =>{
       
@@ -63,7 +65,9 @@ export class HistorialPage {
       var id_usuario = respuesta.data.id_usuario;
       console.log(id_usuario);  
 
-    this.http.delete('http://localhost/apiRest/public/historial_publicacion/delete/'+id_usuario)
+    //http://localhost/apiRest/public/historial_publicacion/delete/
+    //https://edein.cl/equipo2/apiRest/public/historial_publicacion/delete/
+    this.http.delete('https://edein.cl/equipo2/apiRest/public/historial_publicacion/delete/'+id_usuario)
     .subscribe(data => {
       console.log(data);
       this.presentToast("Historial borrado");

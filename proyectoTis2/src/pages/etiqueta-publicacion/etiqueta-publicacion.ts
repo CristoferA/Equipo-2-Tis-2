@@ -25,7 +25,9 @@ export class EtiquetaPublicacionPage {
   etiqueta = this.navParams.get('valor');
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
-    this.http.get('http://localhost/apiRest/public/etiqueta_publicacion/'+this.etiqueta)
+    //http://localhost/apiRest/public/etiqueta_publicacion/
+    //https://edein.cl/equipo2/apiRest/public/etiqueta_publicacion/
+    this.http.get('https://edein.cl/equipo2/apiRest/public/etiqueta_publicacion/'+this.etiqueta)
     .map(response => response.json())
     .subscribe(data =>
       {

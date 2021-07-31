@@ -34,7 +34,10 @@ export class PublicacionPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl:ToastController) {
 
-    this.http.get('http://localhost/apiRest/public/publicacion_detallada/'+this.id_publicacion)
+
+    //http://localhost/apiRest/public/publicacion_detallada/
+    //https://edein.cl/equipo2/apiRest/public/publicacion_detallada/
+    this.http.get('https://edein.cl/equipo2/apiRest/public/publicacion_detallada/'+this.id_publicacion)
     .map(response => response.json())
     .subscribe(data =>
       {
@@ -48,7 +51,10 @@ export class PublicacionPage {
       }
     );
 
-    this.http.get('http://localhost/apiRest/public/etiqueta/'+this.id_publicacion)
+
+    //http://localhost/apiRest/public/etiqueta/
+    //https://edein.cl/equipo2/apiRest/public/etiqueta/
+    this.http.get('https://edein.cl/equipo2/apiRest/public/etiqueta/'+this.id_publicacion)
     .map(response => response.json())
     .subscribe(datas=>
       {
@@ -60,7 +66,9 @@ export class PublicacionPage {
       });
 
 
-      this.http.get('http://localhost/apiRest/public//publicacion_similar/'+this.id_publicacion)
+      //http://localhost/apiRest/public/publicacion_similar/
+      //https://edein.cl/equipo2/apiRest/public/publicacion_similar/
+      this.http.get('https://edein.cl/equipo2/apiRest/public/publicacion_similar/'+this.id_publicacion)
       .map(response => response.json())
       .subscribe(data => {
 
@@ -104,7 +112,9 @@ export class PublicacionPage {
     var id_usuario = respuesta.data.id_usuario;
     console.log(id_usuario);  
 
-    var url =  'http://localhost/apiRest/public/guardar_publicacion/new';
+    //http://localhost/apiRest/public/guardar_publicacion/new
+    //https://edein.cl/equipo2/apiRest/public/guardar_publicacion/new
+    var url =  'https://edein.cl/equipo2/apiRest/public/guardar_publicacion/new';
     
     postData.append('id_usuario', id_usuario);
     postData.append('id_publicacion', this.id_publicacion);
@@ -137,7 +147,9 @@ export class PublicacionPage {
   agregarVisita(){
     console.log(this.id_publicacion);
 
-    this.http.get('http://localhost/apiRest/public/publicacion/visita/'+this.id_publicacion)
+    //http://localhost/apiRest/public/publicacion/visita/
+    //https://edein.cl/equipo2/apiRest/public/publicacion/visita/
+    this.http.get('https://edein.cl/equipo2/apiRest/public/publicacion/visita/'+this.id_publicacion)
     .map(response => response.json())
     .subscribe(data =>
       {

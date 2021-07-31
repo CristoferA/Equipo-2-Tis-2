@@ -36,7 +36,9 @@ export class MisPublicacionesPage {
       if (token.hasOwnProperty('data')) {
         console.log(token.data.id_usuario);
         var a = token.data.id_usuario;
-        this.http.get("http://localhost/apiRest/public/oferente/" + a)   //OFERENTES
+        //http://localhost/apiRest/public/oferente/
+        //https://edein.cl/equipo2/apiRest/public/oferente/
+        this.http.get("https://edein.cl/equipo2/apiRest/public/oferente/" + a)   //OFERENTES
           .map(Response => Response.json())
           .subscribe(data => {
             if (data === "No existen usuarios en la BBDD con este ID.") { // TE LLEVA A OFERENTE-CHECK   logeado no oferente
@@ -63,7 +65,10 @@ export class MisPublicacionesPage {
     //Aca se saca el id_de usuario dependiendo si ta logeado
     //desde el Local Storage
     //Tiene que ser oferente si no lo lleva al login
-    this.http.get('http://localhost/apiRest/public/mis_publicaciones/' + a)
+
+    //http://localhost/apiRest/public/mis_publicaciones/
+    //https://edein.cl/equipo2/apiRest/public/mis_publicaciones/
+    this.http.get('https://edein.cl/equipo2/apiRest/public/mis_publicaciones/' + a)
       .map(response => response.json())
       .subscribe(data => {
         this.publicaciones = data;

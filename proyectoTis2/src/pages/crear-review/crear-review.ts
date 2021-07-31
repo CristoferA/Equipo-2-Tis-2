@@ -28,7 +28,9 @@ export class CrearReviewPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public toastCtrl: ToastController) {
 
-    this.http.get('http://localhost/apiRest/public/publicacion/' + this.id_publicacion)
+    //http://localhost/apiRest/public/publicacion/
+    //https://edein.cl/equipo2/apiRest/public/publicacion/
+    this.http.get('https://edein.cl/equipo2/apiRest/public/publicacion/' + this.id_publicacion)
       .map(response => response.json())
       .subscribe(data_pub => {
         this.publicacion = data_pub;
@@ -72,7 +74,9 @@ export class CrearReviewPage {
   }
 
   crearReview() {
-    var url_review = 'http://localhost/apiRest/public/review/new';
+    //http://localhost/apiRest/public/review/new
+    //https://edein.cl/equipo2/apiRest/public/review/new
+    var url_review = 'https://edein.cl/equipo2/apiRest/public/review/new';
 
     let postData = new FormData();
 

@@ -27,7 +27,11 @@ export class OferenteCheckPage {
     if(token.hasOwnProperty('data')){
       console.log(token.data.id_usuario);
       var a=token.data.id_usuario;
-      this.http.get("http://localhost/apiRest/public/oferente/"+a)
+
+    //http://localhost/apiRest/public/oferente/
+    //https://edein.cl/equipo2/apiRest/public/oferente/
+
+      this.http.get("https://edein.cl/equipo2/apiRest/public/oferente/"+a)
       .map(Response=>Response.json())
       .subscribe(data =>{
         if(data==="No existen usuarios en la BBDD con este ID."){

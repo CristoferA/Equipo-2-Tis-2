@@ -33,7 +33,9 @@ export class CuentaPage {
     var id_usuario = respuesta.data.id_usuario;
     console.log(id_usuario);  
 
-    this.http.get('http://localhost/apiRest/public/usuario/'+id_usuario)
+    //http://localhost/apiRest/public/usuario/
+    //https://edein.cl/equipo2/apiRest/public/usuario/
+    this.http.get('https://edein.cl/equipo2/apiRest/public/usuario/'+id_usuario)
     .map(response => response.json())
     .subscribe(data => {
       this.cuenta = data;

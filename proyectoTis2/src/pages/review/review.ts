@@ -26,7 +26,10 @@ export class ReviewPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
     
-    this.http.get('http://localhost/apiRest/public/publicacion/' + this.id_publicacion)
+
+    //http://localhost/apiRest/public/publicacion/
+    //https://edein.cl/equipo2/apiRest/public/publicacion/
+    this.http.get('https://edein.cl/equipo2/apiRest/public/publicacion/' + this.id_publicacion)
     .map(response => response.json())
     .subscribe(data_pub =>
       {
@@ -39,7 +42,9 @@ export class ReviewPage {
       }
     );
 
-    this.http.get('http://localhost/apiRest/public/review/' + this.id_publicacion)
+    //http://localhost/apiRest/public/review/
+    //https://edein.cl/equipo2/apiRest/public/review/
+    this.http.get('https://edein.cl/equipo2/apiRest/public/review/' + this.id_publicacion)
     .map(response => response.json())
     .subscribe(data_rev =>
       {

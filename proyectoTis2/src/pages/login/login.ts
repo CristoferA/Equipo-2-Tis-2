@@ -64,7 +64,10 @@ export class LoginPage {
   async login() {
 
     var f = this.datos.value;
-    var url = 'http://localhost/apiRest/public/login';
+
+    //http://localhost/apiRest/public/login
+    //https://edein.cl/equipo2/apiRest/public/login
+    var url = 'https://edein.cl/equipo2/apiRest/public/login';
     console.log(f);
 
     //var usuario = JSON.parse(localStorage.getItem('usuario'));

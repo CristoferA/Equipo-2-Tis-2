@@ -27,8 +27,9 @@ export class ComentarioPage {
   data_dislike: Observable<any>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public toastCtrl: ToastController) {
-
-    this.http.get('http://localhost/apiRest/public/publicacion/' + this.id_publicacion)
+    //http://localhost/apiRest/public/publicacion/
+    ////https://edein.cl/equipo2/apiRest/public/publicacion/
+    this.http.get('https://edein.cl/equipo2/apiRest/public/publicacion/' + this.id_publicacion)
       .map(response => response.json())
       .subscribe(data_pub => {
         this.publicacion = data_pub;
@@ -40,7 +41,9 @@ export class ComentarioPage {
         }
       );
 
-    this.http.get('http://localhost/apiRest/public/comentario/' + this.id_publicacion)
+      //http://localhost/apiRest/public/comentario/
+      //https://edein.cl/equipo2/apiRest/public/comentario/
+    this.http.get('https://edein.cl/equipo2/apiRest/public/comentario/' + this.id_publicacion)
       .map(response => response.json())
       .subscribe(data_com => {
         this.comentario = data_com;
@@ -79,7 +82,10 @@ export class ComentarioPage {
 
       let le_dio_like:boolean = false;
       if (!le_dio_like) {
-        var url = 'http://localhost/apiRest/public/comentario/like';
+        //http://localhost/apiRest/public/comentario/like
+        //https://edein.cl/equipo2/apiRest/public/comentario/like
+
+        var url = 'https://edein.cl/equipo2/apiRest/public/comentario/like';
         let postData = new FormData();
 
         console.log("id_comentario es: " + id_comentario);
@@ -112,7 +118,9 @@ export class ComentarioPage {
 
       let le_dio_like:boolean = false;
       if (!le_dio_like) {
-        var url = 'http://localhost/apiRest/public/comentario/dislike';
+        //http://localhost/apiRest/public/comentario/dislike
+        //https://edein.cl/equipo2/apiRest/public/comentario/dislike
+        var url = 'https://edein.cl/equipo2/apiRest/public/comentario/dislike';
         let postData = new FormData();
 
         console.log("id_comentario es: " + id_comentario);

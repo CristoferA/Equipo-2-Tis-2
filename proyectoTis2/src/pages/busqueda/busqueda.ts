@@ -32,8 +32,9 @@ export class BusquedaPage {
     postData.append("comuna_publicacion", this.comunaR);
     postData.append("tipo_publicacion", this.tipoPR);
     postData.append("tipo_turismo", this.tipoTR);
-
-    this.http.post('http://localhost/apiRest/public/publicacion/buscar', postData)
+    //http://localhost/apiRest/public/publicacion/buscar
+    //https://edein.cl/equipo2/apiRest/public/publicacion/buscar
+    this.http.post('https://edein.cl/equipo2/apiRest/public/publicacion/buscar', postData)
     .map(response => response.json())
     .subscribe(data =>
       {

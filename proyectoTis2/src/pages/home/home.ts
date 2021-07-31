@@ -21,8 +21,9 @@ export class HomePage implements OnInit{
 
 
   constructor(public navCtrl: NavController, public http: Http, public navParams: NavParams) {
-
-    this.http.get('http://localhost/apiRest/public/publicacion/destacadas')
+    //http://localhost/apiRest/public/publicacion/destacadas
+    //https://edein.cl/equipo2/apiRest/public/publicacion/destacadas/ 
+    this.http.get('https://edein.cl/equipo2/apiRest/public/publicacion/destacadas ')
       .map(response => response.json())
       .subscribe(data => {
 
@@ -50,7 +51,9 @@ export class HomePage implements OnInit{
       var id_usuario = respuesta.data.id_usuario;
       console.log(id_usuario);
 
-      var url = 'http://localhost/apiRest/public/historial_publicacion/new';
+      //http://localhost/apiRest/public/historial_publicacion/new
+      //https://edein.cl/equipo2/apiRest/public/historial_publicacion/new/
+      var url = 'https://edein.cl/equipo2/apiRest/public/historial_publicacion/new';
 
       postData.append('id_usuario', id_usuario);
       postData.append('id_publicacion', id_publicacion);
