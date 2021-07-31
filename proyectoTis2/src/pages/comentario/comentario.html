@@ -10,7 +10,9 @@
   </ion-header>
 </div>
 
-<ion-content>
+<ion-content padding>
+
+  <ng-container *ngIf= "comentario?.length; else nocom"> 
 
   <div *ngIf="comentario" style="padding-top: 55px;">
     <ion-card *ngFor="let com of comentario">
@@ -32,6 +34,15 @@
   <div *ngIf="!comentario">
     <p> Esta publicación no tiene comentarios. </p>
   </div>
+
+</ng-container> 
+<ng-template #nocom>
+  <br>
+  <br>
+  <br>
+  <br>
+  <h3>Esta publicación no tiene comentarios.</h3>
+</ng-template>
 
 </ion-content>
 

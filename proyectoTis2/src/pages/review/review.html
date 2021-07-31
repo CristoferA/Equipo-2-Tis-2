@@ -10,7 +10,9 @@
   </ion-header>
 </div>
 
-<ion-content>
+<ion-content padding> 
+
+  <ng-container *ngIf= "review?.length; else norev"> 
 
   <div *ngIf="review" style="padding-top: 55px;">
     <ion-card *ngFor="let rev of review">
@@ -34,6 +36,15 @@
     <p> Esta publicación no tiene reseñas. </p>
   </div>
 
+
+</ng-container> 
+<ng-template #norev>
+  <br>
+  <br>
+  <br>
+  <br>
+  <h3>Esta publicación no tiene reviews.</h3>
+</ng-template>
 </ion-content>
 
 <div *ngFor="let pub of publicacion">
