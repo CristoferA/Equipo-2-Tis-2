@@ -1,16 +1,9 @@
-<!--
-  Generated template for the CrearPublicacionPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-
 <ion-header>
   <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Crear publicacion</ion-title>
+    <ion-title>Crear publicación</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -34,11 +27,11 @@
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" [(ngModel)]="precio"placeholder="Precio"></ion-input>
+      <ion-input type="text" [(ngModel)]="precio" placeholder="Precio"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" [(ngModel)]="telefono"placeholder="Teléfono"></ion-input>
+      <ion-input type="text" [(ngModel)]="telefono" placeholder="Teléfono"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -54,8 +47,9 @@
     </ion-item>
 
     <ion-item>
-      <ion-label style="padding-left: 8px;">Region</ion-label>
-      <ion-select id="regionID" [(ngModel)]="region" placeholder="Selecciona" #regionS (ionChange)='onOptionsSelected(regionS.value)'>
+      <ion-label style="padding-left: 8px;">Región</ion-label>
+      <ion-select id="regionID" [(ngModel)]="region" placeholder="Selecciona" #regionS
+        (ionChange)='onOptionsSelected(regionS.value)'>
         <ion-option *ngFor="let reg of regiones" [value]="reg.codigo">{{reg.nombre}}</ion-option>
       </ion-select>
     </ion-item>
@@ -68,7 +62,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-label style="padding-left: 8px;">Tipo de publicacion</ion-label>
+      <ion-label style="padding-left: 8px;">Tipo de publicación</ion-label>
       <ion-select [(ngModel)]="tipo_publicacion" placeholder="Selecciona">
         <ion-option [value]="producto">Producto</ion-option>
         <ion-option [value]="servicio">Servicio</ion-option>
@@ -82,17 +76,16 @@
         <ion-option [value]="negocios">Negocios</ion-option>
         <ion-option [value]="urbano">Urbano</ion-option>
         <ion-option [value]="natural">Natural</ion-option>
-        <ion-option [value]="gastronomico">Gastronomico</ion-option>
+        <ion-option [value]="gastronomico">Gastronómico</ion-option>
         <ion-option [value]="aventura">Aventura</ion-option>
-        <ion-option [value]="ecologico">Ecologico</ion-option>
+        <ion-option [value]="ecologico">Ecológico</ion-option>
         <ion-option [value]="cultural">Cultural</ion-option>
         <ion-option [value]="lujo">De lujo</ion-option>
-        <ion-option [value]="diversion">De diversion</ion-option>
+        <ion-option [value]="diversion">De diversión</ion-option>
         <ion-option [value]="religioso">Religioso</ion-option>
         <ion-option [value]="espacial">Espacial</ion-option>
       </ion-select>
     </ion-item>
-
   </ion-list>
 
   <div>

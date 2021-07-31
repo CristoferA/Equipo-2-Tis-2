@@ -8,6 +8,8 @@ import { Observable } from 'rxjs/Observable';
 import { ReviewPage } from '../review/review';
 import { ComentarioPage } from '../comentario/comentario';
 import { PublicacionesOferentePage } from '../publicaciones-oferente/publicaciones-oferente';
+import { MapaPage } from '../mapa/mapa';
+import { EtiquetaPublicacionPage } from '../etiqueta-publicacion/etiqueta-publicacion';
 import { ToastController } from 'ionic-angular';
 
 
@@ -23,15 +25,24 @@ export class PublicacionPage {
   data:Observable<any>;
   id_review:any;
   oferente:any;
-  
+  etiqueta: any;
+  similarPub : any;
+
+  direccionP : any;
+  direccionS : any;  
+  direccionPub: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl:ToastController) {
-    
-    this.http.get('http://appdeturismotis2.000webhostapp.com/apiRest/public/publicacion_detallada/'+this.id_publicacion)
+
+
+    //http://localhost/apiRest/public/publicacion_detallada/
+    //https://edein.cl/equipo2/apiRest/public/publicacion_detallada/
+    this.http.get('https://edein.cl/equipo2/apiRest/public/publicacion_detallada/'+this.id_publicacion)
     .map(response => response.json())
     .subscribe(data =>
       {
         this.publicacion = data;
+        this.agregarVisita();
 
         console.log(data);
       },
@@ -40,6 +51,34 @@ export class PublicacionPage {
       }
     );
 
+
+    //http://localhost/apiRest/public/etiqueta/
+    //https://edein.cl/equipo2/apiRest/public/etiqueta/
+    this.http.get('https://edein.cl/equipo2/apiRest/public/etiqueta/'+this.id_publicacion)
+    .map(response => response.json())
+    .subscribe(datas=>
+      {
+        this.etiqueta = datas;
+        console.log(datas);
+      },
+      err => {
+        console.log("Oops!");
+      });
+
+
+      //http://localhost/apiRest/public/publicacion_similar/
+      //https://edein.cl/equipo2/apiRest/public/publicacion_similar/
+      this.http.get('https://edein.cl/equipo2/apiRest/public/publicacion_similar/'+this.id_publicacion)
+      .map(response => response.json())
+      .subscribe(data => {
+
+        this.similarPub = data;
+
+      },
+        err => {
+          console.log("Oops!");
+        }
+      );  
   }
 
   ionViewDidLoad() {
@@ -59,6 +98,9 @@ export class PublicacionPage {
     console.log(oferente);
 
   }
+  verPubEtiqueta(etiqueta){
+    this.navCtrl.push(EtiquetaPublicacionPage, {valor: etiqueta});
+  }
 
 
 
@@ -69,8 +111,10 @@ export class PublicacionPage {
     var respuesta = JSON.parse(localStorage.getItem('respuesta'));
     var id_usuario = respuesta.data.id_usuario;
     console.log(id_usuario);  
-    
-    var url =  'http://appdeturismotis2.000webhostapp.com/apiRest/public/guardar_publicacion/new';
+
+    //http://localhost/apiRest/public/guardar_publicacion/new
+    //https://edein.cl/equipo2/apiRest/public/guardar_publicacion/new
+    var url =  'https://edein.cl/equipo2/apiRest/public/guardar_publicacion/new';
     
     postData.append('id_usuario', id_usuario);
     postData.append('id_publicacion', this.id_publicacion);
@@ -89,12 +133,43 @@ export class PublicacionPage {
 
   }
 
+  verPub(id_publicacion){
+    this.navCtrl.push(PublicacionPage, { valor: id_publicacion });
+  }
+
   presentToast(msg: string){
     let toast = this.toastCtrl.create({
       message: msg,
       duration: 2000,
     });
     toast.present();
+  }
+  agregarVisita(){
+    console.log(this.id_publicacion);
+
+    //http://localhost/apiRest/public/publicacion/visita/
+    //https://edein.cl/equipo2/apiRest/public/publicacion/visita/
+    this.http.get('https://edein.cl/equipo2/apiRest/public/publicacion/visita/'+this.id_publicacion)
+    .map(response => response.json())
+    .subscribe(data =>
+      {
+        if (data === "No existe publicacion en la BBDD con este ID."){
+          console.log("No existe publicacion en la BBDD con este ID.");
+          
+        } 
+        else {
+          console.log(data);
+        }        
+
+      },
+      err => {
+        console.log("Oops!");
+      }
+    );
+  }
+
+  irMapa(value:string){
+    this.navCtrl.push(MapaPage, {direccionP: value});
   }
 
 

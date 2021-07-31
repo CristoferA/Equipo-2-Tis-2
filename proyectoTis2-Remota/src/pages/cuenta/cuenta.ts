@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { Http } from '@angular/http';
 import { LoginPage } from '../login/login';
 import { MisPublicacionesGuardadasPage } from '../mis-publicaciones-guardadas/mis-publicaciones-guardadas';
+import { HistorialPage } from '../historial/historial';
+import { EditCuentaPage } from '../edit-cuenta/edit-cuenta';
 
 @IonicPage()
 @Component({
@@ -30,8 +32,10 @@ export class CuentaPage {
     var respuesta = JSON.parse(localStorage.getItem('respuesta'));
     var id_usuario = respuesta.data.id_usuario;
     console.log(id_usuario);  
- 
-    this.http.get('http://appdeturismotis2.000webhostapp.com/apiRest/public/usuario/'+id_usuario)
+
+    //http://localhost/apiRest/public/usuario/
+    //https://edein.cl/equipo2/apiRest/public/usuario/
+    this.http.get('https://edein.cl/equipo2/apiRest/public/usuario/'+id_usuario)
     .map(response => response.json())
     .subscribe(data => {
       this.cuenta = data;
@@ -71,6 +75,14 @@ export class CuentaPage {
 
   PublicacionesGuardadas(){
     this.navCtrl.push(MisPublicacionesGuardadasPage);
+  }
+
+  Historial(){
+    this.navCtrl.push(HistorialPage);
+  }
+
+  editarInfo(){
+    this.navCtrl.push(EditCuentaPage);
   }
 
 }

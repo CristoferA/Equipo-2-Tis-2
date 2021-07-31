@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { LoginPage } from '../login/login';
+//import { LoginPage } from '../login/login';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs';
+//import { Observable } from 'rxjs';
 
 /**
  * Generated class for the OferenteCheckPage page.
@@ -27,8 +27,11 @@ export class OferenteCheckPage {
     if(token.hasOwnProperty('data')){
       console.log(token.data.id_usuario);
       var a=token.data.id_usuario;
-      
-      this.http.get("http://appdeturismotis2.000webhostapp.com/apiRest/public/oferente/"+a)
+
+    //http://localhost/apiRest/public/oferente/
+    //https://edein.cl/equipo2/apiRest/public/oferente/
+
+      this.http.get("https://edein.cl/equipo2/apiRest/public/oferente/"+a)
       .map(Response=>Response.json())
       .subscribe(data =>{
         if(data==="No existen usuarios en la BBDD con este ID."){

@@ -20,8 +20,11 @@ export class PublicacionesOferentePage {
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
-    
-    this.http.get('http://appdeturismotis2.000webhostapp.com/apiRest/public/usuario_publicacion/'+this.oferente)
+
+
+    //http://localhost/apiRest/public/usuario_publicacion/
+    //https://edein.cl/equipo2/apiRest/public/usuario_publicacion/
+    this.http.get('http://localhost/apiRest/public/usuario_publicacion/'+this.oferente)
     .map(response => response.json())
     .subscribe(data =>
       {
@@ -40,6 +43,21 @@ export class PublicacionesOferentePage {
     this.navCtrl.push(PublicacionPage, {valor: id_publicacion});
   }
   
+  ordenarPubAsc($event){
+    if($event == "Asc"){
+      console.log($event);
+      //this.publicaciones.sort((a,b) => a.nombre_publicacion.localeCompare(b.nombre_publicacion));
+      this.publicaciones.sort((a,b) => a.nombre_publicacion.toLowerCase() < b.nombre_publicacion.toLowerCase() ? -1 : a.nombre_publicacion.toLowerCase() > b.nombre_publicacion.toLowerCase() ? 1 : 0);
+    }else if($event == "Des"){
+      console.log($event);
+      this.publicaciones.sort((a,b) =>  a.nombre_publicacion.toLowerCase() < b.nombre_publicacion.toLowerCase() ? 1 : a.nombre_publicacion.toLowerCase() > b.nombre_publicacion.toLowerCase() ? -1 : 0);   
+    }else if($event == "MenP"){
+      console.log($event);
+      this.publicaciones.sort((a,b) =>  a.valor_publicacion < b.valor_publicacion ? -1 : a.valor_publicacion > b.valor_publicacion ? 1 : 0);   
+    }else{
+      console.log($event);
+      this.publicaciones.sort((a,b) =>  a.valor_publicacion < b.valor_publicacion ? 1 : a.valor_publicacion > b.valor_publicacion ? -1 : 0);   
+    }
 
-
+  }
 }

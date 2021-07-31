@@ -1,33 +1,26 @@
-<!--
-  Generated template for the FiltroPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Busqueda</ion-title>
+    <ion-title>Búsqueda</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding center class="centrado">
 
-  <ion-content padding>
+  <ion-searchbar id="nombreF" [(ngModel)]="nombreF" #ctl="ngModel" placeholder="Buscar" animated></ion-searchbar>
 
-   
-    <ion-searchbar id="nombreF" [(ngModel)]="nombreF" #ctl="ngModel" placeholder="Buscar" animated></ion-searchbar>
-    
-    
+  <br>
+  <hr>
+  <br>
 
-    <br>
-  
-  <ion-list >
+  <ion-list>
+    
     <h4>Filtros</h4>
     <br>
 
     <ion-item>
-      <ion-label>Region</ion-label>
-      <ion-select id="regionF" [(ngModel)]="regionF" #ctl="ngModel"  placeholder="Selecciona" #regionS (ionChange)='onOptionsSelected(regionS.value)'>
+      <ion-label>Región</ion-label>
+      <ion-select id="regionF" [(ngModel)]="regionF" #ctl="ngModel" placeholder="Selecciona" #regionS
+        (ionChange)='onOptionsSelected(regionS.value)'>
         <ion-option *ngFor="let reg of regiones" [value]="reg.codigo">{{reg.nombre}}</ion-option>
       </ion-select>
     </ion-item>
@@ -36,7 +29,7 @@
 
     <ion-item>
       <ion-label>Comuna</ion-label>
-      <ion-select  id="comunaF" [(ngModel)]="comunaF" #ctl="ngModel"  placeholder="Selecciona" #comunaS>
+      <ion-select id="comunaF" [(ngModel)]="comunaF" #ctl="ngModel" placeholder="Selecciona" #comunaS>
         <ion-option *ngFor="let com of comunas" [value]="com.codigo">{{com.nombre}}</ion-option>
       </ion-select>
     </ion-item>
@@ -44,41 +37,43 @@
     <br>
 
     <ion-item>
-      <ion-label>Tipo de publicacion</ion-label>
+      <ion-label>Tipo de publicación</ion-label>
       <ion-select id="tipoPF" [(ngModel)]="tipoPF" #ctl="ngModel" placeholder="Selecciona">
         <ion-option [value]="producto">Producto</ion-option>
         <ion-option [value]="servicio">Servicio</ion-option>
         <ion-option [value]="infraestructura">Infraestructura</ion-option>
       </ion-select>
     </ion-item>
+
     <br>
+
     <ion-item>
       <ion-label>Tipo de turismo</ion-label>
       <ion-select id="tipoTF" [(ngModel)]="tipoTF" #ctl="ngModel" placeholder="Selecciona">
         <ion-option [value]="negocios">Negocios</ion-option>
         <ion-option [value]="urbano">Urbano</ion-option>
         <ion-option [value]="natural">Natural</ion-option>
-        <ion-option [value]="gastronomico">Gastronomico</ion-option>
+        <ion-option [value]="gastronomico">Gastronómico</ion-option>
         <ion-option [value]="aventura">Aventura</ion-option>
-        <ion-option [value]="ecologico">Ecologico</ion-option>
+        <ion-option [value]="ecologico">Ecológico</ion-option>
         <ion-option [value]="cultural">Cultural</ion-option>
         <ion-option [value]="lujo">De lujo</ion-option>
-        <ion-option [value]="diversion">De diversion</ion-option>
+        <ion-option [value]="diversion">De diversión</ion-option>
         <ion-option [value]="religioso">Religioso</ion-option>
         <ion-option [value]="espacial">Espacial</ion-option>
       </ion-select>
     </ion-item>
-  
+
   </ion-list>
+
   <ion-buttons end><button ion-button end round (click)="limpiarFiltros()" style="zoom:0.8;" placeholder="asda ">
       Borrar Filtros &nbsp;
       <ion-icon name="trash" style="zoom:1.2;"></ion-icon>
     </button></ion-buttons>
   <br>
+
   <button ion-button round (click)="irBusqueda()">
     Buscar
   </button>
 
-
-  
 </ion-content>

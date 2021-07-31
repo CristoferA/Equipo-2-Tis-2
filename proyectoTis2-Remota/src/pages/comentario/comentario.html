@@ -1,9 +1,3 @@
-<!--
-  Generated template for the ComentarioPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <div>
   <ion-header>
     <ion-navbar color="primary">
@@ -19,7 +13,6 @@
 <ion-content>
 
   <div *ngIf="comentario" style="padding-top: 55px;">
-    <!-- <div *ngFor="let pub of publicacion"> No me acuerdo por qué puse esto pero funciona sin él-->
     <ion-card *ngFor="let com of comentario">
       <ion-card-content>
 
@@ -29,15 +22,15 @@
         <!-- Comentario -->
         <p> {{com.comentario}} </p>
 
-        <a (click)="darLike()"> Me gusta </a>
-
+        <a (click)="darLike(com.id_comentario)"> Me gusta ({{com.likes}}) </a>
+        <a (click)="darDislike(com.id_comentario)"> No me gusta ({{com.likes}}) </a>
+        
       </ion-card-content>
     </ion-card>
-    <!-- </div> -->
   </div>
 
   <div *ngIf="!comentario">
-    <p> Esta publicación no tiene reseñas. </p>
+    <p> Esta publicación no tiene comentarios. </p>
   </div>
 
 </ion-content>

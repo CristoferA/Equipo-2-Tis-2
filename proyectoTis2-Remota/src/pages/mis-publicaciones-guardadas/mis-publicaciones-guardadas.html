@@ -12,6 +12,17 @@
 
 <ion-content padding>
 
+  <br>
+  <ion-buttons start><button ion-button end round (click)="limpiarGuardados()" style="zoom:0.9;" placeholder="asda ">
+    Borrar publicaciones guardadas &nbsp;
+    <ion-icon name="trash" style="zoom:1.5;"></ion-icon>
+  </button></ion-buttons>
+  <br>
+  <hr>
+  <br>
+  <ng-container *ngIf= "publicacionesGuardadas?.length; else nopub"> 
+
+  
   <ion-card *ngFor="let pub of publicacionesGuardadas" (click)="irPublicacion(pub.id_publicacion)">
     
     <img src="../assets/imgs/paine.jpg">
@@ -43,5 +54,10 @@
     </ion-row>
  
   </ion-card>
+  </ng-container> 
+  <ng-template #nopub>
+    <h3>No tienes publicaciones guardadas</h3>
+  </ng-template>
 
+  
 </ion-content>

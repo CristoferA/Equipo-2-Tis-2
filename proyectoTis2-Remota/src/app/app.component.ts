@@ -6,7 +6,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 
 import { LoginPage } from '../pages/login/login';
-import { CrearPublicacionPage } from '../pages/crear-publicacion/crear-publicacion';
+import { MisPublicacionesPage } from '../pages/mis-publicaciones/mis-publicaciones';
+
 import { CuentaPage } from '../pages/cuenta/cuenta';
 import { CrearPublicacionCheckPage } from '../pages/crear-publicacion-check/crear-publicacion-check';
 
@@ -29,7 +30,8 @@ export class MyApp {
       { title: 'Publicaciones', component: HomePage },
       { title: 'Crear publicacion', component: CrearPublicacionCheckPage },
       { title: 'Mi Cuenta', component: CuentaPage },
-      { title: 'Ingresar', component: LoginPage }
+      { title: 'Ingresar', component: LoginPage },
+      { title: 'Mis publicaciones', component: MisPublicacionesPage }
     ];
 
   }

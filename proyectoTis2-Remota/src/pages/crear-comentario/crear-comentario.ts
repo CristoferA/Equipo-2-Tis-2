@@ -10,6 +10,7 @@ import { LoginPage } from '../login/login';
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
+ * 
  */
 
 @IonicPage()
@@ -28,8 +29,10 @@ export class CrearComentarioPage {
   data_comment:Observable<any>;
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public toastCtrl: ToastController) {
-    
-    this.http.get('http://appdeturismotis2.000webhostapp.com/apiRest/public/publicacion/'+this.id_publicacion)
+
+    //http://localhost/apiRest/public/publicacion/
+    //https://edein.cl/equipo2/apiRest/public/publicacion/
+    this.http.get('https://edein.cl/equipo2/apiRest/public/publicacion/'+this.id_publicacion)
     .map(response => response.json())
     .subscribe(data_pub =>
       {
@@ -73,9 +76,11 @@ export class CrearComentarioPage {
     });
     toast.present();
   }
-
   crearComentario() {
-    var url = 'http://appdeturismotis2.000webhostapp.com/apiRest/public/comentario/new';
+
+    //http://localhost/apiRest/public/comentario/new
+    //https://edein.cl/equipo2/apiRest/public/comentario/new
+    var url = 'https://edein.cl/equipo2/apiRest/public/comentario/new';
     let num = 0;
     var stringForm = num.toString();
     let postData = new FormData();

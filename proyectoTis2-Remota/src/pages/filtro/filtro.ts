@@ -48,6 +48,7 @@ export class FiltroPage {
 
   constructor(public navCtrl: NavController, public http: Http, public navParams: NavParams, public toastCtrl: ToastController) {
 
+    
     this.http.get('https://apis.digital.gob.cl/dpa/regiones')
     .map(response => response.json())
     .subscribe(data =>
@@ -88,6 +89,7 @@ export class FiltroPage {
     this.navCtrl.push(BusquedaPage, {nombreB: this.nombreBusqueda, regionB: this.regionBusqueda, comunaB: this.comunaBusqueda, tipoPB: this.tipoPubBusqueda, tipoTB: this.tipoTurBusqueda});
 
   }
+  
   ionViewDidLoad() {
     console.log('ionViewDidLoad FiltroPage');
   }

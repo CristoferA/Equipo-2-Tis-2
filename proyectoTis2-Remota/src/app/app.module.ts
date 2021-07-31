@@ -5,10 +5,10 @@ import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { PublicacionPage } from '../pages/publicacion/publicacion';
 import { FiltroPage } from '../pages/filtro/filtro';
 import { BusquedaPage } from '../pages/busqueda/busqueda';
+import { MapaPage } from '../pages/mapa/mapa';
 import { PublicacionesOferentePage } from '../pages/publicaciones-oferente/publicaciones-oferente';
 import { LoginPage } from '../pages/login/login';
 import { CrearPublicacionPage } from '../pages/crear-publicacion/crear-publicacion';
@@ -20,20 +20,25 @@ import { CrearReviewPage } from '../pages/crear-review/crear-review';
 import { CrearPublicacionCheckPage } from '../pages/crear-publicacion-check/crear-publicacion-check';
 import { ComentarioPage } from '../pages/comentario/comentario';
 import { CrearComentarioPage } from '../pages/crear-comentario/crear-comentario';
-
+import { AgregarEtiquetaPage } from '../pages/agregar-etiqueta/agregar-etiqueta';
+import { EtiquetaPublicacionPage } from '../pages/etiqueta-publicacion/etiqueta-publicacion';
+import { HistorialPage } from '../pages/historial/historial';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { OferenteCheckPage } from '../pages/oferente-check/oferente-check';
 import { MisPublicacionesGuardadasPage } from '../pages/mis-publicaciones-guardadas/mis-publicaciones-guardadas';
+import { EditCuentaPage } from '../pages/edit-cuenta/edit-cuenta';
+import { EliminarPublicacionPage } from '../pages/eliminar-publicacion/eliminar-publicacion';
+import { EditarPublicacionPage } from '../pages/editar-publicacion/editar-publicacion';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
     PublicacionPage,
     FiltroPage,
     BusquedaPage,
+    MapaPage,
     PublicacionesOferentePage,
     LoginPage,
     CrearPublicacionPage,
@@ -47,7 +52,13 @@ import { MisPublicacionesGuardadasPage } from '../pages/mis-publicaciones-guarda
     OferenteCheckPage,
     ComentarioPage,
     CrearComentarioPage,
-    MisPublicacionesGuardadasPage
+    MisPublicacionesGuardadasPage,
+    AgregarEtiquetaPage,
+    EtiquetaPublicacionPage,
+    HistorialPage,
+    EditCuentaPage,
+    EliminarPublicacionPage,
+    EditarPublicacionPage
   ],
   imports: [
     BrowserModule,
@@ -58,10 +69,10 @@ import { MisPublicacionesGuardadasPage } from '../pages/mis-publicaciones-guarda
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
     PublicacionPage,
     FiltroPage,
     BusquedaPage,
+    MapaPage,
     PublicacionesOferentePage,
     LoginPage,
     CrearPublicacionPage,
@@ -74,7 +85,13 @@ import { MisPublicacionesGuardadasPage } from '../pages/mis-publicaciones-guarda
     OferenteCheckPage,
     ComentarioPage,
     CrearComentarioPage,
-    MisPublicacionesGuardadasPage
+    MisPublicacionesGuardadasPage,
+    AgregarEtiquetaPage,
+    EtiquetaPublicacionPage,
+    HistorialPage,
+    EditCuentaPage,
+    EliminarPublicacionPage,
+    EditarPublicacionPage
   ],
   providers: [
     StatusBar,

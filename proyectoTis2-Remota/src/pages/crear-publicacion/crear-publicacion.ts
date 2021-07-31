@@ -3,7 +3,8 @@ import { FormGroup } from '@angular/forms';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { Http } from '@angular/http';
-import { HomePage } from '../home/home';
+//import { HomePage } from '../home/home';
+import { AgregarEtiquetaPage } from '../agregar-etiqueta/agregar-etiqueta';
 /**
  * Generated class for the CrearPublicacionPage page.
  *
@@ -18,6 +19,8 @@ import { HomePage } from '../home/home';
 })
 export class CrearPublicacionPage {
 
+  publicacionesDes:any;
+  id_publicacion: any;
   datos: FormGroup;
   data: Observable<any>;
   nombre: any;
@@ -31,11 +34,13 @@ export class CrearPublicacionPage {
   tipo_publicacion: any;
   tipo_turismo: any;
   estado: any; //"pendiente" o "aprobado"
-  moderador: any;
+  //moderador: any;
   region: any;
   comuna: any;
   //xdd
   //xd
+  //xddddddddd
+  //xddddddddddd
   regiones: any;
   comunas: any;
   regionS: any;
@@ -68,9 +73,11 @@ export class CrearPublicacionPage {
     });
     toast.present();
   }
-  
+
   crearPublicacion() {
-    var url = 'http://appdeturismotis2.000webhostapp.com/apiRest/public/publicacion_detallada/new';
+    //http://localhost/apiRest/public/publicacion_detallada/new
+    //https://edein.cl/equipo2/apiRest/public/publicacion_detallada/new
+    var url = 'https://edein.cl/equipo2/apiRest/public/publicacion_detallada/new';
     let postData = new FormData();
     
     console.log("El nombre_publicacion es: " + this.nombre);
@@ -83,7 +90,7 @@ export class CrearPublicacionPage {
     console.log("Los likes son: " + this.likes);
     console.log("El tipo_publicacion es: " + this.tipo_publicacion);
     console.log("El tipo_turismo es: " + this.tipo_turismo);
-    console.log("El id_moderador es: " + this.moderador);
+    //console.log("El id_moderador es: " + this.moderador);
     console.log("El id de la region es: " + this.region + ". Y el nombre es: " + document.getElementById("regionID").innerText);
     console.log("El id de la comuna es: " + this.comuna + ". Y el nombre es: " + document.getElementById("comunaID").innerText);
 
@@ -94,6 +101,7 @@ export class CrearPublicacionPage {
       
       if(token.hasOwnProperty('data')){   //solo si hay datos entra
         var id_oferente = token.data.id_usuario; 
+        //var visitas= '0';
         postData.append('nombre_publicacion', this.nombre);
         postData.append('descripcion_publicacion', this.descripcion);
         postData.append('valor_publicacion', this.precio);
@@ -105,26 +113,28 @@ export class CrearPublicacionPage {
         postData.append('tipo_publicacion', this.tipo_publicacion); //'producto','servicio','infraestructura'
         postData.append('tipo_turismo', this.tipo_turismo); //'negocios','urbano','natural','gastronomico','aventura','ecologico','cultural','lujo','diversion','religioso','espacial'
         postData.append('estado', 'pendiente');
-        postData.append('id_moderador', '1');
+        //postData.append('id_moderador', '1');
         postData.append("region_publicacion", document.getElementById("regionID").innerText);
         postData.append("comuna_publicacion", document.getElementById("comunaID").innerText);
+        postData.append('visitas', '0');
         postData.append('id_oferente',id_oferente);
-        this.data = this.http.post(url, postData);
 
-        this.data.subscribe((data) => {
-          console.log(data);
-
-          this.mensajeToast('Publicación subida correctamente y en espera de aprobación.');
-          this.navCtrl.setRoot(HomePage);
-          //this.navCtrl.pop();
-        })
+        var id;
+        this.http.post(url, postData)
+        .map(response => response.json())
+        .subscribe(datas =>
+          {
+            console.log(datas);
+            id=datas;
+            this.mensajeToast('Publicación subida correctamente y en espera de aprobación.');
+            this.irAgregarEtiqueta(id);
+          });
       }
     }
+  }
 
-    
-
-    
-
+  irAgregarEtiqueta(id){
+    this.navCtrl.push(AgregarEtiquetaPage, {valor: id})
   }
 
   onOptionsSelected(value: string) {

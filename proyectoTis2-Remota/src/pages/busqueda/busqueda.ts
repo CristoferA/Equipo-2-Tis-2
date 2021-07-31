@@ -32,8 +32,9 @@ export class BusquedaPage {
     postData.append("comuna_publicacion", this.comunaR);
     postData.append("tipo_publicacion", this.tipoPR);
     postData.append("tipo_turismo", this.tipoTR);
-    
-    this.http.post('http://appdeturismotis2.000webhostapp.com/apiRest/public/buscar', postData)
+    //http://localhost/apiRest/public/publicacion/buscar
+    //https://edein.cl/equipo2/apiRest/public/publicacion/buscar
+    this.http.post('https://edein.cl/equipo2/apiRest/public/publicacion/buscar', postData)
     .map(response => response.json())
     .subscribe(data =>
       {
@@ -60,5 +61,23 @@ export class BusquedaPage {
 
   irFiltro(){
     this.navCtrl.push(FiltroPage);
+  }
+
+  ordenarPubAsc($event){
+    if($event == "Asc"){
+      console.log($event);
+      //this.publicacionesBus.sort((a,b) => a.nombre_publicacion.localeCompare(b.nombre_publicacion));
+      this.publicacionesBus.sort((a,b) => a.nombre_publicacion.toLowerCase() < b.nombre_publicacion.toLowerCase() ? -1 : a.nombre_publicacion.toLowerCase() > b.nombre_publicacion.toLowerCase() ? 1 : 0);
+    }else if($event == "Des"){
+      console.log($event);
+      this.publicacionesBus.sort((a,b) =>  a.nombre_publicacion.toLowerCase() < b.nombre_publicacion.toLowerCase() ? 1 : a.nombre_publicacion.toLowerCase() > b.nombre_publicacion.toLowerCase() ? -1 : 0);   
+    }else if($event == "MenP"){
+      console.log($event);
+      this.publicacionesBus.sort((a,b) =>  a.valor_publicacion < b.valor_publicacion ? -1 : a.valor_publicacion > b.valor_publicacion ? 1 : 0);   
+    }else{
+      console.log($event);
+      this.publicacionesBus.sort((a,b) =>  a.valor_publicacion < b.valor_publicacion ? 1 : a.valor_publicacion > b.valor_publicacion ? -1 : 0);   
+    }
+
   }
 }

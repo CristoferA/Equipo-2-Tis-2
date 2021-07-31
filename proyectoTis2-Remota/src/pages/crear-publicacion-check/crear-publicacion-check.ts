@@ -32,8 +32,9 @@ export class CrearPublicacionCheckPage {
     if(token.hasOwnProperty('data')){   //solo si hay datos entra
       console.log(token.data.id_usuario);
       var a=token.data.id_usuario;
-
-      this.http.get("http://appdeturismotis2.000webhostapp.com/apiRest/public/oferente/"+a)   //OFERENTES
+      //http://localhost/apiRest/public/oferente/
+      //https://edein.cl/equipo2/apiRest/public/oferente/
+      this.http.get("https://edein.cl/equipo2/apiRest/public/oferente/"+a)   //OFERENTES
       .map(Response=>Response.json())
       .subscribe(data =>{
         if(data==="No existen usuarios en la BBDD con este ID."){ // TE LLEVA A OFERENTE-CHECK   logeado no oferente
