@@ -59,7 +59,7 @@ export class CrearComentarioPage {
     } else {
       console.log("NO ENTRÓ AL IF. ENTRÓ AL ELSE");
       console.log("No estás logeado");
-      this.mensajeToast('Debes iniciar sesión para poder hacer una reseña.')
+      this.mensajeToast('Debes iniciar sesión para poder hacer un comentario.')
       this.irLogeo();
     }
 
