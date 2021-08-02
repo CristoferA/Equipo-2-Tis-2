@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { MisPublicacionesPage } from '../mis-publicaciones/mis-publicaciones';
 import { HomePage } from '../home/home';
 import { Observable } from 'rxjs';
@@ -25,7 +25,7 @@ export class CuentaPage {
   cuenta: any;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, public toastCtrl: ToastController) {
 
 
     if('respuesta' in localStorage){
@@ -52,6 +52,14 @@ export class CuentaPage {
 
   }
 
+  mensajeToast(msg) {
+    const toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
+    });
+    toast.present();
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad CuentaPage');
   }
@@ -71,6 +79,7 @@ export class CuentaPage {
   cerrar(){
       localStorage.clear();
       this.irHome();
+      this.mensajeToast("Se ha cerrado su sesión.");
   }
 
   PublicacionesGuardadas(){

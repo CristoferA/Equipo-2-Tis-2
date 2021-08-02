@@ -100,6 +100,7 @@ export class LoginPage {
           token = JSON.parse(localStorage.getItem('respuesta'));
           console.log(token);
           this.irHome();
+          this.mensajeToast("Se ha iniciado sesión.");
         }
 
       });
