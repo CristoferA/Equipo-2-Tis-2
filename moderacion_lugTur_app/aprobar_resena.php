@@ -13,7 +13,9 @@ print_r($postdata);
 
 $postdata = json_encode($postdata);
 echo $postdata;
-$url ="http://localhost/apiRest/public/aprobar_resena";
+//http://localhost/apiRest/public/aprobar_resena
+//https://edein.cl/equipo2/apiRest/public/aprobar_resena
+$url ="https://edein.cl/equipo2/apiRest/public/aprobar_resena";
 $curl = curl_init($url);
 
 //curl_setopt($curl, CURLOPT_HEADER, false);

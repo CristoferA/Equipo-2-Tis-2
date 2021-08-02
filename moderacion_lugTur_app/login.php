@@ -21,8 +21,9 @@ print_r($postdata);
 
 $postdata = json_encode($postdata);
 echo $postdata;
-
-$url ="http://localhost/apiRest/public/login_moderador";
+//http://localhost/apiRest/public/login_moderador
+//https://edein.cl/equipo2/apiRest/public/login_moderador
+$url ="https://edein.cl/equipo2/apiRest/public/login_moderador";
 $curl = curl_init($url);
 
 

@@ -1,6 +1,8 @@
 <?php
 
-$url = 'http://localhost/apiRest/public/publicacion_aprobada';
+//http://localhost/apiRest/public/publicacion_aprobada
+//https://edein.cl/equipo2/apiRest/public/publicacion_aprobada
+$url = 'https://edein.cl/equipo2/apiRest/public/publicacion_aprobada';
 $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_HTTPGET, true);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

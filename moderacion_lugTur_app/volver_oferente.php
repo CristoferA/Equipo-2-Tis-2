@@ -11,7 +11,10 @@ print_r($postdata);
 
 $postdata = json_encode($postdata);
 echo $postdata;
-$url ="http://localhost/apiRest/public/oferente/new";
+
+//http://localhost/apiRest/public/oferente/new
+//https://edein.cl/equipo2/apiRest/public/oferente/new
+$url ="https://edein.cl/equipo2/apiRest/public/oferente/new";
 $curl = curl_init($url);
 
 //curl_setopt($curl, CURLOPT_HEADER, false);

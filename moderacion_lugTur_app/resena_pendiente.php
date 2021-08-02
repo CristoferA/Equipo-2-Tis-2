@@ -1,6 +1,8 @@
 <?php
 
-$url = 'http://localhost/apiRest/public/resena_pendiente';
+//http://localhost/apiRest/public/resena_pendiente
+//https://edein.cl/equipo2/apiRest/public/resena_pendiente
+$url = 'https://edein.cl/equipo2/apiRest/public/resena_pendiente';
 $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_HTTPGET, true);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

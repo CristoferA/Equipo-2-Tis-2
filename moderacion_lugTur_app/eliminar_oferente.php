@@ -11,7 +11,9 @@ print_r($postdata);
 
 $postdata = json_encode($postdata);
 echo $postdata;
-$url ="http://localhost/apiRest/public/oferente/delete";
+//http://localhost/apiRest/public/oferente/delete
+//https://edein.cl/equipo2/apiRest/public/oferente/delete
+$url ="https://edein.cl/equipo2/apiRest/public/oferente/delete";
 $curl = curl_init($url);
 
 //curl_setopt($curl, CURLOPT_HEADER, false);

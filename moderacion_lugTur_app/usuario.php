@@ -1,6 +1,9 @@
 <?php
 
-$url = 'http://localhost/apiRest/public/usuario_no_oferente';
+
+//http://localhost/apiRest/public/usuario_no_oferente
+//https://edein.cl/equipo2/apiRest/public/usuario_no_oferente
+$url = 'https://edein.cl/equipo2/apiRest/public/usuario_no_oferente';
 $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_HTTPGET, true);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

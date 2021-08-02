@@ -11,7 +11,9 @@ print_r($postdata);
 
 $postdata = json_encode($postdata);
 echo $postdata;
-$url ="http://localhost/apiRest/public/aprobar_publicacion";
+//http://localhost/apiRest/public/aprobar_publicacion
+//https://edein.cl/equipo2/apiRest/public/aprobar_publicacion
+$url ="https://edein.cl/equipo2/apiRest/public/aprobar_publicacion";
 $curl = curl_init($url);
 
 //curl_setopt($curl, CURLOPT_HEADER, false);
