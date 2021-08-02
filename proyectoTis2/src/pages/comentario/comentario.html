@@ -15,7 +15,7 @@
   <ng-container *ngIf="comentario?.length; else nocom">
 
     <div *ngIf="comentario" style="padding-top: 55px;">
-      <ion-card *ngFor="let com of comentario">
+      <ion-card *ngFor="let com of comentario; let i = index">
         <ion-card-content>
 
           <!-- Usuario -->
@@ -24,8 +24,8 @@
           <!-- Comentario -->
           <p> {{com.comentario}} </p>
 
-          <b style="font-weight: normal;"> ({{com.likes}}) </b> <a (click)="darLike(com.id_comentario)">Me gusta</a> <b>/</b>
-          <a (click)="darDislike(com.id_comentario)"> No me gusta</a>
+          <b style="font-weight: normal;"> ({{com.likes}}) </b> <a (click)="darLike(com.id_comentario, i)">Me gusta</a> <b>/</b>
+          <a (click)="darDislike(com.id_comentario, i)"> No me gusta</a>
 
         </ion-card-content>
       </ion-card>

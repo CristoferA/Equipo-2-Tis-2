@@ -20,7 +20,7 @@ export class ComentarioPage {
   publicacion: any;
   comentario: any;
   id_publicacion = this.navParams.get('valor');
-  id_comentario = this.navParams.get('valor');;
+  id_comentario = this.navParams.get('valor');
   data_pub: Observable<any>;
   data_com: Observable<any>;
   data_likes: Observable<any>;
@@ -73,7 +73,7 @@ export class ComentarioPage {
     toast.present();
   }
 
-  darLike(id_comentario) {
+  darLike(id_comentario: any, index: number) {
     console.log('Entró a darLike()');
     if ('respuesta' in localStorage) {
       var respuesta = JSON.parse(localStorage.getItem('respuesta'));
@@ -90,7 +90,7 @@ export class ComentarioPage {
 
         console.log("id_comentario es: " + id_comentario);
         //Acualizar contador
-        this.comentario[0].likes = Number(this.comentario[0].likes) + 1;
+        this.comentario[index].likes = Number(this.comentario[index].likes) + 1;
 
         postData.append('id_comentario', id_comentario);
 
@@ -111,7 +111,7 @@ export class ComentarioPage {
     }
   }
 
-  darDislike(id_comentario) {
+  darDislike(id_comentario: any, index: number) {
     console.log('Entró a darDislike()');
     if ('respuesta' in localStorage) {
       var respuesta = JSON.parse(localStorage.getItem('respuesta'));
@@ -127,7 +127,7 @@ export class ComentarioPage {
 
         console.log("id_comentario es: " + id_comentario);
         //Acualizar contador
-        this.comentario[0].likes = Number(this.comentario[0].likes) - 1;
+        this.comentario[index].likes = Number(this.comentario[index].likes) - 1;
 
         postData.append('id_comentario', id_comentario);
 
