@@ -61,9 +61,9 @@ export class PublicacionPage {
         console.log("Oops!");
       });
 
-      //http://localhost/apiRest/public/publicacion_similar/
-      //https://edein.cl/equipo2/apiRest/public/publicacion_similar/
-      this.http.get('https://edein.cl/equipo2/apiRest/public/publicacion_similar/'+this.id_publicacion)
+      //http://localhost/apiRest/public/publicacion/publicacion_similar/
+      //https://edein.cl/equipo2/apiRest/public/publicacion/publicacion_similar/
+      this.http.get('https://edein.cl/equipo2/apiRest/public/publicacion/publicacion_similar/'+this.id_publicacion)
       .map(response => response.json())
       .subscribe(data => {
 
