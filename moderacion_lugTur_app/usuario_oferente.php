@@ -15,7 +15,7 @@ $response=json_decode($response_json, true);
 </a>
  
  <hr>
- <h1>Revise qué usuarios convertir en usuario normal</h1>
+ <h1>Vea que oferentes volver normales</h1>
  <hr>
 <?php
 
@@ -24,11 +24,11 @@ $response=json_decode($response_json, true);
 foreach($response as $key => $result) {
      //Hay que adaptar los div si sobra tiempo
     echo '<div>';
-    echo 'Id de usuario: ';
+    echo 'Id de usuario : ';
     echo $result['id_usuario'], '<br>';
-    echo 'Nombre de usuario: ';
+    echo 'Nombre de usuario : ';
     echo $result['nombre_usuario'], '<br>';
-    echo 'Email usuario: ';
+    echo 'Email usuario : ';
     echo $result['email_usuario'], '<br>';
     
     
@@ -37,7 +37,7 @@ foreach($response as $key => $result) {
     echo '</div>'; ?>
     <a href="eliminar_oferente.php?varname=<?php echo $result['id_usuario'] ?>">
     <?php
-    echo '<input name="submit" type="submit" value="Convertir a usuario normal: '.$result['id_usuario'].'" class="btn solid" />';
+    echo '<input name="submit" type="submit" value="Volver usuario normal: '.$result['id_usuario'].'" class="btn solid" />';
     ?>
     </a>
 
@@ -47,6 +47,8 @@ foreach($response as $key => $result) {
     echo '<div>';
     
     echo '</div>';
-    echo '<hr>';  
+    echo '<hr>';
+       
 }
+echo "Desde aqui no quedan mas usuarios que revisar";
 ?>

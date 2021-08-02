@@ -7,7 +7,7 @@ $postdata = array (
     "id_publicacion" => $var_value 
 );
 
-echo 'Has rechazado la publicación: '.$var_value.'';
+echo 'Haz rechazado la publicacion: '.$var_value.'';
 print_r($postdata);
 
 $postdata = json_encode($postdata);
@@ -29,7 +29,7 @@ if (curl_errno($curl)) {
 curl_close($curl); 
 echo "<pre> $postResult</pre>";
 
-echo "Publicación rechazada.";
+echo "Publicacion rechazada";
 ?>
 
 <a href="publicaciones_rechazadas.php">

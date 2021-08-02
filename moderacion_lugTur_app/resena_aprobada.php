@@ -15,23 +15,23 @@ $response=json_decode($response_json, true);
 </a>
  
  <hr>
- <h1>ESTAS SON LAS RESEÑAS QUE ESTÁN APROBADAS</h1>
+ <h1>ESTAS SON LAS RESENAS QUE ESTAN APROBADAS</h1>
  <hr>
 <?php
 foreach($response as $key => $result) {
      //Hay que adaptar los div si sobra tiempo
     echo '<div>';
-    echo 'Id de review: ';
+    echo 'Id de review : ';
     echo $result['id_review'], '<br>';
-    echo 'Nombre de review: ';
+    echo 'Nombre de review : ';
     echo $result['review'], '<br>';
-    echo 'Id de publicación: ';
+    echo 'Id de publicacion : ';
     echo $result['id_publicacion'], '<br>';
-    echo 'Valor publicación: ';
+    echo 'Valor publicacion : ';
     echo $result['valor_publicacion'], '<br>';
-    echo 'Estado: ';
+    echo 'Estado : ';
     echo $result['estado'], '<br>';
-    echo 'Calificación de review: ';
+    echo 'Calificacion de review : ';
     echo $result['calificacion_review'], '<br>';
     
 
@@ -39,14 +39,14 @@ foreach($response as $key => $result) {
     echo '</div>'; ?>
     <a href="aprobar_resena.php?varname=<?php echo $result['id_review'].'&var='.$result['id_publicacion'] ?>">
     <?php
-    echo '<input name="submit" type="submit" value="Aprobar reseña: '.$result['id_review'].'" class="btn solid" />';
+    echo '<input name="submit" type="submit" value="Aprobar resena: '.$result['id_review'].'" class="btn solid" />';
     ?>
     </a>
 
 
     <a href="rechazar_resena.php?varname=<?php echo $result['id_review'].'&var='.$result['id_publicacion'] ?>">
     <?php
-    echo '<input name="submit" type="submit" value="Rechazar reseña: '.$result['id_review'].'" class="btn solid" />';
+    echo '<input name="submit" type="submit" value="Rechazar publicacion: '.$result['id_review'].'" class="btn solid" />';
     ?>
     </a>
     
@@ -55,5 +55,7 @@ foreach($response as $key => $result) {
     
     echo '</div>';
     echo '<hr>';
+      
 }
+echo "Desde aqui no quedan mas reseñas que revisar";
 ?>

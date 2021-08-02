@@ -6,7 +6,7 @@ $postdata = array (
     "id_review" => $var_value 
 );
 
-echo 'Has rechazado la reseña: '.$var_value.'';
+echo 'Haz rechazado la reseña: '.$var_value.'';
 print_r($postdata);
 
 $postdata = json_encode($postdata);
@@ -28,7 +28,7 @@ if (curl_errno($curl)) {
 curl_close($curl); 
 echo "<pre> $postResult</pre>";
 
-echo "Reseña rechazada.";
+echo "Review Aprobada";
 ?>
 
 <a href="resena_rechazada.php">

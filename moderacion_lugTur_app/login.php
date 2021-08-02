@@ -41,7 +41,7 @@ if (curl_errno($curl)) {
  echo "<pre> $postResult</pre>";
 
  if($postResult ==='{"error":{"text":"Bad request wrong username and password"}}'){
-    echo "fuck"; //XD
+    echo "fuck";
     header("Location: index.php");
     die();
  }else {

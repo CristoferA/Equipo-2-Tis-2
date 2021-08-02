@@ -6,7 +6,7 @@ $postdata = array (
     "usuario" => $var_value 
 );
 
-echo 'Has integrado al oferente: '.$var_value.'';
+echo 'Haz integrado al oferente : '.$var_value.'';
 print_r($postdata);
 
 $postdata = json_encode($postdata);
@@ -28,7 +28,7 @@ if (curl_errno($curl)) {
 curl_close($curl); 
 echo "<pre> $postResult</pre>";
 
-echo "El usuario ahora es oferente.";
+echo "Oferente eliminado";
 ?>
 
 <a href="usuario_oferente.php">

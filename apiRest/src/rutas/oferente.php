@@ -167,13 +167,13 @@ $app->put('/oferente/editar/{usuario}', function(Request $request, Response $res
 
 $app->post('/oferente/delete', function(Request $request, Response $response){
     $usuario = $request->getParam('usuario');
-    $sql = "DELETE FROM oferente WHERE usuario = $usuario";
+    $sql = "DELETE FROM oferente WHERE usuario = '$usuario'";
 
     try{
         $db = new db();
         $db = $db->conectionDB();
         $result = $db->prepare($sql);
-        $result = execute();
+        $result -> execute();
 
         //eliminar tambien las publicaciones del oferente
 
