@@ -48,7 +48,7 @@ export class ComentarioPage {
       .subscribe(data_com => {
         this.comentario = data_com;
 
-        console.log(data_com);
+        console.log(this.comentario);
       },
         err => {
           console.log("Oops!");
@@ -89,6 +89,8 @@ export class ComentarioPage {
         let postData = new FormData();
 
         console.log("id_comentario es: " + id_comentario);
+        //Acualizar contador
+        this.comentario[0].likes = Number(this.comentario[0].likes) + 1;
 
         postData.append('id_comentario', id_comentario);
 
@@ -124,6 +126,8 @@ export class ComentarioPage {
         let postData = new FormData();
 
         console.log("id_comentario es: " + id_comentario);
+        //Acualizar contador
+        this.comentario[0].likes = Number(this.comentario[0].likes) - 1;
 
         postData.append('id_comentario', id_comentario);
 
