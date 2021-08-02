@@ -9,39 +9,46 @@
 </ion-header>
 
 <ion-content>
+
   <ion-list>
-
-    <div id="reviews" style="padding-left: 10px; padding-right: 10px;">
-      <p>Escriba su reseña:</p>
-      <ion-item>
-        <ion-textarea autoGrow required maxlength="5000" rows="10" placeholder="Escriba su reseña..."
-          [(ngModel)]="review"></ion-textarea>
-      </ion-item>
-    </div>
-
-    <hr>
-
-    <div id="calificacion" style="padding-left: 10px; padding-right: 10px;">
-      <p>Calificación:</p>
-      <ion-item>
-        <ion-select [(ngModel)]="calificacion">
-          <ion-option [value]="1">1</ion-option>
-          <ion-option [value]="2">2</ion-option>
-          <ion-option [value]="3">3</ion-option>
-          <ion-option [value]="4">4</ion-option>
-          <ion-option [value]="5">5</ion-option>
-          <ion-option [value]="6">6</ion-option>
-          <ion-option [value]="7">7</ion-option>
-          <ion-option [value]="8">8</ion-option>
-          <ion-option [value]="9">9</ion-option>
-          <ion-option [value]="10">10</ion-option>
-        </ion-select>
-      </ion-item>
-    </div>
 
   </ion-list>
 
-  <div style="text-align: center; padding-bottom: 20px;">
-    <button ion-button round (click)="crearReview()">Enviar</button>
-  </div>
+  <form [formGroup]="datos">
+    <ion-list>
+
+      <div id="reviews" style="padding-left: 10px; padding-right: 10px;">
+        <p>Escriba su reseña:</p>
+        <ion-item>
+          <ion-textarea type="text" minlength="10" maxlength="4999" required autoGrow rows="10" placeholder="Escriba su reseña..."
+            [(ngModel)]="review" formControlName="review_usuario"></ion-textarea>
+        </ion-item>
+      </div>
+
+      <hr>
+      
+      <div id="calificacion" style="padding-left: 10px; padding-right: 10px;">
+        <p>Calificación:</p>
+        <ion-item>
+          <ion-select [(ngModel)]="calificacion" formControlName="calificacion_usuario">
+            <ion-option [value]="1">1</ion-option>
+            <ion-option [value]="2">2</ion-option>
+            <ion-option [value]="3">3</ion-option>
+            <ion-option [value]="4">4</ion-option>
+            <ion-option [value]="5">5</ion-option>
+            <ion-option [value]="6">6</ion-option>
+            <ion-option [value]="7">7</ion-option>
+            <ion-option [value]="8">8</ion-option>
+            <ion-option [value]="9">9</ion-option>
+            <ion-option [value]="10">10</ion-option>
+          </ion-select>
+        </ion-item>
+      </div>
+
+      <div style="text-align: center; padding-bottom: 20px;">
+        <button ion-button type="submit" round (click)="crearReview()">Enviar</button>
+      </div>
+
+    </ion-list>
+  </form>
 </ion-content>

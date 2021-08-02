@@ -10,11 +10,17 @@
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-textarea autoGrow required maxlength="1024" rows="5" placeholder="Escriba su comentario..." [(ngModel)]="comentario"></ion-textarea>
-  </ion-item>
+  <form [formGroup]="datos">
+    <ion-list>
 
-  <div style="text-align: center;">
-    <button ion-button round (click)="crearComentario()">Enviar</button>
-  </div>
+      <ion-item>
+        <ion-textarea type="text" minlength="10" maxlength="1024" required autoGrow rows="5" placeholder="Escriba su comentario..." [(ngModel)]="comentario" formControlName="comentario_usuario"></ion-textarea>
+      </ion-item>
+
+      <div style="text-align: center;">
+        <button ion-button type="submit" round (click)="crearComentario()">Enviar</button>
+      </div>
+
+    </ion-list>
+  </form>
 </ion-content>

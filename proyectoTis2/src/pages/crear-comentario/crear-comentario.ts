@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { AlertController, IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { HomePage } from '../home/home';
 import { LoginPage } from '../login/login';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 /**
  * Generated class for the CrearComentarioPage page.
@@ -20,6 +21,8 @@ import { LoginPage } from '../login/login';
 })
 export class CrearComentarioPage {
 
+  datos:FormGroup;
+
   publicacion:any;
   comentario:any;
   usuario:any;
@@ -28,7 +31,7 @@ export class CrearComentarioPage {
   data_pub:Observable<any>;
   data_comment:Observable<any>;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public toastCtrl: ToastController, public formBuilder: FormBuilder, public alertController: AlertController) {
 
     //http://localhost/apiRest/public/publicacion/
     //https://edein.cl/equipo2/apiRest/public/publicacion/
@@ -63,6 +66,11 @@ export class CrearComentarioPage {
       this.irLogeo();
     }
 
+    //Validador comentario
+    this.datos = formBuilder.group({
+      comentario_usuario:  ['',[Validators.required, Validators.minLength(10), Validators.maxLength(1024)]]
+    });
+
   }
 
   ionViewDidLoad() {
@@ -76,7 +84,18 @@ export class CrearComentarioPage {
     });
     toast.present();
   }
-  crearComentario() {
+  async crearComentario() {
+
+    if(this.datos.invalid){
+      const alert = await this.alertController.create({
+        title: 'Error en comentario',
+        message: 'Su comentario es muy corto o contiene caracteres no permitidos.',
+        buttons: ['Aceptar']
+
+      });
+        await alert.present();
+        return;
+    }
 
     //http://localhost/apiRest/public/comentario/new
     //https://edein.cl/equipo2/apiRest/public/comentario/new

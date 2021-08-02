@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { AlertController, IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { LoginPage } from '../login/login';
 import { HomePage } from '../home/home';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 /**
  * Generated class for the CrearReviewPage page.
  *
@@ -18,6 +19,8 @@ import { HomePage } from '../home/home';
 })
 export class CrearReviewPage {
 
+  datos:FormGroup;
+
   publicacion: any;
   review: any;
   id_publicacion = this.navParams.get('valor');
@@ -26,7 +29,7 @@ export class CrearReviewPage {
   usuario: any;
   calificacion: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public toastCtrl: ToastController, public formBuilder: FormBuilder, public alertController: AlertController) {
 
     //http://localhost/apiRest/public/publicacion/
     //https://edein.cl/equipo2/apiRest/public/publicacion/
@@ -59,6 +62,13 @@ export class CrearReviewPage {
       this.mensajeToast('Debes iniciar sesión para poder hacer una reseña.')
       this.irLogeo();
     }
+
+    //Validador comentario
+    this.datos = formBuilder.group({
+      review_usuario:  ['',[Validators.required, Validators.minLength(10), Validators.maxLength(4999)]],
+      calificacion_usuario:  ['',[Validators.required]]
+    });
+
   }
 
   ionViewDidLoad() {
@@ -73,7 +83,19 @@ export class CrearReviewPage {
     toast.present();
   }
 
-  crearReview() {
+  async crearReview() {
+
+    if(this.datos.invalid){
+      const alert = await this.alertController.create({
+        title: 'Error en reseña',
+        message: '-Verifique si seleccionó una calificación. <br/> -Verifique si su reseña es muy corta o contiene caracteres no permitidos.',
+        buttons: ['Aceptar']
+
+      });
+        await alert.present();
+        return;
+    }
+
     //http://localhost/apiRest/public/review/new
     //https://edein.cl/equipo2/apiRest/public/review/new
     var url_review = 'https://edein.cl/equipo2/apiRest/public/review/new';
