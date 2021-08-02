@@ -122,7 +122,7 @@ export class PublicacionPage {
       console.log("Oops!");
     }
   }else{
-    this.presentToast("Para guardar debes iniciar sesion");
+    this.presentToast("Para guardar una publicación debes iniciar sesión.");
   }
 
   }
