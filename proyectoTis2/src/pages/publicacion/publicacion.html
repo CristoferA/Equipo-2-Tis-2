@@ -82,12 +82,14 @@
       </ion-list>
     </ion-row>
     <ion-row>
-      <ion-list no-margin>
-        <ion-item>
-          <ion-icon name="md-call" item-start></ion-icon>
-          Telefono contacto: +56 {{pub.telefono_contacto}}
-        </ion-item>
-      </ion-list>
+      <a href="tel:+56{{pub.telefono_contacto}}">
+        <ion-list no-margin>
+          <ion-item>
+            <ion-icon name="md-call" item-start></ion-icon>
+            Telefono contacto: +56 {{pub.telefono_contacto}}
+          </ion-item>
+        </ion-list>
+      </a>
     </ion-row>
   </ion-grid>
 
