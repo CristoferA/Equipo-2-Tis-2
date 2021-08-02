@@ -76,6 +76,7 @@ export class EliminarPublicacionPage {
       console.log("Suscribió la data en eliminar publicación.");
       console.log(data);
       this.irMisPublicaciones();
+      this.mensajeToast("Se ha borrado la publicación.");
     },
     err => {
       this.mensajeToast("Error al eliminar la publicación.");
