@@ -172,7 +172,7 @@ $app->post('/oferente/delete', function(Request $request, Response $response){
     try{
         $db = new db();
         $db = $db->conectionDB();
-        $result = $db_>prepare($sql);
+        $result = $db_->prepare($sql);
         $result = execute();
 
         //eliminar tambien las publicaciones del oferente
