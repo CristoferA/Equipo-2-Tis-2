@@ -4,12 +4,20 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding center text-center class="bg">
+<ion-content padding center>
+
+  <div>
+    <h5>Para registrarse debe cumplir los siguientes formatos:</h5>
+    <p>• El usuario debe tener entre 5 a 20 caracteres.</p>
+    <p>• Debe ingresar su nombre real en 5 a 50 caracteres máximo.</p>
+    <p>• Su contraseña debe tener entre 5 a 30 caracteres.</p>
+    <p>• Su correo electrónico debe tener el formato de un correo electrónico. Ejemplo: CorreoDeEjemplo@gmail.com</p>
+  </div>
 
   <div style="display: flex; justify-content: center; zoom:0.8;">
     <ion-avatar (click)="abrirGaleria()">
-      <img src="../assets/imgs/avatarC.png" style="height:125px;">
-    </ion-avatar>     
+      <img src="../assets/imgs/avatarC.png" style="height:125px; margin-top: 15px; margin-bottom: 29px;">
+    </ion-avatar>
   </div>
 
   <form [formGroup]="datos">
@@ -29,7 +37,7 @@
 
       <ion-item>
         <ion-input type="text" formControlName="nombre_usuario" [(ngModel)]="nombre_usuario" ngModel required
-          placeholder="Nombre completo"></ion-input>
+          placeholder="Nombre real"></ion-input>
       </ion-item>
 
       <ion-item>
@@ -60,7 +68,7 @@
         </ion-item>
       </div>
 
-      <div style="padding-top: 5px;">
+      <div style="padding-top: 5px; text-align: center;">
         <button ion-button type="submit" round (click)="register()">Enviar</button>
       </div>
 

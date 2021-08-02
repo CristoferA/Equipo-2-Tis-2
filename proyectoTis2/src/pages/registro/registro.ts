@@ -10,14 +10,6 @@ import { ToastController } from 'ionic-angular';
 import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
 import { File } from '@ionic-native/file';
 
-
-/**
- * Generated class for the RegistroPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-registro',
@@ -25,7 +17,6 @@ import { File } from '@ionic-native/file';
 })
 
 export class RegistroPage {
-
 
   //IMPORTANTE
   datos:FormGroup;
@@ -40,9 +31,6 @@ export class RegistroPage {
   fotos:any=[];
   images:any=[];
 
-  
-  
-  //añadir toast aqui y en la funcion
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, public formBuilder: FormBuilder,private toastCtrl:ToastController, public alertController: AlertController, private imagePicker: ImagePicker, private file: File) {
       
     //File plugin
@@ -57,7 +45,6 @@ export class RegistroPage {
     });
   }
 
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegistroPage');
   }
@@ -65,14 +52,13 @@ export class RegistroPage {
     this.navCtrl.pop();
   }
 
-
   async register(){
 
     var f = this.datos.value;
     if(this.datos.invalid){
       const alert = await this.alertController.create({
-        title: 'Datos incompletos',
-        message: 'Tienes que llenar todos los datos',
+        title: 'Datos incorrectos.',
+        message: 'Debes completar los campos correctamente.',
         buttons: ['Aceptar']
 
       });
@@ -96,25 +82,8 @@ export class RegistroPage {
 
     localStorage.setItem('usuario', JSON.stringify(usuario));
 
-
     var url =  'https://edein.cl/equipo2/apiRest/public/signup';
     this.data = this.http.post(url, usuario);
-
-
-   /* 
-    let postData= new FormData();
-  
-
-
-    postData.append('id_usuario', this.id_usuario);
-    postData.append('nombre_usuario', this.nombre_usuario);
-    postData.append('contrasena', this.contrasena);
-    postData.append('email_usuario', this.email_usuario);
-    
- 
-    */
-    
-
 
     this.data.subscribe((data) => {
       console.log(data);
@@ -129,7 +98,6 @@ export class RegistroPage {
 
   
   }
-
 
   presentToast(msg: string){
     let toast = this.toastCtrl.create({
@@ -167,7 +135,4 @@ export class RegistroPage {
     this.fotos.splice(index, 1);
   }
 
- 
-
-  
 }
