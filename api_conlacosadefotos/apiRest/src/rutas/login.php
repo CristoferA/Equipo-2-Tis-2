@@ -43,83 +43,7 @@ $app->post('/login-check',function(Request $request, Response $response){
 
 
 //LOGIN QUE REPARADO AHORA
-/*
-$app->post('/login',function(Request $request, Response $response){
-    $id_usuario = $request->getParam('id_usuario');
-    $contrasena = $request->getParam('contrasena');
-    $contrasena=hash('sha256',$contrasena);
-    $sql = "SELECT id_usuario FROM usuario 
-    WHERE (id_usuario='$id_usuario' OR email_usuario='$id_usuario') 
-    AND contrasena ='$contrasena'";
 
-    try{
-        $db = new db();
-        $db = $db -> conectionDB();  
-        $data='';
- 
-        $result = $db -> prepare ($sql);
-        $result->bindParam(':id_usuario',$id_usuario);        
-        $result->bindParam(':contrasena',$contrasena);
-        $result->execute();
-        
-        $count = $result->rowCount();
-        $data=$result->fetch(PDO::FETCH_OBJ);       
-        //$result=null;
-        $count = null;
-        if(!empty($data)){
-            $count=null;       
-            //$data='';
-            //esto es si el usuario cuenta como oferente
-            
-            $sql2="SELECT usuario FROM oferente WHERE usuario='$id_usuario'";
-            $result2= $db -> prepare ($sql2);
-            $result2->bindParam(':usuario',$id_usuario);
-            $result2->excecute();
-            
-            $count=$result2->rowCount();
-            $data2=$result2->fetch(PDO::FETCH_OBJ);
-            /*if($count>0){
-                    
-                $user_id=$data2->id_usuario;
-                $data2->token = apiToken($user_id);
-                /*if($data){
-                    
-                    echo '{"data": Es OFERENTE}';            
-                }*/
-            //}
-            /*
-            $count= null;
-            $sql="SELECT usuario FROM moderador WHERE usuario='$id_usuario'";
-            $result= $db -> prepare ($sql);
-            $result->bindParam(':usuario',$id_usuario);
-            $result->excecute();
-            $count=$result->rowCount();
-            if($count>0){
-                $user_id=$data->id_usuario;
-                $data->token = apiToken($user_id);
-                if($data){
-                    
-                    echo '{"data": Es MODERADOR}';             
-                }
-            }
-            //esto es si el usuario no cuenta ni como oferente ni como moderador
-            
-            $user_id=$data->id_usuario;
-            $data->token = apiToken($user_id);
-        }
-        $db=null;
-
-        if($data){
-            $data=json_encode($data);
-            echo '{"data": ' .$data . '}';            
-        }else{
-            echo '{"error":{"text":"Bad request wrong username and password"}}';
-        }
-    }catch(PDOException $e){
-        echo '{"error" : {"texto":'.$e->getMessage().'}'; 
-    }
-});*/
-// ACA ESTA EL LOGIN VIEJO POR SI DEJA DE FUNCIONAR EL NUEVO
 
 $app->post('/login',function(Request $request, Response $response){
     $id_usuario = $request->getParam('id_usuario');
@@ -178,6 +102,7 @@ $app->post('/signup',function(Request $request, Response $response){
     $contrasena = $request->getParam('contrasena');
     $email_usuario=$data=$request->getParam('email_usuario');
   
+    $base64=$request->getParam('base64');
 
     /*$sql = "SELECT id_usuario FROM usuario 
     WHERE (id_usuario='$id_usuario' OR email_usuario='$email_usuario') 
@@ -218,6 +143,15 @@ $app->post('/signup',function(Request $request, Response $response){
                 $stmt1->bindParam("nombre_usuario", $nombre_usuario,PDO::PARAM_STR);
                 $stmt1->execute();
                 //echo"PASE EL IF";
+                if(strlen(trim($base64))>0){
+                    $sql2 = "INSERT INTO imagen_usuario(base64,id_usuario) VALUES(:base64,:id_usuario)";
+                    $stmt1 = $db->prepare($sql2);
+                    $stmt1->bindParam("id_usuario", $id_usuario);
+                    $stmt1->bindParam("base64", $base64);
+                    $stmt1->execute();
+                    //$db = null;
+                    //echo '{"success":{"status":"uploaded"}}';
+                }
                 $userData=internalUserDetails($email_usuario);
                 
             }
@@ -250,6 +184,27 @@ $app->post('/signup',function(Request $request, Response $response){
 
 });
 
+$app->post('/imagen',function(Request $request, Response $response){
+//$app->post('/imagen'); /* User Details */
+
+$id_usuario = $request->getParam('id_usuario');
+$base64=$request->getParam('base64');
+
+    try {
+        $db = new db();
+        $db = $db -> conectionDB();
+            $sql = "INSERT INTO imagen_usuario(base64,id_usuario) VALUES(:base64,:id_usuario)";
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam("id_usuario", $id_usuario);
+            $stmt->bindParam("base64", $base64);
+            $stmt->execute();
+            $db = null;
+            echo '{"success":{"status":"uploaded"}}';
+        
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+});
 
 //DETALLES INTERNOS DE USUARIO
 function internalUserDetails($input) {
@@ -272,57 +227,4 @@ function internalUserDetails($input) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
     
-}
-
-
-$app->post('/userImage','userImage'); /* User Details */
-function userImage(){
-    $request = \Slim\Slim::getInstance()->request();
-    $data = json_decode($request->getBody());
-    $user_id=$data->user_id;
-    $token=$data->token;
-    $imageB64=$data->imageB64;
-    $systemToken=apiToken($user_id);
-    try {
-        if(1){
-            $db = getDB();
-            $sql = "INSERT INTO imagesData(b64,user_id_fk) VALUES(:b64,:user_id)";
-            $stmt = $db->prepare($sql);
-            $stmt->bindParam("user_id", $user_id, PDO::PARAM_INT);
-            $stmt->bindParam("b64", $imageB64, PDO::PARAM_STR);
-            $stmt->execute();
-            $db = null;
-            echo '{"success":{"status":"uploaded"}}';
-        } else{
-            echo '{"error":{"text":"No access"}}';
-        }
-    } catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
-}
-
-$app->post('/getImages', 'getImages');
-function getImages(){
-    $request = \Slim\Slim::getInstance()->request();
-    $data = json_decode($request->getBody());
-    $user_id=$data->user_id;
-    $token=$data->token;
-    
-    $systemToken=apiToken($user_id);
-    try {
-        if(1){
-            $db = getDB();
-            $sql = "SELECT b64 FROM imagesData";
-            $stmt = $db->prepare($sql);
-           
-            $stmt->execute();
-            $imageData = $stmt->fetchAll(PDO::FETCH_OBJ);
-            $db = null;
-            echo '{"imageData": ' . json_encode($imageData) . '}';
-        } else{
-            echo '{"error":{"text":"No access"}}';
-        }
-    } catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
 }
