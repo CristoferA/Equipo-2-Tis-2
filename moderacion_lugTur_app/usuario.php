@@ -15,7 +15,7 @@ $response=json_decode($response_json, true);
 </a>
  
  <hr>
- <h1>Vea que usuarios volver oferente</h1>
+ <h1>Revise qué usuarios convertir en oferente</h1>
  <hr>
 <?php
 
@@ -37,7 +37,7 @@ foreach($response as $key => $result) {
     echo '</div>'; ?>
     <a href="eliminar_oferente.php?varname=<?php echo $result['id_usuario'] ?>">
     <?php
-    echo '<input name="submit" type="submit" value="Volver usuario normal: '.$result['id_usuario'].'" class="btn solid" />';
+    echo '<input name="submit" type="submit" value="Convertir a usuario oferente: '.$result['id_usuario'].'" class="btn solid" />';
     ?>
     </a>
 
@@ -47,7 +47,6 @@ foreach($response as $key => $result) {
     echo '<div>';
     
     echo '</div>';
-    echo '<hr>';
-    echo "Aqui no hay nada mas";    
+    echo '<hr>';    
 }
 ?>

@@ -55,6 +55,5 @@ foreach($response as $key => $result) {
     
     echo '</div>';
     echo '<hr>';
-    echo "Aqui no hay nada mas";    
 }
 ?>

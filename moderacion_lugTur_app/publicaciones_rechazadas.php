@@ -69,7 +69,6 @@ foreach($response as $key => $result) {
     echo '<div>';
     
     echo '</div>';
-    echo '<hr>';
-    echo "Aqui no hay nada mas";    
+    echo '<hr>';  
 }
 ?>
