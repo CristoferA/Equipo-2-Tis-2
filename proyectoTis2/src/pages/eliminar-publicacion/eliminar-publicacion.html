@@ -26,15 +26,6 @@
     </ion-item>
   </ion-card>
 
-  <!-- Botón para guardar la publicación -->
-  
-  <div style="text-align: center;">
-    <button ion-button end round (click)="eliminarPublicacion()" style="zoom:0.9;">
-      Borrar publicacion &nbsp;
-      <ion-icon name="md-bookmark" style="zoom:1.5;"></ion-icon>
-    </button>
-  </div>
-
   <!-- Descripción de la publicación -->
   <ion-grid padding style="padding-bottom: 0px; padding-top: 0px;">
     <ion-row>
@@ -76,7 +67,7 @@
     </ion-row>
     <ion-row>
       <ion-list no-margin>
-        <ion-item >
+        <ion-item>
           <ion-icon name="md-contact" item-start></ion-icon>
           Representante: {{pub.nombre_usuario}}
         </ion-item>
@@ -92,8 +83,6 @@
     </ion-row>
   </ion-grid>
 
- 
-
   <!-- Etiquetas/Hashtags de la publicación -->
   <ion-grid padding style="padding-bottom: 0px; padding-top: 0px;" *ngIf="etiqueta?.length;">
     <hr>
@@ -102,14 +91,13 @@
     </ion-row>
 
     <div class="a">
-      <p *ngFor="let et of etiqueta"  style="text-align: justify; margin-bottom: 7px;">{{et.etiqueta}}</p>
+      <p *ngFor="let et of etiqueta" style="text-align: justify; margin-bottom: 7px;">{{et.etiqueta}}</p>
     </div>
   </ion-grid>
- 
-  
+
   <!-- Publicaciones similares -->
- 
- <!--
+
+  <!--
   <ion-grid padding>
     <ion-row>
       <h3>También te podría interesar...</h3>
@@ -130,7 +118,15 @@
 
   <hr>
 -->
- 
-  <br><br>
 
+  <!-- Botón para borrar la publicación -->
+  <div style="text-align: center;">
+    <hr>
+    <button ion-button end round (click)="eliminarPublicacion()" style="zoom:1.2;">
+      Borrar publicacion &nbsp;
+      <ion-icon name="trash" style="zoom:1.5;"></ion-icon>
+    </button>
+  </div>
+
+  <br>
 </ion-content>

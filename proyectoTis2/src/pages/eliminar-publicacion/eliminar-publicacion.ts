@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
@@ -30,11 +30,11 @@ export class EliminarPublicacionPage {
   oferente:any;
   etiqueta: any;
   similarPub : any;
-
   direccionP : any;
   direccionS : any;  
   direccionPub: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public toastCtrl: ToastController) {
 
     //http://localhost/apiRest/public/publicacion_detallada/
     //https://edein.cl/equipo2/apiRest/public/publicacion_detallada/
@@ -56,30 +56,42 @@ export class EliminarPublicacionPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad EliminarPublicacionPage');
   }
+
   irComentario(id_publicacion){
     this.navCtrl.push(ComentarioPage, {valor: id_publicacion});
   }
+
   irReview(id_publicacion){
     this.navCtrl.push(ReviewPage, {valor: id_publicacion});
   }
+  
   eliminarPublicacion(){
-    console.log("Holi");
-    console.log(this.id_publicacion);
+    console.log("Entró a eliminar publicación.");
+    console.log("El id de la publicación es: " + this.id_publicacion);
     var a = this.id_publicacion;
     //http://localhost/apiRest/public/publicacion/delete/
     //https://edein.cl/equipo2/apiRest/public/publicacion/delete/
     this.http.delete('https://edein.cl/equipo2/apiRest/public/publicacion/delete/'+a)
     .subscribe(data =>{
-      console.log("ARDILLA");
+      console.log("Suscribió la data en eliminar publicación.");
       console.log(data);
       this.irMisPublicaciones();
     },
     err => {
-      // Colocar toas con error
+      this.mensajeToast("Error al eliminar la publicación.");
       console.log("Oops~~!");
     });
   }
+
   irMisPublicaciones(){
     this.navCtrl.setRoot(MisPublicacionesPage);
+  }
+
+  mensajeToast(msg) {
+    const toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
+    });
+    toast.present();
   }
 }

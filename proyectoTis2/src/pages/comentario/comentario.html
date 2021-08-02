@@ -12,37 +12,33 @@
 
 <ion-content padding>
 
-  <ng-container *ngIf= "comentario?.length; else nocom"> 
+  <ng-container *ngIf="comentario?.length; else nocom">
 
-  <div *ngIf="comentario" style="padding-top: 55px;">
-    <ion-card *ngFor="let com of comentario">
-      <ion-card-content>
+    <div *ngIf="comentario" style="padding-top: 55px;">
+      <ion-card *ngFor="let com of comentario">
+        <ion-card-content>
 
-        <!-- Usuario -->
-        <b> {{com.id_usuario}} </b>
+          <!-- Usuario -->
+          <b> {{com.id_usuario}} </b>
 
-        <!-- Comentario -->
-        <p> {{com.comentario}} </p>
+          <!-- Comentario -->
+          <p> {{com.comentario}} </p>
 
-        <a (click)="darLike(com.id_comentario)"> Me gusta ({{com.likes}}) </a>
-        <a (click)="darDislike(com.id_comentario)"> No me gusta ({{com.likes}}) </a>
-        
-      </ion-card-content>
-    </ion-card>
-  </div>
+          <b style="font-weight: normal;"> ({{com.likes}}) </b> <a (click)="darLike(com.id_comentario)">Me gusta</a> <b>/</b>
+          <a (click)="darDislike(com.id_comentario)"> No me gusta</a>
 
-  <div *ngIf="!comentario">
-    <p> Esta publicación no tiene comentarios. </p>
-  </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
 
-</ng-container> 
-<ng-template #nocom>
-  <br>
-  <br>
-  <br>
-  <br>
-  <h3>Esta publicación no tiene comentarios.</h3>
-</ng-template>
+  </ng-container>
+
+  <ng-template #nocom>
+    <br>
+    <br>
+    <br>
+    <h3>Esta publicación no tiene comentarios.</h3>
+  </ng-template>
 
 </ion-content>
 

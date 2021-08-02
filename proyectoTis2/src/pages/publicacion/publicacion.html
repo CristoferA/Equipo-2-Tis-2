@@ -91,10 +91,10 @@
     </ion-row>
   </ion-grid>
 
-  <hr>
-
   <!-- Etiquetas/Hashtags de la publicación -->
   <ion-grid padding style="padding-bottom: 0px; padding-top: 0px;" *ngIf="etiqueta?.length;">
+    <hr>
+
     <ion-row>
       <h3 style="padding-top: 7px; padding-bottom: 7px; margin: 0px;">Etiquetas:</h3>
     </ion-row>
@@ -102,12 +102,13 @@
     <div class="a">
       <p *ngFor="let et of etiqueta" (click)="verPubEtiqueta(et.id_etiqueta)" style="text-align: justify; margin-bottom: 7px;">{{et.etiqueta}}</p>
     </div>
+    
+    <br>
   </ion-grid>
 
-  <hr>
-
   <!-- Publicaciones similares -->
-  <ion-grid padding>
+  <ion-grid padding *ngIf="similarPub?.length;">
+    <hr>
     <ion-row>
       <h3>También te podría interesar...</h3>
     </ion-row>
@@ -124,26 +125,5 @@
       </ion-card-content>
     </ion-card>
   </ion-grid>
-
-  <hr>
-
-  <!-- Redes sociales -->
-  <ion-grid padding class="centrado">
-    <ion-row>
-      <ion-col>
-        <ion-icon name="logo-facebook" style="zoom:3.0"></ion-icon>
-      </ion-col>
-
-      <ion-col>
-        <ion-icon name="logo-instagram" style="zoom:3.0"></ion-icon>
-      </ion-col>
-
-      <ion-col>
-        <ion-icon name="logo-twitter" style="zoom:3.0"></ion-icon>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-  <br><br>
 
 </ion-content>

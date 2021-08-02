@@ -12,7 +12,6 @@ import { MapaPage } from '../mapa/mapa';
 import { EtiquetaPublicacionPage } from '../etiqueta-publicacion/etiqueta-publicacion';
 import { ToastController } from 'ionic-angular';
 
-
 @IonicPage()
 @Component({
   selector: 'page-publicacion',
@@ -27,13 +26,11 @@ export class PublicacionPage {
   oferente:any;
   etiqueta: any;
   similarPub : any;
-
   direccionP : any;
   direccionS : any;  
   direccionPub: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl:ToastController) {
-
 
     //http://localhost/apiRest/public/publicacion_detallada/
     //https://edein.cl/equipo2/apiRest/public/publicacion_detallada/
@@ -51,7 +48,6 @@ export class PublicacionPage {
       }
     );
 
-
     //http://localhost/apiRest/public/etiqueta/
     //https://edein.cl/equipo2/apiRest/public/etiqueta/
     this.http.get('https://edein.cl/equipo2/apiRest/public/etiqueta/'+this.id_publicacion)
@@ -64,7 +60,6 @@ export class PublicacionPage {
       err => {
         console.log("Oops!");
       });
-
 
       //http://localhost/apiRest/public/publicacion_similar/
       //https://edein.cl/equipo2/apiRest/public/publicacion_similar/
@@ -102,8 +97,6 @@ export class PublicacionPage {
     this.navCtrl.push(EtiquetaPublicacionPage, {valor: etiqueta});
   }
 
-
-
   irPublicacionesGuardadas(){
     let postData = new FormData();
     
@@ -121,13 +114,14 @@ export class PublicacionPage {
     this.data = this.http.post(url, postData);
     this.data.subscribe((data) => {
       console.log(data);
+      console.log("Publicación guardada.");
+      this.presentToast("Publicación guardada.");
       this.navCtrl.pop();
 
     }), err => {
       console.log("Oops!");
     }
   }else{
-
     this.presentToast("Para guardar debes iniciar sesion");
   }
 
@@ -144,6 +138,7 @@ export class PublicacionPage {
     });
     toast.present();
   }
+
   agregarVisita(){
     console.log(this.id_publicacion);
 
@@ -155,12 +150,10 @@ export class PublicacionPage {
       {
         if (data === "No existe publicacion en la BBDD con este ID."){
           console.log("No existe publicacion en la BBDD con este ID.");
-          
         } 
         else {
           console.log(data);
         }        
-
       },
       err => {
         console.log("Oops!");

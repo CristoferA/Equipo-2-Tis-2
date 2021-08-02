@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -27,7 +27,7 @@ export class MisPublicacionesPage {
   usuario: any;
   //oferente = this.navParams.get('valor');
   data: Observable<any>;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public toastCtrl: ToastController) {
 
 
     if ('respuesta' in localStorage) {
@@ -56,7 +56,7 @@ export class MisPublicacionesPage {
 
 
     } else {
-      //Colocar Toast que no ingreso 
+      this.mensajeToast("Usted no ha iniciado sesión.");
       this.irLogin();
     }
   }
@@ -85,20 +85,32 @@ export class MisPublicacionesPage {
   }
 
   irHome(){
-    //colocar Un toast que diga que no es oferente
+    this.mensajeToast("Usted no es oferente.");
     this.navCtrl.setRoot(HomePage);
   }
+
   irLogin() {
-    //colocar Un toast que diga que se logee
+    this.mensajeToast("Usted no ha iniciado sesión.");
     this.navCtrl.setRoot(LoginPage);
   }
+
   irEliminarPublicacion(id_publicacion){
     this.navCtrl.push(EliminarPublicacionPage, { valor: id_publicacion });
   }
+
   irPublicacion(id_publicacion) {
     this.navCtrl.push(PublicacionPage, { valor: id_publicacion });
   }
+
   irEditarPublicacion(id_publicacion) {
     this.navCtrl.push(EditarPublicacionPage, { valor: id_publicacion });
+  }
+
+  mensajeToast(msg) {
+    const toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
+    });
+    toast.present();
   }
 }
