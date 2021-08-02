@@ -100,9 +100,10 @@
     </ion-row>
 
     <div class="a">
-      <p *ngFor="let et of etiqueta" (click)="verPubEtiqueta(et.id_etiqueta)" style="text-align: justify; margin-bottom: 7px;">{{et.etiqueta}}</p>
+      <p *ngFor="let et of etiqueta" (click)="verPubEtiqueta(et.id_etiqueta)"
+        style="text-align: justify; margin-bottom: 7px;">{{et.etiqueta}}</p>
     </div>
-    
+
     <br>
   </ion-grid>
 
@@ -125,5 +126,5 @@
       </ion-card-content>
     </ion-card>
   </ion-grid>
-
+  <br>
 </ion-content>
