@@ -24,11 +24,11 @@ $response=json_decode($response_json, true);
 foreach($response as $key => $result) {
      //Hay que adaptar los div si sobra tiempo
     echo '<div>';
-    echo 'Id de usuario : ';
+    echo 'Id de usuario: ';
     echo $result['id_usuario'], '<br>';
-    echo 'Nombre de usuario : ';
+    echo 'Nombre de usuario: ';
     echo $result['nombre_usuario'], '<br>';
-    echo 'Email usuario : ';
+    echo 'Email usuario: ';
     echo $result['email_usuario'], '<br>';
     
     

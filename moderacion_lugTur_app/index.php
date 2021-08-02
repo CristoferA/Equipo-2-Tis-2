@@ -1,10 +1,10 @@
 
 
-<h1>Bienvenido a su trabajo de moderacion</h1>
+<h1>Bienvenido a su trabajo de moderación.</h1>
 
-<h3>Por favor inicie sesion para comenzar</h3>
+<h3>Por favor, inicie sesión para comenzar.</h3>
 
-<h5>En caso de ser redirijido aqui, revise que sus datos ingresados sean correctos</h5>
+<h5>En caso de ser redirigido aquí, revise que sus datos ingresados sean correctos.</h5>
 
 <form action="login.php" method="post" name="login" class="sign-in-form">
 

@@ -6,7 +6,7 @@ $postdata = array (
     "id_publicacion" => $var_value 
 );
 
-echo 'Haz aprobado la publicacion: '.$var_value.'';
+echo 'Has aprobado la publicacion: '.$var_value.'';
 print_r($postdata);
 
 $postdata = json_encode($postdata);
@@ -28,7 +28,7 @@ if (curl_errno($curl)) {
 curl_close($curl); 
 echo "<pre> $postResult</pre>";
 
-echo "Publicacion Aprobada";
+echo "Publicación aprobada.";
 ?>
 
 <a href="publicaciones_aprobadas.php">

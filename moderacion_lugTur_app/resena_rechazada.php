@@ -6,54 +6,54 @@ curl_setopt($ch, CURLOPT_HTTPGET, true);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $response_json = curl_exec($ch);
 curl_close($ch);
-$response=json_decode($response_json, true);
+$response = json_decode($response_json, true);
 //echo '<pre>'; print_r($response); echo '</pre>';
 //print_r($response);
 ?>
 <a href="menu.php">
-<input name="submit" type="submit" value="Volver" class="btn solid" />
+    <input name="submit" type="submit" value="Volver" class="btn solid" />
 </a>
- 
- <hr>
- <h1>ESTAS SON LAS RESENAS QUE ESTAN RECHAZADAS</h1>
- <hr>
+
+<hr>
+<h1>ESTAS SON LAS RESEÑAS QUE ESTÁN RECHAZADAS</h1>
+<hr>
 <?php
-foreach($response as $key => $result) {
-     //Hay que adaptar los div si sobra tiempo
+foreach ($response as $key => $result) {
+    //Hay que adaptar los div si sobra tiempo
     echo '<div>';
-    echo 'Id de review : ';
+    echo 'Id de review: ';
     echo $result['id_review'], '<br>';
-    echo 'Nombre de review : ';
+    echo 'Nombre de review: ';
     echo $result['review'], '<br>';
-    echo 'Id de publicacion : ';
+    echo 'Id de publicación: ';
     echo $result['id_publicacion'], '<br>';
-    echo 'Valor publicacion : ';
+    echo 'Valor publicación: ';
     echo $result['valor_publicacion'], '<br>';
-    echo 'Estado : ';
+    echo 'Estado: ';
     echo $result['estado'], '<br>';
-    echo 'Calificacion de review : ';
+    echo 'Calificación de review: ';
     echo $result['calificacion_review'], '<br>';
-    
+
 
     //Hay que adaptar los div si sobra tiempo 
     echo '</div>'; ?>
-     <a href="aprobar_resena.php?varname=<?php echo $result['id_review'].'&var='.$result['id_publicacion'] ?>">
-    <?php
-    echo '<input name="submit" type="submit" value="Aprobar resena: '.$result['id_review'].'" class="btn solid" />';
-    ?>
+    <a href="aprobar_resena.php?varname=<?php echo $result['id_review'] . '&var=' . $result['id_publicacion'] ?>">
+        <?php
+        echo '<input name="submit" type="submit" value="Aprobar reseña: ' . $result['id_review'] . '" class="btn solid" />';
+        ?>
     </a>
 
 
-    <a href="rechazar_resena.php?varname=<?php echo $result['id_review'].'&var='.$result['id_publicacion'] ?>">
-    <?php
-    echo '<input name="submit" type="submit" value="Rechazar publicacion: '.$result['id_review'].'" class="btn solid" />';
-    ?>
+    <a href="rechazar_resena.php?varname=<?php echo $result['id_review'] . '&var=' . $result['id_publicacion'] ?>">
+        <?php
+        echo '<input name="submit" type="submit" value="Rechazar reseña: ' . $result['id_review'] . '" class="btn solid" />';
+        ?>
     </a>
-    
-    <?php
+
+<?php
     echo '<div>';
-    
+
     echo '</div>';
-    echo '<hr>'; 
+    echo '<hr>';
 }
 ?>

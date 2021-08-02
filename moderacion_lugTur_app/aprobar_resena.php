@@ -8,7 +8,7 @@ $postdata = array (
     "id_publicacion" => $var_value2
 );
 
-echo 'Haz aprobado la reseña: '.$var_value.'';
+echo 'Has aprobado la reseña: '.$var_value.'';
 print_r($postdata);
 
 $postdata = json_encode($postdata);
@@ -30,7 +30,7 @@ if (curl_errno($curl)) {
 curl_close($curl); 
 echo "<pre> $postResult</pre>";
 
-echo "Review Aprobada";
+echo "Reseña aprobada.";
 ?>
 
 <a href="resena_aprobada.php">

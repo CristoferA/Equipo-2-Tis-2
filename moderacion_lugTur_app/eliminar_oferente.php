@@ -6,7 +6,7 @@ $postdata = array (
     "usuario" => $var_value 
 );
 
-echo 'Haz eliminado al oferente : '.$var_value.'';
+echo 'Has eliminado al oferente: '.$var_value.'';
 print_r($postdata);
 
 $postdata = json_encode($postdata);
@@ -28,7 +28,7 @@ if (curl_errno($curl)) {
 curl_close($curl); 
 echo "<pre> $postResult</pre>";
 
-echo "Oferente eliminado";
+echo "Oferente eliminado.";
 ?>
 
 <a href="usuario_oferente.php">
