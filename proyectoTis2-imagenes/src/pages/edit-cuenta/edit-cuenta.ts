@@ -3,7 +3,7 @@ import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angu
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 import { CuentaPage } from '../cuenta/cuenta';
-
+import { ToastController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 /**
  * Generated class for the EditCuentaPage page.
@@ -24,8 +24,9 @@ export class EditCuentaPage {
   nombre_usuario: any;
   email_usuario: any;
   cuenta: any;
+  contrasena: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, public formBuilder: FormBuilder, public alertController: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, public formBuilder: FormBuilder, public alertController: AlertController, private toastCtrl:ToastController) {
     var respuesta = JSON.parse(localStorage.getItem('respuesta'));
     var id_usuario = respuesta.data.id_usuario;
     console.log(id_usuario);
@@ -66,30 +67,41 @@ export class EditCuentaPage {
 
   guardar() {
 
-    if ('respuesta' in localStorage) {
-      var respuesta = JSON.parse(localStorage.getItem('respuesta'));
-      var id_usuario = respuesta.data.id_usuario;
-      console.log(id_usuario);
-      //http://localhost/apiRest/public/usuario/editar
-      //https://edein.cl/equipo2/apiRest/public/usuario/editar
-      var url = 'https://edein.cl/equipo2/apiRest/public/usuario/editar';
-      let postData = new FormData();
+    var respuesta = JSON.parse(localStorage.getItem('respuesta'));
+    var id_usuario = respuesta.data.id_usuario;
+    console.log(id_usuario);
+    var url = 'https://edein.cl/equipo2/apiRest/public/usuario/editar';
+    let postData = new FormData();
 
-      postData.append('id_usuario', this.id_usuario);
-      postData.append('nombre_usuario', this.nombre_usuario);
-      postData.append('email_usuario', this.email_usuario);
+    console.log("El id_usuario es: " + this.id_usuario);
+    console.log("La contraseña es: " + this.contrasena);
+    console.log("El nombre_usuario es: " + this.nombre_usuario);
+    console.log("El email_usuario es: " + this.email_usuario);
 
 
-      this.http.post(url, postData)
-        .map(response => response.json())
-        .subscribe((data) => {
-          console.log(data);
-          this.navCtrl.pop();
 
-        }), err => {
-          console.log("Oops!");
-        }
+    postData.append('id_usuario', id_usuario);
+    postData.append('contrasena', this.contrasena);
+    postData.append('nombre_usuario', this.nombre_usuario);
+    postData.append('email_usuario', this.email_usuario);
 
-    }
-  }
+
+    this.http.post(url,postData)
+      .map(response => response.json())
+      .subscribe((data) => {
+        console.log(data);
+        this.mensajeToast('Usuario editado correctamente.');
+        this.navCtrl.setRoot(CuentaPage);
+      });
+
+  
+}
+
+mensajeToast(msg) {
+  const toast = this.toastCtrl.create({
+    message: msg,
+    duration: 3000
+  });
+  toast.present();
+}
 }
