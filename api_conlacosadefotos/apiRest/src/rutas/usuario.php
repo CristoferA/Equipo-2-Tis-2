@@ -218,6 +218,33 @@ $app->get('/usuario_publicacion/{id_usuario}', function (Request $request, Respo
 }); 
 
 
+$app->get('/usuario_foto/{id_usuario}', function (Request $request, Response $response){
+    $id_usuario = $request->getAttribute('id_usuario');
+
+
+    $sql = "SELECT * FROM  imagen_usuario  
+    WHERE id_usuario='$id_usuario'";
+
+    
+    try {
+        $db = new db();
+        $db = $db -> conectionDB();
+        $result = $db -> query($sql);
+        
+        if($result -> rowCount() > 0){
+            $usuarios = $result -> fetchAll (PDO::FETCH_OBJ);
+            echo json_encode($usuarios);
+
+        }else{
+            echo json_encode("Este usuario no tiene foto de perfil!.");
+        }
+        $result = null;
+        $db = null;
+
+    }catch(PDOException $e){
+        echo '{"error" : {"texto":'.$e->getMessage().'}';
+    }
+}); 
 //insertar usuario editado
 
 $app->post('/usuario/editar', function(Request $request, Response $response){
