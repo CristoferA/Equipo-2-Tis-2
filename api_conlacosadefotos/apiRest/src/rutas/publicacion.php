@@ -422,7 +422,7 @@ $app->post('/ultima_publicacion', function (Request $request, Response $response
     }
 });
 
-$app->get('/publicacion/publicacion_detallada/{id_publicacion}', function (Request $request, Response $response){
+$app->get('/publicacion_detallada/{id_publicacion}', function (Request $request, Response $response){
     $id_publicacion = $request->getAttribute('id_publicacion');
     
     $sql = "SELECT * FROM publicacion, publica, oferente, usuario 
@@ -451,7 +451,7 @@ $app->get('/publicacion/publicacion_detallada/{id_publicacion}', function (Reque
     }
 }); 
 
-$app->get('/publicacion_similar/{id_publicacion}', function (Request $request, Response $response){
+$app->get('/publicacion/publicacion_similar/{id_publicacion}', function (Request $request, Response $response){
     $id_publicacion = $request->getAttribute('id_publicacion');
     
     $sql = "SELECT 	* FROM publicacion 
