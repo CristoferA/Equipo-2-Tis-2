@@ -26,6 +26,10 @@ export class ComentarioPage {
   data_likes: Observable<any>;
   data_dislike: Observable<any>;
 
+  //restringir 1 Like o Dislike
+  dioLike: any =1;
+  dioDislike:any =1;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public toastCtrl: ToastController) {
     //http://localhost/apiRest/public/publicacion/
     ////https://edein.cl/equipo2/apiRest/public/publicacion/
@@ -74,77 +78,84 @@ export class ComentarioPage {
   }
 
   darLike(id_comentario: any, index: number) {
-    console.log('Entró a darLike()');
-    if ('respuesta' in localStorage) {
-      var respuesta = JSON.parse(localStorage.getItem('respuesta'));
-      var id_usuario = respuesta.data.id_usuario;
-      console.log('El usuario logeado es: ' + id_usuario);
+    if (this.dioLike == 1) {
+      this.dioDislike = 1;
+      console.log('Entró a darLike()');
+      if ('respuesta' in localStorage) {
+        var respuesta = JSON.parse(localStorage.getItem('respuesta'));
+        var id_usuario = respuesta.data.id_usuario;
+        console.log('El usuario logeado es: ' + id_usuario);
 
-      let le_dio_like:boolean = false;
-      if (!le_dio_like) {
-        //http://localhost/apiRest/public/comentario/like
-        //https://edein.cl/equipo2/apiRest/public/comentario/like
+            //http://localhost/apiRest/public/comentario/like
+            //https://edein.cl/equipo2/apiRest/public/comentario/like
 
-        var url = 'https://edein.cl/equipo2/apiRest/public/comentario/like';
-        let postData = new FormData();
+            var url = 'https://edein.cl/equipo2/apiRest/public/comentario/like';
+            let postData = new FormData();
 
-        console.log("id_comentario es: " + id_comentario);
-        //Acualizar contador
-        this.comentario[index].likes = Number(this.comentario[index].likes) + 1;
+            console.log("id_comentario es: " + id_comentario);
+            //Acualizar contador
+            this.comentario[index].likes = Number(this.comentario[index].likes) + 1;
+            console.log(this.dioLike);
 
-        postData.append('id_comentario', id_comentario);
+            postData.append('id_comentario', id_comentario);
 
-        this.data_likes = this.http.post(url, postData);
-        this.data_likes.subscribe((data_likes) => {
-          this.mensajeToast('Te gusta este comentario.');
-          console.log(data_likes);
-          le_dio_like = true;
-        },
-          err => {
-            console.log("OopsLikes!");
-          })
-      } else {
-        this.mensajeToast('Ya le diste "me gusta" a este comentario.');
-      }
-    } else {
-      this.mensajeToast('Debe iniciar sesión para darle "me gusta" a un comentario.');
+            this.data_likes = this.http.post(url, postData);
+            this.data_likes.subscribe((data_likes) => {
+              this.mensajeToast('Te gusta este comentario.');
+              console.log(data_likes);
+            },
+              err => {
+                console.log("OopsLikes!");
+              })
+        } else {
+          this.mensajeToast('Debe iniciar sesión para darle "me gusta" a un comentario.');
+        }
+      this.dioLike=0;  
+    }else {
+      this.mensajeToast('Ya le diste "me gusta" a este comentario.');
     }
   }
 
   darDislike(id_comentario: any, index: number) {
-    console.log('Entró a darDislike()');
-    if ('respuesta' in localStorage) {
-      var respuesta = JSON.parse(localStorage.getItem('respuesta'));
-      var id_usuario = respuesta.data.id_usuario;
-      console.log('El usuario logeado es: ' + id_usuario);
+    if (this.dioDislike == 1){
+      this.dioLike = 1;
+      console.log('Entró a darDislike()');
+      if ('respuesta' in localStorage) {
+        var respuesta = JSON.parse(localStorage.getItem('respuesta'));
+        var id_usuario = respuesta.data.id_usuario;
+        console.log('El usuario logeado es: ' + id_usuario);
 
-      let le_dio_like:boolean = false;
-      if (!le_dio_like) {
-        //http://localhost/apiRest/public/comentario/dislike
-        //https://edein.cl/equipo2/apiRest/public/comentario/dislike
-        var url = 'https://edein.cl/equipo2/apiRest/public/comentario/dislike';
-        let postData = new FormData();
+          //http://localhost/apiRest/public/comentario/dislike
+          //https://edein.cl/equipo2/apiRest/public/comentario/dislike
+          var url = 'https://edein.cl/equipo2/apiRest/public/comentario/dislike';
+          let postData = new FormData();
 
-        console.log("id_comentario es: " + id_comentario);
-        //Acualizar contador
-        this.comentario[index].likes = Number(this.comentario[index].likes) - 1;
+          console.log("id_comentario es: " + id_comentario);
+          //Acualizar contador
+          this.comentario[index].likes = Number(this.comentario[index].likes) - 1;
+          console.log(this.dioDislike);
 
-        postData.append('id_comentario', id_comentario);
+          postData.append('id_comentario', id_comentario);
 
-        this.data_dislike = this.http.post(url, postData);
-        this.data_dislike.subscribe((data_dislike) => {
-          this.mensajeToast('No te gusta este comentario.');
-          console.log(data_dislike);
-          le_dio_like = true;
-        },
-          err => {
-            console.log("OopsLikes!");
-          })
+          this.data_dislike = this.http.post(url, postData);
+          this.data_dislike.subscribe((data_dislike) => {
+            this.mensajeToast('No te gusta este comentario.');
+            console.log(data_dislike);
+
+          },
+            err => {
+              console.log("OopsLikes!");
+            })
+        
       } else {
-        this.mensajeToast('Ya le diste "me gusta" a este comentario.');
+        this.mensajeToast('Debe iniciar sesión para darle "no me gusta" a un comentario.');
       }
+    this.dioDislike = 0;  
     } else {
-      this.mensajeToast('Debe iniciar sesión para darle "me gusta" a un comentario.');
+      this.mensajeToast('Ya le diste "no me gusta" a este comentario.');
     }
   }
+
+
+
 }
