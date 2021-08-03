@@ -231,13 +231,11 @@ $app->get('/usuario_foto/{id_usuario}', function (Request $request, Response $re
         $db = $db -> conectionDB();
         $result = $db -> query($sql);
         
-        if($result -> rowCount() > 0){
+        
             $usuarios = $result -> fetchAll (PDO::FETCH_OBJ);
             echo json_encode($usuarios);
 
-        }else{
-            echo json_encode("Este usuario no tiene foto de perfil!.");
-        }
+        
         $result = null;
         $db = null;
 

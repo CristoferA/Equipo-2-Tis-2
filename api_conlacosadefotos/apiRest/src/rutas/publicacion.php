@@ -12,7 +12,7 @@ $app->get('/publicacion', function (Request $request, Response $response){
     
     $sql = "SELECT p.id_publicacion,p.nombre_publicacion,p.descripcion_publicacion,p.valor_publicacion,p.region_publicacion,p.tipo_publicacion,p.estado,
     p.tipo_turismo,p.tipo_turismo,p.email_contacto,p.telefono_contacto,p.direccion,p.redes_sociales,p.comuna_publicacion,p.calificacion_publicacion,p.visitas,imagen_publicacion.base64
-    FROM publicacion p LEFT JOIN imagen_publicacion USING(id_publicacion) WHERE estado ='aprobado'";
+    FROM publicacion p LEFT JOIN imagen_publicacion USING(id_publicacion) WHERE estado ='aprobado' ORDER BY p.calificacion_publicacion DESC, p.visitas DESC";
     try {
         $db = new db();
         $db = $db -> conectionDB();
@@ -422,7 +422,7 @@ $app->post('/ultima_publicacion', function (Request $request, Response $response
     }
 });
 
-$app->get('/publicacion_detallada/{id_publicacion}', function (Request $request, Response $response){
+$app->get('/publicacion/publicacion_detallada/{id_publicacion}', function (Request $request, Response $response){
     $id_publicacion = $request->getAttribute('id_publicacion');
     
     $sql = "SELECT * FROM publicacion, publica, oferente, usuario 
@@ -489,7 +489,7 @@ $app->get('/publicacion_similar/{id_publicacion}', function (Request $request, R
             
 
         }else{
-            echo json_encode("No hay publicaciones aun!.");
+            echo "No hay publicaciones aun!.";
         }
         $result = null;
         $db = null;
@@ -557,7 +557,7 @@ $app->post('/publicacion_detallada/new', function(Request $request, Response $re
     $email_contacto = $request->getParam('email_contacto');
     $telefono_contacto = $request->getParam('telefono_contacto');
     $direccion = $request->getParam('direccion');
-    $redes_sociales = $request->getParam('redes_sociales'); 
+    //$redes_sociales = $request->getParam('redes_sociales'); 
     $comuna_publicacion = $request->getParam('comuna_publicacion'); 
     $calificacion_publicacion = $request->getParam('calificacion_publicacion');
     $visitas = $request->getParam('visitas');  
@@ -575,10 +575,10 @@ $app->post('/publicacion_detallada/new', function(Request $request, Response $re
 
 
     $sql= "INSERT INTO publicacion (nombre_publicacion, descripcion_publicacion, valor_publicacion, region_publicacion,
-    tipo_publicacion, estado, tipo_turismo, email_contacto, telefono_contacto, direccion, redes_sociales, comuna_publicacion,
+    tipo_publicacion, estado, tipo_turismo, email_contacto, telefono_contacto, direccion, comuna_publicacion,
     calificacion_publicacion, visitas) 
     VALUES (:nombre_publicacion, :descripcion_publicacion, :valor_publicacion, :region_publicacion,
-    :tipo_publicacion, :estado, :tipo_turismo, :email_contacto, :telefono_contacto, :direccion, :redes_sociales, :comuna_publicacion,
+    :tipo_publicacion, :estado, :tipo_turismo, :email_contacto, :telefono_contacto, :direccion, :comuna_publicacion,
     :calificacion_publicacion, :visitas)";
 
 
@@ -607,7 +607,6 @@ $app->post('/publicacion_detallada/new', function(Request $request, Response $re
         $result->bindParam(':email_contacto',$email_contacto);
         $result->bindParam(':telefono_contacto',$telefono_contacto);
         $result->bindParam(':direccion',$direccion);
-        $result->bindParam(':redes_sociales',$redes_sociales);
         $result->bindParam(':comuna_publicacion',$comuna_publicacion);
         $result->bindParam(':calificacion_publicacion',$calificacion_publicacion);
         //$result->bindParam(':id_moderador',$id_moderador);
