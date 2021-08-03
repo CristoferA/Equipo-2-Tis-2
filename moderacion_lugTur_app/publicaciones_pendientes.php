@@ -42,8 +42,6 @@ foreach($response as $key => $result) {
     echo $result['telefono_contacto'], '<br>';
     echo 'Direccion : ';
     echo $result['direccion'], '<br>';
-    echo 'Redes sociales : ';
-    echo $result['redes_sociales'], '<br>';
     echo 'Comuna publicacion : ';
     echo $result['comuna_publicacion'], '<br>';
     echo 'Calificacion publicacion : ';

@@ -102,6 +102,7 @@ $app->post('/signup',function(Request $request, Response $response){
     $contrasena = $request->getParam('contrasena');
     $email_usuario=$data=$request->getParam('email_usuario');
   
+    $base64=$request->getParam('base64');
 
     /*$sql = "SELECT id_usuario FROM usuario 
     WHERE (id_usuario='$id_usuario' OR email_usuario='$email_usuario') 
@@ -142,6 +143,15 @@ $app->post('/signup',function(Request $request, Response $response){
                 $stmt1->bindParam("nombre_usuario", $nombre_usuario,PDO::PARAM_STR);
                 $stmt1->execute();
                 //echo"PASE EL IF";
+                if(strlen(trim($base64))>0){
+                    $sql2 = "INSERT INTO imagen_usuario(base64,id_usuario) VALUES(:base64,:id_usuario)";
+                    $stmt1 = $db->prepare($sql2);
+                    $stmt1->bindParam("id_usuario", $id_usuario);
+                    $stmt1->bindParam("base64", $base64);
+                    $stmt1->execute();
+                    //$db = null;
+                    //echo '{"success":{"status":"uploaded"}}';
+                }
                 $userData=internalUserDetails($email_usuario);
                 
             }
@@ -174,6 +184,27 @@ $app->post('/signup',function(Request $request, Response $response){
 
 });
 
+$app->post('/imagen',function(Request $request, Response $response){
+//$app->post('/imagen'); /* User Details */
+
+$id_usuario = $request->getParam('id_usuario');
+$base64=$request->getParam('base64');
+
+    try {
+        $db = new db();
+        $db = $db -> conectionDB();
+            $sql = "INSERT INTO imagen_usuario(base64,id_usuario) VALUES(:base64,:id_usuario)";
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam("id_usuario", $id_usuario);
+            $stmt->bindParam("base64", $base64);
+            $stmt->execute();
+            $db = null;
+            echo '{"success":{"status":"uploaded"}}';
+        
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+});
 
 //DETALLES INTERNOS DE USUARIO
 function internalUserDetails($input) {
