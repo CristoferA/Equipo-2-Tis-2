@@ -10,7 +10,9 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 $app->get('/publicacion', function (Request $request, Response $response){
     
     
-    $sql = "SELECT * FROM publicacion WHERE estado='aprobado'";
+    $sql = "SELECT p.id_publicacion,p.nombre_publicacion,p.descripcion_publicacion,p.valor_publicacion,p.region_publicacion,p.tipo_publicacion,p.estado,
+    p.tipo_turismo,p.tipo_turismo,p.email_contacto,p.telefono_contacto,p.direccion,p.redes_sociales,p.comuna_publicacion,p.calificacion_publicacion,p.visitas,imagen_publicacion.base64
+    FROM publicacion p LEFT JOIN imagen_publicacion USING(id_publicacion) WHERE estado ='aprobado'";
     try {
         $db = new db();
         $db = $db -> conectionDB();
