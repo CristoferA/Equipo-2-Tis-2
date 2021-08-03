@@ -496,7 +496,45 @@ $app->get('/publicacion_similar/{id_publicacion}', function (Request $request, R
         echo '{"error" : {"texto":'.$e->getMessage().'}';
     }
 }); 
+//
+//
+//
+//
+//
+//
+//Muestra la IMAGEN de la publicacion
 
+$app->get('/publicacion_imagen/{id_publicacion}', function (Request $request, Response $response){
+    $id_publicacion = $request->getAttribute('id_publicacion');
+    
+    $sql = "SELECT * FROM imagen_publicacion 
+    WHERE id_publicacion = '$id_publicacion'";
+    try {
+        $db = new db();
+        $db = $db -> conectionDB();
+        $result = $db -> query($sql);
+        
+        if($result -> rowCount() > 0){
+            $publicaciones = $result -> fetchAll (PDO::FETCH_OBJ);
+            echo json_encode($publicaciones);
+
+        }else{
+            echo json_encode("No hay publicaciones aun!.");
+        }
+        $result = null;
+        $db = null;
+
+    }catch(PDOException $e){
+        echo '{"error" : {"texto":'.$e->getMessage().'}';
+    }
+}); 
+//
+//
+//
+//
+//
+//
+//
 //POST Agregar nueva publicacion ademas agrega 
 //los datos que le corresponden a usuario que publico la 
 //publicacion
@@ -527,6 +565,9 @@ $app->post('/publicacion_detallada/new', function(Request $request, Response $re
 
     //id_usuario
     $id_oferente = $request->getParam('id_oferente');
+
+    //string base64
+    $base64 = $request ->getParam('base64');
 
 
 
@@ -582,6 +623,14 @@ $app->post('/publicacion_detallada/new', function(Request $request, Response $re
 
         $result->execute();
         
+
+        if(strlen(trim($base64))>0){
+        $result = $db -> prepare ("INSERT INTO imagen_publicacion (id_publicacion,base64) VALUES(:id_publicacion,:base64)");
+        $result->bindParam('id_publicacion',$insertId);
+        $result->bindParam('base64',$base64);
+
+        $result ->execute();
+        }
         echo json_encode($insertId);
         $result=null;
         $db=null;
