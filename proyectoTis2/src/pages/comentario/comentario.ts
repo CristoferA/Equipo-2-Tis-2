@@ -27,8 +27,7 @@ export class ComentarioPage {
   data_dislike: Observable<any>;
 
   //restringir 1 Like o Dislike
-  dioLike: any =1;
-  dioDislike:any =1;
+  dioLike: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public toastCtrl: ToastController) {
     //http://localhost/apiRest/public/publicacion/
@@ -78,8 +77,8 @@ export class ComentarioPage {
   }
 
   darLike(id_comentario: any, index: number) {
-    if (this.dioLike == 1) {
-      this.dioDislike = 1;
+    if (this.dioLike[index] != 1) {
+
       console.log('Entró a darLike()');
       if ('respuesta' in localStorage) {
         var respuesta = JSON.parse(localStorage.getItem('respuesta'));
@@ -101,7 +100,7 @@ export class ComentarioPage {
 
             this.data_likes = this.http.post(url, postData);
             this.data_likes.subscribe((data_likes) => {
-              this.mensajeToast('Te gusta este comentario.');
+              this.mensajeToast('Te gusta éste comentario.');
               console.log(data_likes);
             },
               err => {
@@ -110,15 +109,15 @@ export class ComentarioPage {
         } else {
           this.mensajeToast('Debe iniciar sesión para darle "me gusta" a un comentario.');
         }
-      this.dioLike=0;  
+      this.dioLike[index] = 1;  
     }else {
-      this.mensajeToast('Ya le diste "me gusta" a este comentario.');
+      this.mensajeToast('Ya le diste "me gusta" a éste comentario.');
     }
   }
 
   darDislike(id_comentario: any, index: number) {
-    if (this.dioDislike == 1){
-      this.dioLike = 1;
+    if (this.dioLike[index] == 1){
+
       console.log('Entró a darDislike()');
       if ('respuesta' in localStorage) {
         var respuesta = JSON.parse(localStorage.getItem('respuesta'));
@@ -133,13 +132,13 @@ export class ComentarioPage {
           console.log("id_comentario es: " + id_comentario);
           //Acualizar contador
           this.comentario[index].likes = Number(this.comentario[index].likes) - 1;
-          console.log(this.dioDislike);
+          console.log(this.dioLike);
 
           postData.append('id_comentario', id_comentario);
 
           this.data_dislike = this.http.post(url, postData);
           this.data_dislike.subscribe((data_dislike) => {
-            this.mensajeToast('No te gusta este comentario.');
+            this.mensajeToast('Ya no te gusta éste comentario.');
             console.log(data_dislike);
 
           },
@@ -148,11 +147,11 @@ export class ComentarioPage {
             })
         
       } else {
-        this.mensajeToast('Debe iniciar sesión para darle "no me gusta" a un comentario.');
+        this.mensajeToast('Debes iniciar sesión quitar tú "me gusta" de éste comentario.');
       }
-    this.dioDislike = 0;  
+    this.dioLike[index] = 0;  
     } else {
-      this.mensajeToast('Ya le diste "no me gusta" a este comentario.');
+      this.mensajeToast('No le has puesto "me gusta" a éste comentario.');
     }
   }
 
