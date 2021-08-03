@@ -16,8 +16,8 @@
 
 <ion-content *ngFor="let pub of publicacion" >
   <ion-grid *ngFor="let fo of fotos">
-    <img  src="{{fo.base64}}">
-    <img *ngIf="fo.base64===null" src="../assets/imgs/paine.jpg">
+    <img *ngIf="pub.base64!==null"  src="{{fo.base64}}" style="height: 250px;">
+    <img *ngIf="fo.base64===null" src="../assets/imgs/paine.jpg" style="height: 250px;">
   </ion-grid>
   
   <!--<img *ngIf="fo===null" src="../assets/imgs/paine.jpg"> -->

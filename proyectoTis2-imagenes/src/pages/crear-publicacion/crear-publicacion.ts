@@ -175,8 +175,8 @@ export class CrearPublicacionPage {
       
       var options: ImagePickerOptions = {
                 maximumImagesCount: 1,
-                width: 100,
-                height: 100
+                width: 300,
+                height: 300
       }
 
       /*this.imagePicker.getPictures(options).then((results) => {

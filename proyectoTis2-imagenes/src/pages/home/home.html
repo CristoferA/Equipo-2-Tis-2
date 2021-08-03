@@ -49,8 +49,8 @@
     <!-- Muestra de publicaciones -->
     <ion-card *ngFor="let pub of (publicacionesDes)" (click)="irPublicacion(pub.id_publicacion)">
       
-      <img src="{{pub.base64}}" >
-      <img *ngIf="pub.base64===null" src="../assets/imgs/paine.jpg" >
+      <img *ngIf="pub.base64!==null" src="{{pub.base64}}" style="height: 200px;">
+      <img *ngIf="pub.base64===null" src="../assets/imgs/paine.jpg" style="height: 200px;">
       <ion-card-content>
         <ion-row>
           <ion-col col-9>

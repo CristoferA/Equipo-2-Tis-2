@@ -129,8 +129,8 @@ export class RegistroPage {
       
       var options: ImagePickerOptions = {
                 maximumImagesCount: 1,
-                width: 100,
-                height: 100
+                width: 200,
+                height: 200
       }
 
       /*this.imagePicker.getPictures(options).then((results) => {
