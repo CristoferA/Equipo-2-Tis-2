@@ -26,6 +26,7 @@ export class RegistroPage {
   contrasena:any;
   email_usuario:any;
   foto_usuario:any;
+  
   tipo:any;
 
   fotos:any=[];
@@ -53,12 +54,14 @@ export class RegistroPage {
   }
 
   async register(){
-
+    let foto = this.fotos[0];
     var f = this.datos.value;
+    
     if(this.datos.invalid){
       const alert = await this.alertController.create({
         title: 'Datos incorrectos.',
-        message: 'Debes completar los campos correctamente.',
+        message: this.fotos,
+
         buttons: ['Aceptar']
 
       });
@@ -77,18 +80,32 @@ export class RegistroPage {
       nombre_usuario: f.nombre_usuario,
       contrasena: f.contrasena,
       email_usuario: f.email_usuario,
-      foto_usuario: this.fotos
+      base64: foto
     }
-
+    
+    //this.presentToast(usuario.base64);
     localStorage.setItem('usuario', JSON.stringify(usuario));
 
+    console.log(JSON.stringify(usuario));
+
     var url =  'https://edein.cl/equipo2/apiRest/public/signup';
-    this.data = this.http.post(url, usuario);
+    //var url2 = 'http://localhost/apiRest/public/signup';
+
+    let postData = new FormData();
+
+    postData.append('id_usuario',this.id_usuario);
+    postData.append('nombre_usuario',this.nombre_usuario);
+    postData.append('contrasena',this.contrasena);
+    postData.append('email_usuario',this.email_usuario);
+    postData.append('base64',usuario.base64);
+
+    this.data = this.http.post(url,postData);
 
     this.data.subscribe((data) => {
       console.log(data);
 
-      this.presentToast("Registro realizado correctamente");
+      this.presentToast(usuario.base64);
+      //this.presentToast(data);
       this.navCtrl.pop();
 
     }), err => {
